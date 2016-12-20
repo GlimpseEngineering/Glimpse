@@ -1,0 +1,19 @@
+{
+  "name": "glimpse",
+  "version": "1.0.0",
+  "description": "Platform for sharing content in 3D space.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kamirdjanian/Glimpse.git"
+  },
+  "author": "GlimpseEngineering",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kamirdjanian/Glimpse/issues"
+  },
+  "homepage": "https://github.com/kamirdjanian/Glimpse#readme"
+}
