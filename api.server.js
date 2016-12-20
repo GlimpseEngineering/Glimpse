@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const path = require('path');
 const routes = require('./api/routes');
+require('dotenv').config();
 const PORT = process.env.PORT || 8080;
 
 module.exports = (PORT) => {
