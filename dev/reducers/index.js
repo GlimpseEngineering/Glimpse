@@ -1,0 +1,6 @@
+/*
+reducer makes changes to the state based off what the action tells us to do
+
+
+
+*/
