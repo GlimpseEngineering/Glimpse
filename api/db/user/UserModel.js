@@ -26,19 +26,6 @@ module.exports = (sequelize, DataTypes) => {
     freezeTableName: true,
     classMethods: {
       associate: (models) => {
-        User.hasMany(models.Post, {
-          foreignKey: {
-            allowNull: false
-          }
-        });
-        User.belongsToMany(models.Tag, {
-          through: 'UserTags'
-        });
-        User.belongsToMany(models.User, {
-          as: 'Friend',
-          through: 'UserFriend',
-          constraints: false
-        });
       }
     } 
   });

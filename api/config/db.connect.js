@@ -2,7 +2,6 @@ const Sequelize = require('sequelize');
 
 const modelPaths = [
   __dirname + '/../db/user/UserModel.js',
-  __dirname + '/../db/post/PostModel.js',
   __dirname + '/../db/tag/TagModel.js'
 ];
 
