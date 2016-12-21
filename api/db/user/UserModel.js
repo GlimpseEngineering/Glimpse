@@ -26,6 +26,11 @@ module.exports = (sequelize, DataTypes) => {
     freezeTableName: true,
     classMethods: {
       associate: (models) => {
+       // add relationship with tags here
+
+       // add relationship with posts here
+
+       // add relationship with emojis here
       }
     } 
   });
