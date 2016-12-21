@@ -31,6 +31,14 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
           }
         });
+        User.belongsToMany(models.Tag, {
+          through: 'UserTags'
+        });
+        User.belongsToMany(models.User, {
+          as: 'Friend',
+          through: 'UserFriend',
+          constraints: false
+        });
       }
     } 
   });
