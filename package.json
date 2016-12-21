@@ -20,8 +20,13 @@
   "homepage": "https://github.com/kamirdjanian/Glimpse#readme",
   "dependencies": {
     "aframe": "^0.4.0",
+    "aframe-animation-component": "^3.0.4",
+    "aframe-bmfont-text-component": "^0.1.4",
+    "aframe-react": "^3.4.0",
+    "aframe-text-component": "^0.4.0",
     "babel-core": "^6.21.0",
     "babel-loader": "^6.2.10",
+    "babel-polyfill": "^6.20.0",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.16.0",
     "body-parser": "^1.15.2",
@@ -32,8 +37,8 @@
     "path": "^0.12.7",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
-    "sequelize": "^3.28.0",
     "react-router": "^3.0.0",
+    "sequelize": "^3.28.0",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2"
   },
@@ -42,5 +47,12 @@
       "es2015",
       "react"
     ]
+  },
+  "devDependencies": {
+    "css-loader": "^0.26.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "node-sass": "^4.1.1",
+    "sass-loader": "^4.1.1",
+    "style-loader": "^0.13.1"
   }
 }
