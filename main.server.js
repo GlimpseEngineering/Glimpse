@@ -6,7 +6,7 @@ const models = require('./api/config/db.connect.js');
 const PORT = process.env.PORT || 8080;
 
 models.sequelize
-  .sync()
+  .sync({force: true})
   .then(() => {
     apiServer(PORT - 1);
     appServer(PORT);
