@@ -1,12 +1,12 @@
+require('dotenv').config();
 const Sequelize = require('sequelize');
 
 const modelPaths = [
   __dirname + '/../db/user/UserModel.js',
   __dirname + '/../db/tag/TagModel.js',
   __dirname + '/../db/post/PostModel.js',
-  __dirname + '/../db/friends/FriendsModel.js',
+  __dirname + '/../db/friend/FriendModel.js',
   __dirname + '/../db/emoji/EmojiModel.js',
-  
 ];
 
 const sequelize = new Sequelize(process.env.DB_DATABASE, process.env.DB_USER, process.env.DB_PASS, {
