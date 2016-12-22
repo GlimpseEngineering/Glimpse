@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING
       },
       json : {
-        type: DataType.TEXT
+        type: DataTypes.TEXT
       }
     }, {
     /**
@@ -25,5 +25,5 @@ module.exports = (sequelize, DataTypes) => {
       }
     } 
   });
-  return User;
+  return Emoji;
 };

@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   
-  const Friends = sequelize.define('Friends', {
+  const Friend = sequelize.define('Friend', {
       status : {
         type: DataTypes.ENUM('pending', 'accepted')
       }
@@ -14,5 +14,5 @@ module.exports = (sequelize, DataTypes) => {
       }
     } 
   });
-  return User;
+  return Friend;
 };
