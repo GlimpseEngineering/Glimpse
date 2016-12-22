@@ -9,6 +9,9 @@ module.exports = (sequelize, DataTypes) => {
       },
       format: {
         type: DataTypes.STRING
+      },
+      private: {
+        type: DataTypes.BOOLEAN
       }
     }, {
     /**
@@ -31,6 +34,11 @@ module.exports = (sequelize, DataTypes) => {
          through: 'User_Emoji_Post',
          constraints: false
        });
+       Post.hasMany(models.Notification, {
+         foreignKey: {
+           allowNull: true
+         }
+       }); 
       }
     }
   });

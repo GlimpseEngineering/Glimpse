@@ -18,6 +18,9 @@ module.exports = (sequelize, DataTypes) => {
       },
       dob: {
         type: DataTypes.DATE
+      },
+      private: {
+        type: DataTypes.BOOLEAN
       }
     }, {
     /**
@@ -36,8 +39,8 @@ module.exports = (sequelize, DataTypes) => {
           }
         });
        User.belongsToMany(models.User, {
-         through: 'Friend',
-         as: 'Friend'
+         through: 'Follow',
+         as: 'Follow'
        });
        User.belongsToMany(models.Tag, {
          through: "User_Tags",

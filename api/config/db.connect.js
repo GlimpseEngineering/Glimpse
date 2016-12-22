@@ -5,9 +5,10 @@ const modelPaths = [
   __dirname + '/../db/user/UserModel.js',
   __dirname + '/../db/tag/TagModel.js',
   __dirname + '/../db/post/PostModel.js',
-  __dirname + '/../db/friend/FriendModel.js',
+  __dirname + '/../db/follow/FollowModel.js',
   __dirname + '/../db/emoji/EmojiModel.js',
-  __dirname + '/../db/user-emoji-post/UserEmojiPostModel.js'
+  __dirname + '/../db/user-emoji-post/UserEmojiPostModel.js',
+  __dirname + '/../db/notification/NotificationModel.js'
 ];
 
 const sequelize = new Sequelize(process.env.DB_DATABASE, process.env.DB_USER, process.env.DB_PASS, {
