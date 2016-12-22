@@ -2,15 +2,20 @@ const models = require('../../config/db.connect.js');
 
 module.exports = {
   getFollowersForUser: (req, res, next) => {
-    // models.Follow.findAll({
-
-    // })
-    // .then(result => {
-    //   res.json(result);
-    // })
-    // .catch(err => {
-
-    // })
+    models.Follow.findAll({
+      where: {
+        FollowId: req.params.userId,
+        status: 'accepted'
+      }
+    })
+    .then(result => {
+      if (Array.isArray(result)) res.json(result);
+      else res.json([result]);
+    })
+    .catch(err => {
+      res.json(err);
+      throw err;
+    });
   },
 
   requestFollow: (req, res, next) => {
