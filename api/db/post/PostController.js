@@ -1,4 +1,4 @@
-const models = require('../config/db.connect.js');
+const models = require('../../config/db.connect.js');
 
 module.exports = {
   getAllPosts: (req, res, next) => {
