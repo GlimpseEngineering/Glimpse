@@ -51,6 +51,7 @@
     ]
   },
   "devDependencies": {
+    "aframe-html-shader": "^0.1.1",
     "css-loader": "^0.26.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "node-sass": "^4.1.1",
