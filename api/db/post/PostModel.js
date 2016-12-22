@@ -17,23 +17,20 @@ module.exports = (sequelize, DataTypes) => {
     freezeTableName: true,
     classMethods: {
       associate: (models) => {
-       // add relationship with tags here
        Post.belongsTo(models.User, {
          foreignKey: {
            allowNull: false
          },
-         onDelete: "cascade"
-       })
-       // add relationship with posts here
+         onDelete: 'CASCADE'
+       });
        Post.belongsToMany(models.Tag, {
-         through: "User_Tags",
+         through: 'User_Tags',
          constraints: false
-       })
-       // add relationship with emojis here
+       });
        Post.belongsToMany(models.Emoji, {
-         through: "User_Emoji_Post",
+         through: 'User_Emoji_Post',
          constraints: false
-       })
+       });
       }
     }
   });

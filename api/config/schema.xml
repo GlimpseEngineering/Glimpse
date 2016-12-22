@@ -37,7 +37,7 @@
 		<type label="SET" length="1" sql="SET" quote=""/>
 		<type label="Bit" length="0" sql="bit" quote=""/>
 	</group>
-</datatypes><table x="430" y="21" name="Users">
+</datatypes><table x="419" y="37" name="Users">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="Posts" row="UserId" />
@@ -87,7 +87,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="65" y="154" name="Post_Emoji_Response">
+<table x="53" y="185" name="User_Emoji_Post">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -105,10 +105,12 @@
 </row>
 <key type="PRIMARY" name="">
 <part>id</part>
+<part>PostId</part>
+<part>EmojiId</part>
 </key>
 <comment>This is a join table.</comment>
 </table>
-<table x="674" y="15" name="User_Tags">
+<table x="621" y="44" name="User_Tags">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -122,6 +124,8 @@
 </row>
 <key type="PRIMARY" name="">
 <part>id</part>
+<part>UserId</part>
+<part>TagId</part>
 </key>
 <comment>This is a join table.</comment>
 </table>
@@ -150,6 +154,8 @@
 </row>
 <key type="PRIMARY" name="">
 <part>id</part>
+<part>PostId</part>
+<part>TagId</part>
 </key>
 <comment>This is a join table.</comment>
 </table>
@@ -167,7 +173,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="79" y="17" name="Friends">
+<table x="98" y="42" name="Friends">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -179,8 +185,13 @@
 <datatype>INTEGER</datatype>
 <relation table="Users" row="id" />
 </row>
+<row name="status" null="1" autoincrement="0">
+<datatype>ENUM</datatype>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
+<part>UserId</part>
+<part>FriendId</part>
 </key>
 </table>
 </sql>
