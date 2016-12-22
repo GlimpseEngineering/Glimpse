@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  
+
   const User = sequelize.define('User', {
       username: {
         type: DataTypes.STRING
@@ -22,12 +22,24 @@ module.exports = (sequelize, DataTypes) => {
     }, {
     /**
      * freezeTableName: Model tableName will be the same as the model name
-     *  */ 
+     *  */
     freezeTableName: true,
     classMethods: {
       associate: (models) => {
+       // add relationship with tags here
+       User.belongsToMany(models.Tag, {
+         through: "User_Tags",
+         constraints: false
+       })
+       // add relationship with posts here
+       User.hasMany(models.Post, {
+         foreignKey: {
+           allowNull: false
+         }
+       })
+       // add relationship with emojis here
       }
-    } 
+    }
   });
   return User;
 };
