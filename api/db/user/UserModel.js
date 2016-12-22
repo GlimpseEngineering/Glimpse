@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  
+
   const User = sequelize.define('User', {
       username: {
         type: DataTypes.STRING
@@ -22,15 +22,10 @@ module.exports = (sequelize, DataTypes) => {
     }, {
     /**
      * freezeTableName: Model tableName will be the same as the model name
-     *  */ 
+     *  */
     freezeTableName: true,
     classMethods: {
       associate: (models) => {
-       // add relationship with tags here
-
-       // add relationship with posts here
-
-       // add relationship with emojis here
        User.belongsToMany(models.Emoji, { 
          through: 'User_Emoji_Post',
          constraints: false
@@ -39,13 +34,21 @@ module.exports = (sequelize, DataTypes) => {
          through: 'User_Emoji_Post',
          constraints: false
         });
-       // add relationship with other users here
        User.belongsToMany(models.User, {
          through: 'Friends',
          as: 'FriendID'
        });
+       User.belongsToMany(models.Tag, {
+         through: "User_Tags",
+         constraints: false
+       })
+       User.hasMany(models.Post, {
+         foreignKey: {
+           allowNull: false
+         }
+       })
       }
-    } 
+    }
   });
   return User;
 };
