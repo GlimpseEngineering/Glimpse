@@ -30,9 +30,14 @@ module.exports = (sequelize, DataTypes) => {
          through: 'User_Emoji_Post',
          constraints: false
         });
-       User.belongsToMany(models.Post, { 
-         through: 'User_Emoji_Post',
-         constraints: false
+      //  User.belongsToMany(models.Post, { 
+      //    through: 'User_Emoji_Post',
+      //    constraints: false
+      //   });
+        User.hasOne(models.User_Emoji_Post, {
+          foreignKey: {
+            allowNull: false
+          }
         });
        User.belongsToMany(models.User, {
          through: 'Friend',

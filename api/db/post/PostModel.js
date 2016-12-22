@@ -34,6 +34,10 @@ module.exports = (sequelize, DataTypes) => {
          through: "User_Emoji_Post",
          constraints: false
        })
+       Post.belongsToMany(models.User, {
+         through: 'User_Emoji_Post',
+         constraints: false
+        })
       }
     }
   });
