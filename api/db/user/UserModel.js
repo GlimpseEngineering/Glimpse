@@ -31,6 +31,14 @@ module.exports = (sequelize, DataTypes) => {
        // add relationship with posts here
 
        // add relationship with emojis here
+       User.belongsToMany(models.Emoji, { 
+         through: 'User_Emoji_Post',
+         constraints: false
+        });
+       User.belongsToMany(models.Post, { 
+         through: 'User_Emoji_Post',
+         constraints: false
+        });
       }
     } 
   });
