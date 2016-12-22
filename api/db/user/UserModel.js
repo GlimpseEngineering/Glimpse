@@ -26,18 +26,27 @@ module.exports = (sequelize, DataTypes) => {
     freezeTableName: true,
     classMethods: {
       associate: (models) => {
-       // add relationship with tags here
+       User.belongsToMany(models.Emoji, { 
+         through: 'User_Emoji_Post',
+         constraints: false
+        });
+       User.belongsToMany(models.Post, { 
+         through: 'User_Emoji_Post',
+         constraints: false
+        });
+       User.belongsToMany(models.User, {
+         through: 'Friends',
+         as: 'FriendID'
+       });
        User.belongsToMany(models.Tag, {
          through: "User_Tags",
          constraints: false
        })
-       // add relationship with posts here
        User.hasMany(models.Post, {
          foreignKey: {
            allowNull: false
          }
        })
-       // add relationship with emojis here
       }
     }
   });
