@@ -39,6 +39,11 @@ module.exports = (sequelize, DataTypes) => {
          through: 'User_Emoji_Post',
          constraints: false
         });
+       // add relationship with other users here
+       User.belongsToMany(models.User, {
+         through: 'Friends',
+         as: 'FriendID'
+       });
       }
     } 
   });
