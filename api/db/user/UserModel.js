@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
          constraints: false
         });
        User.belongsToMany(models.User, {
-         through: 'Friends',
+         through: 'Friend',
          as: 'FriendID'
        });
        User.belongsToMany(models.Tag, {

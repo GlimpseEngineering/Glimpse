@@ -60,7 +60,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	__webpack_require__(542);
+	__webpack_require__(545);
 
 	_reactDom2.default.render(_routes2.default, document.querySelector("#container"));
 
@@ -21495,7 +21495,7 @@
 
 	var _World2 = _interopRequireDefault(_World);
 
-	var _Login = __webpack_require__(541);
+	var _Login = __webpack_require__(544);
 
 	var _Login2 = _interopRequireDefault(_Login);
 
@@ -26506,15 +26506,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Camera = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./primatives/Camera\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _Camera = __webpack_require__(541);
 
 	var _Camera2 = _interopRequireDefault(_Camera);
 
-	var _Sky = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./primatives/Sky\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _Sky = __webpack_require__(542);
 
 	var _Sky2 = _interopRequireDefault(_Sky);
 
-	var _Text = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./primatives/Text\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _Text = __webpack_require__(543);
 
 	var _Text2 = _interopRequireDefault(_Text);
 
@@ -105558,6 +105558,89 @@
 /* 541 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _aframeReact = __webpack_require__(538);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function (props) {
+	  return _react2.default.createElement(
+	    _aframeReact.Entity,
+	    null,
+	    _react2.default.createElement(_aframeReact.Entity, _extends({ camera: '', 'look-controls': '', 'wasd-controls': '' }, props))
+	  );
+	};
+
+/***/ },
+/* 542 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _aframeReact = __webpack_require__(538);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function (props) {
+	  return _react2.default.createElement(_aframeReact.Entity, {
+	    geometry: { primitive: 'sphere', radius: 100 },
+	    material: { shader: 'flat', src: props.src },
+	    scale: '1 1 -1' });
+	};
+
+/***/ },
+/* 543 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _aframeReact = __webpack_require__(538);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function (props) {
+	  var extraProps = AFRAME.utils.extend({}, props);
+	  delete extraProps.color;
+	  delete extraProps.text;
+
+	  return _react2.default.createElement(_aframeReact.Entity, _extends({
+	    text: { text: props.text }, material: { color: props.color }
+	  }, extraProps));
+	};
+
+/***/ },
+/* 544 */
+/***/ function(module, exports, __webpack_require__) {
+
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -105610,7 +105693,7 @@
 	exports.default = Login;
 
 /***/ },
-/* 542 */
+/* 545 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
