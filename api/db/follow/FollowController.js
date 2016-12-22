@@ -17,7 +17,6 @@ module.exports = {
       throw err;
     });
   },
-
   requestFollow: (req, res, next) => {
     models.Follow.findOrCreate({
       where: {
@@ -39,7 +38,6 @@ module.exports = {
       throw err;
     });
   },
-
   acceptFollow: (req, res, next) => {
     models.Follow.findOne({
       where: {
@@ -64,7 +62,6 @@ module.exports = {
       throw err;
     });
   },
-
   deleteFollow: (req, res, next) => {
     models.Follow.findOne({
       where: {
@@ -84,7 +81,6 @@ module.exports = {
       throw err;
     });
   },
-
   getFollowedByUser: (req, res, next) => {
     models.Follow.findAll({
       where: {
