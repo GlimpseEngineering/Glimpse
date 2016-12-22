@@ -6,6 +6,8 @@ const path = require('path');
 const routes = require('./api/routes');
 const PORT = process.env.PORT || 8080;
 
+const models = require('./api/config/db.connect.js'); 
+
 module.exports = (PORT) => {
   const app = express();
   app.use(morgan('dev'));
