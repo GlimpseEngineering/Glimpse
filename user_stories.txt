@@ -1,0 +1,61 @@
+ __   __       ____
+|  | |  |     /  __|
+\  \_/  /    |__   | 
+ \_____/SER  |____/TORIES
+         
+ - [20] [mvp] I can log in 
+ - [40] [mvp] I can view a 2d page that shows my profile, my posts, and my feed
+ - [60] [mvp+] I can view a 3d representation of the splashscreen
+ - [40] [mvp] my newsfeed displays recent activity from my friends
+ - [40] [mvp+] my newsfeed uses an algorithm to suggest content for me
+ - [20] [mvp] my posts-feed on the 2d dashboard shows everything I have posted
+ - [13] [mvp] I can click on another user's profile on the 2d dash to see their posts and their feed
+ - [13] [mvp] I can search for and add friends from the 2d dashboard
+ - [20] [mvp+] I can search for posts
+ - [13] [mvp] I can click on a post from the 2d dashboard to view it in VR
+ - [20] [mvp] From VR, I can pull up a UI that allows me to see links to other posts
+ - [60] [mvp+] I can scroll through the 3D links UI to see more dynamically generated links
+ - [13] [mvp] I can post a scene consisting of a single a-frame entity
+ - [40] [mvp+] I can post a scene consisting of multiple a-frame enitities
+ - [40] [mvp+] My followers immediately know when I've posted a scene
+ - [100] [mvp+++] I can share a post with a friend of mine directly
+ - [13] [mvp+] I can repost a post
+ - [40] [mvp+] I can post an album of posts
+ - [13] [mvp+] I can mark posts and interests as private
+ - [100] [mvp++] As an advertiser, I can see what content a user interacts with in order to cater my advertising to that user
+ - [60] [mvp+] From VR, I can pull up a UI that allows me to view and post emojis and comments in response to a post
+ - [100] [mvp+++] I can buy and sell custom emojis
+ - [13] [mvp+] I can store my interests on my profile
+ - [20] [mvp+] I can tag my posts with categories so that others can find them easily
+ - [60] [mvp++] I can voice chat with my friends who are online 
+ - [60] [mvp++] I can view the same posts as my friends who are online
+ - [20] [mvp++] I can filter to only see specfic content types in my feed (panos, vidoes, etc)
+ - [60] [mvp++] I can use voice-to-text to create text posts
+ - [] [mvp++] Gaze tracking analytics
+ - [200] [mvp+++] I can fully interact with the app using voice commands
+
+Logline: 
+ "A platform for sharing content in 3D space"
+
+Content people could share:
+  - pictures
+  - Panoramic pictures
+  - gifs
+  - videos
+  - pano video
+  - tweet-like text
+  - audio
+  - 3d sculptures
+  - links to 3D Websites
+
+Product Name Ideas:
+  - "The Woods" (probably not this)
+  - "infinite space"
+  - "myworld"
+  - "worlds"
+  - "infinite worlds"
+  - "Wander"
+
+Team Name ideas:
+  - "The Woodsmen" (probably not this)
+  - 
