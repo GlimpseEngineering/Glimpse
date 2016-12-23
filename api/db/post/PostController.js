@@ -51,7 +51,7 @@ module.exports = {
     })
   },
   createPost: (req, res, next) => {
-    let tempTag;
+    let tempTag = [];
     models.Tag.findOrCreate({
       where: {
         name: req.body.tag
@@ -61,7 +61,7 @@ module.exports = {
       }
     })
     .then(result => {
-      tempTag = result[0];
+      tempTag = tempTag.push(result[0]);
       return models.Post.create({
         content: req.body.content,
         description: req.body.description,
