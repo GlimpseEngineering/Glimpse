@@ -51,18 +51,36 @@ module.exports = {
     })
   },
   createPost: (req, res, next) => {
-    // let tags = req.body.tags;
-    // tags.forEach((tag) => {
-    //   models.Tag.findOrCreate({})
-    // })
-    models.Post.create({
-      content: req.body.content,
-      description: req.body.description,
-      format: req.body.format,
-      private: req.body.private,
-      UserId: req.body.userId,
+    let tempTag;
+    models.Tag.findOrCreate({
+      where: {
+        name: req.body.tag
+      },
+      defaults: {
+        name: req.body.tag
+      }
     })
-    .then(post => res.json(post))
+    .then(result => {
+      tempTag = result[0];
+      return models.Post.create({
+        content: req.body.content,
+        description: req.body.description,
+        format: req.body.format,
+        private: req.body.private,
+        UserId: req.body.userId
+      })
+    })
+    .then(result => {
+      console.log('Here is our tempTag', tempTag);
+      console.log('Here is our attempt to add tag', result.addTags);
+      return result.addTag(tempTag);
+    })
+    .then(result => {
+      res.json(result);
+    })
+    // .then(result => {
+    //   res.json(result);
+    // })
     .catch(err => {
       res.json(err);
       throw err;
