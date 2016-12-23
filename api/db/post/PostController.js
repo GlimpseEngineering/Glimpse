@@ -52,18 +52,7 @@ module.exports = {
   },
   createPost: (req, res, next) => {
     let postInstance;
-    let tagInstances = [];
     let tags = JSON.parse(req.body.tags);
-    // models.Tag.findOrCreate({
-    //   where: {
-    //     name: req.body.tag
-    //   },
-    //   defaults: {
-    //     name: req.body.tag
-    //   }
-    // })
-    // .then(result => {
-      // tempTag.push(result[0]);
     models.Post.create({
       content: req.body.content,
       description: req.body.description,
@@ -71,7 +60,6 @@ module.exports = {
       private: req.body.private,
       UserId: req.body.userId
     })
-    // })
     .then(result => {
       postInstance = result;
       tags.forEach((tag) => {
@@ -83,18 +71,12 @@ module.exports = {
             name: tag
           }
         })
-        .then(result => {
-          tagInstances.push(result);
-        })
+        .then(result => postInstance.addTag(result[0]))
         .catch(err => {
           throw err;
         })
-        return postInstance.addTags(tagInstances);
       })
-      // return result.addTag(tempTag);
-    })
-    .then(result => {
-      res.json(result);
+      res.json(postInstance);
     })
     .catch(err => {
       res.json(err);
