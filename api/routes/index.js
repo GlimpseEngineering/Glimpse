@@ -3,6 +3,7 @@ const router = express.Router();
 const userController = require('../db/user/UserController');
 const postController = require('../db/post/PostController');
 const followController = require('../db/follow/FollowController.js');
+const tagController = require('../db/tag/TagController.js');
 //USER CONTROLLER routes================>
 //get one user
 router.get('/users/:userId', userController.getOneUser);//MVP
@@ -42,5 +43,14 @@ router.put('/users/:userId/follows/:followId', followController.acceptFollow);
 router.delete('/users/:userId/follows/:followId', followController.deleteFollow);
 //get followed by user
 router.get('/users/:userId/follows', followController.getFollowedByUser);
+
+//TAG CONTROLLER routes================>
+router
+  .route('/tags/:tagId/users/:userId')
+  .post(tagController.addTagToUser)
+
+router
+  .route('/tags/:tagId/posts/:postId')
+  .post(tagController.addTagToPost)
 
 module.exports = router;
