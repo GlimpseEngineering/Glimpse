@@ -60,7 +60,7 @@
 
 	var _reactRouter = __webpack_require__(179);
 
-	var _reduxThunk = __webpack_require__(609);
+	var _reduxThunk = __webpack_require__(611);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
@@ -68,13 +68,13 @@
 
 	var _redux = __webpack_require__(556);
 
-	var _index = __webpack_require__(610);
+	var _index = __webpack_require__(612);
 
 	var _index2 = _interopRequireDefault(_index);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	__webpack_require__(612);
+	__webpack_require__(615);
 
 
 	//create store
@@ -26489,6 +26489,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
+	        'hello',
 	        this.props.children
 	      );
 	    }
@@ -109920,7 +109921,15 @@
 
 	var _reactRedux = __webpack_require__(547);
 
-	var _actionCreators = __webpack_require__(583);
+	var _usersActionCreators = __webpack_require__(583);
+
+	var _User_Feeds = __webpack_require__(609);
+
+	var _User_Feeds2 = _interopRequireDefault(_User_Feeds);
+
+	var _User_Info = __webpack_require__(610);
+
+	var _User_Info2 = _interopRequireDefault(_User_Info);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -109938,7 +109947,7 @@
 
 	    var _this = _possibleConstructorReturn(this, (Profile.__proto__ || Object.getPrototypeOf(Profile)).call(this, props));
 
-	    _this.props.getUserListings();
+	    _this.props.getUserProfile(1);
 	    return _this;
 	  }
 
@@ -109953,6 +109962,12 @@
 	          'h1',
 	          null,
 	          'Profile'
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(_User_Feeds2.default, { user: this.props.user }),
+	          _react2.default.createElement(_User_Info2.default, { user: this.props.user })
 	        )
 	      );
 	    }
@@ -109962,12 +109977,17 @@
 	}(_react.Component);
 
 	function mapStateToProps(_ref) {
-	  var users = _ref.users;
+	  var user = _ref.user;
 
-	  return { users: users.userListings };
+	  return {
+	    user: user.userProfile
+	  };
 	}
 
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, { getUserListings: _actionCreators.getAllUsers })(Profile);
+	var dashboard = (0, _reactRedux.connect)(mapStateToProps, {
+	  getUserProfile: _usersActionCreators.getOneUser
+	})(Profile);
+	exports.default = dashboard;
 
 /***/ },
 /* 547 */
@@ -112089,8 +112109,8 @@
 	  value: true
 	});
 	exports.getAllUsers = getAllUsers;
-	exports.createNewUser = createNewUser;
 	exports.getOneUser = getOneUser;
+	exports.createNewUser = createNewUser;
 	exports.updateUser = updateUser;
 	exports.getUsersWithTag = getUsersWithTag;
 
@@ -112104,7 +112124,7 @@
 	function getAllUsers() {
 	  return function (dispatch) {
 	    _axios2.default.get('/api/users').then(function (response) {
-	      console.log('the response for getting user listings is:', response);
+	      console.log('the response for getting users listings is:', response.data);
 	      dispatch({ type: 'USERS_LISTINGS', payload: response.data });
 	    });
 	  };
@@ -112117,38 +112137,40 @@
 
 	// import { push } from 'react-router-redux';
 	// import { browserHistory } from 'react-router';
-	function createNewUser(profPic, bio, username, email, dob, gender) {
+	function getOneUser(userId) {
+	  return function (dispatch) {
+	    (0, _axios2.default)({
+	      method: 'GET',
+	      url: '/api/users/' + userId
+	    }).then(function (response) {
+	      console.log('the response for getting one user is:', response.data);
+	      dispatch({ type: 'USER_PROFILE', payload: response.data });
+	    }).catch(function (err) {
+	      console.log('err in getOneUser is:', err);
+	    });
+	  };
+	}
+
+	function createNewUser(username, profPic, authId, bio, email, dob, gender, isPrivate) {
 	  return function (dispatch) {
 	    (0, _axios2.default)({
 	      method: 'POST',
 	      url: '/api/users',
 	      data: {
-	        profPic: profPic,
-	        bio: bio,
 	        username: username,
+	        profPic: profPic,
+	        authId: authId,
+	        bio: bio,
 	        email: email,
 	        dob: dob,
-	        gender: gender
+	        gender: gender,
+	        private: isPrivate
 	      }
 	    }).then(function (response) {
 	      console.log('the response for updating user is:', response);
 	      dispatch({ type: 'USER_UPDATE', payload: response.data });
 	    }).catch(function (err) {
 	      console.log('err in createNewUser is:', err);
-	    });
-	  };
-	}
-
-	function getOneUser(userId) {
-	  return function (dispatch) {
-	    (0, _axios2.default)({
-	      method: 'GET',
-	      url: '/api/users/:userId'
-	    }).then(function (response) {
-	      console.log('the response for getting user is:', response);
-	      dispatch({ type: 'GET_USER', payload: response.data });
-	    }).catch(function (err) {
-	      console.log('err in getOneUser is:', err);
 	    });
 	  };
 	}
@@ -113648,6 +113670,139 @@
 
 /***/ },
 /* 609 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(547);
+
+	var _usersActionCreators = __webpack_require__(583);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var User_Feeds = function (_Component) {
+	  _inherits(User_Feeds, _Component);
+
+	  function User_Feeds(props) {
+	    _classCallCheck(this, User_Feeds);
+
+	    var _this = _possibleConstructorReturn(this, (User_Feeds.__proto__ || Object.getPrototypeOf(User_Feeds)).call(this, props));
+
+	    _this.props.getUserListings();
+	    // this.props.getUserProfile(1);
+	    return _this;
+	  }
+
+	  _createClass(User_Feeds, [{
+	    key: 'render',
+	    value: function render() {
+
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          'Feeds'
+	        )
+	      );
+	    }
+	  }]);
+
+	  return User_Feeds;
+	}(_react.Component);
+
+	function mapStateToProps(_ref) {
+	  var users = _ref.users,
+	      user = _ref.user;
+
+	  return {
+	    users: users.userListings
+	  };
+	}
+
+	var feeds = (0, _reactRedux.connect)(mapStateToProps, {
+	  getUserListings: _usersActionCreators.getAllUsers
+	})(User_Feeds);
+	exports.default = feeds;
+
+/***/ },
+/* 610 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var User_Info = function (_Component) {
+	  _inherits(User_Info, _Component);
+
+	  function User_Info() {
+	    _classCallCheck(this, User_Info);
+
+	    return _possibleConstructorReturn(this, (User_Info.__proto__ || Object.getPrototypeOf(User_Info)).apply(this, arguments));
+	  }
+
+	  _createClass(User_Info, [{
+	    key: 'render',
+
+	    // constructor(props){
+	    //   super(props);
+	    //
+	    // }
+	    value: function render() {
+
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          'User Info'
+	        )
+	      );
+	    }
+	  }]);
+
+	  return User_Info;
+	}(_react.Component);
+
+	exports.default = User_Info;
+
+/***/ },
+/* 611 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -113675,7 +113830,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 610 */
+/* 612 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -113686,23 +113841,27 @@
 
 	var _redux = __webpack_require__(556);
 
-	var _users = __webpack_require__(611);
+	var _users_reducer = __webpack_require__(613);
 
-	var _users2 = _interopRequireDefault(_users);
+	var _users_reducer2 = _interopRequireDefault(_users_reducer);
+
+	var _user_reducer = __webpack_require__(614);
+
+	var _user_reducer2 = _interopRequireDefault(_user_reducer);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	/*
-	reducer makes changes to the state based off what the action tells us to do
-	*/
-	var rootReducer = (0, _redux.combineReducers)({
-	  users: _users2.default
-	});
 	// import { routerReducer } from 'react-router-redux';
+	var rootReducer = (0, _redux.combineReducers)({
+	  users: _users_reducer2.default,
+	  user: _user_reducer2.default
+	}); /*
+	    reducer makes changes to the state based off what the action tells us to do
+	    */
 	exports.default = rootReducer;
 
 /***/ },
-/* 611 */
+/* 613 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -113730,7 +113889,35 @@
 	var initialState = { userListing: [] };
 
 /***/ },
-/* 612 */
+/* 614 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	exports.default = function () {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case 'USER_PROFILE':
+	      // console.log('payload for get users listings is', action.payload);
+	      return Object.assign({}, state, {
+	        userProfile: action.payload
+	      });
+	    default:
+	      return state;
+	  }
+	  return state;
+	};
+
+	var initialState = { userProfile: [] };
+
+/***/ },
+/* 615 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

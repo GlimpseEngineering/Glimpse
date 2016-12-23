@@ -10,6 +10,7 @@ import Text from './primatives/Text';
 import 'aframe-html-shader';
 
 class World extends Component {
+
   render() {
 
     return (
