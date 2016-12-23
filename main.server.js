@@ -6,11 +6,7 @@ const db = require('./api/config/db.connect.js');
 const PORT = process.env.PORT || 8080;
 
 db.sequelize
-<<<<<<< HEAD
   .sync(/*{force: true}*/)
-=======
-  .sync()
->>>>>>> [setup] not dropping tables
   .then(() => {
     apiServer(PORT - 1);
     appServer(PORT);
