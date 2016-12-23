@@ -32,7 +32,7 @@ module.exports = {
     .catch(err => {
       res.json(err);
       throw err;
-    })
+    });
   },
   getPostsByTag: (req, res, next) => {
     models.Post.findAll({
@@ -48,9 +48,11 @@ module.exports = {
     .catch(err => {
       res.json(err);
       throw err;
-    })
+    });
   },
   createPost: (req, res, next) => {
+    let postInstance;
+    let tags = JSON.parse(req.body.tags);
     models.Post.create({
       content: req.body.content,
       description: req.body.description,
@@ -58,13 +60,32 @@ module.exports = {
       private: req.body.private,
       UserId: req.body.userId
     })
-    .then(post => res.json(post))
+    .then(result => {
+      postInstance = result;
+      tags.forEach((tag) => {
+        models.Tag.findOrCreate({
+          where: {
+            name: tag
+          },
+          defaults: {
+            name: tag
+          }
+        })
+        .then(result => postInstance.addTag(result[0]))
+        .catch(err => {
+          res.json(err);
+          throw err;
+        });
+      });
+      res.json(postInstance);
+    })
     .catch(err => {
       res.json(err);
       throw err;
-    })
+    });
   },
   updatePost: (req, res, next) => {
+    let tags = JSON.parse(req.body.tags);
     models.Post.findOne({
       where: { id: req.params.postId}
     })
@@ -79,7 +100,25 @@ module.exports = {
       }
       return post.save();
     })
-    .then(post => res.json(post))
+    .then(post => {
+      postInstance = post;
+      tags.forEach((tag) => {
+        models.Tag.findOrCreate({
+          where: {
+            name: tag
+          },
+          defaults: {
+            name: tag
+          }
+        })
+        .then(result => postInstance.addTag(result[0]))
+        .catch(err => {
+          res.json(err);
+          throw err;
+        });
+      });
+      res.json(postInstance);
+    })
     .catch(err => {
       res.json(err);
       throw err;
@@ -95,6 +134,6 @@ module.exports = {
     .catch(err => {
       res.json(err);
       throw err;
-    })
+    });
   }
-}
+};

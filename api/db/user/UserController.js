@@ -14,6 +14,7 @@ module.exports = {
     });
   },
   updateUser: (req, res, next) => {
+    let tags = JSON.parse(req.body.tags);
     models.User.findOne({
       where: { id: req.params.userId }
     })
@@ -31,7 +32,25 @@ module.exports = {
       }
       return user.save();
     })
-    .then(user => res.json(user))
+    .then(user => {
+      userInstance = user;
+      tags.forEach((tag) => {
+        models.Tag.findOrCreate({
+          where: {
+            name: tag
+          },
+          defaults: {
+            name: tag
+          }
+        })
+        .then(result => userInstance.addTag(result[0]))
+        .catch(err => {
+          res.json(err);
+          throw err;
+        });
+      });
+      res.json(userInstance);
+    })
     .catch(err => {
       res.json(err);
       throw err
@@ -45,9 +64,11 @@ module.exports = {
     .catch(err => {
       res.json(err);
       throw err;
-    })
+    });
   },
   createNewUser: (req, res, next) => {
+    let userInstance;
+    let tags = JSON.parse(req.body.tags);
     models.User.create({
       username: req.body.username,
       profPic: req.body.profPic,
@@ -59,7 +80,23 @@ module.exports = {
       private: req.body.private
     })
     .then(user => {
-      res.json(user);
+      userInstance = user;
+      tags.forEach((tag) => {
+        models.Tag.findOrCreate({
+          where: {
+            name: tag
+          },
+          defaults: {
+            name: tag
+          }
+        })
+        .then(result => userInstance.addTag(result[0]))
+        .catch(err => {
+          res.json(err);
+          throw err;
+        });
+      });
+      res.json(userInstance);
     })
     .catch(err => {
       res.json(err);
@@ -80,6 +117,6 @@ module.exports = {
     .catch(err => {
       res.json(err);
       throw err;
-    })
+    });
   }
-}
+};
