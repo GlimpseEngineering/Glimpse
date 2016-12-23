@@ -79,6 +79,7 @@ router
 // //get followed by user
 // router.get('/users/:userId/follows', followController.getFollowedByUser);
 
+//FOLLOWS CONTROLLER routes================>
 router
   .route('/users/:userId/follows')
     .get(followController.getFollowedByUser)
