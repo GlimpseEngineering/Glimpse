@@ -34,7 +34,7 @@ module.exports = {
     .then(user => res.json(user))
     .catch(err => {
       res.json(err);
-      throw err;
+      throw err
     });
   },
   getAllUsers: (req, res, next) => {
