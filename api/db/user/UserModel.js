@@ -19,6 +19,9 @@ module.exports = (sequelize, DataTypes) => {
       dob: {
         type: DataTypes.DATE
       },
+      gender: {
+        type: DataTypes.STRING(20)
+      },
       private: {
         type: DataTypes.BOOLEAN
       }

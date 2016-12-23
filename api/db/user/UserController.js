@@ -14,17 +14,24 @@ module.exports = {
     });
   },
   updateUser: (req, res, next) => {
-    models.User.update({
-      profPic: req.body.profPic,
-      bio: req.body.bio,
-      username: req.body.username,
-      email: req.body.email,
-      dob: req.body.dob,
-      gender: req.body.gender
+    models.User.findOne({
+      where: { id: req.params.userId }
     })
     .then(user => {
-      res.json(user);
+      if (!user) res.json('user not found');
+      else {
+        user.username = req.body.username,
+        user.profPic = req.body.profPic,
+        user.authId = req.body.authId,
+        user.bio = req.body.bio,
+        user.email = req.body.email,
+        user.dob = req.body.dob,
+        user.gender = req.body.gender,
+        user.private = req.body.private
+      }
+      return user.save();
     })
+    .then(user => res.json(user))
     .catch(err => {
       res.json(err);
       throw err
@@ -42,12 +49,14 @@ module.exports = {
   },
   createNewUser: (req, res, next) => {
     models.User.create({
-      profPic: req.body.profPic,
-      bio: req.body.bio,
       username: req.body.username,
+      profPic: req.body.profPic,
+      authId: req.body.authId,
+      bio: req.body.bio,
       email: req.body.email,
       dob: req.body.dob,
-      gender: req.body.gender
+      gender: req.body.gender,
+      private: req.body.private
     })
     .then(user => {
       res.json(user);

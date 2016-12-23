@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -105253,7 +105255,7 @@
 	  children: _react2.default.PropTypes.any,
 	  events: _react2.default.PropTypes.object,
 	  mixin: _react2.default.PropTypes.string,
-	  primitve: _react2.default.PropTypes.string
+	  primitive: _react2.default.PropTypes.string
 	};
 
 	var Scene = exports.Scene = (function (_React$Component2) {
@@ -113744,3 +113746,4 @@
 
 /***/ }
 /******/ ]);
+>>>>>>> backendsetup
