@@ -9,6 +9,7 @@ class App extends Component {
   render() {
     return (
       <div >
+        hello
        {this.props.children}
       </div>
     );

@@ -1,5 +1,5 @@
-
 const initialState = { userListing: []};
+
 export default function(state = initialState, action) {
   switch(action.type){
     case 'USERS_LISTINGS':
