@@ -1,25 +1,35 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getAllUsers } from '../../actions/actionCreators';
+import { getOneUser  } from '../../actions/usersActionCreators';
+import User_Feeds from './User_Feeds';
+import User_Info from './User_Info';
 
 class Profile extends Component {
   constructor(props){
     super(props);
-    this.props.getUserListings();
+    this.props.getUserProfile(1);
   }
   render() {
 
     return (
       <div >
        <h1>Profile</h1>
-
+       <div>
+         <User_Feeds user={this.props.user}/>
+         <User_Info user={this.props.user}/>
+       </div>
       </div>
     );
   }
 }
 
-function mapStateToProps({ users }){
-  return { users: users.userListings };
+function mapStateToProps({ user }){
+  return {
+    user: user.userProfile
+  };
 }
 
-export default connect(mapStateToProps, {getUserListings: getAllUsers })(Profile);
+var dashboard = connect(mapStateToProps, {
+  getUserProfile: getOneUser
+})(Profile);
+export default dashboard;
