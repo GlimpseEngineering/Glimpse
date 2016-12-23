@@ -35,7 +35,7 @@ router.post('/posts/:postId', postController.respondToPost);
 //get followers for user
 router.get('/users/:userId/followers', followController.getFollowersForUser);//MVP
 //request follow
-router.post('/users/:userId/follows', followController.requestFollow);//MVP
+router.post('/users/:userId/follows/:followId', followController.requestFollow);//MVP
 //accept follow
 router.put('/users/:userId/follows/:followId', followController.acceptFollow);
 //delete follow
