@@ -55,7 +55,8 @@ module.exports = {
       content: req.body.content,
       description: req.body.description,
       format: req.body.format,
-      userId: req.body.userId
+      private: req.body.private,
+      UserId: req.body.userId
     })
     .then(post => res.json(post))
     .catch(err => {
@@ -64,26 +65,31 @@ module.exports = {
     })
   },
   updatePost: (req, res, next) => {
-    models.Post.update({
-      content: req.body.content,
-      description: req.body.description,
-      format: req.body.format,
-      userId: req.body.userId
-    },
-    {
-      where: { id: req.params.postId } 
+    models.Post.findOne({
+      where: { id: req.params.postId}
+    })
+    .then(post => {
+      if (!post) res.json('post not found');
+      else {
+        post.content = req.body.content,
+        post.description = req.body.description,
+        post.format = req.body.format,
+        post.private = req.body.private,
+        post.UserId = req.body.userId        
+      }
+      return post.save();
     })
     .then(post => res.json(post))
     .catch(err => {
       res.json(err);
       throw err;
-    })
+    });
   },
   respondToPost: (req, res, next) => {
     models.User_Emoji_Post.create({
-      userId: req.body.userId,
-      emojiId: req.body.emojiId,
-      postId: req.body.postId
+      UserId: req.body.userId,
+      EmojiId: req.body.emojiId,
+      PostId: req.body.postId
     })
     .then(emoji => res.json(emoji))
     .catch(err => {
