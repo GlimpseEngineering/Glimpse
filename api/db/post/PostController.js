@@ -11,9 +11,7 @@ module.exports = {
   },
   getOnePost: (req, res, next) => {
     models.Post.find({
-      where: {
-        id: req.params.postId
-      }
+      where: { id: req.params.postId }
     })
     .then(post => res.json(post))
     .catch(err => {
@@ -64,12 +62,8 @@ module.exports = {
       postInstance = result;
       tags.forEach((tag) => {
         models.Tag.findOrCreate({
-          where: {
-            name: tag
-          },
-          defaults: {
-            name: tag
-          }
+          where: { name: tag },
+          defaults: { name: tag }
         })
         .then(result => postInstance.addTag(result[0]))
         .catch(err => {
@@ -104,12 +98,8 @@ module.exports = {
       postInstance = post;
       tags.forEach((tag) => {
         models.Tag.findOrCreate({
-          where: {
-            name: tag
-          },
-          defaults: {
-            name: tag
-          }
+          where: { name: tag },
+          defaults: { name: tag }
         })
         .then(result => postInstance.addTag(result[0]))
         .catch(err => {

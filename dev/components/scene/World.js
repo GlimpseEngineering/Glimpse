@@ -4,9 +4,9 @@ import 'aframe-text-component';
 import 'babel-polyfill';
 import {Entity, Scene} from 'aframe-react';
 import React, { Component } from 'react';
-import Camera from './primatives/Camera';
-import Sky from './primatives/Sky';
-import Text from './primatives/Text';
+import Camera from './primitives/Camera';
+import PhotoSphere from './primitives/PhotoSphere';
+import Text from './primitives/Text';
 import 'aframe-html-shader';
 
 class World extends Component {

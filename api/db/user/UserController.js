@@ -36,12 +36,8 @@ module.exports = {
       userInstance = user;
       tags.forEach((tag) => {
         models.Tag.findOrCreate({
-          where: {
-            name: tag
-          },
-          defaults: {
-            name: tag
-          }
+          where: { name: tag },
+          defaults: { name: tag }
         })
         .then(result => userInstance.addTag(result[0]))
         .catch(err => {
@@ -83,12 +79,8 @@ module.exports = {
       userInstance = user;
       tags.forEach((tag) => {
         models.Tag.findOrCreate({
-          where: {
-            name: tag
-          },
-          defaults: {
-            name: tag
-          }
+          where: { name: tag },
+          defaults: { name: tag }
         })
         .then(result => userInstance.addTag(result[0]))
         .catch(err => {
