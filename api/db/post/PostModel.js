@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
          onDelete: 'CASCADE'
        });
        Post.belongsToMany(models.Tag, {
-         through: 'User_Tags',
+         through: 'Post_Tags',
          constraints: false
        });
        Post.belongsToMany(models.Emoji, {
