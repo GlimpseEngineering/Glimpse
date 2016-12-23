@@ -27,7 +27,7 @@ module.exports = {
     })
     .catch(err => {
       res.json(err);
-      throw.err
+      throw err
     });
   },
   getAllUsers: (req, res, next) => {
