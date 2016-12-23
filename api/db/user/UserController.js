@@ -48,6 +48,8 @@ module.exports = {
     })
   },
   createNewUser: (req, res, next) => {
+    let userInstance;
+    let tags = JSON.parse(req.body.tags);
     models.User.create({
       username: req.body.username,
       profPic: req.body.profPic,
@@ -59,7 +61,23 @@ module.exports = {
       private: req.body.private
     })
     .then(user => {
-      res.json(user);
+      userInstance = user;
+      tags.forEach((tag) => {
+        models.Tag.findOrCreate({
+          where: {
+            name: tag
+          },
+          defaults: {
+            name: tag
+          }
+        })
+        .then(result => userInstance.addTag(result[0]))
+        .catch(err => {
+          res.json(err);
+          throw err;
+        })
+      })
+      res.json(userInstance);
     })
     .catch(err => {
       res.json(err);
