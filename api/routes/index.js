@@ -45,12 +45,12 @@ router.delete('/users/:userId/follows/:followId', followController.deleteFollow)
 router.get('/users/:userId/follows', followController.getFollowedByUser);
 
 //TAG CONTROLLER routes================>
-router
-  .route('/tags/:tagId/users/:userId')
-  .post(tagController.addTagToUser)
+// router
+//   .route('/tags/:tagId/users/:userId')
+//   .post(tagController.addTagToUser)
 
-router
-  .route('/tags/:tagId/posts/:postId')
-  .post(tagController.addTagToPost)
+// router
+//   .route('/tags/:tagId/posts/:postId')
+//   .post(tagController.addTagToPost)
 
 module.exports = router;

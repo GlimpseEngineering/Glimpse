@@ -51,12 +51,16 @@ module.exports = {
     })
   },
   createPost: (req, res, next) => {
+    // let tags = req.body.tags;
+    // tags.forEach((tag) => {
+    //   models.Tag.findOrCreate({})
+    // })
     models.Post.create({
       content: req.body.content,
       description: req.body.description,
       format: req.body.format,
       private: req.body.private,
-      UserId: req.body.userId
+      UserId: req.body.userId,
     })
     .then(post => res.json(post))
     .catch(err => {
