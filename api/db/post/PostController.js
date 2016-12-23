@@ -71,16 +71,11 @@ module.exports = {
       })
     })
     .then(result => {
-      console.log('Here is our tempTag', tempTag);
-      console.log('Here is our attempt to add tag', result.addTags);
       return result.addTag(tempTag);
     })
     .then(result => {
       res.json(result);
     })
-    // .then(result => {
-    //   res.json(result);
-    // })
     .catch(err => {
       res.json(err);
       throw err;
