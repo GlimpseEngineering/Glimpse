@@ -51,27 +51,47 @@ module.exports = {
     })
   },
   createPost: (req, res, next) => {
-    let tempTag = [];
-    models.Tag.findOrCreate({
-      where: {
-        name: req.body.tag
-      },
-      defaults: {
-        name: req.body.tag
-      }
+    let postInstance;
+    let tagInstances = [];
+    let tags = JSON.parse(req.body.tags);
+    // models.Tag.findOrCreate({
+    //   where: {
+    //     name: req.body.tag
+    //   },
+    //   defaults: {
+    //     name: req.body.tag
+    //   }
+    // })
+    // .then(result => {
+      // tempTag.push(result[0]);
+    models.Post.create({
+      content: req.body.content,
+      description: req.body.description,
+      format: req.body.format,
+      private: req.body.private,
+      UserId: req.body.userId
     })
+    // })
     .then(result => {
-      tempTag = tempTag.push(result[0]);
-      return models.Post.create({
-        content: req.body.content,
-        description: req.body.description,
-        format: req.body.format,
-        private: req.body.private,
-        UserId: req.body.userId
+      postInstance = result;
+      tags.forEach((tag) => {
+        models.Tag.findOrCreate({
+          where: {
+            name: tag
+          },
+          defaults: {
+            name: tag
+          }
+        })
+        .then(result => {
+          tagInstances.push(result);
+        })
+        .catch(err => {
+          throw err;
+        })
+        return postInstance.addTags(tagInstances);
       })
-    })
-    .then(result => {
-      return result.addTag(tempTag);
+      // return result.addTag(tempTag);
     })
     .then(result => {
       res.json(result);
