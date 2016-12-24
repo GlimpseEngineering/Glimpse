@@ -13,7 +13,12 @@ class User_Feeds extends Component {
     return (
       <div >
        <h2>Feeds</h2>
-
+       <ul className="nav nav-tabs">
+         <li role="presentation" className="active">Posts</li>
+         <li role="presentation" >Newfeed</li>
+         <li role="presentation" >Following</li>
+         <li role="presentation" >Followers</li>
+       </ul>
       </div>
     );
   }

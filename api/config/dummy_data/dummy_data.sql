@@ -1,6 +1,6 @@
 -- how to run this file
--- use the following command with your computer's absolute path 
--- mysql -u root -p < [[path]]\[[to]]\glimpse\api\config\dummy_data\dummy_data.sql
+-- use the following command with your computer's absolute path
+-- mysql -u root -p < /Users/jimmygonzalez/documents/code/thesis/glimpse/api/config/dummy_data/dummy_data.sql
 -- database glimpse must already exist
 -- table names must already exist
 -- this file will delete your old data and repopulate your already made tables
@@ -111,7 +111,7 @@ INSERT into `user_emoji_post` (`createdAt`,`updatedAt`,`EmojiId`,`PostId`,`UserI
 INSERT into `user_emoji_post` (`createdAt`,`updatedAt`,`EmojiId`,`PostId`,`UserId`) VALUES (NOW(), NOW(), 6, 3, 3);
 INSERT into `user_emoji_post` (`createdAt`,`updatedAt`,`EmojiId`,`PostId`,`UserId`) VALUES (NOW(), NOW(), 4, 4, 4);
 INSERT into `user_emoji_post` (`createdAt`,`updatedAt`,`EmojiId`,`PostId`,`UserId`) VALUES (NOW(), NOW(), 5, 5, 5);
-  
+
 INSERT into `notification` (`notificationType`,`createdAt`,`updatedAt`,`PostId`,`SenderId`,`RecipientId`)
   VALUES('user', NOW(), NOW(), null, 4, 2);
 INSERT into `notification` (`notificationType`,`createdAt`,`updatedAt`,`PostId`,`SenderId`,`RecipientId`)
@@ -133,4 +133,3 @@ INSERT into `notification` (`notificationType`,`createdAt`,`updatedAt`,`PostId`,
 --     -> inner join user_tags ut on u.id=ut.userId
 --     -> inner join tag t on ut.tagid = t.id
 --     -> where t.name='horror';
-
