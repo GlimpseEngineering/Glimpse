@@ -17,7 +17,6 @@ class App extends Component {
     let displayMode = this.props.vrMode.active? <World /> : <Profile />
     return (
       <div >
-        sup
         <button onClick={this.props.enterVR}>enter vr</button>
         <button onClick={this.props.exitVR}>exit vr</button>
         {displayMode}
@@ -34,7 +33,7 @@ function mapStateToProps(state) {
 }
 
 // anything returned by mapDispatchToProps will end up
-// as props on the App container. 
+// as props on the App container.
 // Allows this.props.enterVR to be called
 function mapDispatchToProps(dispatch) {
   // pass the result of selectBook to all reducers

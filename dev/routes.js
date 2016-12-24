@@ -10,7 +10,6 @@ const routes = (
     <Route path="/" component={App} >
       {/* <IndexRedirect to="/profile" /> */}
       <Route path="profile" component={Profile} />
-
       <Route path="login" component={Login} />
       <Route path="world" component={World} />
     </Route>
