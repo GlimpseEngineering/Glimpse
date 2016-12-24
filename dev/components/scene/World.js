@@ -15,7 +15,7 @@ class World extends Component {
   createJSX(entity, i) {
     let Tag =
       entity.primitive === 'PhotoSphere' ? PhotoSphere :
-      enity.primitive === 'Text' ? Text :
+      entity.primitive === 'Text' ? Text :
       Entity;
     const comps = entity.components;
     const children = entity.children || [];
@@ -55,12 +55,105 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps)(World);
 
-/*
-  <PhotoSphere src= "url(https://calderonsteven.github.io/panorama-vr/images/santorini.png)" />
 
+/**
+//////////////////////////////////////////////
+// What a scene's JSX would like like:  
+<PhotoSphere src="url(https://c6.staticflickr.com/3/2936/14749427013_c8fdbc4c76_z.jpg)"/>
+<Text
+  text='Hello World!'
+  color='#DADADA'
+  position='-1.75 1 -3'>
   <Text
-    text='yooooo'
+    text='sup tho'
     color='#DADADA'
     position='-1 0 -5'/>
-  <Entity geometry="primitive:box;"  />
+    position='0 -1 0'
+  />
+</Text>
+ 
+<Entity light={{type: 'ambient', color: '#888'}}/>
+<Entity light={{type: 'directional', intensity: 0.5}} position='-1 1 0'/>
+<Entity light={{type: 'directional', intensity: 1}} position='1 1 0'/> 
+
+///////////////////////////////////////////////
+// What a scene would look like as an object:
+[
+  {
+    primitive: "PhotoSphere",
+    components: {
+      src: "url(https://rawgit.com/aframevr/assets/gh-pages/360-image-gallery-boilerplate/img/sechelt.jpg)"
+    },
+    children: null
+  },
+  {
+    primitive: "Text",
+    components: {
+      text: 'YOOOOO',
+      color: '#DADADA',
+      position: '-1.75 1 -3'
+    },
+  children: [{
+      primitive: "Text",
+      components: {
+        text: 'sup',
+        color: '#DADADA',
+        position: '1 -1 0'
+      },
+      children: null
+    }]
+  },
+  {
+    primitive: "Entity",
+    components: {
+      light: {
+        type: 'ambient',
+        color: '#888'
+      }
+    },
+    children: null
+  },
+  {
+    primitive: "Entity",
+    components: {
+      light: {
+        type: 'directional',
+        intensity: 0.5
+      },
+      position: '-1 1 0'
+    },
+    children: null
+  },
+  {
+    primitive: "Entity",
+    components: {
+      light: {
+        type: 'directional',
+        intensity: 1
+      },
+      position: '1 1 0'
+    },
+    children: null
+  }
+]
+
+///////////////////////////////////////////////
+// what a scene looks like on the database:
+
+    '[{"primitive":"PhotoSphere","components":{'+
+    '"src":"url(https://rawgit.com/aframevr/assets/'+
+    'gh-pages/360-image-gallery-boilerplate/img/'+
+    'sechelt.jpg)"},"children":null},{"primitive":'+
+    '"Text","components":{"text":"YOOOOO","color":'+
+    '"#DADADA","position":"-1.75 1 -3"},"children":'+
+    '[{"primitive":"Text","components":{"text":"sup",'+
+    '"color":"#DADADA","position":"1 -1 0"},"children":'+
+    'null}]},{"primitive":"Entity","components":{"light":'+
+    '{"type":"ambient","color":"#888"}},"children":null},'+
+    '{"primitive":"Entity","components":{"light":{"type":'+
+    '"directional","intensity":0.5},"position":"-1 1 0"},'+
+    '"children":null},{"primitive":"Entity","components":'+
+    '{"light":{"type":"directional","intensity":1},'+
+    '"position":"1 1 0"},"children":null}]'
+
  */
