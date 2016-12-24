@@ -1,15 +1,20 @@
 import axios from 'axios';
-let ENTER_VR = "ENTER_VR"
+
+export const ENTER_VR = "ENTER_VR";
+export const EXIT_VR = "EXIT_VR";
+export const SET_SCENE = "SET_SCENE";
 
 export function enterVR() {
-  console.log('enterVR');
-  dispatch( { type: ENTER_VR } )
+  console.log('dispatching ENTER_VR');
+  return { type: ENTER_VR }
 }
 
 export function exitVR() {
-  console.log('exitV')
+  console.log('dispatching EXIT_VR');
+  return { type: EXIT_VR }
 }
 
-export function setScene() {
-
+export function setScene(scene) {
+  console.log('dispatching SET_SCENE:\n'+scene);
+  return { type: SET_SCENE, payload: scene };
 }
