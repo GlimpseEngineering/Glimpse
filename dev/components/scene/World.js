@@ -11,6 +11,7 @@ import Text from './primitives/Text';
 import 'aframe-html-shader';
 
 class World extends Component {
+
   createJSX(entity, i) {
     let Tag =
       entity.primitive === 'PhotoSphere' ? PhotoSphere :
@@ -23,9 +24,7 @@ class World extends Component {
         { children.map((child, i) => this.createJSX(child, i)) }
       </Tag>
     )
-  }  
-
-
+  }
 
   render() {
     console.log('curScene:',JSON.parse(this.props.currentScene))

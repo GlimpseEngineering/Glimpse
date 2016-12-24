@@ -11,7 +11,6 @@ const rootReducer = combineReducers({
   users: users_reducer,
   user: user_reducer,
   vrMode: vrMode
-
 });
 
 export default rootReducer;
