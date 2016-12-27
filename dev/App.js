@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { enterVR } from './actions/vrModeCreators';
-import { exitVR } from './actions/vrModeCreators';
+import { enterVR } from './actions/vrModeActionCreators';
+import { exitVR } from './actions/vrModeActionCreators';
 import World from './components/scene/world';
 import Profile from './components/dashboard/profile'
 
@@ -13,14 +13,19 @@ class App extends Component {
   }
 
   render() {
+    let children = null;
+    if (this.props.children) {
+      children = React.cloneElement(this.props.children, {
+        auth: this.props.route.auth //sends auth instance from route to children
+      })
+    }
     console.log('state.vrMode:',this.props.vrMode)
-    let displayMode = this.props.vrMode.active? <World /> : <Profile />
+    let displayMode = this.props.vrMode.active? <World /> : this.props.children
     return (
       <div >
         <button onClick={this.props.enterVR}>enter vr</button>
         <button onClick={this.props.exitVR}>exit vr</button>
         {displayMode}
-       {this.props.children}
       </div>
     );
   }
