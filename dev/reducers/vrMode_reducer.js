@@ -1,6 +1,6 @@
-import { ENTER_VR } from '../actions/vrModeCreators';
-import { EXIT_VR } from '../actions/vrModeCreators';
-import { SET_SCENE } from '../actions/vrModeCreators';
+import { ENTER_VR } from '../actions/vrModeActionCreators';
+import { EXIT_VR } from '../actions/vrModeActionCreators';
+import { SET_SCENE } from '../actions/vrModeActionCreators';
 
 
 const initialState = {

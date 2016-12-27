@@ -35,12 +35,12 @@ class World extends Component {
             animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150">
           </a-cursor>
         </Camera>
-        <Entity>
-          {JSON.parse(this.props.currentScene)
-            .map((entity, i) => {
-              return this.createJSX(entity, i)
-          })}
-        </Entity>
+        
+        {JSON.parse(this.props.currentScene)
+          .map((entity, i) => {
+            return this.createJSX(entity, i)
+        })}
+        
       </Scene>
     );
   }
@@ -77,7 +77,7 @@ export default connect(mapStateToProps)(World);
 <Entity light={{type: 'directional', intensity: 1}} position='1 1 0'/> 
 
 ///////////////////////////////////////////////
-// What a scene would look like as an object:
+// What a scene would look like as an array:
 [
   {
     primitive: "PhotoSphere",
