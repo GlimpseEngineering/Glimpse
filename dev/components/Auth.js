@@ -8,18 +8,19 @@ class Auth extends Component {
   }
 
   render() {
+    console.log('auth props:', this.props)
     const { onLoginClick, onLogoutClick, isAuthenticated, profile } = this.props
     return (
       <div style={{ marginTop: '10px' }}>
-        { !isAuthenticated ? (
+        { !this.props.auth.isAuthenticated ? (
           <ul className="list-inline">
-            <li><button className="btn btn-primary" onClick={onLoginClick}>Login</button></li>
+            <li><button className="btn btn-primary" onClick={this.props.login}>Login</button></li>
           </ul>
         ) : (
           <ul className="list-inline">
-            <li><img src={profile.picture} height="40px" /></li>
-            <li><span>Welcome, {profile.nickname}</span></li>
-            <li><button className="btn btn-primary" onClick={onLogoutClick}>Logout</button></li>
+            <li><img src={this.props.auth.profile.picture} height="40px" /></li>
+            <li><span>Welcome, {this.props.auth.profile.nickname}</span></li>
+            <li><button className="btn btn-primary" onClick={this.props.logout}>Logout</button></li>
           </ul>
         )}
       </div>
@@ -27,4 +28,14 @@ class Auth extends Component {
   }
 }
 
-export default Auth;
+function mapStateToProps(state){
+  return {
+    auth: state.auth
+  };
+}
+
+var authentication = connect(mapStateToProps, {
+  login: login,
+  logout: logout
+})(Auth);
+export default authentication;
