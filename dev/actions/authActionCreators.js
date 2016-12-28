@@ -23,7 +23,7 @@ function logoutSuccess(profile) {
 }
 
 export function login() {
-  const lock = new Auth0Lock(process.env.AUTH_CLIENT_ID, process.env.AUTH_DOMAIN)
+  const lock = new Auth0Lock('7YhgDoHIuZpKxGRa0A81rjDh1JuXd5vD', 'glimpse.auth0.com')
   return dispatch => {
     lock.show((error, profile, token) => {
       if(error) {
