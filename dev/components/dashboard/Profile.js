@@ -7,7 +7,7 @@ import User_Info from './User_Info';
 class Profile extends Component {
   constructor(props){
     super(props);
-    this.props.getUserProfile(1);
+    this.props.getUserProfile(5);
   }
   render() {
 

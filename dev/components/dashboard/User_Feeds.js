@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getAllUsers } from '../../actions/usersActionCreators';
+import { getFollowersForUser } from '../../actions/followsActionCreators';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
+import News_Feed from './feeds/News_Feed';
 import Posts from './feeds/Posts';
+import Following from './feeds/Following';
+import Followers from './feeds/Followers';
 
 class User_Feeds extends Component {
   constructor(props){
     super(props);
-
     this.props.getUserListings();
-
+    this.props.getUserFollowers(5);
   }
 
   handleSelect(index, last) {
@@ -18,13 +21,14 @@ class User_Feeds extends Component {
   }
 
   render() {
+    //remove built in css from tabs
     Tabs.setUseDefaultStyles(false);
     return (
       <div className="col-6">
         <div className="tab-wrap">
           <Tabs
             onSelect={this.handleSelect}
-            selectedIndex={2}
+            selectedIndex={0}
           >
 
             <TabList className="navBar">
@@ -34,17 +38,17 @@ class User_Feeds extends Component {
               <Tab className="tab">Followers</Tab>
             </TabList>
 
-            <TabPanel name="tabs">
-              <h2>News Feed</h2>
+            <TabPanel>
+              <News_Feed />
             </TabPanel>
             <TabPanel>
               <Posts />
             </TabPanel>
             <TabPanel>
-              <h2>Following</h2>
+              <Following />
             </TabPanel>
             <TabPanel>
-              <h2>Follers</h2>
+              <Followers />
             </TabPanel>
           </Tabs>
         </div>
@@ -54,15 +58,15 @@ class User_Feeds extends Component {
   }
 }
 
-function mapStateToProps({ users, user }){
+function mapStateToProps({ users, followers }){
   return {
     users: users.userListings,
-    // user: user.userProfile
+    followers: followers.userFollowers
   };
 }
 
 var feeds = connect(mapStateToProps, {
   getUserListings: getAllUsers ,
-  // getUserProfile: getOneUser
+  getUserFollowers: getFollowersForUser
 })(User_Feeds);
 export default feeds;

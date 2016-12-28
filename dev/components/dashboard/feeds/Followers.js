@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 
 
-class Posts extends Component {
+class Followers extends Component {
 
   render() {
 
     return (
       <div className="feed_content">
-       <h2>Posts yooo</h2>
-
+       <h2>Followers yooo</h2>
       </div>
     );
   }
 }
 
-export default Posts;
+export default Followers;

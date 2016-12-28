@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 
 
-class Posts extends Component {
+class New_Feed extends Component {
 
   render() {
 
     return (
       <div className="feed_content">
-       <h2>Posts yooo</h2>
+       <h2>News Feed yooo</h2>
 
       </div>
     );
   }
 }
 
-export default Posts;
+export default New_Feed;

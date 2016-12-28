@@ -10,11 +10,18 @@ http://redux.js.org/docs/basics/Actions.html
 import axios from 'axios';
 
 //USER ACTIONS ===========================>
-export function getFollowersForUser() {
+export function getFollowersForUser(userId) {
   return function(dispatch) {
-    axios.get('/api/users/:userId/followers')
+    axios({
+      method: 'GET',
+      url: `/api/users/${userId}/followers`
+    })
     .then(response => {
-
+      console.log('the response for getting one user is:', response.data);
+      dispatch({type: 'USER_FOLLOWERS', payload: response.data});
+    })
+    .catch(err => {
+      console.log('err in getOneUser is:', err);
     });
   }
 }
