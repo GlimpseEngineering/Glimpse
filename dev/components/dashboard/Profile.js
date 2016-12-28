@@ -14,9 +14,9 @@ class Profile extends Component {
     return (
       <div >
        <h1>Profile</h1>
-       <div>
-         <User_Feeds user={this.props.user}/>
+       <div className='row'>
          <User_Info user={this.props.user}/>
+         <User_Feeds user={this.props.user}/>
        </div>
       </div>
     );
