@@ -5,12 +5,14 @@ import { combineReducers } from 'redux';
 // import { routerReducer } from 'react-router-redux';
 import users_reducer from './users_reducer.js';
 import user_reducer from './user_reducer.js';
-import vrMode from './vrMode_reducer.js'
+import vrMode from './vrMode_reducer.js';
+import auth from './auth_reducer.js';
 
 const rootReducer = combineReducers({
   users: users_reducer,
   user: user_reducer,
-  vrMode: vrMode
+  vrMode: vrMode,
+  auth: auth
 });
 
 export default rootReducer;

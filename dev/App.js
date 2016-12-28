@@ -3,8 +3,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { enterVR } from './actions/vrModeActionCreators';
 import { exitVR } from './actions/vrModeActionCreators';
-import World from './components/scene/world';
-import Profile from './components/dashboard/profile'
+import World from './components/scene/World';
+import Profile from './components/dashboard/Profile';
+import Auth from './components/Auth';
 
 class App extends Component {
   constructor(props) {
