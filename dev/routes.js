@@ -5,12 +5,13 @@ import App from './App';
 import World from './components/scene/World';
 import Profile from './components/dashboard/Profile';
 import Auth from './components/Auth';
+import Post from './components/CreatePost';
 
 const routes = (
     <Route path="/" component={App} >
       <IndexRedirect to="/profile" />
       <Route path="profile" component={Profile} />
-      {/*<Route path="post" component={Post} /> */}
+      <Route path="post" component={Post} />
       <Route path="world" component={World} />
       <Route path="auth" component={Auth} /> 
     </Route>

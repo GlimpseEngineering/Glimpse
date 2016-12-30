@@ -41,3 +41,16 @@ export function getAllPosts() {
     });
   }
 }
+
+export const CREATE_POST = 'CREATE_POST';
+
+export function createPost(formValues) {
+  console.log('Here are the formValues passed to the createPost action creator', formValues);
+  const request = axios.post('/api/posts', formValues)
+
+  return (dispatch) => {
+    request.then((data) => {
+      dispatch({ type: CREATE_POST, payload: data})
+    });
+  };
+};

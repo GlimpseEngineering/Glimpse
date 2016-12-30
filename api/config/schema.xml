@@ -37,7 +37,7 @@
 		<type label="SET" length="1" sql="SET" quote=""/>
 		<type label="Bit" length="0" sql="bit" quote=""/>
 	</group>
-</datatypes><table x="419" y="37" name="Users">
+</datatypes><table x="400" y="33" name="Users">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="Posts" row="UserId" />
@@ -63,11 +63,14 @@
 <row name="gender" null="1" autoincrement="0">
 <datatype>VARCHAR(30)</datatype>
 <default>NULL</default></row>
+<row name="private" null="1" autoincrement="0">
+<datatype>bit</datatype>
+<default>0</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
 </table>
-<table x="351" y="307" name="Posts">
+<table x="352" y="312" name="Posts">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -83,6 +86,9 @@
 <row name="format" null="1" autoincrement="0">
 <datatype>VARCHAR(30)</datatype>
 <default>NULL</default></row>
+<row name="private" null="1" autoincrement="0">
+<datatype>bit</datatype>
+<default>0</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
@@ -110,7 +116,7 @@
 </key>
 <comment>This is a join table.</comment>
 </table>
-<table x="621" y="44" name="User_Tags">
+<table x="619" y="32" name="User_Tags">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -129,7 +135,7 @@
 </key>
 <comment>This is a join table.</comment>
 </table>
-<table x="846" y="169" name="Tags">
+<table x="872" y="301" name="Tags">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -140,7 +146,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="621" y="156" name="Post_Tags">
+<table x="635" y="439" name="Post_Tags">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -173,7 +179,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="98" y="42" name="Friends">
+<table x="103" y="44" name="Follows">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -193,5 +199,29 @@
 <part>UserId</part>
 <part>FriendId</part>
 </key>
+</table>
+<table x="606" y="206" name="Notifications">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="Sender" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="Users" row="id" />
+</row>
+<row name="Recipient" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="Users" row="id" />
+</row>
+<row name="PostId" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="Posts" row="id" />
+</row>
+<row name="notificationType" null="1" autoincrement="0">
+<datatype>ENUM</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<comment>When someone follows you. When someone responds to a post with an emoji. When someone with a private profile accepts your follow request.</comment>
 </table>
 </sql>
