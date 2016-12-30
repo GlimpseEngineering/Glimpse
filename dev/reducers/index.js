@@ -6,7 +6,6 @@ import { combineReducers } from 'redux';
 import users_reducer from './users_reducer.js';
 import user_reducer from './user_reducer.js';
 
-import vrMode from './vrMode_reducer.js';
 import auth from './auth_reducer.js';
 
 import userPosts_reducer from './userPosts_reducer.js';
