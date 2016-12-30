@@ -22,14 +22,17 @@ class CreatePost extends Component {
       content: '',
       description: '',
       private: 0,
-      tags: ''
+      tags: '', 
+      src: ''
     };
 
     this.primitiveCollection = [];
 
     this.basePrimitive = {
-      primitive: '',
-      components: {},
+      primitive: 'PhotoSphere',
+      components: {
+        src: ''
+      },
       children: null
     };
   }
@@ -45,6 +48,9 @@ class CreatePost extends Component {
 
   submitScene(event) {
     event.preventDefault();
+    this.basePrimitive.components.src = this.state.src;
+    this.primitiveCollection.push(this.basePrimitive);
+    this.setState({content: JSON.stringify(this.primitiveCollection)});
   }
 
   onInputChange(event) {
@@ -54,8 +60,15 @@ class CreatePost extends Component {
     name === 'description' && this.setState({description: value});
     name === 'private' && this.setState({private: value});
     name === 'tags' && this.setState({tags: value});
-    name === 'primitive' && console.log(value);
-  };
+    name === 'url' && this.setState({src: value});
+  }
+
+  onPrimitiveChange(event) {
+    event.preventDefault();
+    let name = event.target.name;
+    let value = event.target.value;
+    this.basePrimitive.primitive = value;
+  }
 
   render() {
     return (
@@ -64,20 +77,20 @@ class CreatePost extends Component {
           
         <select 
           name="primitive"
-          onChange={event => this.onInputChange(event)} >
+          onChange={event => this.onPrimitiveChange(event)} >
           <option value="PhotoSphere">PhotoSphere</option>
-          <option value="Camera">Camera</option>
-          <option value="Text">Text</option>
         </select>
 
         <form 
           id="photosphere"
           onSubmit={this.submitScene.bind(this)} >
           <div>
-            <label>Image URL</label>
+            <label>Image URL (click add before clicking submit!)</label>
             <input 
               type="text"
-              name="url" />
+              name="url" 
+              value={this.state.src}
+              onChange={event => this.onInputChange(event)} />
           </div>
           
           <button type="submit">Add this scene!</button>
