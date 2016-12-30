@@ -20,6 +20,20 @@ import { connect } from 'react-redux';
 import { createPost } from '../actions/postsActionCreators';
 
 class CreatePost extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      content: 'Testing',
+      description: 'State works',
+      private: 0,
+      tags: 'basic'
+    };
+  }
+
+  submitPost() {
+    this.props.createPost(this.state);
+  }
 
   render() {
     return (
@@ -28,23 +42,22 @@ class CreatePost extends Component {
 
         <div>
           <label>Content</label>
-          <input type="text" />
+          <input type="text" value={this.state.content}/>
         </div>
 
         <div>
           <label>Description</label>
-          <textarea></textarea>
+          <textarea value={this.state.description}></textarea>
         </div>
 
         <div>
-          <label>Privacy Options</label>
-          <input type="radio" name="private" value={0} /> Public
-          <input type="radio" name="private" value={1} /> Private 
+          <label>Privacy</label>
+          <input type="radio" name="private" value={this.state.private} /> Make Private
         </div>
 
         <div>
           <label>Tags</label>
-          <input type="text" />
+          <input type="text" value={this.state.tags}/>
         </div>
 
         <button type="submit">Submit</button>
