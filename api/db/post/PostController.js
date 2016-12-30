@@ -49,8 +49,8 @@ module.exports = {
     });
   },
   createPost: (req, res, next) => {
+    console.log('Here is the createPost request body', req.body);
     let postInstance;
-    let tags = JSON.parse(req.body.tags);
     models.Post.create({
       content: req.body.content,
       description: req.body.description,
@@ -60,17 +60,20 @@ module.exports = {
     })
     .then(result => {
       postInstance = result;
-      tags.forEach((tag) => {
-        models.Tag.findOrCreate({
-          where: { name: tag },
-          defaults: { name: tag }
-        })
-        .then(result => postInstance.addTag(result[0]))
-        .catch(err => {
-          res.json(err);
-          throw err;
+      if (req.body.tags) {
+        let tags = JSON.parse(req.body.tags);
+        tags.forEach((tag) => {
+          models.Tag.findOrCreate({
+            where: { name: tag },
+            defaults: { name: tag }
+          })
+          .then(result => postInstance.addTag(result[0]))
+          .catch(err => {
+            res.json(err);
+            throw err;
+          });
         });
-      });
+      }
       res.json(postInstance);
     })
     .catch(err => {

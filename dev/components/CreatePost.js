@@ -24,10 +24,10 @@ class CreatePost extends Component {
     super(props)
 
     this.state = {
+      userId: 1,
       content: 'Testing',
       description: 'State works',
-      private: 0,
-      tags: 'basic'
+      private: 0
     };
   }
 
@@ -37,27 +37,27 @@ class CreatePost extends Component {
 
   render() {
     return (
-      <form>
+    <form onSubmit={this.submitPost.bind(this)}>
         <h3>Create A New World</h3>
 
         <div>
           <label>Content</label>
-          <input type="text" value={this.state.content}/>
+          <input type="text" />
         </div>
 
         <div>
           <label>Description</label>
-          <textarea value={this.state.description}></textarea>
+          <textarea></textarea>
         </div>
 
         <div>
           <label>Privacy</label>
-          <input type="radio" name="private" value={this.state.private} /> Make Private
+          <input type="radio" name="private" /> Make Private
         </div>
 
         <div>
           <label>Tags</label>
-          <input type="text" value={this.state.tags}/>
+          <input type="text" />
         </div>
 
         <button type="submit">Submit</button>
@@ -66,4 +66,10 @@ class CreatePost extends Component {
   }
 };
 
-export default connect(null, { createPost })(CreatePost);
+function mapStateToProps(state) {
+  return {
+    auth: state.auth
+  };
+}
+
+export default connect(mapStateToProps, { createPost })(CreatePost);
