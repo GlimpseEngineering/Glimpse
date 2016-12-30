@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getAllUsers } from '../../actions/usersActionCreators';
-import { getFollowersForUser } from '../../actions/followsActionCreators';
+import { getPostsByUser, getAllPosts } from '../../actions/postsActionCreators';
+import { getFollowersForUser, getFollowedByUser } from '../../actions/followsActionCreators';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 import News_Feed from './feeds/News_Feed';
@@ -13,11 +14,16 @@ class User_Feeds extends Component {
   constructor(props){
     super(props);
     this.props.getUserListings();
-    this.props.getUserFollowers(5);
+    this.props.getUserFollowers(3);
+    this.props.getUserFollows(3);
+    this.props.getUserPosts(3);
+    this.props.getAllUsersPosts();
   }
 
+
+
   handleSelect(index, last) {
-    console.log('Selected tab: ' + index + ', Last tab: ' + last);
+    //console.log('Selected tab: ' + index + ', Last tab: ' + last);
   }
 
   render() {
@@ -39,16 +45,20 @@ class User_Feeds extends Component {
             </TabList>
 
             <TabPanel>
-              <News_Feed />
+              <News_Feed
+                allPosts={this.props.allPosts}
+                users={this.props.users}
+                follows={this.props.follows}
+              />
             </TabPanel>
             <TabPanel>
-              <Posts />
+              <Posts userPosts={this.props.userPosts}/>
             </TabPanel>
             <TabPanel>
-              <Following />
+              <Following follows={this.props.follows}/>
             </TabPanel>
             <TabPanel>
-              <Followers />
+              <Followers followers={this.props.followers}/>
             </TabPanel>
           </Tabs>
         </div>
@@ -58,15 +68,21 @@ class User_Feeds extends Component {
   }
 }
 
-function mapStateToProps({ users, followers }){
+function mapStateToProps({ users, followers, follows, userPosts, allPosts }){
   return {
     users: users.userListings,
-    followers: followers.userFollowers
+    followers: followers.userFollowers,
+    follows: follows.userFollows,
+    userPosts: userPosts.userPosts,
+    allPosts: allPosts.allPosts
   };
 }
 
 var feeds = connect(mapStateToProps, {
   getUserListings: getAllUsers ,
-  getUserFollowers: getFollowersForUser
+  getUserFollowers: getFollowersForUser,
+  getUserFollows: getFollowedByUser,
+  getUserPosts: getPostsByUser,
+  getAllUsersPosts: getAllPosts
 })(User_Feeds);
 export default feeds;

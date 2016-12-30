@@ -10,11 +10,34 @@ http://redux.js.org/docs/basics/Actions.html
 import axios from 'axios';
 
 //USER ACTIONS ===========================>
-export function getFollowersForUser() {
+export function getPostsByUser(userId) {
   return function(dispatch) {
-    axios.get('/api/users/:userId/followers')
+    axios({
+      method: 'GET',
+      url: `/api/users/${userId}/posts`
+    })
     .then(response => {
+      //console.log('the response for getting user posts:', response.data);
+      dispatch({type: 'USER_POSTS', payload: response.data});
+    })
+    .catch(err => {
+      console.log('err in getPostsByUser is:', err);
+    });
+  }
+}
 
+export function getAllPosts() {
+  return function(dispatch) {
+    axios({
+      method: 'GET',
+      url: `/api/posts`
+    })
+    .then(response => {
+      //console.log('the response for getting all posts:', response.data);
+      dispatch({type: 'ALL_POSTS', payload: response.data});
+    })
+    .catch(err => {
+      console.log('err in getAllPosts is:', err);
     });
   }
 }
