@@ -41,3 +41,16 @@ export function getAllPosts() {
     });
   }
 }
+
+export const CREATE_POST = 'CREATE_POST';
+
+export function createPost(props) {
+  console.log('Here are the props passed to the createPost action creator', props);
+  const request = axios.post('/api/posts', props)
+
+  return (dispatch) => {
+    request.then((data) => {
+      dispatch({ type: CREATE_POST, payload: data})
+    });
+  };
+};

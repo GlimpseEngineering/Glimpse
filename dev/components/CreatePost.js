@@ -17,42 +17,34 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { reduxForm } from 'redux-form';
-import { createPost } from '../../actions/postsActionCreators';
-import { Link } from 'react-router';
+import { createPost } from '../actions/postsActionCreators';
 
-class NewPost extends Component {
-  onSubmit(props) {
-    console.log('Values that we are submitting with the form', props);
-    this.props.createPost(props);
-  }
+class CreatePost extends Component {
 
   render() {
-    const { fields: {content, description, privacy, tags}, handleSubmit } = this.props;
-
     return (
-      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+      <form>
         <h3>Create A New World</h3>
 
         <div>
           <label>Content</label>
-          <input type="text" {...content} />
+          <input type="text" />
         </div>
 
         <div>
           <label>Description</label>
-          <textarea {...description}></textarea>
+          <textarea></textarea>
         </div>
 
         <div>
           <label>Privacy Options</label>
-          <input type="radio" name="private" value={0} {...privacy} /> Public
-          <input type="radio" name="private" value={1} {...privacy} /> Private 
+          <input type="radio" name="private" value={0} /> Public
+          <input type="radio" name="private" value={1} /> Private 
         </div>
 
         <div>
           <label>Tags</label>
-          <input type="text" {...tags} />
+          <input type="text" />
         </div>
 
         <button type="submit">Submit</button>
@@ -61,7 +53,4 @@ class NewPost extends Component {
   }
 };
 
-export default connect(null, { createPost })(reduxForm({
-  form: 'NewPost',
-  fields: ['content', 'description', 'privacy', 'tags']
-})(NewPost))
+export default connect(null, { createPost })(CreatePost);
