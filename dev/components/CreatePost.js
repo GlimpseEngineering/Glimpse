@@ -26,19 +26,25 @@ class CreatePost extends Component {
     this.state = {
       userId: 1,
       content: '',
-      description: 'State works',
-      private: 0
+      description: '',
+      private: 0,
+      tags: ''
     };
   }
 
-  submitPost() {
+  submitPost(event) {
+    event.preventDefault();
     this.props.createPost(this.state);
   }
 
-  onInputChange(value) {
-    console.log('Here are the contents of event.target', value)
-    console.log('Here is the value we are passing to onInputChange', value.value);
-    this.setState({content: value.value});
+  onInputChange(event) {
+    event.preventDefault();
+    let value = event.target.value;
+    console.log('Here is the unique identifier of the event', event.target.name);
+    console.log('Here is the value we are passing to onInputChange', event.target.value);
+    event.target.name === 'content' && this.setState({content: value});
+    event.target.name === 'description' && this.setState({description: value});
+    event.target.name === 'tags' && this.setState({tags: value});
   };
 
   render() {
@@ -50,23 +56,31 @@ class CreatePost extends Component {
           <label>Content</label>
           <input 
             type="text"
+            name="content"
             value={this.state.content}
-            onChange={event => this.onInputChange(event.target)} />
+            onChange={event => this.onInputChange(event)} />
         </div>
 
         <div>
           <label>Description</label>
-          <textarea></textarea>
+          <textarea
+            name="description"
+            value={this.state.description}
+            onChange={event => this.onInputChange(event)} >
+          </textarea>
         </div>
 
         <div>
-          <label>Privacy</label>
-          <input type="radio" name="private" /> Make Private
+          Make Private <input type="radio" name="private" />
         </div>
 
         <div>
           <label>Tags</label>
-          <input type="text" />
+          <input 
+            type="text"
+            name="tags"
+            value={this.state.tags}
+            onChange={event => this.onInputChange(event)} />
         </div>
 
         <button type="submit">Submit</button>
