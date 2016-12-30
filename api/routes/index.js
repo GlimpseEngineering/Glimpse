@@ -28,6 +28,10 @@ router
     .put(userController.updateUser)
 
 router
+  .route('/login')
+    .post(userController.findUser);
+
+router
   .route('/tags/:tagId/users')
     .get(userController.getUsersWithTag)
 
