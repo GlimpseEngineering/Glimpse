@@ -35,6 +35,10 @@ class CreatePost extends Component {
   submitPost(event) {
     event.preventDefault();
     this.props.createPost(this.state);
+    this.setState({
+      description: '',
+      tags: ''
+    });
   }
 
   onInputChange(event) {
@@ -44,6 +48,7 @@ class CreatePost extends Component {
     console.log('Here is the value we are passing to onInputChange', event.target.value);
     event.target.name === 'content' && this.setState({content: value});
     event.target.name === 'description' && this.setState({description: value});
+    event.target.name === 'private' && this.setState({private: value});
     event.target.name === 'tags' && this.setState({tags: value});
   };
 
@@ -71,7 +76,12 @@ class CreatePost extends Component {
         </div>
 
         <div>
-          Make Private <input type="radio" name="private" />
+          <label>Make Private</label>
+          <input 
+            type="radio" 
+            name="private"
+            value={this.state.private}
+            onChange={event => this.onInputChange(event)} />
         </div>
 
         <div>
