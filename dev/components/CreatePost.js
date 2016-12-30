@@ -5,14 +5,8 @@
  * 3) children -> null
  *
  * MVP+ Inputs:
- * add children (maybe a button on the ui)
- * edit button (while building) change position of any component in the entity, first in default position
- * 
- * entity-component -> a-frame
- * entity is an empty collection
- * add components to entity
- * 
- * my post is a container
+ * 1) add children (maybe a button on the ui)
+ * 2) edit button (while building) change position of any component in the entity, first in default position
  */
 
 import React, { Component } from 'react';
@@ -43,19 +37,24 @@ class CreatePost extends Component {
 
   onInputChange(event) {
     event.preventDefault();
+    let name = event.target.name;
     let value = event.target.value;
-    console.log('Here is the unique identifier of the event', event.target.name);
-    console.log('Here is the value we are passing to onInputChange', event.target.value);
-    event.target.name === 'content' && this.setState({content: value});
-    event.target.name === 'description' && this.setState({description: value});
-    event.target.name === 'private' && this.setState({private: value});
-    event.target.name === 'tags' && this.setState({tags: value});
+    name === 'content' && this.setState({content: value});
+    name === 'description' && this.setState({description: value});
+    name === 'private' && this.setState({private: value});
+    name === 'tags' && this.setState({tags: value});
   };
 
   render() {
     return (
       <form onSubmit={this.submitPost.bind(this)}>
-        <h3>Create A New World</h3>
+        <h3>Create A New Scene</h3>
+
+        <select>
+          <option value="PhotoSphere">PhotoSphere</option>
+          <option value="Camera">Camera</option>
+          <option value="Text">Text</option>
+        </select>
 
         <div>
           <label>Content</label>

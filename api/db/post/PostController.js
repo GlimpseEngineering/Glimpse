@@ -62,7 +62,6 @@ module.exports = {
       postInstance = result;
       if (req.body.tags) {
         let tags = req.body.tags.split(',');
-        console.log('Here are the split tags', tags);
         tags.forEach((tag) => {
           models.Tag.findOrCreate({
             where: { name: tag },
