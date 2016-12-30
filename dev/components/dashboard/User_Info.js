@@ -9,7 +9,7 @@ class User_Info extends Component {
   render() {
 
     return (
-      <div >
+      <div className="col-6">
        <h2>User Info</h2>
 
       </div>

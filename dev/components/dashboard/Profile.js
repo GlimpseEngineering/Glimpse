@@ -7,16 +7,16 @@ import User_Info from './User_Info';
 class Profile extends Component {
   constructor(props){
     super(props);
-    this.props.getUserProfile(1);
+    this.props.getUserProfile(5);
   }
   render() {
 
     return (
       <div >
        <h1>Profile</h1>
-       <div>
-         <User_Feeds user={this.props.user}/>
+       <div className='row'>
          <User_Info user={this.props.user}/>
+         <User_Feeds user={this.props.user}/>
        </div>
       </div>
     );
