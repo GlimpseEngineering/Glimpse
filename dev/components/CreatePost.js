@@ -25,7 +25,7 @@ class CreatePost extends Component {
 
     this.state = {
       userId: 1,
-      content: 'Testing',
+      content: '',
       description: 'State works',
       private: 0
     };
@@ -35,14 +35,23 @@ class CreatePost extends Component {
     this.props.createPost(this.state);
   }
 
+  onInputChange(value) {
+    console.log('Here are the contents of event.target', value)
+    console.log('Here is the value we are passing to onInputChange', value.value);
+    this.setState({content: value.value});
+  };
+
   render() {
     return (
-    <form onSubmit={this.submitPost.bind(this)}>
+      <form onSubmit={this.submitPost.bind(this)}>
         <h3>Create A New World</h3>
 
         <div>
           <label>Content</label>
-          <input type="text" />
+          <input 
+            type="text"
+            value={this.state.content}
+            onChange={event => this.onInputChange(event.target)} />
         </div>
 
         <div>
@@ -70,6 +79,6 @@ function mapStateToProps(state) {
   return {
     auth: state.auth
   };
-}
+};
 
 export default connect(mapStateToProps, { createPost })(CreatePost);
