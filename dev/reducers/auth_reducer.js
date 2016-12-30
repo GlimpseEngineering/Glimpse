@@ -22,13 +22,16 @@ function getProfile() {
   return JSON.parse(localStorage.getItem('profile'));
 }
 
-export default function (state = {
-    isAuthenticated: checkTokenExpiry(),
-    profile: getProfile(),
-    error: ''
-  }, action) {
+const initialState = {
+  isAuthenticated: checkTokenExpiry(),
+  profile: getProfile(),
+  error: ''
+}
+
+export default function (state = initialState, action) {
   switch (action.type) {
     case LOGIN_SUCCESS:
+      console.log('login success!')
       return Object.assign({}, state, {
         isAuthenticated: true,
         profile: action.profile,

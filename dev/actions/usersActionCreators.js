@@ -53,8 +53,9 @@ export function createNewUser(username, profPic, authId, bio, email, dob, gender
         }
     })
     .then(response => {
-      //console.log('the response for updating user is:', response);
-      dispatch({type: 'USER_UPDATE', payload: response.data});
+      console.log('the response for creating user is:', response);
+      localStorage.setItem('profile', JSON.stringify(response.data))
+      return dispatch({type: 'USER_CREATED', profile: response.data});
     })
     .catch(err => {
       console.log('err in createNewUser is:', err);

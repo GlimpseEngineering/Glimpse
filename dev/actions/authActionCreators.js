@@ -1,3 +1,6 @@
+import axios from 'axios';
+import { createNewUser } from './usersActionCreators'
+
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_ERROR = 'LOGIN_ERROR'
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
@@ -29,9 +32,29 @@ export function login() {
       if(error) {
         return dispatch(loginError(error))
       }
-      localStorage.setItem('profile', JSON.stringify(profile))
-      localStorage.setItem('id_token', token)
-      return dispatch(loginSuccess(profile))
+      console.log('auth0 profile:',profile)
+      axios.post('/api/login', {
+        authId: profile.user_id
+      })
+      .then(user => {
+        console.log('user sent back from db:', user)
+        localStorage.setItem('id_token', token)
+        if(user.data) {
+          localStorage.setItem('profile', JSON.stringify(user.data))
+          return dispatch(loginSuccess(user.data))
+        } else {
+          createNewUser(
+            profile.nickname, 
+            profile.picture, 
+            profile.user_id, 
+            "Loves VR", 
+            profile.email || profile.link, 
+            null, 
+            profile.gender || null, 
+            false
+          )(dispatch)
+        }
+      })
     })
   }
 }
