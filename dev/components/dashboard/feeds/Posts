@@ -3,12 +3,17 @@ import React, { Component } from 'react';
 
 class Posts extends Component {
 
+
+
   render() {
 
     return (
       <div className="feed_content">
-       <h2>Posts yooo</h2>
-
+        <ul>
+          {this.props.userPosts.map( post =>
+            <li key={post.id} className='list-item'>{post.description}</li>
+          )}
+        </ul>
       </div>
     );
   }

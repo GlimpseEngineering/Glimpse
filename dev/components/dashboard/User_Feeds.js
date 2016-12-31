@@ -13,13 +13,18 @@ import Followers from './feeds/Followers';
 class User_Feeds extends Component {
   constructor(props){
     super(props);
+    
+  }
+
+  componentWillMount(){
     this.props.getUserListings();
     this.props.getUserFollowers(3);
     this.props.getUserFollows(3);
     this.props.getUserPosts(3);
     this.props.getAllUsersPosts();
-  }
 
+
+  }
 
 
   handleSelect(index, last) {
@@ -27,6 +32,7 @@ class User_Feeds extends Component {
   }
 
   render() {
+
     //remove built in css from tabs
     Tabs.setUseDefaultStyles(false);
     return (
