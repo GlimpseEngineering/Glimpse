@@ -16,11 +16,11 @@ class Auth extends Component {
             <li><button className="btn btn-primary" onClick={this.props.login}>Login</button></li>
           </ul>
         ) : (
-          <ul className="list-inline">
-            <li><img src={this.props.auth.profile.profPic} height="40px" /></li>
-            <li><span>Welcome, {this.props.auth.profile.username}</span></li>
-            <li><button className="btn btn-primary" onClick={this.props.logout}>Logout</button></li>
-          </ul>
+          <span>
+            <img src={this.props.auth.profile.profPic} height="40px" />
+            <span>Welcome, {this.props.auth.profile.username} </span>
+            <button className="btn btn-primary" onClick={this.props.logout}>Logout</button>
+          </span>
         )}
       </div>
     )
