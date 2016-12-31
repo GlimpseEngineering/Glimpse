@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { searchUser } from '../../actions/searchActionCreators';
+import SearchResults from './SearchResults';
 
 class SearchBar extends Component {
   constructor(props) {
@@ -36,6 +37,7 @@ class SearchBar extends Component {
 
           <button type="submit">Search</button>
         </form>
+        <SearchResults />
       </div>
     );
   }
