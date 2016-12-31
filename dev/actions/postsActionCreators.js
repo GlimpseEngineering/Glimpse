@@ -64,7 +64,6 @@ export function getOnePost(postId) {
 }
 
 export function createPost(formValues) {
-  console.log('Here are the formValues passed to the createPost action creator', formValues);
   const request = axios.post('/api/posts', formValues)
 
   return (dispatch) => {
