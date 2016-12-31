@@ -1,6 +1,6 @@
 -- how to run this file
 -- use the following command with your computer's absolute path
--- mysql -u root -p < /Users/jimmygonzalez/documents/code/thesis/glimpse/api/config/dummy_data/dummy_data.sql
+-- mysql -u root -p < INSERT\PATH\TO\Glimpse\api\config\dummy_data\dummy_data.sql
 -- database glimpse must already exist
 -- table names must already exist
 -- this file will delete your old data and repopulate your already made tables
@@ -71,16 +71,16 @@ INSERT into `user_tags` (`createdAt`,`updatedAt`,`UserId`,`TagId`) VALUES(NOW(),
 INSERT into `user_tags` (`createdAt`,`updatedAt`,`UserId`,`TagId`) VALUES(NOW(), NOW(), 5, 4);
 
 INSERT into `post` (`content`,`description`,`format`,`private`,`createdAt`,`updatedAt`,`UserId`)
-  VALUES('"[{"primitive":"Text","components":{"text":"YOOOOO","color":"#DADADA","position":"-1.75 1 3"},"children":null}]"',
+  VALUES('[{"primitive":"Text","components":{"text":"YOOOOO","color":"#02665c","position":"-1.75 1 -3"},"children":null}]',
          'some text that says YOOOOO','3D Text', 0, NOW(), NOW(), 1);
 INSERT into `post` (`content`,`description`,`format`,`private`,`createdAt`,`updatedAt`,`UserId`)
-  VALUES('"[{"primitive":"Text","components":{"text":"AAAAAYY","color":"#DADADA","position":"-1.75 1 3"},"children":null}]"',
+  VALUES('[{"primitive":"Text","components":{"text":"AAAAAYY","color":"#ee42f4","position":"-1.75 1 -3"},"children":null}]',
          'some text that says AAAAAYY','3D Text', 1, NOW(), NOW(), 2);
 INSERT into `post` (`content`,`description`,`format`,`private`,`createdAt`,`updatedAt`,`UserId`)
-  VALUES('"[{"primitive":"PhotoSphere","components":{"src":"url(https://rawgit.com/aframevr/assets/gh-pages/360-image-gallery-boilerplate/img/sechelt.jpg)"},"children":null}]"',
+  VALUES('[{"primitive":"PhotoSphere","components":{"src":"url(https://rawgit.com/aframevr/assets/gh-pages/360-image-gallery-boilerplate/img/sechelt.jpg)"},"children":null}]',
          'beachy night scene','PhotoSphere', 0, NOW(), NOW(), 2);
 INSERT into `post` (`content`,`description`,`format`,`private`,`createdAt`,`updatedAt`,`UserId`)
-  VALUES('"[{"primitive":"PhotoSphere","components":{"src":"url(https://c6.staticflickr.com/3/2936/14749427013_c8fdbc4c76_z.jpg)"},"children":null}]"',
+  VALUES('[{"primitive":"PhotoSphere","components":{"src":"url(https://c6.staticflickr.com/3/2936/14749427013_c8fdbc4c76_z.jpg)"},"children":null}]',
          'some geometry bullshit','PhotoSphere', 1, NOW(), NOW(), 3);
 
 INSERT into `post_tags` (`createdAt`,`updatedAt`,`TagId`,`PostId`) VALUES(NOW(), NOW(), 1, 1);

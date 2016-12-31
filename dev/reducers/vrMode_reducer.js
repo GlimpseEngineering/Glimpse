@@ -1,6 +1,7 @@
 import { ENTER_VR } from '../actions/vrModeActionCreators';
 import { EXIT_VR } from '../actions/vrModeActionCreators';
 import { SET_SCENE } from '../actions/vrModeActionCreators';
+import { GET_ONE_POST } from '../actions/postsActionCreators'
 
 
 const initialState = {
@@ -37,7 +38,7 @@ export default function(state = initialState, action) {
     case SET_SCENE:
       console.log('assigning state.vrMode.currentScene to \n'+action.payload)
       return Object.assign({},state,{
-          currentScene: payload
+          currentScene: action.payload
         });
     default:
       return state;
