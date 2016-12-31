@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-export default class SearchResult extends Component {
+class SearchResult extends Component {
   render() {
     return (
-      <div>Hey!</div>
+      <div>{this.props.searchResult.username}</div>
     );
   }
 };
+
+const searchResult = connect(null, null)(SearchResult);
+export default searchResult;

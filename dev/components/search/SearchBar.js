@@ -22,7 +22,7 @@ class SearchBar extends Component {
   onSubmit(event) {
     event.preventDefault();
     let searchterm = this.state.searchterm;
-    this.props.searchUser(searchterm);
+    this.props.searchUser(searchterm)
   }
   
   render() {
