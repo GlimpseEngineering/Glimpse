@@ -7,12 +7,11 @@ export function searchUser(searchterm) {
 
   return (dispatch) => {
     request
-      .then((data) => {
-        console.log('In the searchUser action creator with data:', data.data);
-        dispatch({ type: SEARCH_USERS, payload: data.data})
+      .then((foundUsers) => {
+        dispatch({ type: SEARCH_USERS, payload: foundUsers.data})
       })
       .catch((error) => {
         throw error;
-      })
+      });
   };
 };
