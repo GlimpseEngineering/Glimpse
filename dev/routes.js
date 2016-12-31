@@ -5,7 +5,7 @@ import App from './App';
 import World from './components/scene/World';
 import Profile from './components/dashboard/Profile';
 import Auth from './components/Auth';
-import Post from './components/CreatePost';
+import Post from './components/PostGenerator';
 
 const routes = (
     <Route path="/" component={App} >
