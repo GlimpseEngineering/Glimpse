@@ -13,7 +13,7 @@ import Followers from './feeds/Followers';
 class User_Feeds extends Component {
   constructor(props){
     super(props);
-    
+
   }
 
   componentWillMount(){
@@ -36,7 +36,7 @@ class User_Feeds extends Component {
     //remove built in css from tabs
     Tabs.setUseDefaultStyles(false);
     return (
-      <div className="col-6">
+      <div className="col-6 container">
         <div className="tab-wrap">
           <Tabs
             onSelect={this.handleSelect}
@@ -44,7 +44,7 @@ class User_Feeds extends Component {
           >
 
             <TabList className="navBar">
-              <Tab className="tab">News Feed</Tab>
+              <Tab className="tab">Feed</Tab>
               <Tab className="tab">Posts</Tab>
               <Tab className="tab">Following</Tab>
               <Tab className="tab">Followers</Tab>

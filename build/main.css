@@ -1,4 +1,7 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700,400,italic);.navBar {
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700,400,italic);.container {
+  padding: 10px; }
+
+.navBar {
   color: black;
   box-sizing: border-box;
   display: inline-flex;
@@ -8,7 +11,17 @@
 
 .tab {
   cursor: pointer;
-  width: 100%; }
+  width: 100%;
+  background-color: #b3b3b3;
+  flex: 1;
+  margin-right: 4px; }
+
+.tab:last-child {
+  margin-right: 0; }
+
+.tab:hover {
+  color: white;
+  transition: color 0.3s; }
 
 .react-tabs [role=tablist] {
   border-bottom: 1px solid #aaa;
@@ -28,10 +41,7 @@
 .react-tabs [role=tab][aria-selected=true] {
   background: #fff;
   border-color: #aaa;
-  color: black;
-  border-radius: 5px 5px 0 0;
-  -moz-border-radius: 5px 5px 0 0;
-  -webkit-border-radius: 5px 5px 0 0; }
+  color: black; }
 
 .feed_content {
   width: 100%; }
@@ -39,11 +49,11 @@
 .list-item {
   position: relative;
   display: block;
-  padding: 10px 15px;
+  padding: 5px 10px;
   margin-bottom: -1px;
   background-color: #fff;
   border: 1px solid #ddd;
-  margin-left: -30px; }
+  margin-left: -40px; }
 
 h1, h2 {
   font-family: "Open Sans", sans-serif;
