@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
-import { LOGIN_SUCCESS } from '../actions/authActionCreators.js';
-import { LOGIN_ERROR } from '../actions/authActionCreators.js';
-import { LOGOUT_SUCCESS } from '../actions/authActionCreators.js';
+import { LOGIN_SUCCESS, LOGIN_ERROR, LOGOUT_SUCCESS, USER_CREATED } from '../actions/authActionCreators.js';
+// import { LOGIN_ERROR } from '../actions/authActionCreators.js';
+// import { LOGOUT_SUCCESS } from '../actions/authActionCreators.js';
 const jwtDecode = require('jwt-decode');
 
 function checkTokenExpiry() {
@@ -48,6 +48,12 @@ export default function (state = initialState, action) {
         isAuthenticated: false,
         profile: null
       })
+    case USER_CREATED:
+      return Object.assign({}, state, {
+        isAuthenticated: true,
+        profile: action.profile,
+        error: ''
+      });
     default:
       return state
     }
