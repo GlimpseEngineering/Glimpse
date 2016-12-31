@@ -6,6 +6,7 @@ import World from './components/scene/World';
 import Profile from './components/dashboard/Profile';
 import Auth from './components/Auth';
 import Post from './components/PostGenerator';
+import Search from './components/search/SearchBar';
 
 const routes = (
     <Route path="/" component={App} >
@@ -13,7 +14,8 @@ const routes = (
       <Route path="profile" component={Profile} />
       <Route path="post" component={Post} />
       <Route path="world" component={World} />
-      <Route path="auth" component={Auth} /> 
+      <Route path="auth" component={Auth} />
+      <Route path="search" component={Search} /> 
     </Route>
 
 )
