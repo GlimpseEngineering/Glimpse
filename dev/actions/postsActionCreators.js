@@ -8,6 +8,9 @@ http://redux.js.org/docs/basics/Actions.html
 // import { push } from 'react-router-redux';
 // import { browserHistory } from 'react-router';
 import axios from 'axios';
+import { SET_SCENE, ENTER_VR } from './vrModeActionCreators';
+
+export const CREATE_POST = 'CREATE_POST';
 
 //USER ACTIONS ===========================>
 export function getPostsByUser(userId) {
@@ -42,7 +45,23 @@ export function getAllPosts() {
   }
 }
 
-export const CREATE_POST = 'CREATE_POST';
+export function getOnePost(postId) {
+  console.log('hitting getOnePost action creator', postId)
+  return function(dispatch) {
+    axios({
+      method: 'GET',
+      url: `/api/posts/${postId}`
+    })
+    .then(response => {
+      console.log('the response for getting one post:', response.data);
+      dispatch({type: SET_SCENE, payload: response.data.content});
+      dispatch({type: ENTER_VR})
+    })
+    .catch(err => {
+      console.log('err in getOnePost is:', err);
+    });
+  }
+}
 
 export function createPost(formValues) {
   console.log('Here are the formValues passed to the createPost action creator', formValues);

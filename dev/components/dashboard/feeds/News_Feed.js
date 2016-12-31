@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { getOnePost } from '../../../actions/postsActionCreators'
 
-
-class New_Feed extends Component {
+class News_Feed extends Component {
 
   handleSelect(event){
     console.log('you clicked on post id:', event.target.value);
@@ -14,7 +16,10 @@ class New_Feed extends Component {
        <ul>
          {this.props.allPosts.map( post =>
            <li
-             onClick={this.handleSelect}
+             onClick={(e) => {
+               this.handleSelect(e);
+               this.props.getOnePost(post.id)
+             }}
              key={post.id}
              className='list-item'
              value={post.id}
@@ -28,4 +33,16 @@ class New_Feed extends Component {
   }
 }
 
-export default New_Feed;
+function mapStateToProps(state) {
+  // returns input state as props in output
+  return {
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  // pass the result of selectBook to all reducers
+  return bindActionCreators({ getOnePost: getOnePost }, dispatch)
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(News_Feed);
