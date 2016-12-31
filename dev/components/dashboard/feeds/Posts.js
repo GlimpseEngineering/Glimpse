@@ -3,7 +3,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getOnePost } from '../../../actions/postsActionCreators';
 
-class News_Feed extends Component {
+
+class Posts extends Component {
 
   handleSelect(event){
     console.log('you clicked on post id:', event.target.value);
@@ -13,8 +14,8 @@ class News_Feed extends Component {
 
     return (
       <div className="feed_content">
-       <ul>
-         {this.props.allPosts.map( post =>
+        <ul>
+          {this.props.userPosts.map( post =>
            <li
              onClick={(e) => {
                this.handleSelect(e);
@@ -24,10 +25,10 @@ class News_Feed extends Component {
              className='list-item'
              value={post.id}
              >
-             UserId: {post.UserId} postId: {post.id}
+             {post.description}
            </li>
-         )}
-       </ul>
+          )}
+        </ul>
       </div>
     );
   }
@@ -44,4 +45,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(News_Feed);
+export default connect(mapStateToProps, mapDispatchToProps)(Posts);

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Auth from "../Auth.js"
 
 /**
  * for now
@@ -11,6 +12,7 @@ import React, { Component } from 'react';
 class User_Info extends Component {
   render() {
     console.log('Here are our user props', this.props.user);
+    if (!this.props.user.id) return (<div className="col-6"><Auth /></div>)
     return (
       <div className="col-6">
         <h2>User Info</h2>

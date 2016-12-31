@@ -7,25 +7,28 @@ import User_Info from './User_Info';
 class Profile extends Component {
   constructor(props){
     super(props);
-    this.props.getUserProfile(5);
+    if (this.props.activeUser) {
+      this.props.getUserProfile(this.props.activeUser.id);
+    }
   }
   render() {
-
+    console.log('**props in profile:', this.props)
     return (
       <div >
        <h1>Profile</h1>
        <div className='row'>
-         <User_Info user={this.props.user}/>
-         <User_Feeds user={this.props.user}/>
+         <User_Info user={this.props.viewedProfile}/>
+         <User_Feeds user={this.props.viewedProfile}/>
        </div>
       </div>
     );
   }
 }
 
-function mapStateToProps({ user }){
+function mapStateToProps(state){
   return {
-    user: user.userProfile
+    activeUser: state.auth.activeUser,
+    viewedProfile: state.user.viewedProfile
   };
 }
 

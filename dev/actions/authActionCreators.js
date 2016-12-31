@@ -47,7 +47,7 @@ export function login() {
         localStorage.setItem('id_token', token)
         if(user.data) {
           localStorage.setItem('profile', JSON.stringify(user.data))
-          return dispatch(loginSuccess(user.data))
+          return dispatch(loginSuccess(user.data));
         } else {
           createNewUser(
             profile.nickname, 

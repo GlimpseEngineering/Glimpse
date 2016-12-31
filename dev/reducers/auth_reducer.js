@@ -24,7 +24,7 @@ function getProfile() {
 
 const initialState = {
   isAuthenticated: checkTokenExpiry(),
-  profile: getProfile(),
+  activeUser: getProfile(),
   error: ''
 }
 
@@ -34,24 +34,24 @@ export default function (state = initialState, action) {
       console.log('login success!')
       return Object.assign({}, state, {
         isAuthenticated: true,
-        profile: action.profile,
+        activeUser: action.profile,
         error: ''
       })
     case LOGIN_ERROR:
       return Object.assign({}, state, {
         isAuthenticated: false,
-        profile: null,
+        activeUser: null,
         error: action.error
       })
     case LOGOUT_SUCCESS:
       return Object.assign({}, state, {
         isAuthenticated: false,
-        profile: null
+        activeUser: null
       })
     case USER_CREATED:
       return Object.assign({}, state, {
         isAuthenticated: true,
-        profile: action.profile,
+        activeUser: action.profile,
         error: ''
       });
     default:
