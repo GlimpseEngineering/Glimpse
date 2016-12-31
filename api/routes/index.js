@@ -24,7 +24,7 @@ router
     .get(userController.getUsersWithTag)
 
 router
-  .route('/users/:searchterm')
+  .route('/search/users/:searchterm')
     .get(userController.searchUsers)
 
 /** POST CONTROLLER ROUTES */

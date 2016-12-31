@@ -133,7 +133,20 @@ module.exports = {
   },
 
   searchUsers: (req, res, next) => {
-    console.log('Placeholder function for search users');
-    res.json('pending');
+    models.User.findAndCountAll({
+      where: {
+        username: {
+          $like: '%' + req.params.searchterm + '%'
+        }
+      },
+      limit: 10
+    })
+    .then(users => {
+      res.json(users);
+    })
+    .catch(err => {
+      res.json(err);
+      throw err;
+    });
   }
 };
