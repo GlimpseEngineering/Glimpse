@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { login, logout } from '../actions/authActionCreators';
+import User_Info from './dashboard/User_Info';
 
 class Auth extends Component {
   constructor(props) {
@@ -16,11 +18,11 @@ class Auth extends Component {
             <li><button className="btn btn-primary" onClick={this.props.login}>Login</button></li>
           </ul>
         ) : (
-          <span>
-            <img src={this.props.auth.profile.profPic} height="40px" />
-            <span>Welcome, {this.props.auth.profile.username} </span>
+          <div>
+            <User_Info user={this.props.auth.activeUser}/>
+            <br />
             <button className="btn btn-primary" onClick={this.props.logout}>Logout</button>
-          </span>
+          </div>
         )}
       </div>
     )
@@ -33,8 +35,12 @@ function mapStateToProps(state){
   };
 }
 
-var authentication = connect(mapStateToProps, {
-  login: login,
-  logout: logout
-})(Auth);
-export default authentication;
+function mapDispatchToProps(dispatch) {
+  // pass the result of selectBook to all reducers
+  return bindActionCreators({
+    login: login,
+    logout: logout
+  }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);

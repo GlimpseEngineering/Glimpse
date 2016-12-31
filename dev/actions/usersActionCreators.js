@@ -28,7 +28,7 @@ export function getOneUser(userId){
     })
     .then(response => {
       //console.log('the response for getting one user is:', response.data);
-      dispatch({type: 'USER_PROFILE', payload: response.data});
+      dispatch({type: 'SET_USER_PROFILE', payload: response.data});
     })
     .catch(err => {
       console.log('err in getOneUser is:', err);

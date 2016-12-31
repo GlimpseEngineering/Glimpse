@@ -11,7 +11,9 @@ import Search from './components/search/SearchBar';
 const routes = (
     <Route path="/" component={App} >
       <IndexRedirect to="/profile" />
-      <Route path="profile" component={Profile} />
+      <Route path="profile" component={Profile}>
+        <Route path=":id" component={Profile} />
+      </Route>
       <Route path="post" component={Post} />
       <Route path="world" component={World} />
       <Route path="auth" component={Auth} />
