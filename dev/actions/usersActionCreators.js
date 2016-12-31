@@ -36,33 +36,6 @@ export function getOneUser(userId){
   }
 }
 
-export function createNewUser(username, profPic, authId, bio, email, dob, gender, isPrivate) {
-  return function(dispatch) {
-    axios({
-        method: 'POST',
-        url: '/api/users',
-        data: {
-          username: username,
-          profPic: profPic,
-          authId: authId,
-          bio: bio,
-          email: email,
-          dob: dob,
-          gender: gender,
-          private: isPrivate
-        }
-    })
-    .then(response => {
-      console.log('the response for creating user is:', response);
-      localStorage.setItem('profile', JSON.stringify(response.data))
-      return dispatch({type: 'USER_CREATED', profile: response.data});
-    })
-    .catch(err => {
-      console.log('err in createNewUser is:', err);
-    });
-  }
-}
-
 export function updateUser(){}
 
 export function getUsersWithTag(){}

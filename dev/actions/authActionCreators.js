@@ -1,14 +1,21 @@
 import axios from 'axios';
-import { createNewUser } from './usersActionCreators'
 
+export const SHOW_LOCK = 'SHOW_LOCK'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_ERROR = 'LOGIN_ERROR'
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
+export const USER_CREATED = 'USER_CREATED'
 
-function loginSuccess(profile) {
+const lock = new Auth0Lock(
+  '7YhgDoHIuZpKxGRa0A81rjDh1JuXd5vD',
+  'glimpse.auth0.com'
+)
+
+function loginSuccess(profile, token) {
   return {
     type: LOGIN_SUCCESS,
-    profile
+    profile,
+    token
   }
 }
 
@@ -26,13 +33,12 @@ function logoutSuccess(profile) {
 }
 
 export function login() {
-  const lock = new Auth0Lock('7YhgDoHIuZpKxGRa0A81rjDh1JuXd5vD', 'glimpse.auth0.com')
   return dispatch => {
-    lock.show((error, profile, token) => {
-      if(error) {
-        return dispatch(loginError(error))
+    lock.show((err, profile, token) => {
+      if(err) {
+        return dispatch(lockError(err));
       }
-      console.log('auth0 profile:',profile)
+      console.log('auth0 profile:', profile)
       axios.post('/api/login', {
         authId: profile.user_id
       })
@@ -55,7 +61,7 @@ export function login() {
           )(dispatch)
         }
       })
-    })
+    });
   }
 }
 
@@ -64,5 +70,32 @@ export function logout() {
     localStorage.removeItem('id_token');
     localStorage.removeItem('profile');
     return dispatch(logoutSuccess());
+  }
+}
+
+export function createNewUser(username, profPic, authId, bio, email, dob, gender, isPrivate) {
+  return function(dispatch) {
+    axios({
+        method: 'POST',
+        url: '/api/users',
+        data: {
+          username: username,
+          profPic: profPic,
+          authId: authId,
+          bio: bio,
+          email: email,
+          dob: dob,
+          gender: gender,
+          private: isPrivate
+        }
+    })
+    .then(response => {
+      console.log('the response for creating user is:', response);
+      localStorage.setItem('profile', JSON.stringify(response.data))
+      return dispatch({type: 'USER_CREATED', profile: response.data});
+    })
+    .catch(err => {
+      console.log('err in createNewUser is:', err);
+    });
   }
 }
