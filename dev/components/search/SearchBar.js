@@ -15,7 +15,6 @@ class SearchBar extends Component {
     let name = event.target.name;
     let value = event.target.value;
     name === 'searchterm' && this.setState({searchterm: value});
-    console.log('Here is the update local state', this.state);
   }
   
   render() {

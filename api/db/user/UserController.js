@@ -130,5 +130,10 @@ module.exports = {
       res.json(err);
       throw err;
     });
+  },
+
+  searchUsers: (req, res, next) => {
+    console.log('Placeholder function for search users');
+    res.json('pending');
   }
 };
