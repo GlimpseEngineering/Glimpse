@@ -4,7 +4,10 @@ import { connect } from 'react-redux';
 class SearchResult extends Component {
   render() {
     return (
-      <div>{this.props.searchResult.username}</div>
+      <div>
+        {this.props.searchResult.username}
+        <button>Follow</button>
+      </div>
     );
   }
 };
