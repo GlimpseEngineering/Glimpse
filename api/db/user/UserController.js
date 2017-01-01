@@ -133,7 +133,38 @@ module.exports = {
   },
 
   searchUsers: (req, res, next) => {
-    console.log('Placeholder function for search users');
-    res.json('pending');
+    let foundUsers = {
+      users: null,
+      followedByUser: null
+    };
+    models.User.findAndCountAll({
+      where: {
+        username: {
+          $like: '%' + req.params.searchterm + '%'
+        }
+      },
+      limit: 10
+    })
+    .then(users => {
+      foundUsers.users = users;
+      return models.Follow.findAll({
+        where: {
+          UserId: req.params.userId,
+          status: 'accepted'
+        }
+      })
+    })
+    .then(followedByUser => {
+      let followedByUserStorage = {};
+      followedByUser.forEach((user) => {
+        followedByUserStorage[user.FollowId] = user;
+      });
+      foundUsers.followedByUser = followedByUserStorage;
+      res.json(foundUsers);
+    })
+    .catch(err => {
+      res.json(err);
+      throw err;
+    });
   }
 };
