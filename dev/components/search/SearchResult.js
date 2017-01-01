@@ -12,7 +12,9 @@ class SearchResult extends Component {
   }
 
   componentDidMount() {
-    if (this.props.foundUsers.followedByUser[this.props.searchResult.id]) this.setState({button: 'following'});
+    let followRequest = this.props.foundUsers.followedByUser[this.props.searchResult.id];
+    followRequest && followRequest.status === 'pending' && this.setState({button: 'pending'});
+    followRequest && followRequest.status === 'accepted' && this.setState({button: 'following'});
     /**
      * need to dispatch an action when calling requestFollow
      * need to dispatch an action when calling acceptFollow

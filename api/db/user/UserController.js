@@ -149,8 +149,7 @@ module.exports = {
       foundUsers.users = users;
       return models.Follow.findAll({
         where: {
-          UserId: req.params.userId,
-          status: 'accepted'
+          UserId: req.params.userId
         }
       })
     })
