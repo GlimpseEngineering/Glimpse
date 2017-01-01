@@ -8,16 +8,14 @@ http://redux.js.org/docs/basics/Actions.html
 // import { push } from 'react-router-redux';
 // import { browserHistory } from 'react-router';
 import axios from 'axios';
+import { getFollowers, getFollows } from '../action_helpers/http.js';
 
 //USER ACTIONS ===========================>
 export function getFollowersForUser(userId) {
   return function(dispatch) {
-    axios({
-      method: 'GET',
-      url: `/api/users/${userId}/followers`
-    })
+  getFollowers(userId)
     .then(response => {
-      //console.log('the response for getting user followers is:', response.data);
+      console.log('the response for getting user followers is:', response.data);
       dispatch({type: 'USER_FOLLOWERS', payload: response.data});
     })
     .catch(err => {
@@ -28,12 +26,9 @@ export function getFollowersForUser(userId) {
 
 export function getFollowedByUser(userId) {
   return function(dispatch) {
-    axios({
-      method: 'GET',
-      url: `/api/users/${userId}/follows`
-    })
+    getFollows(userId)
     .then(response => {
-      //console.log('the response for getting followers to user:', response.data);
+      console.log('the response for getting follows: ', response.data);
       dispatch({type: 'USER_FOLLOWS', payload: response.data});
     })
     .catch(err => {

@@ -24,6 +24,7 @@ $secondary-color: #B364B4;
   flex: 1;
   margin-right: 4px;
 }
+
 .tab:last-child {
   margin-right: 0;
 }
@@ -31,7 +32,6 @@ $secondary-color: #B364B4;
 .tab:hover {
   color: white;
   transition: color 0.3s;
-
 }
 
 .react-tabs [role=tablist] {
@@ -74,5 +74,8 @@ $secondary-color: #B364B4;
   background-color: #fff;
   border: 1px solid #ddd;
   margin-left: -40px;
+}
 
+li {
+  cursor: pointer;
 }

@@ -22,17 +22,13 @@ class User_Feeds extends Component {
     this.props.getUserFollows(3);
     this.props.getUserPosts(3);
     this.props.getAllUsersPosts();
-
-
   }
-
 
   handleSelect(index, last) {
     //console.log('Selected tab: ' + index + ', Last tab: ' + last);
   }
 
   render() {
-
     //remove built in css from tabs
     Tabs.setUseDefaultStyles(false);
     return (
@@ -42,7 +38,6 @@ class User_Feeds extends Component {
             onSelect={this.handleSelect}
             selectedIndex={0}
           >
-
             <TabList className="navBar">
               <Tab className="tab">Feed</Tab>
               <Tab className="tab">Posts</Tab>

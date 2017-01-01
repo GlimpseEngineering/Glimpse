@@ -9,7 +9,7 @@ class Following extends Component {
 
 
   render() {
-
+    console.log(this.props.follows);
     return (
       <div className="feed_content">
         <ul>
