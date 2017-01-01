@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { login, logout } from '../actions/authActionCreators';
+import { getOneUser  } from '../actions/usersActionCreators';
 import User_Info from './dashboard/User_Info';
 
 class Auth extends Component {
@@ -14,14 +15,17 @@ class Auth extends Component {
     return (
       <div style={{ marginTop: '10px' }}>
         { !this.props.auth.isAuthenticated ? (
-          <ul className="list-inline">
-            <li><button className="btn btn-primary" onClick={this.props.login}>Login</button></li>
-          </ul>
+          <div>
+            <button className="btn btn-primary" onClick={this.props.login}>Login</button>
+          </div>
         ) : (
           <div>
-            <User_Info user={this.props.auth.activeUser}/>
-            <br />
             <button className="btn btn-primary" onClick={this.props.logout}>Logout</button>
+            <button className="btn btn-primary" 
+                    onClick={()=>{
+                      this.props.getOneUser(this.props.auth.activeUser.id)
+                    }}>Home
+            </button>
           </div>
         )}
       </div>
@@ -39,7 +43,8 @@ function mapDispatchToProps(dispatch) {
   // pass the result of selectBook to all reducers
   return bindActionCreators({
     login: login,
-    logout: logout
+    logout: logout,
+    getOneUser: getOneUser
   }, dispatch)
 }
 
