@@ -10,7 +10,7 @@ class SearchResults extends Component {
 
   render() {
     let props = this.props;
-    let searchResults = props.foundUsers.rows.map((searchResult) => {
+    let searchResults = props.foundUsers.users.rows.map((searchResult) => {
       return (
         <SearchResult
           key={searchResult.id} 

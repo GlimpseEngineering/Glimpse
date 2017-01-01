@@ -22,7 +22,7 @@ class SearchBar extends Component {
   onSubmit(event) {
     event.preventDefault();
     let searchterm = this.state.searchterm;
-    this.props.searchUser(searchterm)
+    this.props.searchUser(searchterm, this.props.auth.activeUser.id);
   }
   
   render() {
@@ -45,6 +45,7 @@ class SearchBar extends Component {
 
 function mapStateToProps(state){
   return {
+    auth: state.auth,
     foundUsers: state.search.foundUsers
   };
 }

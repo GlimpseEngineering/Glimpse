@@ -3,12 +3,13 @@ import axios from 'axios';
 export const CLEAR_SEARCH = 'CLEAR_SEARCH';
 export const SEARCH_USERS = 'SEARCH_USERS';
 
-export function searchUser(searchterm) {
-  const request = axios.get(`api/search/users/${searchterm}`);
+export function searchUser(searchterm, UserId) {
+  const request = axios.get(`api/search/users/${UserId}/${searchterm}`);
 
   return (dispatch) => {
     request
       .then((foundUsers) => {
+        console.log('Here are the foundUsers', foundUsers.data);
         dispatch({ type: SEARCH_USERS, payload: foundUsers.data})
       })
       .catch((error) => {

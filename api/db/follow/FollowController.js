@@ -41,8 +41,8 @@ module.exports = {
   acceptFollow: (req, res, next) => {
     models.Follow.findOne({
       where: {
-        UserId: req.params.userId,
-        FollowId: req.params.followId,
+        UserId: req.params.followId,
+        FollowId: req.params.userId,
         status: 'pending'
       }
     })

@@ -1,6 +1,14 @@
 import { CLEAR_SEARCH, SEARCH_USERS } from '../actions/searchActionCreators';
 
-const INITIAL_STATE = { foundUsers: {count: 0, rows: []} };
+const INITIAL_STATE = { 
+  foundUsers: { 
+    users: {
+      count: 0, 
+      rows: []
+    }, 
+    followedByUser: {} 
+  } 
+};
 
 export default function(state = INITIAL_STATE, action) {
   switch (action.type) {
@@ -11,7 +19,13 @@ export default function(state = INITIAL_STATE, action) {
     })
   case CLEAR_SEARCH:
     return Object.assign({}, state, {
-      foundUsers: {count: 0, rows: []}
+      foundUsers: { 
+        users: {
+          count: 0, 
+          rows: []
+        }, 
+        followedByUser: {} 
+      } 
     })
   default:
     return state
