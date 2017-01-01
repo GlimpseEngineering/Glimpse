@@ -9,7 +9,6 @@ export function searchUser(searchterm, UserId) {
   return (dispatch) => {
     request
       .then((foundUsers) => {
-        console.log('Here are the foundUsers', foundUsers.data);
         dispatch({ type: SEARCH_USERS, payload: foundUsers.data})
       })
       .catch((error) => {

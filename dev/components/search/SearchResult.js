@@ -12,8 +12,6 @@ class SearchResult extends Component {
   }
 
   componentDidMount() {
-    console.log('accessing followedByUser in searchResult', this.props.foundUsers.followedByUser);
-    console.log('Am I following this user already?', this.props.foundUsers.followedByUser[this.props.searchResult.id]);
     if (this.props.foundUsers.followedByUser[this.props.searchResult.id]) this.setState({button: 'following'});
     /**
      * need to dispatch an action when calling requestFollow
