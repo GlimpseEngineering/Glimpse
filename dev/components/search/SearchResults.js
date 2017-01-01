@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SearchResult from './SearchResult';
+import { clearSearch } from '../../actions/searchActionCreators';
 
 class SearchResults extends Component {
+  componentWillUnmount() {
+    this.props.clearSearch();
+  }
 
   render() {
     let props = this.props;
@@ -28,5 +32,5 @@ function mapStateToProps(state){
   };
 }
 
-const searchResults = connect(mapStateToProps, null)(SearchResults);
+const searchResults = connect(mapStateToProps, { clearSearch })(SearchResults);
 export default searchResults;

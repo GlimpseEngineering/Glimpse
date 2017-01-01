@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+export const CLEAR_SEARCH = 'CLEAR_SEARCH';
 export const SEARCH_USERS = 'SEARCH_USERS';
 
 export function searchUser(searchterm) {
@@ -13,5 +14,11 @@ export function searchUser(searchterm) {
       .catch((error) => {
         throw error;
       });
+  };
+};
+
+export function clearSearch() {
+  return (dispatch) => {
+    dispatch({ type: CLEAR_SEARCH });
   };
 };
