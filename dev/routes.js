@@ -1,5 +1,6 @@
 import React from 'react';
 import { Router, Route, hashHistory, IndexRedirect } from 'react-router';
+import { getOneUser  } from './actions/usersActionCreators';
 //provider makes store available to all container(super) components in app without passing it explicitly
 import App from './App';
 import World from './components/scene/World';
@@ -12,7 +13,13 @@ const routes = (
     <Route path="/" component={App} >
       <IndexRedirect to="/profile" />
       <Route path="profile" component={Profile}>
-        <Route path=":id" component={Profile} />
+        <Route path=":id" 
+               component={Profile} 
+               onChange={(state)=> {
+                 console.log('param change!')
+                 getOneUser(state.params.id)
+               }}
+        />
       </Route>
       <Route path="post" component={Post} />
       <Route path="world" component={World} />

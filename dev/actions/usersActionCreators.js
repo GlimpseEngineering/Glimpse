@@ -8,6 +8,7 @@ http://redux.js.org/docs/basics/Actions.html
 // import { push } from 'react-router-redux';
 // import { browserHistory } from 'react-router';
 import axios from 'axios';
+import { browserHistory } from 'react-router';
 
 //USER ACTIONS ===========================>
 export function getAllUsers() {
@@ -27,8 +28,10 @@ export function getOneUser(userId){
       url: `/api/users/${userId}`
     })
     .then(response => {
-      //console.log('the response for getting one user is:', response.data);
-      dispatch({type: 'SET_USER_PROFILE', payload: response.data});
+      console.log('the response for getting one user is:', response.data);
+      let user = response.data || {}
+      browserHistory.push(`/#/profile/${response.data.id}`);
+      dispatch({type: 'SET_USER_PROFILE', payload: user});
     })
     .catch(err => {
       console.log('err in getOneUser is:', err);
