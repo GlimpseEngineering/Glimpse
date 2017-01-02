@@ -9,6 +9,7 @@ class Profile extends Component {
 
   constructor(props){
     super(props);
+    this.props.getCachedUsers();
     if(this.props.params) {
       this.props.getUserProfile(this.props.params.id);
     } else if (this.props.activeUser) {
@@ -18,19 +19,8 @@ class Profile extends Component {
     }
   }
 
-  componentDidMount() {
-    /**
-     * cache the users to redis on login
-     * on profile mount make get request to redis, not mysql 
-     * delete cached users from redis on logout
-     */
-    this.props.cache.cached && this.props.getCachedUsers();
-    // this.props.getCachedUsers();
-  }
-
-
   render() {
-    console.log('Here are our cached users', this.props.cache.cachedUsers);
+    console.log('Here are our cached users', this.props.cache);
     return (
       <div >
        <h1>Profile</h1>

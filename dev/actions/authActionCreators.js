@@ -49,6 +49,7 @@ export function login() {
         localStorage.setItem('id_token', token)
         if(user.data) {
           localStorage.setItem('profile', JSON.stringify(user.data))
+          generateCache(user.data.id)(dispatch);
           return dispatch(loginSuccess(user.data));
         } else {
           createNewUser(

@@ -4,12 +4,11 @@ const initialState = { cached: false, cachedUsers: {} };
 
 export default function(state = initialState, action) {
   switch (action.type) {
-  case GENERATE_CACHE: 
+  case GENERATE_CACHE:
     return Object.assign({}, state, {
       cached: true
     });
   case GET_CACHED_USERS:
-    console.log('Here is our payload of cached users', action.payload);
     return Object.assign({}, state, {
       cachedUsers: action.payload.data
     });
