@@ -19,13 +19,17 @@ class Profile extends Component {
   }
 
   componentDidMount() {
+    /**
+     * cache the users to redis on login
+     * on profile mount make get request to redis, not mysql 
+     * delete cached users from redis on logout
+     */
     this.props.getCachedUsers();
-    console.log('Here are our props', this.props);
-    console.log('Here are our cachedUsers', this.props.cachedUsers);
   }
-  
+
 
   render() {
+    console.log('Here are our cached users', this.props.cachedUsers);
     return (
       <div >
        <h1>Profile</h1>

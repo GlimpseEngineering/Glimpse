@@ -1,11 +1,13 @@
+import { GET_USERS_CACHE } from '../actions/cacheActionCreators.js';
+
 const initialState = { cachedUsers: {} };
 
 export default function(state = initialState, action) {
   switch(action.type){
-  case 'CACHE_USERS':
+  case GET_USERS_CACHE:
     console.log('Here is our payload of cached users', action.payload);
     return Object.assign({},state,{
-        cachedUsers: action.payload
+        cachedUsers: action.payload.data
       });
   default:
     return state;

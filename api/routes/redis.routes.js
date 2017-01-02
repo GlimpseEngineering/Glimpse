@@ -4,6 +4,11 @@ const redisControllers = require('../redis/redis.controllers.js');
 
 router
   .route('/users')
-    .get(redisControllers.getUsers);
+    .get(redisControllers.getCachedUsers)
+    .delete(redisControllers.deleteCachedUsers);
+
+router
+  .route('/users/:activeId')
+    .get(redisControllers.cacheUsers);
 
 module.exports = router;
