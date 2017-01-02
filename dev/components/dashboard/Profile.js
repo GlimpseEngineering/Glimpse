@@ -23,6 +23,7 @@ class Profile extends Component {
     console.log('Here are our props', this.props);
     console.log('Here are our cachedUsers', this.props.cachedUsers);
   }
+  
 
   render() {
     return (

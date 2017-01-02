@@ -27,7 +27,7 @@ const rootReducer = combineReducers({
   userPosts: userPosts_reducer,
   allPosts: allPosts_reducer,
   search: search_reducer,
-  userFeed: userFeed_reducer
+  userFeed: userFeed_reducer,
   cache: cache_reducer
 });
 
