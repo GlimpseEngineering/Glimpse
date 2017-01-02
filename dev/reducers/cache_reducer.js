@@ -1,14 +1,18 @@
-import { GET_USERS_CACHE } from '../actions/cacheActionCreators.js';
+import { GENERATE_CACHE, GET_CACHED_USERS } from '../actions/cacheActionCreators.js';
 
-const initialState = { cachedUsers: {} };
+const initialState = { cached: false, cachedUsers: {} };
 
 export default function(state = initialState, action) {
   switch(action.type){
-  case GET_USERS_CACHE:
+  case GENERATE_CACHE: 
+    return Object.assign({}, state, {
+      cached: true
+    });
+  case GET_CACHED_USERS:
     console.log('Here is our payload of cached users', action.payload);
-    return Object.assign({},state,{
-        cachedUsers: action.payload.data
-      });
+    return Object.assign({}, state, {
+      cachedUsers: action.payload.data
+    });
   default:
     return state;
   }

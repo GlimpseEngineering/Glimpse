@@ -29,7 +29,7 @@ class Profile extends Component {
 
 
   render() {
-    console.log('Here are our cached users', this.props.cachedUsers);
+    console.log('Here are our cached users', this.props.cache.cachedUsers);
     return (
       <div >
        <h1>Profile</h1>
@@ -46,7 +46,7 @@ function mapStateToProps(state){
   return {
     activeUser: state.auth.activeUser,
     viewedProfile: state.user.viewedProfile,
-    cachedUsers: state.cache.cachedUsers
+    cache: state.cache
   };
 }
 
