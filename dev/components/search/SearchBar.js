@@ -24,18 +24,19 @@ class SearchBar extends Component {
     let searchterm = this.state.searchterm;
     this.props.searchUser(searchterm, this.props.auth.activeUser.id);
   }
-  
+
   render() {
     return (
-      <div>
+      <div className="searchBar">
         <form onSubmit={this.onSubmit.bind(this)}>
-          <input 
+          <input
+            className="searchBarInput"
             type="text"
             name="searchterm"
             value={this.state.searchterm}
             onChange={event => this.onInputChange(event)} />
 
-          <button type="submit">Search</button>
+          <button type="submit" className="btn-primary" >Search</button>
         </form>
         <SearchResults />
       </div>

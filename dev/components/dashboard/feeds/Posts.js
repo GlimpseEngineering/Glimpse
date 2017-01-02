@@ -26,7 +26,7 @@ class Posts extends Component {
              value={post.id}
              >
             <div>
-              <img src={this.props.user.profPic} />
+              <img className="userPic" src={this.props.user.profPic} />
             </div>
             <p>{post.description}</p>
 

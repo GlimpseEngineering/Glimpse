@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { getOneUser  } from '../../actions/usersActionCreators';
 import User_Feeds from './User_Feeds';
 import User_Info from './User_Info';
+import Auth from "../Auth.js";
+import SearchBar from "../search/SearchBar.js";
 
 class Profile extends Component {
 
@@ -20,11 +22,23 @@ class Profile extends Component {
   render() {
     return (
       <div >
-       <h1>Profile</h1>
-       <div className='row'>
-         <User_Info user={this.props.viewedProfile}/>
-         <User_Feeds user={this.props.viewedProfile}/>
-       </div>
+        <nav className="mainNav">
+          <h3 className="glimpseLogo">Glimpse</h3>
+          <div className="searchAndButtons">
+            <SearchBar />
+            <div className="navButtons">
+
+              <Auth />
+            </div>
+          </div>
+
+
+        </nav>
+
+        <div className='row'>
+           <User_Info user={this.props.viewedProfile}/>
+           <User_Feeds user={this.props.viewedProfile}/>
+        </div>
       </div>
     );
   }

@@ -18,11 +18,11 @@ class User_Feeds extends Component {
   componentWillMount(){
 
     this.props.getUserListings();
-    this.props.getUserFollowers(2);
-    this.props.getUserFollows(2);
-    this.props.getUserPosts(2);
+    this.props.getUserFollowers(1);
+    this.props.getUserFollows(1);
+    this.props.getUserPosts(1);
     this.props.getAllUsersPosts();
-    this.props.getUserFollowedPosts(2);
+    this.props.getUserFollowedPosts(1);
   }
 
   handleSelect(index, last) {
@@ -34,7 +34,7 @@ class User_Feeds extends Component {
     //remove built in css from tabs
     Tabs.setUseDefaultStyles(false);
     return (
-      <div className="col-6 container">
+      <div className="col-8 container">
         <div className="tab-wrap">
           <Tabs
             onSelect={this.handleSelect}
