@@ -17,9 +17,7 @@ client.on('error', err => {
 
 client.on('connect', () => {
   console.log(`Redis server connection has been established to: ${host}:${port}`);
-  /**
-   * here we can launch a redis helper function that inits our cache
-   */
+  require('../redis/redis.helpers.js').generateCache();
 });
 
 module.exports = client;
