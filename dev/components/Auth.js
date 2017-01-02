@@ -14,19 +14,21 @@ class Auth extends Component {
   render() {
     console.log('auth props:', this.props)
     return (
-      <div style={{ marginTop: '10px' }}>
+      <div className="auth">
         { !this.props.auth.isAuthenticated ? (
-          <div>
+          <div >
             <button className="btn btn-primary" onClick={this.props.login}>Login</button>
           </div>
         ) : (
           <div>
+
             <button className="btn btn-primary" onClick={this.props.logout}>Logout</button>
-            <button className="btn btn-primary" 
+            <button className="btn btn-primary"
                     onClick={()=>{
                       this.props.getOneUser(this.props.auth.activeUser.id)
                     }}>Home
             </button>
+            <button className="btn-primary">Post</button>
           </div>
         )}
         <DummyLogin />

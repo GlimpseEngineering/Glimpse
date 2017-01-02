@@ -22,7 +22,7 @@ class News_Feed extends Component {
              }}
              key={post.id} className='list-item' value={post.id}>
              <div>
-               {/*<img src={post.userInfo.profPic} />*/}
+               <img className="userPic" src={post.userInfo.profPic} />
              </div>
              <p>{post.description}</p>
              {/* UserId: {post.UserId} postId: {post.id} */}

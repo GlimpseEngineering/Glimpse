@@ -3,10 +3,11 @@
 // =======================
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700,400,italic);
 @import './newsfeed';
+@import './userInfo';
 // =======================
 // VARIABLES
 // =======================
-$primary-color: #F186F1;
+$primary-color: black;
 $secondary-color: #B364B4;
 $tertiary-color: #A58DA5;
 $accent-color: #726272;
@@ -36,7 +37,7 @@ $nav-height: 100px;
 // Elements
 h1, h2 {
   font-family: $font-stack;
-  text-transform: uppercase;
+  // text-transform: uppercase;
   color: $primary-color;
   font-weight: 400;
   margin : 0;
@@ -44,10 +45,11 @@ h1, h2 {
 
 h3, h4, h5 {
   font-family: $font-stack;
-  text-transform: uppercase;
-  color: $tertiary-color;
+  // text-transform: uppercase;
+  color: $primary-color;
   font-weight: 400;
   margin: 0;
+  // padding-left: 10px;
 }
 
 h1 {
@@ -80,9 +82,9 @@ a:hover {
   color: $secondary-color;
 }
 
-ul {
-  margin: 1em 0em;
-}
+// ul {
+//   margin: 1em 0em;
+// }
 
 li {
   list-style: none;
@@ -102,6 +104,14 @@ body {
   font-family: $font-stack;
   margin: 0px;
 }
+//hide enterVR and exitVR buttons
+.top-hide {
+  display: none;
+}
+
+.container {
+  padding: 10px;
+}
 
 .content_body {
   display: inline-block;
@@ -113,6 +123,75 @@ body {
   position: relative;
   height: auto;
   overflow: hidden;
+}
+
+.btn-primary {
+
+  background-color:#fff;
+  -moz-border-radius:6px;
+  -webkit-border-radius:6px;
+  border-radius:6px;
+  border:1px solid #dcdcdc;
+  display:inline-block;
+  cursor:pointer;
+  color:#666666;
+  // font-family:Arial;
+  font-size:16px;
+  // font-weight:bold;
+  padding:6px 24px;
+  text-decoration:none;
+  margin-left:2px;
+  // text-shadow:0px 1px 0px #ffffff;
+}
+.btn-primary:hover {
+	background-color:#b3b3b3;
+  color: white;
+  transition: color 0.3s;
+  transition: background-color 0.3s;
+}
+.btn-primary:active {
+	position:relative;
+	top:1px;
+}
+
+//
+.mainNav {
+  display: inline-flex;
+  position: relative;
+  // background-color: yellow;
+  width: 100%;
+  height: 50px;
+  border-bottom: solid #e1e8ed 1px;
+  // padding: 5px;
+}
+
+.navButtons {
+  margin-top: 10px;
+  margin-right: 10px;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.glimpseLogo {
+  margin-top: 5px;
+  margin-left: 7px;
+}
+
+.searchBar {
+  margin-top: 10px;
+  position: absolute;
+  right: 45%;
+  top: 0;
+
+}
+
+.searchBarInput {
+  position: relative;
+  top: -2px;
+  border-radius: 6px;
+  border: 1px solid #e1e8ed;
+  padding:9px 24px;
 }
 
 //----- Extends

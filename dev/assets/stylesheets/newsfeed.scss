@@ -1,10 +1,8 @@
-$primary-color: #F186F1;
+$primary-color: #3e5f60;
 $secondary-color: #B364B4;
 
 
-.container {
-  padding: 10px;
-}
+
 //nav bar--------------------------->
 .navBar {
   color: black;
@@ -21,6 +19,8 @@ $secondary-color: #B364B4;
   cursor: pointer;
   width: 100%;
   background-color: #b3b3b3;
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;
   flex: 1;
   margin-right: 4px;
 }
@@ -78,4 +78,8 @@ $secondary-color: #B364B4;
 
 li {
   cursor: pointer;
+}
+
+.userPic {
+  border-radius: 50%;
 }

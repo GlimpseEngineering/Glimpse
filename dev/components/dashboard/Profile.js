@@ -4,6 +4,8 @@ import { getOneUser  } from '../../actions/usersActionCreators';
 import { getCachedUsers } from '../../actions/cacheActionCreators';
 import User_Feeds from './User_Feeds';
 import User_Info from './User_Info';
+import Auth from "../Auth.js";
+import SearchBar from "../search/SearchBar.js";
 
 class Profile extends Component {
 
@@ -25,12 +27,26 @@ class Profile extends Component {
   render() {
     console.log('Here are our cached users:', this.props.cache);
     return (
+
       <div key={this.props.cache.cached}>
-       <h1>Profile</h1>
-       <div className='row'>
-         <User_Info user={this.props.viewedProfile}/>
-         <User_Feeds user={this.props.viewedProfile}/>
-       </div>
+        <nav className="mainNav">
+          <h3 className="glimpseLogo">Glimpse</h3>
+          <div className="searchAndButtons">
+            <SearchBar />
+            <div className="navButtons">
+
+              <Auth />
+            </div>
+          </div>
+
+
+        </nav>
+
+        <div className='row'>
+           <User_Info user={this.props.viewedProfile}/>
+           <User_Feeds user={this.props.viewedProfile}/>
+        </div>
+
       </div>
     );
   }
