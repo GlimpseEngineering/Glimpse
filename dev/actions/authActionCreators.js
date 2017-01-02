@@ -1,10 +1,12 @@
 import axios from 'axios';
 
-export const SHOW_LOCK = 'SHOW_LOCK'
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
-export const LOGIN_ERROR = 'LOGIN_ERROR'
-export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
-export const USER_CREATED = 'USER_CREATED'
+export const SHOW_LOCK = 'SHOW_LOCK';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_ERROR = 'LOGIN_ERROR';
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const USER_CREATED = 'USER_CREATED';
+
+import { generateCache } from './cacheActionCreators';
 
 const lock = new Auth0Lock(
   '7YhgDoHIuZpKxGRa0A81rjDh1JuXd5vD',

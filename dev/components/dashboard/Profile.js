@@ -24,7 +24,8 @@ class Profile extends Component {
      * on profile mount make get request to redis, not mysql 
      * delete cached users from redis on logout
      */
-    this.props.getCachedUsers();
+    this.props.cache.cached && this.props.getCachedUsers();
+    // this.props.getCachedUsers();
   }
 
 

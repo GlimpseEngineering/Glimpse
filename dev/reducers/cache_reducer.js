@@ -3,7 +3,7 @@ import { GENERATE_CACHE, GET_CACHED_USERS } from '../actions/cacheActionCreators
 const initialState = { cached: false, cachedUsers: {} };
 
 export default function(state = initialState, action) {
-  switch(action.type){
+  switch (action.type) {
   case GENERATE_CACHE: 
     return Object.assign({}, state, {
       cached: true
