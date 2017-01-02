@@ -15,6 +15,7 @@ import follows_reducer from './follows_reducer.js';
 import vrMode from './vrMode_reducer.js';
 import search_reducer from './search_reducer.js';
 import userFeed_reducer from './userFeed_reducer.js';
+import cache_reducer from './cache_reducer.js';
 
 const rootReducer = combineReducers({
   users: users_reducer,
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   allPosts: allPosts_reducer,
   search: search_reducer,
   userFeed: userFeed_reducer
+  cache: cache_reducer
 });
 
 export default rootReducer;
