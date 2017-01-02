@@ -14,7 +14,7 @@ import followers_reducer from './followers_reducer.js';
 import follows_reducer from './follows_reducer.js';
 import vrMode from './vrMode_reducer.js';
 import search_reducer from './search_reducer.js';
-
+import userFeed_reducer from './userFeed_reducer.js';
 
 const rootReducer = combineReducers({
   users: users_reducer,
@@ -25,7 +25,8 @@ const rootReducer = combineReducers({
   follows: follows_reducer,
   userPosts: userPosts_reducer,
   allPosts: allPosts_reducer,
-  search: search_reducer
+  search: search_reducer,
+  userFeed: userFeed_reducer
 });
 
 export default rootReducer;

@@ -20,11 +20,16 @@ class Followers extends Component {
                 key={user.UserId}
                 value={user.UserId}
                 onClick = {e => {
-                  console.log('you clicked on post id:', e.target.value)
-                  this.props.getUserProfile(e.target.value)
+                  console.log('you clicked on post id:', user.UserId)
+                  this.props.getUserProfile(user.UserId)
                 }
             }>
-              User Id: {user.UserId}</li>
+              <div>
+                <img src={user.userInfo.profPic} />
+              </div>
+              <p>username: {user.userInfo.username}</p>
+              <p>Bio: {user.userInfo.bio}</p>
+            </li>
           )}
         </ul>
       </div>
