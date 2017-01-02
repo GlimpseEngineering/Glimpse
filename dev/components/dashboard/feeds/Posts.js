@@ -25,7 +25,11 @@ class Posts extends Component {
              className='list-item'
              value={post.id}
              >
-             {post.description}
+            <div>
+              <img src={this.props.user.profPic} />
+            </div>
+            <p>{post.description}</p>
+
            </li>
           )}
         </ul>

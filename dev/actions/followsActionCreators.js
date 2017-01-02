@@ -8,7 +8,7 @@ http://redux.js.org/docs/basics/Actions.html
 // import { push } from 'react-router-redux';
 // import { browserHistory } from 'react-router';
 import axios from 'axios';
-import { getFollowers, getFollows } from '../action_helpers/http.js';
+import { getFollowers, getFollows, getFeedPosts } from '../action_helpers/followsHelpers.js';
 
 //USER ACTIONS ===========================>
 export function getFollowersForUser(userId) {
@@ -33,6 +33,18 @@ export function getFollowedByUser(userId) {
     })
     .catch(err => {
       console.log('err in getFollowedByUser is:', err);
+    });
+  }
+}
+
+export function getFollowedPosts(userId) {
+  return function (dispatch) {
+    getFeedPosts(userId)
+    .then(response => {
+      dispatch({type: 'USER_FEED', payload: response});
+    })
+    .catch(err => {
+      console.log('err in getFollowedPosts is:', err);
     });
   }
 }

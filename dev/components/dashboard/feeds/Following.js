@@ -18,11 +18,16 @@ class Following extends Component {
                 key={user.FollowId}
                 value={user.FollowId}
                 onClick = {e => {
-                  console.log('you clicked on post id:', e.target.value)
-                  this.props.getUserProfile(e.target.value)
+                  console.log('you clicked on post id:', user.FollowId)
+                  this.props.getUserProfile(user.FollowId)
                 }
             }>
-              User Id: {user.FollowId}
+              <div>
+                <img src={user.userInfo.profPic} />
+              </div>
+              <p>username: {user.userInfo.username}</p>
+              <p>Bio: {user.userInfo.bio}</p>
+
             </li>
           )}
         </ul>

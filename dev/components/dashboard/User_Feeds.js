@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getAllUsers } from '../../actions/usersActionCreators';
 import { getPostsByUser, getAllPosts } from '../../actions/postsActionCreators';
-import { getFollowersForUser, getFollowedByUser } from '../../actions/followsActionCreators';
+import { getFollowersForUser, getFollowedByUser, getFollowedPosts } from '../../actions/followsActionCreators';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 import News_Feed from './feeds/News_Feed';
@@ -13,15 +13,16 @@ import Followers from './feeds/Followers';
 class User_Feeds extends Component {
   constructor(props){
     super(props);
-
   }
 
   componentWillMount(){
+
     this.props.getUserListings();
-    this.props.getUserFollowers(3);
-    this.props.getUserFollows(3);
-    this.props.getUserPosts(3);
+    this.props.getUserFollowers(2);
+    this.props.getUserFollows(2);
+    this.props.getUserPosts(2);
     this.props.getAllUsersPosts();
+    this.props.getUserFollowedPosts(2);
   }
 
   handleSelect(index, last) {
@@ -29,6 +30,7 @@ class User_Feeds extends Component {
   }
 
   render() {
+
     //remove built in css from tabs
     Tabs.setUseDefaultStyles(false);
     return (
@@ -46,14 +48,13 @@ class User_Feeds extends Component {
             </TabList>
 
             <TabPanel>
-              <News_Feed
-                allPosts={this.props.allPosts}
-                users={this.props.users}
-                follows={this.props.follows}
-              />
+              <News_Feed userFeed={this.props.userFeed}/>
             </TabPanel>
             <TabPanel>
-              <Posts userPosts={this.props.userPosts}/>
+              <Posts
+                userPosts={this.props.userPosts}
+                user={this.props.user}
+              />
             </TabPanel>
             <TabPanel>
               <Following follows={this.props.follows}/>
@@ -69,13 +70,14 @@ class User_Feeds extends Component {
   }
 }
 
-function mapStateToProps({ users, followers, follows, userPosts, allPosts }){
+function mapStateToProps({ users, followers, follows, userPosts, allPosts, userFeed }){
   return {
     users: users.userListings,
     followers: followers.userFollowers,
     follows: follows.userFollows,
     userPosts: userPosts.userPosts,
-    allPosts: allPosts.allPosts
+    allPosts: allPosts.allPosts,
+    userFeed: userFeed.followingPosts
   };
 }
 
@@ -84,6 +86,7 @@ var feeds = connect(mapStateToProps, {
   getUserFollowers: getFollowersForUser,
   getUserFollows: getFollowedByUser,
   getUserPosts: getPostsByUser,
-  getAllUsersPosts: getAllPosts
+  getAllUsersPosts: getAllPosts,
+  getUserFollowedPosts: getFollowedPosts
 })(User_Feeds);
 export default feeds;
