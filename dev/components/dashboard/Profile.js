@@ -16,7 +16,7 @@ class Profile extends Component {
     } else if (this.props.activeUser) {
       this.props.getUserProfile(this.props.activeUser.id);
     } else {
-      this.props.getUserProfile(0)
+      this.props.getUserProfile(1)
     }
   }
 

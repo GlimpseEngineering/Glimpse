@@ -13,16 +13,17 @@ import Followers from './feeds/Followers';
 class User_Feeds extends Component {
   constructor(props){
     super(props);
+    console.log('XxXxXxXxXxXxX',this.props)
   }
 
-  componentWillMount(){
-
+  getFeedData(){
     this.props.getUserListings();
-    this.props.getUserFollowers(19);
-    this.props.getUserFollows(19);
-    this.props.getUserPosts(19);
+    this.props.getUserFollowers(this.props.viewedProf.id);
+    this.props.getUserFollows(this.props.viewedProf.id);
+    this.props.getUserPosts(this.props.viewedProf.id);
     this.props.getAllUsersPosts();
-    this.props.getUserFollowedPosts(19);
+    this.props.getUserFollowedPosts(this.props.viewedProf.id);
+    this.receivedData = true;
   }
 
   handleSelect(index, last) {
@@ -31,10 +32,9 @@ class User_Feeds extends Component {
 
   render() {
 
-    //remove built in css from tabs
     Tabs.setUseDefaultStyles(false);
     return (
-      <div className="col-8 container">
+      <div className="col-8 container"> 
         <div className="tab-wrap">
           <Tabs
             onSelect={this.handleSelect}
@@ -70,8 +70,9 @@ class User_Feeds extends Component {
   }
 }
 
-function mapStateToProps({ users, followers, follows, userPosts, allPosts, userFeed }){
+function mapStateToProps({ user, users, followers, follows, userPosts, allPosts, userFeed }){
   return {
+    viewedProf: user.viewedProfile,
     users: users.userListings,
     followers: followers.userFollowers,
     follows: follows.userFollows,

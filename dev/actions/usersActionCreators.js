@@ -10,12 +10,16 @@ http://redux.js.org/docs/basics/Actions.html
 import axios from 'axios';
 import { browserHistory } from 'react-router';
 
+import { getPostsByUser, getAllPosts } from './postsActionCreators';
+import { getFollowersForUser, getFollowedByUser, getFollowedPosts } from './followsActionCreators';
+
+
 //USER ACTIONS ===========================>
 export function getAllUsers() {
   return function(dispatch) {
     axios.get('/api/users')
     .then(response => {
-      //console.log('the response for getting users listings is:', response.data);
+      console.log('the response for getting users listings is:', response.data);
       dispatch({type: 'USERS_LISTINGS', payload: response.data})
     });
   }

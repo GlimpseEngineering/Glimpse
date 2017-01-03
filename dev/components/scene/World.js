@@ -29,7 +29,7 @@ class World extends Component {
   render() {
     console.log('curScene:',JSON.parse(this.props.currentScene))
     return (
-      <Scene >
+      <Scene>
         <Camera>
           <a-cursor
             animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150">
