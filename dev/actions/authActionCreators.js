@@ -80,8 +80,7 @@ export function loginAs(id) {
       authId:`dummy|${id}`
     })
     .then(user => {
-      console.log(id)
-      console.log(user)
+      generateCache(user.data.id)(dispatch);
       localStorage.setItem('profile', JSON.stringify(user.data));
       return dispatch(loginSuccess(user.data));
     })
