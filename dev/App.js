@@ -5,7 +5,6 @@ import { enterVR } from './actions/vrModeActionCreators';
 import { exitVR } from './actions/vrModeActionCreators';
 import World from './components/scene/World';
 import Profile from './components/dashboard/Profile';
-import Auth from './components/Auth';
 
 class App extends Component {
   constructor(props) {
@@ -14,18 +13,18 @@ class App extends Component {
   }
 
   render() {
-    let children = null;
-    if (this.props.children) {
-      children = React.cloneElement(this.props.children, {
-        auth: this.props.route.auth //sends auth instance from route to children
-      })
-    }
+    // let children = null;
+    // if (this.props.children) {
+    //   children = React.cloneElement(this.props.children, {
+    //     auth: this.props.route.auth //sends auth instance from route to children
+    //   })
+    // }
     console.log('state.vrMode:',this.props.vrMode)
-    let displayMode = this.props.vrMode.active? <World /> : this.props.children
+    let displayMode = this.props.vrMode.active? <World /> : this.props.children;
     return (
-      <div className="window">
-        <button className="top-hide" onClick={this.props.enterVR}>enter vr</button>
-        <button className="top-hide" onClick={this.props.exitVR}>exit vr</button>
+      <div >
+        <button onClick={this.props.enterVR}>enter vr</button>
+        <button onClick={this.props.exitVR}>exit vr</button>
         {displayMode}
       </div>
     );
@@ -42,7 +41,6 @@ function mapStateToProps(state) {
 // as props on the App container.
 // Allows this.props.enterVR to be called
 function mapDispatchToProps(dispatch) {
-  // pass the result of selectBook to all reducers
   return bindActionCreators({
     enterVR: enterVR,
     exitVR: exitVR

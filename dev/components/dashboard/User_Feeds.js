@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getAllUsers } from '../../actions/usersActionCreators';
+import { getAllUsers, dataFetched } from '../../actions/usersActionCreators';
 import { getPostsByUser, getAllPosts } from '../../actions/postsActionCreators';
 import { getFollowersForUser, getFollowedByUser, getFollowedPosts } from '../../actions/followsActionCreators';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
@@ -13,16 +13,23 @@ import Followers from './feeds/Followers';
 class User_Feeds extends Component {
   constructor(props){
     super(props);
+    console.log('XxXxXxXxXxXxX',this.props)
   }
 
-  componentWillMount(){
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.requireDataFetch) {
+      this.getFeedData(this.props.viewedProf.id)
+    }
+  }
 
+  getFeedData(id){
     this.props.getUserListings();
-    this.props.getUserFollowers(19);
-    this.props.getUserFollows(19);
-    this.props.getUserPosts(19);
+    this.props.getUserFollowers(id);
+    this.props.getUserFollows(id);
+    this.props.getUserPosts(id);
     this.props.getAllUsersPosts();
-    this.props.getUserFollowedPosts(19);
+    this.props.getUserFollowedPosts(id);
+    this.props.dataFetched()
   }
 
   handleSelect(index, last) {
@@ -30,11 +37,9 @@ class User_Feeds extends Component {
   }
 
   render() {
-
-    //remove built in css from tabs
     Tabs.setUseDefaultStyles(false);
     return (
-      <div className="col-8 container">
+      <div className="col-8 container"> 
         <div className="tab-wrap">
           <Tabs
             onSelect={this.handleSelect}
@@ -70,8 +75,10 @@ class User_Feeds extends Component {
   }
 }
 
-function mapStateToProps({ users, followers, follows, userPosts, allPosts, userFeed }){
+function mapStateToProps({ user, users, followers, follows, userPosts, allPosts, userFeed }){
   return {
+    requireDataFetch: user.requireDataFetch,
+    viewedProf: user.viewedProfile,
     users: users.userListings,
     followers: followers.userFollowers,
     follows: follows.userFollows,
@@ -82,6 +89,7 @@ function mapStateToProps({ users, followers, follows, userPosts, allPosts, userF
 }
 
 var feeds = connect(mapStateToProps, {
+  dataFetched: dataFetched,
   getUserListings: getAllUsers ,
   getUserFollowers: getFollowersForUser,
   getUserFollows: getFollowedByUser,

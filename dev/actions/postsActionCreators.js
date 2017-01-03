@@ -20,7 +20,7 @@ export function getPostsByUser(userId) {
       url: `/api/users/${userId}/posts`
     })
     .then(response => {
-      //console.log('the response for getting user posts:', response.data);
+      console.log('**the response for getting user posts:', response.data);
       dispatch({type: 'USER_POSTS', payload: response.data});
     })
     .catch(err => {

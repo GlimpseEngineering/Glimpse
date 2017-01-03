@@ -11,17 +11,25 @@ class Profile extends Component {
 
   constructor(props){
     super(props);
-    if(this.props.params) {
+    if(this.props.params.id) {
       this.props.getUserProfile(this.props.params.id);
     } else if (this.props.activeUser) {
       this.props.getUserProfile(this.props.activeUser.id);
     } else {
-      this.props.getUserProfile(0)
+      this.props.getUserProfile(1)
     }
   }
 
   componentWillReceiveProps(nextProps) {
     nextProps.cache.cached && nextProps.cache.pending && this.props.getCachedUsers();
+    console.log('Old Props Old Props',this.props)
+    console.log('New Props New Props',nextProps)
+    if(nextProps.viewedProfile.id !== this.props.viewedProfile.id) {
+      this.props.getUserProfile(nextProps.viewedProfile.id)
+    }
+    if(nextProps.params.id !== this.props.params.id) {
+      this.props.getUserProfile(nextProps.params.id)
+    }
   }
 
   render() {

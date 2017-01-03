@@ -2,13 +2,14 @@ import 'aframe';
 import 'aframe-animation-component';
 import 'aframe-text-component';
 import 'babel-polyfill';
+
 import {Entity, Scene} from 'aframe-react';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
 import Camera from './primitives/Camera';
 import PhotoSphere from './primitives/PhotoSphere';
 import Text from './primitives/Text';
-import 'aframe-html-shader';
 
 class World extends Component {
 
@@ -29,7 +30,7 @@ class World extends Component {
   render() {
     console.log('curScene:',JSON.parse(this.props.currentScene))
     return (
-      <Scene >
+      <Scene>
         <Camera>
           <a-cursor
             animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150">
@@ -49,6 +50,9 @@ class World extends Component {
 function mapStateToProps(state) {
   // returns input state as props in output
   return {
+    activeUser: state.auth.activeUser,
+    viewedProfile: state.user.viewedProfile,
+    cache: state.cache,
     currentScene: state.vrMode.currentScene
   };
 }

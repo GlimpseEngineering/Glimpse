@@ -13,13 +13,7 @@ const routes = (
     <Route path="/" component={App} >
       <IndexRedirect to="/profile" />
       <Route path="profile" component={Profile}>
-        <Route path=":id" 
-               component={Profile} 
-               onChange={(state)=> {
-                 console.log('param change!')
-                 getOneUser(state.params.id)
-               }}
-        />
+        <Route path=":id" component={Profile} />
       </Route>
       <Route path="post" component={Post} />
       <Route path="world" component={World} />
