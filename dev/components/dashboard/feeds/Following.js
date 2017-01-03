@@ -25,8 +25,11 @@ class Following extends Component {
               <div>
                 <img className="userPic" src={user.userInfo.profPic} />
               </div>
-              <p>username: {user.userInfo.username}</p>
-              <p>Bio: {user.userInfo.bio}</p>
+              <div className='componentInfo'>
+                <p>username: {user.userInfo.username}</p>
+                <p>Bio: {user.userInfo.bio}</p>
+              </div>
+
 
             </li>
           )}

@@ -20,11 +20,16 @@ class News_Feed extends Component {
                this.handleSelect(e);
                this.props.getOnePost(post.id)
              }}
-             key={post.id} className='list-item' value={post.id}>
+             key={post.id}
+             className='list-item'
+             value={post.id}>
              <div>
                <img className="userPic" src={post.userInfo.profPic} />
              </div>
-             <p>{post.description}</p>
+             <div className='componentInfo'>
+               <p>{post.description}</p>
+             </div>
+
              {/* UserId: {post.UserId} postId: {post.id} */}
            </li>
          )}
