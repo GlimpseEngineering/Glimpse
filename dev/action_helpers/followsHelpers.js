@@ -60,11 +60,11 @@ function _getFollowsUserInfo(resultArr) {
 
   return axios.all(arrayOfPromises)
     .then(userData => {
-      //console.log('follows user info: ', userData)
       resultArr.data.forEach((user, index) => {
 
         user.userInfo = userData[index].data;
       })
+      console.log('asdfasf',resultArr)
       return resultArr;
     })
 }
@@ -81,32 +81,38 @@ export function getFeedPosts(userId) {
 }
 
 function _getFollowsPosts(resultArr) {
+
   const apiCallUserPosts = user => {
     let userId = user.FollowId;
     return axios.get(`api/users/${userId}/posts`);
   }
 
   const arrayOfPromises = resultArr.map(user => {
+    //console.log('user', user)
     return apiCallUserPosts(user);
   })
 
   return axios.all(arrayOfPromises)
-    .then(userPosts => {
+    .then(followersPosts => {
+      //console.log('mahaha', followersPosts)
       var feedPosts = [];
       var result = [];
-      userPosts.forEach((post, index) => {
-        post = post.data;
-        if(post.length > 0){
-          post[index].userInfo = resultArr[index].userInfo;
-          feedPosts.push(userPosts[index].data)
+      followersPosts.forEach((userPosts, index) => {
+        if(userPosts.data.length > 0){
+          //console.log('dis post' + index, userPosts);
+          userPosts.data.forEach(function(post){
+            post.userInfo = resultArr[index].userInfo;
+            feedPosts.push(post);
+          });
         }
       })
-      feedPosts.forEach(user => {
-        user.forEach(post => {
-          result.push(post);
-        })
-      });
-      return result;
+
+      // feedPosts.forEach(user => {
+      //   user.forEach(post => {
+      //     result.push(post);
+      //   })
+      // });
+      return feedPosts;
     })
 
 }

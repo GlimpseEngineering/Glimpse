@@ -28,10 +28,6 @@ class Profile extends Component {
     console.log('Here are our cached users:', this.props.cache);
     return (
       <div key={this.props.cache.cached}>
-<<<<<<< HEAD
-=======
-
->>>>>>> isuues
         <nav className="mainNav">
           <h3 className="glimpseLogo">Glimpse</h3>
           <div className="searchAndButtons">
