@@ -32,6 +32,7 @@ class SearchResult extends Component {
   }
 
   render() {
+    console.log('collection of followed users', this.props.foundUsers);
     return (
       <div>
         {this.props.searchResult.username}

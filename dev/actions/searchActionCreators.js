@@ -30,8 +30,8 @@ export function followFoundUser(userId, followId) {
   return (dispatch) => {
     request
       .then((followRequest) => {
-        console.log('Here is our request to follow an individual', followRequest.data);
-        dispatch({ type: FOLLOW_FOUND_USER, payload: followRequest.data })
+        console.log('Here is our request to follow an individual', followRequest.data[0]);
+        dispatch({ type: FOLLOW_FOUND_USER, payload: followRequest.data[0] });
       })
       .catch((error) => {
         throw error;
