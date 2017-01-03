@@ -1,6 +1,6 @@
 -- how to run this file
 -- use the following command with your computer's absolute path
--- mysql -u root -p < INSERT\PATH\TO\Glimpse\api\config\dummy_data\dummy_data.sql
+-- mysql -u root -p < INSERT\PATH\TOGlimpse\api\config\dummy_data\dummy_data.sql
 -- database glimpse must already exist
 -- table names must already exist
 -- this file will delete your old data and repopulate your already made tables

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-//GETFOLLOWERS w/ userInfo ----------------------------->
+//GETFOLLOWERS then add userInfo ----------------------------->
 export function getFollowers(userId) {
     console.log('in helper getFollowers userid: ',userId);
     return axios({

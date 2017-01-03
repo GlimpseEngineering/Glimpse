@@ -1,0 +1,72 @@
+.profPic {
+  width:100%;
+  max-width:210px;
+  border-radius: 50%;
+  padding: 0% 4% 5% 4%;
+
+}
+
+.picContainer {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 5px;
+}
+
+.profile {
+  color: black;
+  box-sizing: border-box;
+  align-items: center;
+  position: relative;
+  justify-content: center;
+}
+
+.userContainer {
+  align-items: center;
+  padding: 2% 4% 2% 4%;
+}
+
+.profileInfo {
+  // background-color: lightblue;
+  border-top: solid #e1e8ed 1px;
+  padding-top: 10px;
+}
+
+.username, .bio {
+  padding: 0 11% 0 11%;
+}
+
+.bio {
+  padding-top: 10px;
+  border-top: solid #e1e8ed 1px;
+}
+
+.editButton {
+  float: right;
+  padding-right: 4px;
+  background-color:#fff;
+  -moz-border-radius:6px;
+  -webkit-border-radius:6px;
+  border-radius:6px;
+  border:1px solid #dcdcdc;
+  display:inline-block;
+  cursor:pointer;
+  color:#666666;
+  // font-family:Arial;
+  font-size:14px;
+  // font-weight:bold;
+  padding:2px 16px;
+  text-decoration:none;
+  margin-left:2px;
+}
+
+.editButton:hover {
+	background-color:#b3b3b3;
+  color: white;
+  transition: color 0.2s;
+  transition: background-color 0.2s;
+}
+.editButton:active {
+	position:relative;
+	top:1px;
+}

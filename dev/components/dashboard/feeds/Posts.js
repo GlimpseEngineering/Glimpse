@@ -17,6 +17,7 @@ class Posts extends Component {
         <ul>
           {this.props.userPosts.map( post =>
            <li
+
              onClick={(e) => {
                this.handleSelect(e);
                this.props.getOnePost(post.id)
@@ -26,10 +27,11 @@ class Posts extends Component {
              value={post.id}
              >
             <div>
-              <img src={this.props.user.profPic} />
+              <img className="userPic" src={this.props.user.profPic} />
             </div>
-            <p>{post.description}</p>
-
+            <div className='componentInfo'>
+              <p>{post.description}</p>
+            </div>
            </li>
           )}
         </ul>

@@ -16,7 +16,7 @@ class Followers extends Component {
       <div className="feed_content">
         <ul>
           {this.props.followers.map( user =>
-            <li className='list-item'
+            <li
                 key={user.UserId}
                 value={user.UserId}
                 onClick = {e => {
@@ -25,10 +25,12 @@ class Followers extends Component {
                 }
             }>
               <div>
-                <img src={user.userInfo.profPic} />
+                <img className="userPic" src={user.userInfo.profPic} />
               </div>
-              <p>username: {user.userInfo.username}</p>
-              <p>Bio: {user.userInfo.bio}</p>
+              <div className='componentInfo'>
+                <p>username: {user.userInfo.username}</p>
+                <p>Bio: {user.userInfo.bio}</p>
+              </div>
             </li>
           )}
         </ul>
