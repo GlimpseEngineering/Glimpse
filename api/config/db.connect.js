@@ -24,7 +24,7 @@ const sequelize = new Sequelize(process.env.DB_DATABASE, process.env.DB_USER, pr
 sequelize
   .authenticate()
   .then((message) => {
-    console.log('Connection has been established to:', process.env.DB_HOST + ':' + process.env.DB_PORT);
+    console.log('MySQL server connection has been established to:', process.env.DB_HOST + ':' + process.env.DB_PORT);
   })
   .catch((err) => {
     throw err;

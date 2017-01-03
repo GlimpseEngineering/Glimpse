@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { getOneUser  } from '../../actions/usersActionCreators';
+import { getCachedUsers } from '../../actions/cacheActionCreators';
 import User_Feeds from './User_Feeds';
 import User_Info from './User_Info';
 
@@ -17,9 +18,14 @@ class Profile extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    nextProps.cache.cached && nextProps.cache.pending && this.props.getCachedUsers();
+  }
+
   render() {
+    console.log('Here are our cached users:', this.props.cache);
     return (
-      <div >
+      <div key={this.props.cache.cached}>
        <h1>Profile</h1>
        <div className='row'>
          <User_Info user={this.props.viewedProfile}/>
@@ -33,11 +39,13 @@ class Profile extends Component {
 function mapStateToProps(state){
   return {
     activeUser: state.auth.activeUser,
-    viewedProfile: state.user.viewedProfile
+    viewedProfile: state.user.viewedProfile,
+    cache: state.cache
   };
 }
 
 var dashboard = connect(mapStateToProps, {
-  getUserProfile: getOneUser
+  getUserProfile: getOneUser,
+  getCachedUsers: getCachedUsers
 })(Profile);
 export default dashboard;
