@@ -8,15 +8,12 @@ class Followers extends Component {
 
 
   render() {
-    // if(this.props.followers){
-    //   console.log(this.props.followers);
-    // }
 
     return (
       <div className="feed_content">
         <ul>
           {this.props.followers.map( user =>
-            <li
+            <li className='list-item'
                 key={user.UserId}
                 value={user.UserId}
                 onClick = {e => {

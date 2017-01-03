@@ -18,11 +18,11 @@ class User_Feeds extends Component {
   componentWillMount(){
 
     this.props.getUserListings();
-    this.props.getUserFollowers(1);
-    this.props.getUserFollows(1);
-    this.props.getUserPosts(1);
+    this.props.getUserFollowers(19);
+    this.props.getUserFollows(19);
+    this.props.getUserPosts(19);
     this.props.getAllUsersPosts();
-    this.props.getUserFollowedPosts(1);
+    this.props.getUserFollowedPosts(19);
   }
 
   handleSelect(index, last) {
