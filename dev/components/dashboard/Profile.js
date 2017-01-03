@@ -22,8 +22,6 @@ class Profile extends Component {
 
   componentWillReceiveProps(nextProps) {
     nextProps.cache.cached && nextProps.cache.pending && this.props.getCachedUsers();
-    console.log('Old Props Old Props',this.props)
-    console.log('New Props New Props',nextProps)
     if(nextProps.viewedProfile.id !== this.props.viewedProfile.id) {
       this.props.getUserProfile(nextProps.viewedProfile.id)
     }
