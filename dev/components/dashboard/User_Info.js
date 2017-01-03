@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import DummyLogin from '../DummyLogin'
 
 /**
  * for now
@@ -33,6 +33,7 @@ class User_Info extends Component {
               <p>{this.props.user.bio}</p>
             </div>
           </div>
+          <div><DummyLogin /></div>
 
         </div>
 

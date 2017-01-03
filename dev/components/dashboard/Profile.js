@@ -34,7 +34,6 @@ class Profile extends Component {
           <div className="searchAndButtons">
             <SearchBar />
             <div className="navButtons">
-
               <Auth />
             </div>
           </div>

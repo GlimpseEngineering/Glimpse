@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { login, logout } from '../actions/authActionCreators';
 import { getOneUser  } from '../actions/usersActionCreators';
 import User_Info from './dashboard/User_Info';
-import DummyLogin from './DummyLogin'
+
 
 class Auth extends Component {
   constructor(props) {
@@ -14,7 +14,9 @@ class Auth extends Component {
   render() {
     console.log('auth props:', this.props)
     return (
+
       <div className="auth">
+
         { !this.props.auth.isAuthenticated ? (
           <div >
             <button className="btn btn-primary" onClick={this.props.login}>Login</button>
@@ -31,7 +33,7 @@ class Auth extends Component {
             <button className="btn-primary">Post</button>
           </div>
         )}
-        <DummyLogin />
+
       </div>
     )
   }
