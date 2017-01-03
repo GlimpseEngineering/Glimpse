@@ -31,11 +31,9 @@ export function followFoundUser(userId, followId) {
     axios.post(`api/users/${userId}/follows/${followId}`)
       .then((followRequest) => {
         followData.followedByUser = followRequest.data[0];
-        console.log('Here is our request to follow an individual', followRequest.data[0]);
         return axios.get(`api/users/${followId}`)
       })
       .then((userRequest) => {
-        console.log('user request', userRequest.data);
         followData.user = userRequest.data;
         dispatch({ type: FOLLOW_FOUND_USER, payload: followData });
       })

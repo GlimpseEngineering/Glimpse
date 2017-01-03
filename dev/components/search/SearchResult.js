@@ -14,7 +14,7 @@ class SearchResult extends Component {
 
   /** 
    * need to change this life cycle hook
-   * props are changing but component isn't mounting again
+   * props are changing but component isn't mounting again, need it to change so searchResult can re-render to set state
    */
   componentDidMount() {
     let followRequest = this.props.foundUsers.followedByUser[this.props.searchResult.id];
@@ -29,13 +29,10 @@ class SearchResult extends Component {
 
   onClick(event) {
     event.preventDefault();
-    console.log('followId', this.props.searchResult.id);
-    console.log('userId', this.props.auth.activeUser.id);
     this.props.followFoundUser(this.props.auth.activeUser.id, this.props.searchResult.id);
   }
 
   render() {
-    console.log('collection of followed users', this.props.foundUsers);
     return (
       <div>
         {this.props.searchResult.username}
