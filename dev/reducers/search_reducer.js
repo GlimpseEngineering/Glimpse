@@ -4,7 +4,7 @@ const INITIAL_STATE = {
   foundUsers: { 
     users: {
       count: 0, 
-      rows: []
+      rows: {}
     }, 
     followedByUser: {} 
   } 
@@ -22,7 +22,7 @@ export default function(state = INITIAL_STATE, action) {
       foundUsers: { 
         users: {
           count: 0, 
-          rows: []
+          rows: {}
         }, 
         followedByUser: {} 
       } 
@@ -33,12 +33,12 @@ export default function(state = INITIAL_STATE, action) {
       foundUsers: {
         users: {
           count: state.foundUsers.users.count,
-          rows: [
-            ...state.foundUsers.users.rows
-          ]
+          rows: Object.assign({}, state.foundUsers.users.rows, {
+            [action.payload.user.id]: action.payload.user
+          })
         },
         followedByUser: Object.assign({}, state.foundUsers.followedByUser, {
-          [action.payload.FollowId]: action.payload
+          [action.payload.followedByUser.FollowId]: action.payload.followedByUser
         })
       }
     });

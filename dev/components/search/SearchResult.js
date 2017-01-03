@@ -12,7 +12,10 @@ class SearchResult extends Component {
     };
   }
 
-  /** may need to change this lifecycle hook */
+  /** 
+   * need to change this life cycle hook
+   * props are changing but component isn't mounting again
+   */
   componentDidMount() {
     let followRequest = this.props.foundUsers.followedByUser[this.props.searchResult.id];
     followRequest && followRequest.status === 'pending' && this.setState({button: 'pending'});
