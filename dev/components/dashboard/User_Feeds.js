@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getAllUsers } from '../../actions/usersActionCreators';
+import { getAllUsers, dataFetched } from '../../actions/usersActionCreators';
 import { getPostsByUser, getAllPosts } from '../../actions/postsActionCreators';
 import { getFollowersForUser, getFollowedByUser, getFollowedPosts } from '../../actions/followsActionCreators';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
@@ -16,14 +16,20 @@ class User_Feeds extends Component {
     console.log('XxXxXxXxXxXxX',this.props)
   }
 
-  getFeedData(){
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.requireDataFetch) {
+      this.getFeedData(this.props.viewedProf.id)
+    }
+  }
+
+  getFeedData(id){
     this.props.getUserListings();
-    this.props.getUserFollowers(this.props.viewedProf.id);
-    this.props.getUserFollows(this.props.viewedProf.id);
-    this.props.getUserPosts(this.props.viewedProf.id);
+    this.props.getUserFollowers(id);
+    this.props.getUserFollows(id);
+    this.props.getUserPosts(id);
     this.props.getAllUsersPosts();
-    this.props.getUserFollowedPosts(this.props.viewedProf.id);
-    this.receivedData = true;
+    this.props.getUserFollowedPosts(id);
+    this.props.dataFetched()
   }
 
   handleSelect(index, last) {
@@ -31,7 +37,6 @@ class User_Feeds extends Component {
   }
 
   render() {
-
     Tabs.setUseDefaultStyles(false);
     return (
       <div className="col-8 container"> 
@@ -72,6 +77,7 @@ class User_Feeds extends Component {
 
 function mapStateToProps({ user, users, followers, follows, userPosts, allPosts, userFeed }){
   return {
+    requireDataFetch: user.requireDataFetch,
     viewedProf: user.viewedProfile,
     users: users.userListings,
     followers: followers.userFollowers,
@@ -83,6 +89,7 @@ function mapStateToProps({ user, users, followers, follows, userPosts, allPosts,
 }
 
 var feeds = connect(mapStateToProps, {
+  dataFetched: dataFetched,
   getUserListings: getAllUsers ,
   getUserFollowers: getFollowersForUser,
   getUserFollows: getFollowedByUser,

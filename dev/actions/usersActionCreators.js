@@ -35,11 +35,23 @@ export function getOneUser(userId){
       console.log('the response for getting one user is:', response.data);
       let user = response.data || {}
       browserHistory.push(`/#/profile/${response.data.id}`);
+      // getAllPosts();
+      // getAllUsers();
+      // getPostsByUser(userId);
+      // getFollowersForUser(userId);
+      // getFollowedByUser(userId);
+      // getFollowedPosts(userId);
       dispatch({type: 'SET_USER_PROFILE', payload: user});
     })
     .catch(err => {
       console.log('err in getOneUser is:', err);
     });
+  }
+}
+
+export function dataFetched(){
+  return function(dispatch) {
+    dispatch({type: 'DATA_FETCHED'})
   }
 }
 

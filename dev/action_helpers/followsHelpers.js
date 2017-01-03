@@ -64,7 +64,7 @@ function _getFollowsUserInfo(resultArr) {
 
         user.userInfo = userData[index].data;
       })
-      console.log('asdfasf',resultArr)
+      console.log('result array from _getFollowsUserInfo in followsHelpers',resultArr)
       return resultArr;
     })
 }
