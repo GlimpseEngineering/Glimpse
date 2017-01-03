@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { login, logout } from '../actions/authActionCreators';
 import { getOneUser  } from '../actions/usersActionCreators';
 import User_Info from './dashboard/User_Info';
+import DummyLogin from './DummyLogin'
 
 class Auth extends Component {
   constructor(props) {
@@ -28,6 +29,7 @@ class Auth extends Component {
             </button>
           </div>
         )}
+        <DummyLogin />
       </div>
     )
   }
