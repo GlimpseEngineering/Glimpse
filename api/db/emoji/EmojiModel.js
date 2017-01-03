@@ -14,14 +14,14 @@ module.exports = (sequelize, DataTypes) => {
     freezeTableName: true,
     classMethods: {
       associate: (models) => {
-        Emoji.belongsToMany(models.User, {
-          through: 'User_Emoji_Post',
-          constraints: false
-        });
-        Emoji.belongsToMany(models.Post, {
-          through: 'User_Emoji_Post',
-          constraints: false
-        });
+        // Emoji.belongsToMany(models.User, {
+        //   through: 'User_Emoji_Post',
+        //   constraints: false
+        // });
+        // Emoji.belongsToMany(models.Post, {
+        //   through: 'User_Emoji_Post',
+        //   constraints: false
+        // });
       }
     } 
   });

@@ -30,10 +30,10 @@ module.exports = (sequelize, DataTypes) => {
          through: 'Post_Tags',
          constraints: false
        });
-       Post.belongsToMany(models.Emoji, {
-         through: 'User_Emoji_Post',
-         constraints: false
-       });
+      //  Post.belongsToMany(models.Emoji, {
+      //    through: 'User_Emoji_Post',
+      //    constraints: false
+      //  });
        Post.hasMany(models.Notification, {
          foreignKey: {
            allowNull: true
