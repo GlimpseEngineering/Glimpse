@@ -6,7 +6,7 @@ export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const USER_CREATED = 'USER_CREATED';
 
-import { generateCache } from './cacheActionCreators';
+import { generateCache, deleteCache } from './cacheActionCreators';
 
 const lock = new Auth0Lock(
   '7YhgDoHIuZpKxGRa0A81rjDh1JuXd5vD',
@@ -72,6 +72,7 @@ export function logout() {
   return dispatch => {
     localStorage.removeItem('id_token');
     localStorage.removeItem('profile');
+    deleteCache()(dispatch);
     return dispatch(logoutSuccess());
   }
 }

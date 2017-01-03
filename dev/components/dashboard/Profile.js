@@ -9,7 +9,6 @@ class Profile extends Component {
 
   constructor(props){
     super(props);
-    this.props.cache.cached && this.props.getCachedUsers();
     if(this.props.params) {
       this.props.getUserProfile(this.props.params.id);
     } else if (this.props.activeUser) {
