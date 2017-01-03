@@ -7,7 +7,13 @@ module.exports = (sequelize, DataTypes) => {
     freezeTableName: true,
     classMethods: {
       associate: (models) => {
-        User_Emoji_Post.belongsTo(models.User, {
+        User_Emoji_Post.belongsTo(models.Post, {
+          foreignKey: {
+            allowNull: false
+          },
+          onDelete: 'CASCADE'
+        });
+        User_Emoji_Post.belongsTo(models.Emoji, {
           foreignKey: {
             allowNull: false
           },

@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
     freezeTableName: true,
     classMethods: {
       associate: (models) => {
-       User.belongsToMany(models.Emoji, { 
+       User.belongsToMany(models.Post, { 
          through: 'User_Emoji_Post',
          constraints: false
         });
