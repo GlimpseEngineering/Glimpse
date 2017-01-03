@@ -63,10 +63,6 @@ function _getFollowsUserInfo(resultArr) {
       resultArr.data.forEach((user, index) => {
         user.userInfo = userData[index].data;
       })
-<<<<<<< HEAD
-      console.log('result array from _getFollowsUserInfo in followsHelpers',resultArr)
-=======
->>>>>>> [style] display time
       return resultArr;
     })
 }
