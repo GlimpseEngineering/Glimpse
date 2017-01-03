@@ -9,7 +9,7 @@ class Profile extends Component {
 
   constructor(props){
     super(props);
-    this.props.getCachedUsers();
+    this.props.cache.cached && this.props.getCachedUsers();
     if(this.props.params) {
       this.props.getUserProfile(this.props.params.id);
     } else if (this.props.activeUser) {
@@ -17,6 +17,11 @@ class Profile extends Component {
     } else {
       this.props.getUserProfile(0)
     }
+  }
+
+  componentDidMount() {
+    // if (this.props.cache.cached === true) this.props.getCachedUsers();
+    this.props.getCachedUsers();
   }
 
   render() {
