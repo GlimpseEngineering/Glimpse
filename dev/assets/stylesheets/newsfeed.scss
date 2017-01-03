@@ -31,7 +31,7 @@ $secondary-color: #B364B4;
 
 .tab:hover {
   color: white;
-  transition: color 0.3s;
+  transition: color 0.2s;
 }
 
 .react-tabs [role=tablist] {
@@ -68,8 +68,8 @@ $secondary-color: #B364B4;
 //-------->
 .list-item {
   position: relative;
-  display: block;
-  padding: 5px 10px;
+  display: flex;
+  padding: 7px;
   margin-bottom: -1px;
   background-color: #fff;
   border: 1px solid #ddd;
@@ -81,5 +81,12 @@ li {
 }
 
 .userPic {
+  width:100%;
+  max-width: 70px;
   border-radius: 50%;
+  padding: 10px;
+}
+
+.componentInfo {
+  padding: 10px;
 }

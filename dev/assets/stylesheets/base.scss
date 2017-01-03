@@ -82,17 +82,24 @@ a:hover {
   color: $secondary-color;
 }
 
-// ul {
-//   margin: 1em 0em;
-// }
-
 li {
   list-style: none;
 }
 
+p {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  margin-bottom: 0;
+}
 // =======================
 // MAIN
 // =======================
+// .window {
+//   height: 100%;
+// }
 
 html, html a {
   -webkit-font-smoothing: antialiased;
@@ -111,6 +118,7 @@ body {
 
 .container {
   padding: 10px;
+  width: 100%;
 }
 
 .content_body {
@@ -146,8 +154,8 @@ body {
 .btn-primary:hover {
 	background-color:#b3b3b3;
   color: white;
-  transition: color 0.3s;
-  transition: background-color 0.3s;
+  transition: color 0.2s;
+  transition: background-color 0.2s;
 }
 .btn-primary:active {
 	position:relative;
@@ -202,7 +210,7 @@ body {
 }
 
 //----- Grid System
-$grid-spacing:3%;
+$grid-spacing:0%;
 
 .row {
     @extend %clearfix;
