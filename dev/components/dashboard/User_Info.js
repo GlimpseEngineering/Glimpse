@@ -21,10 +21,12 @@ class User_Info extends Component {
           <div className="profileInfo">
             <div className="username">
               <h4>{this.props.user.username}</h4>
-              <p>{this.props.user.email}</p>
+              <p style={{ fontSize: '.7em', padding: '4px 0px 15px 0px' }}>
+                {this.props.user.email}
+              </p>
             </div>
             <div className="bio">
-              <div>
+              <div style={{ paddingBottom: '10px' }}>
 
                 <label>Bio:</label>
                 <button className='editButton'>Edit</button>
