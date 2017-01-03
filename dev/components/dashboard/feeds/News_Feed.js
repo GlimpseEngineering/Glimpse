@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getOnePost } from '../../../actions/postsActionCreators'
+import { getOnePost } from '../../../actions/postsActionCreators';
+import Moment from 'react-moment';
 
 class News_Feed extends Component {
 
@@ -10,7 +11,6 @@ class News_Feed extends Component {
   }
 
   render() {
-
     return (
       <div className="feed_content">
        <ul>
@@ -23,14 +23,15 @@ class News_Feed extends Component {
              key={post.id}
              className='list-item'
              value={post.id}>
-             <div>
+             <div className="col-2">
                <img className="userPic" src={post.userInfo.profPic} />
              </div>
-             <div className='componentInfo'>
+             <div className='col-8 componentInfo'>
                <p>{post.description}</p>
              </div>
-
-             {/* UserId: {post.UserId} postId: {post.id} */}
+             <div className="col-2">
+               <Moment fromNow style={{ fontSize: '.9em' }}>{post.createdAt}</Moment>
+             </div>
            </li>
          )}
        </ul>

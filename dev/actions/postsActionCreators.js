@@ -20,7 +20,10 @@ export function getPostsByUser(userId) {
       url: `/api/users/${userId}/posts`
     })
     .then(response => {
-      console.log('**the response for getting user posts:', response.data);
+      console.log('the response for getting user posts:', response.data);
+      response.data.sort(function(a,b){
+        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      });
       dispatch({type: 'USER_POSTS', payload: response.data});
     })
     .catch(err => {
