@@ -19,13 +19,11 @@ class Profile extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('Old props', this.props);
-    console.log('new props', nextProps);
     nextProps.cache.cached && nextProps.cache.pending && this.props.getCachedUsers();
   }
 
   render() {
-    console.log('Here are our cached users', this.props.cache);
+    console.log('Here are our cached users:', this.props.cache);
     return (
       <div key={this.props.cache.cached}>
        <h1>Profile</h1>
