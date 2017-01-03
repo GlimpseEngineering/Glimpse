@@ -35,6 +35,7 @@ class User_Info extends Component {
           </div>
           <div><DummyLogin /></div>
 
+
         </div>
 
       </div>

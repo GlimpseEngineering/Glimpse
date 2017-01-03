@@ -27,13 +27,21 @@ class Profile extends Component {
   render() {
     console.log('Here are our cached users:', this.props.cache);
     return (
+<<<<<<< HEAD
 
       <div key={this.props.cache.cached}>
+=======
+      <div >
+>>>>>>> fc201b0dbbd39159536f772c8a7b5fb5b95f5b16
         <nav className="mainNav">
           <h3 className="glimpseLogo">Glimpse</h3>
           <div className="searchAndButtons">
             <SearchBar />
             <div className="navButtons">
+<<<<<<< HEAD
+=======
+
+>>>>>>> fc201b0dbbd39159536f772c8a7b5fb5b95f5b16
               <Auth />
             </div>
           </div>
@@ -45,7 +53,10 @@ class Profile extends Component {
            <User_Info user={this.props.viewedProfile}/>
            <User_Feeds user={this.props.viewedProfile}/>
         </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> fc201b0dbbd39159536f772c8a7b5fb5b95f5b16
       </div>
     );
   }
