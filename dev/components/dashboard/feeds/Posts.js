@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getOnePost } from '../../../actions/postsActionCreators';
-
+import Moment from 'react-moment';
 
 class Posts extends Component {
 
@@ -26,11 +26,14 @@ class Posts extends Component {
              className='list-item'
              value={post.id}
              >
-            <div>
+            <div className="col-2">
               <img className="userPic" src={this.props.user.profPic} />
             </div>
-            <div className='componentInfo'>
+            <div className='col-8 componentInfo'>
               <p>{post.description}</p>
+            </div>
+            <div className="col-2">
+              <Moment fromNow style={{ fontSize: '.9em' }}>{post.createdAt}</Moment>
             </div>
            </li>
           )}

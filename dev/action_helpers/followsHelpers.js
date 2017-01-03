@@ -61,10 +61,8 @@ function _getFollowsUserInfo(resultArr) {
   return axios.all(arrayOfPromises)
     .then(userData => {
       resultArr.data.forEach((user, index) => {
-
         user.userInfo = userData[index].data;
       })
-      console.log('asdfasf',resultArr)
       return resultArr;
     })
 }
@@ -88,30 +86,24 @@ function _getFollowsPosts(resultArr) {
   }
 
   const arrayOfPromises = resultArr.map(user => {
-    //console.log('user', user)
     return apiCallUserPosts(user);
   })
 
   return axios.all(arrayOfPromises)
     .then(followersPosts => {
-      //console.log('mahaha', followersPosts)
       var feedPosts = [];
       var result = [];
       followersPosts.forEach((userPosts, index) => {
         if(userPosts.data.length > 0){
-          //console.log('dis post' + index, userPosts);
           userPosts.data.forEach(function(post){
             post.userInfo = resultArr[index].userInfo;
             feedPosts.push(post);
           });
         }
       })
-
-      // feedPosts.forEach(user => {
-      //   user.forEach(post => {
-      //     result.push(post);
-      //   })
-      // });
+      feedPosts.sort(function(a,b){
+        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      });
       return feedPosts;
     })
 
