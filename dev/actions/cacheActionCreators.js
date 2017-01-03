@@ -24,7 +24,7 @@ export function generateCache(activeUser) {
   return (dispatch) => {
     request
       .then((cache) => {
-        dispatch({ type: GENERATE_CACHE, payload: true })
+        dispatch({ type: GENERATE_CACHE })
       })
       .catch((error) => {
         throw error;

@@ -19,15 +19,16 @@ class Profile extends Component {
     }
   }
 
-  componentDidMount() {
-    // if (this.props.cache.cached === true) this.props.getCachedUsers();
-    this.props.getCachedUsers();
+  componentWillReceiveProps(nextProps) {
+    console.log('Old props', this.props);
+    console.log('new props', nextProps);
+    nextProps.cache.cached && nextProps.cache.pending && this.props.getCachedUsers();
   }
 
   render() {
     console.log('Here are our cached users', this.props.cache);
     return (
-      <div >
+      <div key={this.props.cache.cached}>
        <h1>Profile</h1>
        <div className='row'>
          <User_Info user={this.props.viewedProfile}/>
