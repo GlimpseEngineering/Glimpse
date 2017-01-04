@@ -12,6 +12,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createPost } from '../actions/postsActionCreators';
+import PhotoSphereGen from './post-generator/PhotoSphereGen';
 
 class PostGenerator extends Component {
   constructor(props) {
@@ -71,19 +72,6 @@ class PostGenerator extends Component {
     let value = event.target.value;
     this.basePrimitive.primitive = value;
   }
-
-  /**
-   * consider having multiple forms
-   * one for primitive creation and one for overall post submission
-   * can have forms that are hidden (invisible html) depending on what is selected in the primitive menu
-   * note: auto-add camera
-   *
-   * note: can make a mini-component to map over this.primitive collection and show scenes to be posted
-   *
-   * also consider storing individual scenes on the store
-   * i.e. store.newScene.individual part
-   * this way we can edit the parts of the scene?
-   */
 
   render() {
     // console.log('inside of PostGenerator', this.props);
