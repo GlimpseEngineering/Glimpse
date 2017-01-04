@@ -4,11 +4,44 @@ import { connect } from 'react-redux';
 import { login, logout } from '../actions/authActionCreators';
 import { getOneUser  } from '../actions/usersActionCreators';
 import User_Info from './dashboard/User_Info';
+import Modal from 'react-modal';
+import PostGenerator from './PostGenerator.js';
 
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)'
+  }
+};
 
 class Auth extends Component {
   constructor(props) {
     super(props)
+
+    this.state = {
+      modalIsOpen: false
+    };
+
+    this.openModal = this.openModal.bind(this);
+    this.afterOpenModal = this.afterOpenModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+  }
+
+  openModal() {
+    this.setState({modalIsOpen: true});
+  }
+
+  afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    // this.refs.subtitle.style.color = '#f00';
+  }
+
+  closeModal() {
+    this.setState({modalIsOpen: false});
   }
 
   render() {
@@ -30,7 +63,32 @@ class Auth extends Component {
                       this.props.getOneUser(this.props.auth.activeUser.id)
                     }}>Home
             </button>
-            <button className="btn-primary">Post</button>
+            {/* <button className="btn-primary">Post</button> */}
+            {/* <div> */}
+              <button onClick={this.openModal} className="btn-primary">Post</button>
+              <Modal
+                isOpen={this.state.modalIsOpen}
+                onAfterOpen={this.afterOpenModal}
+                onRequestClose={this.closeModal}
+                style={customStyles}
+                contentLabel="Example Modal"
+              >
+                <PostGenerator />
+                {/* <h2 ref="subtitle">Hello</h2>
+                <button onClick={this.closeModal}>close</button>
+                <div>I am a modal</div>
+                <div>
+                  <form>
+                    <input />
+                    <button>tab navigation</button>
+                    <button>stays</button>
+                    <button>inside</button>
+                    <button>the modal</button>
+                  </form>
+                </div> */}
+
+              </Modal>
+            {/* </div> */}
           </div>
         )}
 

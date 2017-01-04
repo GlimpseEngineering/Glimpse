@@ -13,37 +13,50 @@ import Followers from './feeds/Followers';
 class User_Feeds extends Component {
   constructor(props){
     super(props);
-    console.log('XxXxXxXxXxXxX',this.props)
+    this.state = {
+      cacheFollowers: [],
+      tab: 0
+    }
+    this.handleSelect = this.handleSelect.bind(this)
   }
 
   componentWillReceiveProps(nextProps) {
+
     if(nextProps.requireDataFetch) {
       this.getFeedData(this.props.viewedProf.id)
+    }
+
+    if(nextProps.cacheFollowers.cached && !nextProps.cacheFollowers.pending){
+      this.setState({ cacheFollowers: nextProps.cacheFollowers.cachedUsers })
+      console.log(this.state);
     }
   }
 
   getFeedData(id){
+
     this.props.getUserListings();
     this.props.getUserFollowers(id);
     this.props.getUserFollows(id);
     this.props.getUserPosts(id);
     this.props.getAllUsersPosts();
     this.props.getUserFollowedPosts(id);
-    this.props.dataFetched()
+    this.props.dataFetched();
   }
 
   handleSelect(index, last) {
+    this.setState({ tab: index });
     //console.log('Selected tab: ' + index + ', Last tab: ' + last);
   }
 
   render() {
+
     Tabs.setUseDefaultStyles(false);
     return (
-      <div className="col-8 container"> 
+      <div className="col-8 container">
         <div className="tab-wrap">
           <Tabs
             onSelect={this.handleSelect}
-            selectedIndex={0}
+            selectedIndex={this.state.tab}
           >
             <TabList className="navBar">
               <Tab className="tab">Feed</Tab>
@@ -75,7 +88,7 @@ class User_Feeds extends Component {
   }
 }
 
-function mapStateToProps({ user, users, followers, follows, userPosts, allPosts, userFeed }){
+function mapStateToProps({ user, users, followers, follows, userPosts, allPosts, userFeed}){
   return {
     requireDataFetch: user.requireDataFetch,
     viewedProf: user.viewedProfile,
@@ -84,7 +97,7 @@ function mapStateToProps({ user, users, followers, follows, userPosts, allPosts,
     follows: follows.userFollows,
     userPosts: userPosts.userPosts,
     allPosts: allPosts.allPosts,
-    userFeed: userFeed.followingPosts
+    userFeed: userFeed.followingPosts,
   };
 }
 
@@ -95,6 +108,6 @@ var feeds = connect(mapStateToProps, {
   getUserFollows: getFollowedByUser,
   getUserPosts: getPostsByUser,
   getAllUsersPosts: getAllPosts,
-  getUserFollowedPosts: getFollowedPosts
+  getUserFollowedPosts: getFollowedPosts,
 })(User_Feeds);
 export default feeds;

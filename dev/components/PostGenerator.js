@@ -1,5 +1,5 @@
 /**
- * MVP Inputs: (see World.js in scene folder and be sure to stringify the array) 
+ * MVP Inputs: (see World.js in scene folder and be sure to stringify the array)
  * 1) dropdown showing primitives
  * 2) url as a string of the photosphere
  * 3) children -> null
@@ -18,11 +18,11 @@ class PostGenerator extends Component {
     super(props)
 
     this.state = {
-      userId: 1,
+      userId: this.props.auth.activeUser.id,
       content: '',
       description: '',
       private: 0,
-      tags: '', 
+      tags: '',
       src: ''
     };
 
@@ -40,6 +40,7 @@ class PostGenerator extends Component {
   submitPost(event) {
     event.preventDefault();
     this.props.createPost(this.state);
+    console.log('user ' + this.props.auth.activeUser.id + ' made a post!!!!!');
     this.setState({
       description: '',
       tags: ''
@@ -75,41 +76,42 @@ class PostGenerator extends Component {
    * one for primitive creation and one for overall post submission
    * can have forms that are hidden (invisible html) depending on what is selected in the primitive menu
    * note: auto-add camera
-   * 
+   *
    * note: can make a mini-component to map over this.primitive collection and show scenes to be posted
-   * 
+   *
    * also consider storing individual scenes on the store
    * i.e. store.newScene.individual part
-   * this way we can edit the parts of the scene? 
+   * this way we can edit the parts of the scene?
    */
 
   render() {
+    // console.log('inside of PostGenerator', this.props);
     return (
       <div>
         <h3>Create A New Scene</h3>
-          
-        <select 
+
+        <select
           name="primitive"
           onChange={event => this.onPrimitiveChange(event)} >
           <option value="PhotoSphere">PhotoSphere</option>
         </select>
 
-        <form 
+        <form
           id="photosphere"
           onSubmit={this.submitScene.bind(this)} >
           <div>
             <label>Image URL (click add before clicking submit!)</label>
-            <input 
+            <input
               type="text"
-              name="url" 
+              name="url"
               value={this.state.src}
               onChange={event => this.onInputChange(event)} />
           </div>
-          
+
           <button type="submit">Add this scene!</button>
         </form>
-        
-        <form 
+
+        <form
           id="post"
           onSubmit={this.submitPost.bind(this)} >
           <div>
@@ -123,8 +125,8 @@ class PostGenerator extends Component {
 
           <div>
             <label>Make Private</label>
-            <input 
-              type="radio" 
+            <input
+              type="radio"
               name="private"
               value={this.state.private}
               onChange={event => this.onInputChange(event)} />
@@ -132,7 +134,7 @@ class PostGenerator extends Component {
 
           <div>
             <label>Tags</label>
-            <input 
+            <input
               type="text"
               name="tags"
               value={this.state.tags}

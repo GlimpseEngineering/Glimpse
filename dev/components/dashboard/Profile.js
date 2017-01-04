@@ -11,6 +11,7 @@ class Profile extends Component {
 
   constructor(props){
     super(props);
+
     if(this.props.params.id) {
       this.props.getUserProfile(this.props.params.id);
     } else if (this.props.activeUser) {
@@ -45,7 +46,7 @@ class Profile extends Component {
         </nav>
         <div className='row'>
            <User_Info user={this.props.viewedProfile}/>
-           <User_Feeds user={this.props.viewedProfile}/>
+           <User_Feeds cacheFollowers={this.props.cache} user={this.props.viewedProfile}/>
         </div>
       </div>
     );
