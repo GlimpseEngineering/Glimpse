@@ -11,7 +11,7 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createPost } from '../actions/postsActionCreators';
+import { createPost, stageEntity } from '../actions/postsActionCreators';
 import PhotoSphereGen from './post-generator/PhotoSphereGen';
 
 class PostGenerator extends Component {
@@ -24,13 +24,18 @@ class PostGenerator extends Component {
       description: '',
       private: 0,
       tags: '',
-      sceneComplete: false
+      sceneComplete: false,
+      id: 1,
+      src: ''
     };
 
     this.primitiveCollection = [];
   }
 
   submitPost(event) {
+    /**
+     * be sure to JSON.stringify the primitiveCollection before submitting
+     */
     event.preventDefault();
     this.props.createPost(this.state);
     this.setState({
@@ -38,12 +43,24 @@ class PostGenerator extends Component {
       description: '',
       private: 0,
       tags: '',
-      sceneComplete: true
+      sceneComplete: true,
+      id: 1,
+      src: ''
     });
   }
 
   submitScene(event) {
     event.preventDefault();
+    let entity = {
+      id: this.state.id,
+      primitive: 'PhotoSphere',
+      components: {
+        src: this.state.src
+      },
+      children: null
+    };
+    console.log('here is the submission of the entity', entity);
+    this.props.stageEntity(entity);
     /**
      * going to have figure a way to manipulate data passed in to the store using this function
      * can use the store to simply pass around an object
@@ -54,6 +71,10 @@ class PostGenerator extends Component {
      * then put it into the primitiveCollection in the correct format
      * alternatively, we can give each entity a key that we can use for when we want to edit a scene
      * finally, right before actual submission, we iterate through the object and pass the data to primitiveCollection in the correct format 
+     * 
+     * actions to dispatch:
+     * stage_entity
+     * edit_entity
      */
   }
 
@@ -64,6 +85,7 @@ class PostGenerator extends Component {
     name === 'description' && this.setState({description: value});
     name === 'private' && this.setState({private: value});
     name === 'tags' && this.setState({tags: value});
+    name === 'url' && this.setState({src: value});
   }
 
   onPrimitiveChange(event) {
@@ -78,6 +100,7 @@ class PostGenerator extends Component {
   }
 
   render() {
+    console.log('here is the staged entity that we submitted', this.props.newPost.stagedEntity);
     return (
       <div>
         <h3>Create A New Scene</h3>
@@ -143,8 +166,9 @@ class PostGenerator extends Component {
 
 function mapStateToProps(state) {
   return {
-    auth: state.auth
+    auth: state.auth,
+    newPost: state.newPost
   };
 };
 
-export default connect(mapStateToProps, { createPost })(PostGenerator);
+export default connect(mapStateToProps, { createPost, stageEntity })(PostGenerator);
