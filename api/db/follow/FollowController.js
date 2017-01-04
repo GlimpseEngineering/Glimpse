@@ -41,13 +41,13 @@ module.exports = {
   acceptFollow: (req, res, next) => {
     models.Follow.findOne({
       where: {
-        UserId: req.params.followId,
-        FollowId: req.params.userId,
+        UserId: req.params.userId,
+        FollowId: req.params.followId,
         status: 'pending'
       }
     })
     .then(result => {
-      if (result) {
+      if (result !== null) {
         result.status = 'accepted'
         return result.save();
       } else {
@@ -55,7 +55,11 @@ module.exports = {
       }
     })
     .then(result => {
-      res.json([result]);
+      if (result) {
+        res.json(result);
+      } else {
+        res.json([]);
+      }
     })
     .catch(err => {
       res.json(err);

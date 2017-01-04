@@ -23,6 +23,7 @@ class SearchBar extends Component {
     event.preventDefault();
     let searchterm = this.state.searchterm;
     this.props.searchUser(searchterm, this.props.auth.activeUser.id);
+    this.setState({searchterm: ''});
   }
 
   render() {

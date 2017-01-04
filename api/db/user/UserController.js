@@ -134,8 +134,11 @@ module.exports = {
 
   searchUsers: (req, res, next) => {
     let foundUsers = {
-      users: null,
-      followedByUser: null
+      users: {
+        count: null,
+        rows: {}
+      },
+      followedByUser: {}
     };
     models.User.findAndCountAll({
       where: {
@@ -146,11 +149,13 @@ module.exports = {
       limit: 10
     })
     .then(users => {
-      foundUsers.users = users;
+      foundUsers.users.count = users.count;
+      users.rows.forEach((user) => {
+        foundUsers.users.rows[user.dataValues.id] = user.dataValues;
+      });
       return models.Follow.findAll({
         where: {
-          UserId: req.params.userId,
-          status: 'accepted'
+          UserId: req.params.userId
         }
       })
     })

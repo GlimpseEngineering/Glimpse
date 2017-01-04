@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import { followFoundUser } from '../../actions/searchActionCreators';
 
 class SearchResult extends Component {
   constructor(props) {
@@ -12,25 +13,27 @@ class SearchResult extends Component {
   }
 
   componentDidMount() {
-    if (this.props.foundUsers.followedByUser[this.props.searchResult.id]) this.setState({button: 'following'});
-    /**
-     * need to dispatch an action when calling requestFollow
-     * need to dispatch an action when calling acceptFollow
-     * 
-     * trying to check and see if the user is already following the searched individual (make call to getFollowByUser in controller)
-     * if record already exists in the follows table, and they are following, can update the button
-     * 
-     * otherwise, clicking follow just calls the requestFollow f(x) in the controller
-     * for the moment: can also call acceptFollow since we are ignoring privacy atm
-     * 
-     */
+    let followRequest = this.props.foundUsers.followedByUser[this.props.searchResult.id];
+    followRequest && followRequest.status === 'pending' && this.setState({button: 'pending'});
+    followRequest && followRequest.status === 'accepted' && this.setState({button: 'following'});
+  }
+
+  componentWillReceiveProps(nextProps) {
+    let updatedRequest = nextProps.foundUsers.followedByUser[nextProps.searchResult.id];
+    updatedRequest && updatedRequest.status === 'pending' && this.setState({button: 'pending'});
+    updatedRequest && updatedRequest.status === 'accepted' && this.setState({button: 'following'});
+  }
+
+  onClick(event) {
+    event.preventDefault();
+    this.props.followFoundUser(this.props.auth.activeUser.id, this.props.searchResult.id, this.props.searchResult.private);
   }
 
   render() {
     return (
       <div>
         {this.props.searchResult.username}
-        <button>{this.state.button}</button>
+        <button value={this.props.searchResult.id} onClick={this.onClick.bind(this)}>{this.state.button}</button>
       </div>
     );
   }
@@ -41,7 +44,7 @@ function mapStateToProps(state){
     auth: state.auth,
     foundUsers: state.search.foundUsers
   };
-}
+};
 
-const searchResult = connect(mapStateToProps, null)(SearchResult);
+const searchResult = connect(mapStateToProps, { followFoundUser })(SearchResult);
 export default searchResult;

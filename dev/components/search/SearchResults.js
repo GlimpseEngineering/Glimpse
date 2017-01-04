@@ -10,7 +10,13 @@ class SearchResults extends Component {
 
   render() {
     let props = this.props;
-    let searchResults = props.foundUsers.users.rows.map((searchResult) => {
+    let userProfiles = [];
+    
+    for (let user in props.foundUsers.users.rows) {
+      userProfiles.push(props.foundUsers.users.rows[user]);
+    };
+
+    let searchResults = userProfiles.map((searchResult) => {
       return (
         <SearchResult
           key={searchResult.id} 
@@ -24,13 +30,13 @@ class SearchResults extends Component {
       </ul>
     );
   }
-}
+};
 
 function mapStateToProps(state){
   return {
     foundUsers: state.search.foundUsers
   };
-}
+};
 
 const searchResults = connect(mapStateToProps, { clearSearch })(SearchResults);
 export default searchResults;
