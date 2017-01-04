@@ -47,7 +47,6 @@ module.exports = {
       }
     })
     .then(result => {
-      console.log('found one user with pending status', result);
       if (result !== null) {
         result.status = 'accepted'
         return result.save();
@@ -56,7 +55,6 @@ module.exports = {
       }
     })
     .then(result => {
-      console.log('found one user and changing status', result);
       if (result) {
         res.json(result);
       } else {

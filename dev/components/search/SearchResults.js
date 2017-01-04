@@ -30,13 +30,13 @@ class SearchResults extends Component {
       </ul>
     );
   }
-}
+};
 
 function mapStateToProps(state){
   return {
     foundUsers: state.search.foundUsers
   };
-}
+};
 
 const searchResults = connect(mapStateToProps, { clearSearch })(SearchResults);
 export default searchResults;

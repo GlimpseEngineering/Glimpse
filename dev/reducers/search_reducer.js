@@ -13,7 +13,6 @@ const INITIAL_STATE = {
 export default function(state = INITIAL_STATE, action) {
   switch (action.type) {
   case SEARCH_USERS:
-    console.log('Here is our search for users entering the reducer', action.payload);
     return Object.assign({}, state, {
       foundUsers: action.payload
     })
@@ -28,7 +27,6 @@ export default function(state = INITIAL_STATE, action) {
       } 
     })
   case FOLLOW_FOUND_USER:
-    console.log('Attempting to add new user to state', action.payload);
     return Object.assign({}, state, {
       foundUsers: {
         users: {

@@ -18,10 +18,6 @@ class SearchResult extends Component {
     followRequest && followRequest.status === 'accepted' && this.setState({button: 'following'});
   }
 
-  /**
-   * need to dispatch an action that calls requestFollow -> returned model instance should be stored in state (done)
-   * need to dispatch an action that calls acceptFollow -> if accepted, existing model instance in state should be updated
-   */
   componentWillReceiveProps(nextProps) {
     let updatedRequest = nextProps.foundUsers.followedByUser[nextProps.searchResult.id];
     updatedRequest && updatedRequest.status === 'pending' && this.setState({button: 'pending'});
@@ -48,7 +44,7 @@ function mapStateToProps(state){
     auth: state.auth,
     foundUsers: state.search.foundUsers
   };
-}
+};
 
 const searchResult = connect(mapStateToProps, { followFoundUser })(SearchResult);
 export default searchResult;
