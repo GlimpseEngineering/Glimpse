@@ -28,7 +28,7 @@ export default function(state = INITIAL_STATE, action) {
       } 
     })
   case FOLLOW_FOUND_USER:
-    console.log('Attempting to add new user to state');
+    console.log('Attempting to add new user to state', action.payload);
     return Object.assign({}, state, {
       foundUsers: {
         users: {

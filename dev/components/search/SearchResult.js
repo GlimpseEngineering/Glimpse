@@ -30,7 +30,7 @@ class SearchResult extends Component {
 
   onClick(event) {
     event.preventDefault();
-    this.props.followFoundUser(this.props.auth.activeUser.id, this.props.searchResult.id);
+    this.props.followFoundUser(this.props.auth.activeUser.id, this.props.searchResult.id, this.props.searchResult.private);
   }
 
   render() {
