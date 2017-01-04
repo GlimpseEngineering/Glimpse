@@ -1,18 +1,8 @@
-/**
- * MVP Inputs: (see World.js in scene folder and be sure to stringify the array)
- * 1) dropdown showing primitives
- * 2) url as a string of the photosphere
- * 3) children -> null
- *
- * MVP+ Inputs:
- * 1) add children (maybe a button on the ui)
- * 2) edit button (while building) change position of any component in the entity, first in default position
- */
-
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createPost, stageEntity } from '../actions/postsActionCreators';
 import PhotoSphereGen from './post-generator/PhotoSphereGen';
+import { templateIndex } from '../entityTemplates';
 
 class PostGenerator extends Component {
   constructor(props) {
@@ -32,9 +22,18 @@ class PostGenerator extends Component {
     this.primitiveCollection = [];
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.primitiveCollection.push(nextProps.newPost.stagedEntity);
+    console.log('starting props in post generator', this.props);
+    console.log('next props in post generato', nextProps);
+    console.log('here is the entity collection with our newly staged entity', this.primitiveCollection);
+  }
+
   submitPost(event) {
     /**
      * be sure to JSON.stringify the primitiveCollection before submitting
+     * also iterate through the object and pass the data to primitiveCollection w/o id
+     * i.e. when saving to db save w/o id? 
      */
     event.preventDefault();
     this.props.createPost(this.state);
@@ -44,6 +43,7 @@ class PostGenerator extends Component {
       private: 0,
       tags: '',
       sceneComplete: true,
+      selectedPrimitive: 'PhotoSphere',
       id: 1,
       src: ''
     });
@@ -51,14 +51,7 @@ class PostGenerator extends Component {
 
   submitScene(event) {
     event.preventDefault();
-    let entity = {
-      id: this.state.id,
-      primitive: 'PhotoSphere',
-      components: {
-        src: this.state.src
-      },
-      children: null
-    };
+    let entity = templateIndex.photoSphereGenerator(this.state.id, this.state.src);
     console.log('here is the submission of the entity', entity);
     this.props.stageEntity(entity);
     /**
@@ -70,7 +63,6 @@ class PostGenerator extends Component {
      * once back in props can make a copy of it, manipulate it however necessary
      * then put it into the primitiveCollection in the correct format
      * alternatively, we can give each entity a key that we can use for when we want to edit a scene
-     * finally, right before actual submission, we iterate through the object and pass the data to primitiveCollection in the correct format 
      * 
      * actions to dispatch:
      * stage_entity

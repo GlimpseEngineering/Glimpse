@@ -5,10 +5,16 @@ class PhotoSphereGen extends Component {
 
   render() {
     return (
-      <div>Use This Component to Edit the PhotoSphere</div>
+      <div>
+        {this.props.stagedEntity.id}
+      </div>
     );
   }
 };
 
-const photoSphereGen = connect(null, null)(PhotoSphereGen);
+function mapStateToProps(state) {
+  stagedEntity: state.newPost.stagedEntity
+};
+
+const photoSphereGen = connect(mapStateToProps, null)(PhotoSphereGen);
 export default photoSphereGen;
