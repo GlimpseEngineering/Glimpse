@@ -41,12 +41,12 @@ export function login() {
         return dispatch(lockError(err));
       }
       console.log('auth0 profile:', profile)
+      localStorage.setItem('id_token', token)
       axios.post('/api/login', {
         authId: profile.user_id
       })
       .then(user => {
         console.log('user sent back from db:', user)
-        localStorage.setItem('id_token', token)
         if(user.data) {
           localStorage.setItem('profile', JSON.stringify(user.data))
           generateCache(user.data.id)(dispatch);
