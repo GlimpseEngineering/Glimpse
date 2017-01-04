@@ -2,21 +2,34 @@ import 'aframe';
 import 'aframe-animation-component';
 import 'aframe-text-component';
 import 'babel-polyfill';
+import 'aframe-keyboard-controls';
+import 'aframe-mouse-cursor-component';
 
 import {Entity, Scene} from 'aframe-react';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { setScene, exitVR } from '../../actions/vrModeActionCreators';
 
 import Camera from './primitives/Camera';
 import PhotoSphere from './primitives/PhotoSphere';
 import Text from './primitives/Text';
+import UI from './primitives/UI';
+import Plane from './primitives/Plane';
+import Box from './primitives/Box';
 
 class World extends Component {
+  constructor(props) {
+    super(props);
+    this.state={showFeed:'false'}
+  }
 
   createJSX(entity, i) {
     let Tag =
       entity.primitive === 'PhotoSphere' ? PhotoSphere :
       entity.primitive === 'Text' ? Text :
+      entity.primitive === 'Plane' ? Plane :
+      entity.primitive === 'Box' ? Box :
       Entity;
     const comps = entity.components;
     const children = entity.children || [];
@@ -27,16 +40,29 @@ class World extends Component {
     )
   }
 
+  toggleFeed() {
+    if (this.state.showFeed==='false') this.setState({showFeed:'true'});
+    else this.setState({showFeed:'false'});
+  }
+
+
   render() {
     console.log('curScene:',JSON.parse(this.props.currentScene))
+    
     return (
-      <Scene>
-        <Camera>
+      <Scene >
+        <Camera >
           <a-cursor
             animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150">
           </a-cursor>
         </Camera>
-        
+
+        <Entity />
+        <UI className='ui' visible='false' zpos='-1' exit={this.props.exitVR}
+            feed={this.props.userFeed} showFeed={this.state.showFeed} 
+            toggleFeed={this.toggleFeed.bind(this)} setScene={this.props.setScene}/>
+          
+
         {JSON.parse(this.props.currentScene)
           .map((entity, i) => {
             return this.createJSX(entity, i)
@@ -53,11 +79,20 @@ function mapStateToProps(state) {
     activeUser: state.auth.activeUser,
     viewedProfile: state.user.viewedProfile,
     cache: state.cache,
-    currentScene: state.vrMode.currentScene
+    currentScene: state.vrMode.currentScene,
+    userFeed: state.userFeed,
+    vrMode: state.vrMode
   };
 }
 
-export default connect(mapStateToProps)(World);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    exitVR: exitVR,
+    setScene: setScene
+  }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(World);
 
 
 /**
