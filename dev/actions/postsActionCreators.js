@@ -71,7 +71,7 @@ export function createPost(formValues) {
 
   return (dispatch) => {
     request.then((data) => {
-      dispatch({ type: CREATE_POST, payload: data})
+      dispatch({type: CREATE_POST, payload: data})
     });
   };
 };

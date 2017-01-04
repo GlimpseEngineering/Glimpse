@@ -23,7 +23,8 @@ class PostGenerator extends Component {
       description: '',
       private: 0,
       tags: '',
-      src: ''
+      src: '',
+      sceneComplete: false
     };
 
     this.primitiveCollection = [];
@@ -113,7 +114,8 @@ class PostGenerator extends Component {
 
         <form
           id="post"
-          onSubmit={this.submitPost.bind(this)} >
+          onSubmit={this.submitPost.bind(this)}
+          className={this.state.sceneComplete ? "" : "hide-post-details"} >
           <div>
             <label>Description</label>
             <textarea
