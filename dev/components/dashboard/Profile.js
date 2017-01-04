@@ -45,8 +45,11 @@ class Profile extends Component {
           </div>
         </nav>
         <div className='row'>
-           <User_Info user={this.props.viewedProfile}/>
-           <User_Feeds cacheFollowers={this.props.cache} user={this.props.viewedProfile}/>
+           <User_Info user={this.props.viewedProfile} 
+                      loggedIn={this.props.activeUser}/>
+           <User_Feeds user={this.props.viewedProfile}
+                       loggedIn={this.props.activeUser}
+                       cacheFollowers={this.props.cache} />
         </div>
       </div>
     );

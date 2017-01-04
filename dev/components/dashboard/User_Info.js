@@ -10,10 +10,30 @@ import DummyLogin from '../DummyLogin'
  */
 
 class User_Info extends Component {
+  constructor(props){
+    super(props);
+  }
+  componentWillReceiveProps(nextProps) {
+    console.log('user_infor nextprops:',nextProps)
+    if(nextProps.loggedIn){
+      let myProfile = nextProps.user.id===nextProps.loggedIn.id;
+      this.backgroundColor = myProfile ? 'lightBlue' : 'white';
+      this.editButton = myProfile ? (
+        <button className='editButton'>Edit</button>
+      ) : null
+    } else {
+      this.backgroundColor = 'white';
+      this.editButton = null;
+    }
+  }
   render() {
     console.log('Here are our user props', this.props.user);
     return (
-      <div className="col-4 userContainer">
+      <div className="col-4 userContainer" 
+           style={{
+             backgroundColor:this.backgroundColor,
+             height: '100%'
+           }}>
         <div className="profile">
           <div className="picContainer">
             <img src={this.props.user.profPic} className="profPic" />
@@ -21,7 +41,10 @@ class User_Info extends Component {
           <div className="profileInfo">
             <div className="username">
               <h4>{this.props.user.username}</h4>
-              <p style={{ fontSize: '.7em', padding: '4px 0px 15px 0px' }}>
+              <p style={{
+                   fontSize: '.7em',
+                   padding: '4px 0px 15px 0px' 
+                 }}>
                 {this.props.user.email}
               </p>
             </div>
@@ -29,7 +52,7 @@ class User_Info extends Component {
               <div style={{ paddingBottom: '10px' }}>
 
                 <label>Bio:</label>
-                <button className='editButton'>Edit</button>
+                {this.editButton}
               </div>
 
               <p>{this.props.user.bio}</p>
