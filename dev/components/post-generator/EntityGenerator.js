@@ -19,7 +19,7 @@ class EntityGenerator extends Component {
     });
     console.log('original entity', this.props.stagedEntity);
     console.log('copied entity', copiedEntity);
-    // this.props.editEntity(copiedEntity);
+    this.props.editEntity(copiedEntity);
   }
 
   deleteEntity() {

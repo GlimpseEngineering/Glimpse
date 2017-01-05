@@ -31,9 +31,8 @@ class PostGenerator extends Component {
       this.entityCollection.forEach((entity, index) => {
         if (entity.id === editedEntity.id) targetIndex = index;
       });
-      console.log('prior to inserting edited entity', this.entityCollection[targetIndex]);
+      console.log('prior to inserting edited entity', this.entityCollection);
       this.entityCollection[targetIndex] = editedEntity;
-      console.log('after inserting edited entity', this.entityCollection[targetIndex]);
     }
 
     this.deleteEntity = (id) => {
@@ -46,7 +45,11 @@ class PostGenerator extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    nextProps.newPost.stagedEntity && !nextProps.newPost.entityToDeleteId && this.entityCollection.push(nextProps.newPost.stagedEntity);
+    /**
+     * issue is probably in here with the conditionals
+     * if deleteId still exists, then will call deleteEntity
+     */
+    nextProps.newPost.stagedEntity && !nextProps.newPost.entityToDeleteId && !nextProps.newPost.entityToEditId && this.entityCollection.push(nextProps.newPost.stagedEntity);
     nextProps.newPost.entityToDeleteId && this.deleteEntity(nextProps.newPost.entityToDeleteId);
     nextProps.newPost.entityToEditId && this.editEntity(nextProps.newPost.editedEntity);
   }
@@ -134,6 +137,7 @@ class PostGenerator extends Component {
   }
 
   render() {
+    console.log('after inserting edited entity', this.entityCollection);
     let stagedEntities = this.entityCollection.map((entity) => {
       return (
         <EntityGenerator
