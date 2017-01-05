@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import DummyLogin from '../DummyLogin'
 
 /**
@@ -12,25 +13,43 @@ import DummyLogin from '../DummyLogin'
 class User_Info extends Component {
   constructor(props){
     super(props);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log('user_infor nextprops:',nextProps)
-    if(nextProps.loggedIn){
-      let myProfile = nextProps.user.id===nextProps.loggedIn.id;
-      this.backgroundColor = myProfile ? 'lightBlue' : 'white';
-      this.editButton = myProfile ? 
-        <button onClick={()=>{this.editProfile(nextProps.user.id)}}
+    if(this.props.activeUser){
+      this.myProfile = this.props.viewedProfile.id==this.props.activeUser.id;
+      
+      this.backgroundColor = this.myProfile ? 'lightBlue' : 'white';
+      this.editButton = this.myProfile ? 
+        <button onClick={()=>{this.editProfile(this.props.activeUser.id)}}
                 className='editButton'>Edit Profile
         </button> :
-        <button onClick={()=>{this.addFriend(nextProps.user.id)}}
-                className='editButton'>Add Friend
+        <button onClick={()=>{this.addFriend(this.props.viewedProfile.id)}}
+                className='editButton'>Follow
         </button>
     } else {
+      console.log('no activeUser in this.props')
       this.backgroundColor = 'white';
       this.editButton = null;
     }
   }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('user_info nextprops:',nextProps)
+    if(nextProps.activeUser){
+      this.myProfile = nextProps.viewedProfile.id===nextProps.activeUser.id;
+      
+      this.backgroundColor = this.myProfile ? 'lightBlue' : 'white';
+      this.editButton = this.myProfile ? 
+        <button onClick={()=>{this.editProfile(nextProps.activeUser.id)}}
+                className='editButton'>Edit Profile
+        </button> :
+        <button onClick={()=>{this.addFriend(nextProps.viewedProfile.id)}}
+                className='editButton'>Follow
+        </button>
+    } else {
+      console.log('no activeUser in nextprops')
+      this.backgroundColor = 'white';
+      this.editButton = null;
+    }
+  } 
 
   addFriend(id) {
     console.log('add friend',id)
@@ -41,7 +60,7 @@ class User_Info extends Component {
   }
 
   render() {
-    console.log('Here are our user props', this.props.user);
+    console.log('Here are our user props', this.props.viewedProfile);
     return (
       <div className="col-4 userContainer" 
            style={{
@@ -50,17 +69,17 @@ class User_Info extends Component {
            }}>
         <div className="profile">
           <div className="picContainer">
-            <img src={this.props.user.profPic} className="profPic" />
+            <img src={this.props.viewedProfile.profPic} className="profPic" />
             {this.editButton}
           </div>
           <div className="profileInfo">
             <div className="username">
-              <h4>{this.props.user.username}</h4>
+              <h4>{this.props.viewedProfile.username}</h4>
               <p style={{
                    fontSize: '.7em',
                    padding: '4px 0px 15px 0px' 
                  }}>
-                {this.props.user.email}
+                {this.props.viewedProfile.email}
               </p>
             </div>
             <div className="bio">
@@ -69,7 +88,7 @@ class User_Info extends Component {
                 <label>Bio:</label>
               </div>
 
-              <p>{this.props.user.bio}</p>
+              <p>{this.props.viewedProfile.bio}</p>
             </div>
           </div>
           <div><DummyLogin /></div>
@@ -82,4 +101,14 @@ class User_Info extends Component {
   }
 }
 
-export default User_Info;
+function mapStateToProps(state){
+  return {
+    activeUser: state.auth.activeUser,
+    viewedProfile: state.user.viewedProfile,
+    follows: state.follows.userFollows
+  };
+}
+
+
+
+export default connect(mapStateToProps)(User_Info);

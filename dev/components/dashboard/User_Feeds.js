@@ -23,7 +23,7 @@ class User_Feeds extends Component {
   componentWillReceiveProps(nextProps) {
 
     if(nextProps.requireDataFetch) {
-      this.getFeedData(this.props.viewedProf.id)
+      this.getFeedData(this.props.viewedProfile.id)
     }
 
     if(nextProps.cacheFollowers.cached && !nextProps.cacheFollowers.pending){
@@ -71,7 +71,7 @@ class User_Feeds extends Component {
             <TabPanel>
               <Posts
                 userPosts={this.props.userPosts}
-                user={this.props.user}
+                user={this.props.viewedProfile}
               />
             </TabPanel>
             <TabPanel>
@@ -88,10 +88,11 @@ class User_Feeds extends Component {
   }
 }
 
-function mapStateToProps({ user, users, followers, follows, userPosts, allPosts, userFeed}){
+function mapStateToProps({ auth, user, users, followers, follows, userPosts, allPosts, userFeed}){
   return {
     requireDataFetch: user.requireDataFetch,
-    viewedProf: user.viewedProfile,
+    activeUser: auth.activeUser,
+    viewedProfile: user.viewedProfile,
     users: users.userListings,
     followers: followers.userFollowers,
     follows: follows.userFollows,
