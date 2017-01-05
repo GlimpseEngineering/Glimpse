@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { deleteEntity } from '../../actions/postsActionCreators';
+import { editEntity, deleteEntity } from '../../actions/postsActionCreators';
 
 class EntityGenerator extends Component {
   /**
@@ -11,13 +11,15 @@ class EntityGenerator extends Component {
    * 3) need to ensure that the change to this entity's props is reflected in the entityCollection
    * 4a) need to ensure that this component re-renders 
    * 4b) may be able to force re-rendering by manipulating state on this component
-   * 5a) do we need to put edited scene in the store?
-   * 5b) only if we need to use the store to pass the scene back to PostGenerator, but as is prob not 
+   * 5a) edited scene needs to be passed along via store 
    */
   editEntity() {
-    let copiedEntity = Object.assign({}, this.props.stagedEntity);
+    let copiedEntity = Object.assign({}, this.props.stagedEntity, {
+      children: 'yas'
+    });
     console.log('original entity', this.props.stagedEntity);
     console.log('copied entity', copiedEntity);
+    // this.props.editEntity(copiedEntity);
   }
 
   deleteEntity() {
@@ -29,7 +31,7 @@ class EntityGenerator extends Component {
     return (
       <div>
         {this.props.stagedEntity.id}
-        {this.props.stagedEntity.primitive}: some kind of content
+        {this.props.stagedEntity.primitive}: some kind of content {this.props.stagedEntity.children}
         <button onClick={this.editEntity.bind(this)}>Edit</button>
         <button onClick={this.deleteEntity.bind(this)}>Delete</button>
       </div> 
@@ -37,5 +39,5 @@ class EntityGenerator extends Component {
   }
 };
 
-const entityGenerator = connect(null, { deleteEntity })(EntityGenerator);
+const entityGenerator = connect(null, { editEntity, deleteEntity })(EntityGenerator);
 export default entityGenerator;
