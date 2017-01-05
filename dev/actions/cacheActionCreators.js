@@ -10,7 +10,7 @@ export function getCachedUsers() {
   return (dispatch) => {
     request
       .then((cachedUsers) => {
-        console.log('helllloooooooooooo')
+        
         dispatch({ type: GET_CACHED_USERS, payload: cachedUsers})
       })
       .catch((error) => {

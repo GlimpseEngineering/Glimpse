@@ -21,7 +21,9 @@ import Box from './primitives/Box';
 class World extends Component {
   constructor(props) {
     super(props);
-    this.state={showFeed:'false'}
+    this.state={
+      showFeed:'false'
+    }
   }
 
   createJSX(entity, i) {
@@ -48,7 +50,7 @@ class World extends Component {
 
   render() {
     console.log('curScene:',JSON.parse(this.props.currentScene))
-    
+
     return (
       <Scene >
         <Camera >
@@ -57,17 +59,18 @@ class World extends Component {
           </a-cursor>
         </Camera>
 
-        <Entity />
+
         <UI className='ui' visible='false' zpos='-1' exit={this.props.exitVR}
-            feed={this.props.userFeed} showFeed={this.state.showFeed} 
-            toggleFeed={this.toggleFeed.bind(this)} setScene={this.props.setScene}/>
-          
+            feed={this.props.userFeed} showFeed={this.state.showFeed}
+            toggleFeed={this.toggleFeed.bind(this)}
+            setScene={this.props.setScene} currentScene={this.props.currentScene}/>
+
 
         {JSON.parse(this.props.currentScene)
           .map((entity, i) => {
             return this.createJSX(entity, i)
         })}
-        
+
       </Scene>
     );
   }
@@ -97,7 +100,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(World);
 
 /**
 //////////////////////////////////////////////
-// What a scene's JSX would like like:  
+// What a scene's JSX would like like:
 <PhotoSphere src="url(https://c6.staticflickr.com/3/2936/14749427013_c8fdbc4c76_z.jpg)"/>
 <Text
   text='Hello World!'
@@ -110,10 +113,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(World);
     position='0 -1 0'
   />
 </Text>
- 
+
 <Entity light={{type: 'ambient', color: '#888'}}/>
 <Entity light={{type: 'directional', intensity: 0.5}} position='-1 1 0'/>
-<Entity light={{type: 'directional', intensity: 1}} position='1 1 0'/> 
+<Entity light={{type: 'directional', intensity: 1}} position='1 1 0'/>
 
 ///////////////////////////////////////////////
 // What a scene would look like as an array:
