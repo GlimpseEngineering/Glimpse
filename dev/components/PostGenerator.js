@@ -17,7 +17,11 @@ class PostGenerator extends Component {
       sceneComplete: false,
       selectedPrimitive: 'PhotoSphere',
       id: 1,
-      src: ''
+      src: '',
+      width: '',
+      height: '',
+      depth: '',
+      color: ''
     };
 
     this.entityCollection = [];
@@ -46,19 +50,37 @@ class PostGenerator extends Component {
       sceneComplete: false,
       selectedPrimitive: 'PhotoSphere',
       id: 1,
-      src: ''
+      src: '',
+      width: '',
+      height: '',
+      depth: '',
+      color: ''
     });
   }
 
   submitScene(event) {
     event.preventDefault();
-    let entity = templateIndex.photoSphereGenerator(this.state.id, this.state.src);
+    let entity;
+    if (this.state.selectedPrimitive === 'PhotoSphere') {
+      console.log('the selectedPrimitive is', this.state.selectedPrimitive);
+      entity = templateIndex.photoSphereGenerator(this.state.id, this.state.src);
+      console.log('initializing our entity', entity);
+    }
+    if (this.state.selectedPrimitive === 'Box')  {
+      console.log('the selectedPrimitive is', this.state.selectedPrimitive);
+      entity = templateIndex.boxGenerator(this.state.id, this.state.width, this.state.height,this.state.depth, this.state.color);
+      console.log('initializing our entity', entity);
+    }
     console.log('here is the submission of the entity', entity);
     this.props.stageEntity(entity);
     console.log('state id was', this.state.id);
     this.setState({
       id: this.state.id += 1,
-      src: ''
+      src: '',
+      width: '',
+      height: '',
+      depth: '',
+      color: ''
     });
     /**
      * going to have figure a way to manipulate data passed in to the store using this function
@@ -84,6 +106,10 @@ class PostGenerator extends Component {
     name === 'private' && this.setState({private: value});
     name === 'tags' && this.setState({tags: value});
     name === 'url' && this.setState({src: value});
+    name === 'width' && this.setState({width: value});
+    name === 'height' && this.setState({height: value});
+    name === 'depth' && this.setState({depth: value});
+    name === 'color' && this.setState({color: value});
   }
 
   onPrimitiveChange(event) {
@@ -99,14 +125,14 @@ class PostGenerator extends Component {
 
   render() {
     let stagedEntities = this.entityCollection.map((entity) => {
-      if (entity.primitive === "PhotoSphere") {
+      // if (entity.primitive === "PhotoSphere") {
         return (
           <PhotoSphereGen
             key={entity.id}
             stagedEntity={entity} />
         );
-      }
-    })
+      // }
+    });
 
     console.log('here is the staged entity that we submitted', this.props.newPost.stagedEntity);
     return (
@@ -123,13 +149,57 @@ class PostGenerator extends Component {
 
         <form
           id="photosphere"
+          className={this.state.selectedPrimitive === 'PhotoSphere' ? '' : "hide-post-details"}
           onSubmit={this.submitScene.bind(this)} >
           <div>
-            <label>Image URL (click add before clicking submit!)</label>
+            <label>Image URL</label>
             <input
               type="text"
               name="url"
               value={this.state.src}
+              onChange={event => this.onInputChange(event)} />
+          </div>
+
+          <button type="submit">Add this scene!</button>
+        </form>
+
+        <form
+          id="box"
+          className={this.state.selectedPrimitive === 'Box' ? '' : "hide-post-details"}
+          onSubmit={this.submitScene.bind(this)} >
+          <div>
+            <label>Box Width</label>
+            <input
+              type="number"
+              name="width"
+              value={this.state.width}
+              onChange={event => this.onInputChange(event)} />
+          </div>
+
+          <div>
+            <label>Box Height</label>
+            <input
+              type="number"
+              name="height"
+              value={this.state.height}
+              onChange={event => this.onInputChange(event)} />
+          </div>
+
+          <div>
+            <label>Box depth</label>
+            <input
+              type="number"
+              name="depth"
+              value={this.state.depth}
+              onChange={event => this.onInputChange(event)} />
+          </div>
+
+          <div>
+            <label>Box color</label>
+            <input
+              type="text"
+              name="color"
+              value={this.state.color}
               onChange={event => this.onInputChange(event)} />
           </div>
 

@@ -127,6 +127,9 @@ li {
   position: relative;
   top: 1px; }
 
+.hide-post-details {
+  display: none; }
+
 h1, h2 {
   font-family: "Open Sans", sans-serif;
   color: black;

@@ -81,5 +81,5 @@ export function stageEntity(entity) {
   console.log('here is the entity in the action creator', entity);
   return (dispatch) => {
     dispatch({type: STAGE_ENTITY, payload: entity});
-  }
-}
+  };
+};

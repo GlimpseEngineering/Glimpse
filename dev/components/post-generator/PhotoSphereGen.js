@@ -7,7 +7,7 @@ class PhotoSphereGen extends Component {
     return (
       <div>
         {this.props.stagedEntity.id}
-        Some kind of image showing a photosphere
+        {this.props.stagedEntity.primitive}: some kind of content
         <button>Edit</button>
         <button>Delete</button>
       </div> 
