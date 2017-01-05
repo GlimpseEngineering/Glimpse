@@ -11,7 +11,7 @@ class Profile extends Component {
 
   constructor(props){
     super(props);
-
+    console.log('PROFILE PROPZ:',this.props)
     if(this.props.params.id) {
       this.props.getUserProfile(this.props.params.id);
     } else if (this.props.activeUser) {

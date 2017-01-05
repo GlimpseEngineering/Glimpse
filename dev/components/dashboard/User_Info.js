@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { followFoundUser } from '../../actions/searchActionCreators';
 import DummyLogin from '../DummyLogin'
 
 /**
@@ -13,6 +14,8 @@ import DummyLogin from '../DummyLogin'
 class User_Info extends Component {
   constructor(props){
     super(props);
+    console.log("USER_INFO PROPS:",this.props)
+    this.requestFollow = this.props.requestFollow
     if(this.props.activeUser){
       this.myProfile = this.props.viewedProfile.id==this.props.activeUser.id;
       
@@ -21,7 +24,8 @@ class User_Info extends Component {
         <button onClick={()=>{this.editProfile(this.props.activeUser.id)}}
                 className='editButton'>Edit Profile
         </button> :
-        <button onClick={()=>{this.addFriend(this.props.viewedProfile.id)}}
+        <button onClick={()=>{
+                  this.props.requestFollow(this.props.activeUser.id, this.props.viewedProfile.id)}}
                 className='editButton'>Follow
         </button>
     } else {
@@ -41,7 +45,9 @@ class User_Info extends Component {
         <button onClick={()=>{this.editProfile(nextProps.activeUser.id)}}
                 className='editButton'>Edit Profile
         </button> :
-        <button onClick={()=>{this.addFriend(nextProps.viewedProfile.id)}}
+        <button onClick={()=>{
+                  this.props.requestFollow(this.props.activeUser.id, this.props.viewedProfile.id)
+                }}
                 className='editButton'>Follow
         </button>
     } else {
@@ -53,6 +59,9 @@ class User_Info extends Component {
 
   addFriend(id) {
     console.log('add friend',id)
+    console.log(this.props)
+    requestFollow(this.props.activeUser.id, id)
+    // send a followRequest from activeUser to viewedProfile
   }
 
   editProfile(id) {
@@ -105,10 +114,14 @@ function mapStateToProps(state){
   return {
     activeUser: state.auth.activeUser,
     viewedProfile: state.user.viewedProfile,
-    follows: state.follows.userFollows
+    followers: state.followers.userFollowers
   };
 }
 
 
 
-export default connect(mapStateToProps)(User_Info);
+let info = connect(mapStateToProps, {
+  requestFollow: followFoundUser
+})(User_Info);
+
+export default info;
