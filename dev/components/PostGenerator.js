@@ -26,28 +26,20 @@ class PostGenerator extends Component {
 
     this.entityCollection = [];
 
-    this.editEntity = (editedEntity) => {
-      let targetIndex;
+    this.editOrDeleteEntity = (target) => {
+      let targetIndex
       this.entityCollection.forEach((entity, index) => {
-        if (entity.id === editedEntity.id) targetIndex = index;
+        if (entity.id === target.id || entity.id === target) targetIndex = index;
       });
-      console.log('prior to inserting edited entity', this.entityCollection);
-      this.entityCollection[targetIndex] = editedEntity;
-    }
-
-    this.deleteEntity = (id) => {
-      let targetIndex;
-      this.entityCollection.forEach((entity, index) => {
-        if (entity.id === id) targetIndex = index;
-      });
-      this.entityCollection.splice(targetIndex, 1);
-    };
+      if (typeof target === 'object') this.entityCollection[targetIndex] = target;
+      if (typeof target === 'number') this.entityCollection.splice(targetIndex, 1);
+    } 
   }
 
   componentWillReceiveProps(nextProps) {
     nextProps.newPost.stagedEntity && !nextProps.newPost.entityToDeleteId && !nextProps.newPost.entityToEditId && this.entityCollection.push(nextProps.newPost.stagedEntity);
-    nextProps.newPost.entityToDeleteId && this.deleteEntity(nextProps.newPost.entityToDeleteId);
-    nextProps.newPost.entityToEditId && this.editEntity(nextProps.newPost.editedEntity);
+    nextProps.newPost.entityToDeleteId && this.editOrDeleteEntity(nextProps.newPost.entityToDeleteId);
+    nextProps.newPost.entityToEditId && this.editOrDeleteEntity(nextProps.newPost.editedEntity);
   }
 
   submitPost(event) {
@@ -95,20 +87,6 @@ class PostGenerator extends Component {
       depth: '',
       color: ''
     });
-    /**
-     * going to have figure a way to manipulate data passed in to the store using this function
-     * can use the store to simply pass around an object
-     * initial state can just be an entity with a value of null
-     * replace the entity value with an object containing the requisite properties
-     * pass that value back to PostGenerator via props
-     * once back in props can make a copy of it, manipulate it however necessary
-     * then put it into the entityCollection in the correct format
-     * alternatively, we can give each entity a key that we can use for when we want to edit a scene
-     * 
-     * actions to dispatch:
-     * stage_entity
-     * edit_entity -> make a copy of staged entity info, pass parameter back up to parent via passed down f(x)?
-     */
   }
 
   onInputChange(event) {
