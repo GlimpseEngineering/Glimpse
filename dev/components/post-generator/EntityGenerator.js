@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-class PhotoSphereGen extends Component {
+class EntityGenerator extends Component {
 
   render() {
     return (
@@ -19,5 +19,5 @@ class PhotoSphereGen extends Component {
 //   stagedEntity: state.newPost.stagedEntity
 // };
 
-const photoSphereGen = connect(null, null)(PhotoSphereGen);
-export default photoSphereGen;
+const entityGenerator = connect(null, null)(EntityGenerator);
+export default entityGenerator;

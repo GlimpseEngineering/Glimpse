@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createPost, stageEntity } from '../actions/postsActionCreators';
-import PhotoSphereGen from './post-generator/PhotoSphereGen';
+import EntityGenerator from './post-generator/EntityGenerator';
 import { templateIndex } from '../entityTemplates';
 
 class PostGenerator extends Component {
@@ -29,8 +29,6 @@ class PostGenerator extends Component {
 
   componentWillReceiveProps(nextProps) {
     this.entityCollection.push(nextProps.newPost.stagedEntity);
-    console.log('starting props in post generator', this.props);
-    console.log('next props in post generato', nextProps);
     console.log('here is the entity collection with our newly staged entity', this.entityCollection);
   }
 
@@ -62,18 +60,13 @@ class PostGenerator extends Component {
     event.preventDefault();
     let entity;
     if (this.state.selectedPrimitive === 'PhotoSphere') {
-      console.log('the selectedPrimitive is', this.state.selectedPrimitive);
       entity = templateIndex.photoSphereGenerator(this.state.id, this.state.src);
-      console.log('initializing our entity', entity);
     }
     if (this.state.selectedPrimitive === 'Box')  {
-      console.log('the selectedPrimitive is', this.state.selectedPrimitive);
       entity = templateIndex.boxGenerator(this.state.id, this.state.width, this.state.height,this.state.depth, this.state.color);
-      console.log('initializing our entity', entity);
     }
     console.log('here is the submission of the entity', entity);
     this.props.stageEntity(entity);
-    console.log('state id was', this.state.id);
     this.setState({
       id: this.state.id += 1,
       src: '',
@@ -94,7 +87,7 @@ class PostGenerator extends Component {
      * 
      * actions to dispatch:
      * stage_entity
-     * edit_entity
+     * edit_entity -> make a copy of staged entity info, pass parameter back up to parent via passed down f(x)?
      */
   }
 
@@ -113,10 +106,6 @@ class PostGenerator extends Component {
   }
 
   onPrimitiveChange(event) {
-    /**
-     * here we would want to load the various forms so that the user can edit them 
-     * so on change we can set a different form as visible 
-     */
     event.preventDefault();
     let value = event.target.value;
     value === 'PhotoSphere' && this.setState({selectedPrimitive: value});
@@ -125,13 +114,11 @@ class PostGenerator extends Component {
 
   render() {
     let stagedEntities = this.entityCollection.map((entity) => {
-      // if (entity.primitive === "PhotoSphere") {
-        return (
-          <PhotoSphereGen
-            key={entity.id}
-            stagedEntity={entity} />
-        );
-      // }
+      return (
+        <EntityGenerator
+          key={entity.id}
+          stagedEntity={entity} />
+      );
     });
 
     console.log('here is the staged entity that we submitted', this.props.newPost.stagedEntity);
