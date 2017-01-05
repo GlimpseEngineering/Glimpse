@@ -45,10 +45,6 @@ class PostGenerator extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    /**
-     * issue is probably in here with the conditionals
-     * if deleteId still exists, then will call deleteEntity
-     */
     nextProps.newPost.stagedEntity && !nextProps.newPost.entityToDeleteId && !nextProps.newPost.entityToEditId && this.entityCollection.push(nextProps.newPost.stagedEntity);
     nextProps.newPost.entityToDeleteId && this.deleteEntity(nextProps.newPost.entityToDeleteId);
     nextProps.newPost.entityToEditId && this.editEntity(nextProps.newPost.editedEntity);

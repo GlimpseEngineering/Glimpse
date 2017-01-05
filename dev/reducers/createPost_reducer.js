@@ -23,10 +23,12 @@ export default function(state = INITIAL_STATE, action) {
     })
   case DELETE_ENTITY:
     return Object.assign({}, state, {
-      entityToDeleteId: action.payload
+      entityToDeleteId: action.payload,
+      entityToEditId: null
     })
   case EDIT_ENTITY:
     return Object.assign({}, state, {
+      entityToDeleteId: null,
       entityToEditId: action.payload.id,
       editedEntity: action.payload
     })

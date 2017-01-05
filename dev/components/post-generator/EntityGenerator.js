@@ -4,14 +4,9 @@ import { editEntity, deleteEntity } from '../../actions/postsActionCreators';
 
 class EntityGenerator extends Component {
   /**
-   * in order to edit this component i need to:
-   * 1) access THIS entity's props
-   * 2) option 1: need to copy entity's props, change them, then send back up to the parent, re-render parent
-   * 2) option 2: access this entity's props, change them, send back up to parent, re-render this entity 
-   * 3) need to ensure that the change to this entity's props is reflected in the entityCollection
-   * 4a) need to ensure that this component re-renders 
-   * 4b) may be able to force re-rendering by manipulating state on this component
-   * 5a) edited scene needs to be passed along via store 
+   * able to edit via store
+   * can change children 
+   * need to make more dynamic and find a way to edit the actual props in the Component
    */
   editEntity() {
     let copiedEntity = Object.assign({}, this.props.stagedEntity, {
