@@ -25,11 +25,19 @@ class PostGenerator extends Component {
     };
 
     this.entityCollection = [];
+
+    this.deleteScene = (id) => {
+      let targetIndex;
+      this.entityCollection.forEach((entity, index) => {
+        if (entity.id === id) targetIndex = index;
+      });
+      this.entityCollection.splice(targetIndex, 1);
+    };
   }
 
   componentWillReceiveProps(nextProps) {
-    this.entityCollection.push(nextProps.newPost.stagedEntity);
-    console.log('here is the entity collection with our newly staged entity', this.entityCollection);
+    nextProps.newPost.stagedEntity && !nextProps.newPost.entityToDeleteId && this.entityCollection.push(nextProps.newPost.stagedEntity);
+    nextProps.newPost.entityToDeleteId && this.deleteScene(nextProps.newPost.entityToDeleteId);
   }
 
   submitPost(event) {
@@ -37,6 +45,8 @@ class PostGenerator extends Component {
      * be sure to JSON.stringify the entityCollection before submitting
      * also iterate through the object and pass the data to entityCollection w/o id
      * i.e. when saving to db save w/o id? 
+     * 
+     * also be sure to dispatch an action at some point that clears the created post from the reducer state
      */
     event.preventDefault();
     this.props.createPost(this.state);
@@ -136,7 +146,7 @@ class PostGenerator extends Component {
 
         <form
           id="photosphere"
-          className={this.state.selectedPrimitive === 'PhotoSphere' ? '' : "hide-post-details"}
+          className={this.state.selectedPrimitive === "PhotoSphere" ? "" : "hide-post-details"}
           onSubmit={this.submitScene.bind(this)} >
           <div>
             <label>Image URL</label>
@@ -152,7 +162,7 @@ class PostGenerator extends Component {
 
         <form
           id="box"
-          className={this.state.selectedPrimitive === 'Box' ? '' : "hide-post-details"}
+          className={this.state.selectedPrimitive === "Box" ? "" : "hide-post-details"}
           onSubmit={this.submitScene.bind(this)} >
           <div>
             <label>Box Width</label>
