@@ -49,11 +49,6 @@ export function getOneUser(userId){
   }
 }
 
-export function dataFetched(){
-  return function(dispatch) {
-    dispatch({type: 'DATA_FETCHED'})
-  }
-}
 
 export function updateUser(){}
 

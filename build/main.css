@@ -88,7 +88,8 @@ li {
 
 .userContainer {
   align-items: center;
-  padding: 2% 4% 2% 4%; }
+  padding: 2% 4% 2% 4%;
+  max-width: 350px; }
 
 .profileInfo {
   border-top: solid #e1e8ed 1px;
@@ -102,8 +103,7 @@ li {
   border-top: solid #e1e8ed 1px; }
 
 .editButton {
-  float: right;
-  padding-right: 4px;
+  margin: auto;
   background-color: #fff;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;

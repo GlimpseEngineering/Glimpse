@@ -25,6 +25,7 @@ export function clearSearch() {
 };
 
 export function followFoundUser(userId, followId, privacySetting) {
+  // userId requests a follow of followId
   let followData = {};
 
   return (dispatch) => {
