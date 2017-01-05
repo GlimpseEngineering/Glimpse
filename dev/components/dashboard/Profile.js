@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { getOneUser, getAllUsers, dataFetched } from '../../actions/usersActionCreators';
+import { getOneUser, getAllUsers } from '../../actions/usersActionCreators';
 import { getPostsByUser, getAllPosts } from '../../actions/postsActionCreators';
 import { getFollowersForUser, getFollowedByUser, getFollowedPosts } from '../../actions/followsActionCreators';
 import { getCachedUsers } from '../../actions/cacheActionCreators';
@@ -44,7 +44,6 @@ class Profile extends Component {
       this.props.getUserPosts(id);
       this.props.getAllUsersPosts();
       this.props.getUserFollowedPosts(id);
-      this.props.dataFetched();
     }
 
   render() {
@@ -79,7 +78,6 @@ function mapStateToProps(state){
 
 var dashboard = connect(mapStateToProps, {
   getUserProfile: getOneUser,
-  dataFetched: dataFetched,
   getUserListings: getAllUsers ,
   getUserFollowers: getFollowersForUser,
   getUserFollows: getFollowedByUser,

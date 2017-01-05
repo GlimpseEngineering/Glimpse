@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { followFoundUser } from '../../actions/searchActionCreators';
+import { getFollowersForUser } from '../../actions/followsActionCreators';
 import DummyLogin from '../DummyLogin'
 
 /**
@@ -14,9 +15,9 @@ import DummyLogin from '../DummyLogin'
 class User_Info extends Component {
   constructor(props){
     super(props);
-
     if(this.props.activeUser){
-      this.myProfile = this.props.viewedProfile.id==this.props.activeUser.id;
+      console.log(this.props.activeUser.id)
+      this.myProfile = this.props.viewedProfile.id===this.props.activeUser.id;
       
       this.backgroundColor = this.myProfile ? 'lightBlue' : 'white';
       this.editButton = this.myProfile ? 
@@ -34,7 +35,7 @@ class User_Info extends Component {
       console.log('no activeUser in this.props')
       this.backgroundColor = 'white';
       this.editButton = null;
-    } 
+    }  
   }
 
   componentWillReceiveProps(nextProps) {
@@ -42,8 +43,8 @@ class User_Info extends Component {
     console.log('user_info nextprops:',nextProps)    
     console.log(nextProps.followers)    
     console.log(nextProps.followers.map(p=>p.UserId))
-    console.log(nextProps.activeUser.id)
     if(nextProps.activeUser){
+      console.log(nextProps.activeUser.id)
       this.myProfile = nextProps.viewedProfile.id===nextProps.activeUser.id;
       
       this.backgroundColor = this.myProfile ? 'lightBlue' : 'white';
@@ -63,12 +64,16 @@ class User_Info extends Component {
       this.backgroundColor = 'white';
       this.editButton = null;
     }
+    if (Object.keys(nextProps.foundUsers.followedByUser).length !== Object.keys(this.props.foundUsers.followedByUser).length) {
+      console.log('howdy')
+      this.props.getFollowersForUser(nextProps.viewedProfile.id)
+    }
   } 
 
-  addFriend(id) {
+  requestFollow(id) {
     console.log('add friend',id)
     console.log(this.props)
-    requestFollow(this.props.activeUser.id, id)
+    this.props.requestFollow(this.props.activeUser.id, id)
     // send a followRequest from activeUser to viewedProfile
   }
 
@@ -122,14 +127,16 @@ function mapStateToProps(state){
   return {
     activeUser: state.auth.activeUser,
     viewedProfile: state.user.viewedProfile,
-    followers: state.followers.userFollowers
+    followers: state.followers.userFollowers,
+    foundUsers: state.search.foundUsers
   };
 }
 
 
 
 let info = connect(mapStateToProps, {
-  requestFollow: followFoundUser
+  requestFollow: followFoundUser,
+  getFollowersForUser: getFollowersForUser,
 })(User_Info);
 
 export default info;
