@@ -32,7 +32,7 @@ class User_Info extends Component {
       console.log('no activeUser in this.props')
       this.backgroundColor = 'white';
       this.editButton = null;
-    }
+    } 
   }
 
   componentWillReceiveProps(nextProps) {
