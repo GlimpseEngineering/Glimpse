@@ -3,7 +3,8 @@ import { CREATE_POST, STAGE_ENTITY, DELETE_ENTITY } from '../actions/postsAction
 const INITIAL_STATE = { 
   createdPost: null,
   stagedEntity: null,
-  entityToDeleteId: null 
+  entityToDeleteId: null,
+  editedEntity: null 
 };
 
 export default function(state = INITIAL_STATE, action) {

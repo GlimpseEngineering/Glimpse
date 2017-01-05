@@ -26,7 +26,15 @@ class PostGenerator extends Component {
 
     this.entityCollection = [];
 
-    this.deleteScene = (id) => {
+    this.editScene = (id, editedScene) => {
+      let targetIndex;
+      this.entityCollection.forEach((entity, index) => {
+        if (entity.id === id) targetIndex = index;
+      });
+      this.entityCollection[targetIndex] = editedScene;
+    }
+
+    this.deleteEntity = (id) => {
       let targetIndex;
       this.entityCollection.forEach((entity, index) => {
         if (entity.id === id) targetIndex = index;
@@ -37,7 +45,7 @@ class PostGenerator extends Component {
 
   componentWillReceiveProps(nextProps) {
     nextProps.newPost.stagedEntity && !nextProps.newPost.entityToDeleteId && this.entityCollection.push(nextProps.newPost.stagedEntity);
-    nextProps.newPost.entityToDeleteId && this.deleteScene(nextProps.newPost.entityToDeleteId);
+    nextProps.newPost.entityToDeleteId && this.deleteEntity(nextProps.newPost.entityToDeleteId);
   }
 
   submitPost(event) {
