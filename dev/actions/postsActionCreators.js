@@ -11,6 +11,7 @@ import axios from 'axios';
 import { SET_SCENE, ENTER_VR } from './vrModeActionCreators';
 
 export const CREATE_POST = 'CREATE_POST';
+export const STAGE_ENTITY = 'STAGE_ENTITY';
 
 //USER ACTIONS ===========================>
 export function getPostsByUser(userId) {
@@ -71,7 +72,14 @@ export function createPost(formValues) {
 
   return (dispatch) => {
     request.then((data) => {
-      dispatch({ type: CREATE_POST, payload: data})
+      dispatch({type: CREATE_POST, payload: data})
     });
+  };
+};
+
+export function stageEntity(entity) {
+  console.log('here is the entity in the action creator', entity);
+  return (dispatch) => {
+    dispatch({type: STAGE_ENTITY, payload: entity});
   };
 };
