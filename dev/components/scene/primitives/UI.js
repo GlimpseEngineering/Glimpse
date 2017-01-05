@@ -6,6 +6,7 @@ import Box from './Box';
 import 'aframe-ui-modal-component';
 import '../acomps/shift_click_ui'
 import 'aframe-layout-component';
+import 'aframe-bmfont-text-component';
 
 
 class UI extends Component {
@@ -13,8 +14,7 @@ class UI extends Component {
     super(props)
     //console.log(props)
     this.state = {
-      currSceneIndex: '',
-      showPrev: 'true'
+      currSceneIndex: ''
     }
     this.checkNext = this.checkNext.bind(this);
     this.checkPrev = this.checkPrev.bind(this);
@@ -48,7 +48,7 @@ class UI extends Component {
     }
 
     render() {
-
+      var mat;
       return (
         <Entity shift-click-ui {...this.props}>
           <Entity layout="type: line; margin: 1.5" position="-2.25 -2 -1">
@@ -76,12 +76,18 @@ class UI extends Component {
                       layout="line" rotation="0 0 90" margin="0.1">
                 {this.props.feed.followingPosts.map(post=>{
                   return(
-                    <Box color="white" height="0.5" width="1.5"
+
+                    <Box color="white" height="0.85" width="2.7"
                          depth="0.08" rotation="0 0 -90" key={post.id}
                          onClick={()=>{
                            this.props.toggleFeed();
                            this.props.setScene(post.content);
-                        }}/>
+                           console.log('inside of boxs')
+                        }}>
+
+                        <Entity bmfont-text={{text: `${post.description}; width: 500`}} position="-.5 -.02 .1" />
+                        <Plane position="-1 0 .4" material={{src: `url(https://calderonsteven.github.io/panorama-vr/images/moonfase.jpg)`, side: "double"}} />
+                    </Box>
                   )
                 })}
               </Entity>
