@@ -15,6 +15,7 @@ class PostGenerator extends Component {
       private: 0,
       tags: '',
       sceneComplete: false,
+      selectedPrimitive: 'PhotoSphere',
       id: 1,
       src: ''
     };
@@ -42,7 +43,7 @@ class PostGenerator extends Component {
       description: '',
       private: 0,
       tags: '',
-      sceneComplete: true,
+      sceneComplete: false,
       selectedPrimitive: 'PhotoSphere',
       id: 1,
       src: ''
@@ -51,12 +52,14 @@ class PostGenerator extends Component {
 
   submitScene(event) {
     event.preventDefault();
-    let id = this.state.id;
     let entity = templateIndex.photoSphereGenerator(this.state.id, this.state.src);
     console.log('here is the submission of the entity', entity);
     this.props.stageEntity(entity);
     console.log('state id was', this.state.id);
-    this.setState({id: id += 1});
+    this.setState({
+      id: this.state.id += 1,
+      src: ''
+    });
     /**
      * going to have figure a way to manipulate data passed in to the store using this function
      * can use the store to simply pass around an object
@@ -89,13 +92,12 @@ class PostGenerator extends Component {
      * so on change we can set a different form as visible 
      */
     event.preventDefault();
-    let name = event.target.name;
     let value = event.target.value;
-    this.basePrimitive.primitive = value;
+    value === 'PhotoSphere' && this.setState({selectedPrimitive: value});
+    value === 'Box' && this.setState({selectedPrimitive: value});
   }
 
   render() {
-    console.log('state id is', this.state.id);
     let stagedEntities = this.entityCollection.map((entity) => {
       if (entity.primitive === "PhotoSphere") {
         return (
@@ -109,12 +111,14 @@ class PostGenerator extends Component {
     console.log('here is the staged entity that we submitted', this.props.newPost.stagedEntity);
     return (
       <div>
+      {this.state.selectedPrimitive}
         <h3>Create A New Scene</h3>
 
         <select
-          name="primitive"
+          value={this.state.selectedPrimitive}
           onChange={event => this.onPrimitiveChange(event)} >
-          <option value="PhotoSphere">PhotoSphere</option>
+          <option name="PhotoSphere" value="PhotoSphere">PhotoSphere</option>
+          <option name="Box" value="Box">Box</option>
         </select>
 
         <form
