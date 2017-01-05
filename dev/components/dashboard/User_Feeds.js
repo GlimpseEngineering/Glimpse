@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getAllUsers, dataFetched } from '../../actions/usersActionCreators';
-import { getPostsByUser, getAllPosts } from '../../actions/postsActionCreators';
-import { getFollowersForUser, getFollowedByUser, getFollowedPosts } from '../../actions/followsActionCreators';
+// import { getAllUsers, dataFetched } from '../../actions/usersActionCreators';
+// import { getPostsByUser, getAllPosts } from '../../actions/postsActionCreators';
+// import { getFollowersForUser, getFollowedByUser, getFollowedPosts } from '../../actions/followsActionCreators';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 import News_Feed from './feeds/News_Feed';
@@ -21,10 +21,11 @@ class User_Feeds extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log('FEEED MEEE PROPZ:',this.props)
 
-    if(nextProps.requireDataFetch) {
-      this.getFeedData(this.props.viewedProfile.id)
-    }
+    // if(nextProps.requireDataFetch) {
+    //   this.getFeedData(this.props.viewedProfile.id)
+    // }
 
     if(nextProps.cacheFollowers.cached && !nextProps.cacheFollowers.pending){
       this.setState({ cacheFollowers: nextProps.cacheFollowers.cachedUsers })
@@ -32,16 +33,16 @@ class User_Feeds extends Component {
     }
   }
 
-  getFeedData(id){
+  // getFeedData(id){
 
-    this.props.getUserListings();
-    this.props.getUserFollowers(id);
-    this.props.getUserFollows(id);
-    this.props.getUserPosts(id);
-    this.props.getAllUsersPosts();
-    this.props.getUserFollowedPosts(id);
-    this.props.dataFetched();
-  }
+  //   this.props.getUserListings();
+  //   this.props.getUserFollowers(id);
+  //   this.props.getUserFollows(id);
+  //   this.props.getUserPosts(id);
+  //   this.props.getAllUsersPosts();
+  //   this.props.getUserFollowedPosts(id);
+  //   this.props.dataFetched();
+  // }
 
   handleSelect(index, last) {
     this.setState({ tab: index });
@@ -103,12 +104,12 @@ function mapStateToProps({ auth, user, users, followers, follows, userPosts, all
 }
 
 var feeds = connect(mapStateToProps, {
-  dataFetched: dataFetched,
-  getUserListings: getAllUsers ,
-  getUserFollowers: getFollowersForUser,
-  getUserFollows: getFollowedByUser,
-  getUserPosts: getPostsByUser,
-  getAllUsersPosts: getAllPosts,
-  getUserFollowedPosts: getFollowedPosts,
+  // dataFetched: dataFetched,
+  // getUserListings: getAllUsers ,
+  // getUserFollowers: getFollowersForUser,
+  // getUserFollows: getFollowedByUser,
+  // getUserPosts: getPostsByUser,
+  // getAllUsersPosts: getAllPosts,
+  // getUserFollowedPosts: getFollowedPosts,
 })(User_Feeds);
 export default feeds;

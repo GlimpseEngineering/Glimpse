@@ -14,8 +14,7 @@ import DummyLogin from '../DummyLogin'
 class User_Info extends Component {
   constructor(props){
     super(props);
-    console.log("USER_INFO PROPS:",this.props)
-    this.requestFollow = this.props.requestFollow
+
     if(this.props.activeUser){
       this.myProfile = this.props.viewedProfile.id==this.props.activeUser.id;
       
@@ -23,11 +22,14 @@ class User_Info extends Component {
       this.editButton = this.myProfile ? 
         <button onClick={()=>{this.editProfile(this.props.activeUser.id)}}
                 className='editButton'>Edit Profile
-        </button> :
-        <button onClick={()=>{
-                  this.props.requestFollow(this.props.activeUser.id, this.props.viewedProfile.id)}}
-                className='editButton'>Follow
-        </button>
+        </button> : 
+        !this.props.followers.map(p=>p.UserId).includes(this.props.activeUser.id) ?
+        <button className='editButton'
+                onClick={()=>{
+                  this.props.requestFollow(this.props.activeUser.id, this.props.viewedProfile.id)
+                }}>Follow
+        </button> : 
+        <button className='editButton'>Unfollow</button>
     } else {
       console.log('no activeUser in this.props')
       this.backgroundColor = 'white';
@@ -36,7 +38,11 @@ class User_Info extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('user_info nextprops:',nextProps)
+    console.log("USER_INFO PROPS:",this.props)
+    console.log('user_info nextprops:',nextProps)    
+    console.log(nextProps.followers)    
+    console.log(nextProps.followers.map(p=>p.UserId))
+    console.log(nextProps.activeUser.id)
     if(nextProps.activeUser){
       this.myProfile = nextProps.viewedProfile.id===nextProps.activeUser.id;
       
@@ -44,12 +50,14 @@ class User_Info extends Component {
       this.editButton = this.myProfile ? 
         <button onClick={()=>{this.editProfile(nextProps.activeUser.id)}}
                 className='editButton'>Edit Profile
-        </button> :
-        <button onClick={()=>{
-                  this.props.requestFollow(this.props.activeUser.id, this.props.viewedProfile.id)
-                }}
-                className='editButton'>Follow
-        </button>
+        </button> : 
+        !nextProps.followers.map(p=>p.UserId).includes(nextProps.activeUser.id) ?
+        <button className='editButton'
+                onClick={()=>{
+                  nextProps.requestFollow(nextProps.activeUser.id, nextProps.viewedProfile.id)
+                }}>Follow
+        </button> : 
+        <button className='editButton'>Unfollow</button>
     } else {
       console.log('no activeUser in nextprops')
       this.backgroundColor = 'white';
