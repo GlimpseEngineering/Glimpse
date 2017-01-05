@@ -19,20 +19,20 @@ class PostGenerator extends Component {
       src: ''
     };
 
-    this.primitiveCollection = [];
+    this.entityCollection = [];
   }
 
   componentWillReceiveProps(nextProps) {
-    this.primitiveCollection.push(nextProps.newPost.stagedEntity);
+    this.entityCollection.push(nextProps.newPost.stagedEntity);
     console.log('starting props in post generator', this.props);
     console.log('next props in post generato', nextProps);
-    console.log('here is the entity collection with our newly staged entity', this.primitiveCollection);
+    console.log('here is the entity collection with our newly staged entity', this.entityCollection);
   }
 
   submitPost(event) {
     /**
-     * be sure to JSON.stringify the primitiveCollection before submitting
-     * also iterate through the object and pass the data to primitiveCollection w/o id
+     * be sure to JSON.stringify the entityCollection before submitting
+     * also iterate through the object and pass the data to entityCollection w/o id
      * i.e. when saving to db save w/o id? 
      */
     event.preventDefault();
@@ -51,9 +51,12 @@ class PostGenerator extends Component {
 
   submitScene(event) {
     event.preventDefault();
+    let id = this.state.id;
     let entity = templateIndex.photoSphereGenerator(this.state.id, this.state.src);
     console.log('here is the submission of the entity', entity);
     this.props.stageEntity(entity);
+    console.log('state id was', this.state.id);
+    this.setState({id: id += 1});
     /**
      * going to have figure a way to manipulate data passed in to the store using this function
      * can use the store to simply pass around an object
@@ -61,7 +64,7 @@ class PostGenerator extends Component {
      * replace the entity value with an object containing the requisite properties
      * pass that value back to PostGenerator via props
      * once back in props can make a copy of it, manipulate it however necessary
-     * then put it into the primitiveCollection in the correct format
+     * then put it into the entityCollection in the correct format
      * alternatively, we can give each entity a key that we can use for when we want to edit a scene
      * 
      * actions to dispatch:
@@ -92,6 +95,17 @@ class PostGenerator extends Component {
   }
 
   render() {
+    console.log('state id is', this.state.id);
+    let stagedEntities = this.entityCollection.map((entity) => {
+      if (entity.primitive === "PhotoSphere") {
+        return (
+          <PhotoSphereGen
+            key={entity.id}
+            stagedEntity={entity} />
+        );
+      }
+    })
+
     console.log('here is the staged entity that we submitted', this.props.newPost.stagedEntity);
     return (
       <div>
@@ -117,6 +131,10 @@ class PostGenerator extends Component {
 
           <button type="submit">Add this scene!</button>
         </form>
+
+        <ul>
+          {stagedEntities}
+        </ul>
 
         <form
           id="post"
