@@ -13,19 +13,33 @@ class User_Info extends Component {
   constructor(props){
     super(props);
   }
+
   componentWillReceiveProps(nextProps) {
     console.log('user_infor nextprops:',nextProps)
     if(nextProps.loggedIn){
       let myProfile = nextProps.user.id===nextProps.loggedIn.id;
       this.backgroundColor = myProfile ? 'lightBlue' : 'white';
-      this.editButton = myProfile ? (
-        <button className='editButton'>Edit</button>
-      ) : null
+      this.editButton = myProfile ? 
+        <button onClick={()=>{this.editProfile(nextProps.user.id)}}
+                className='editButton'>Edit Profile
+        </button> :
+        <button onClick={()=>{this.addFriend(nextProps.user.id)}}
+                className='editButton'>Add Friend
+        </button>
     } else {
       this.backgroundColor = 'white';
       this.editButton = null;
     }
   }
+
+  addFriend(id) {
+    console.log('add friend',id)
+  }
+
+  editProfile(id) {
+    console.log('edit profile',id)
+  }
+
   render() {
     console.log('Here are our user props', this.props.user);
     return (
@@ -37,6 +51,7 @@ class User_Info extends Component {
         <div className="profile">
           <div className="picContainer">
             <img src={this.props.user.profPic} className="profPic" />
+            {this.editButton}
           </div>
           <div className="profileInfo">
             <div className="username">
@@ -52,7 +67,6 @@ class User_Info extends Component {
               <div style={{ paddingBottom: '10px' }}>
 
                 <label>Bio:</label>
-                {this.editButton}
               </div>
 
               <p>{this.props.user.bio}</p>
