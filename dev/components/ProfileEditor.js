@@ -13,7 +13,7 @@ class ProfileEditor extends Component {
       authId: this.props.user.authId,
       bio: this.props.user.bio,
       email: this.props.user.email,
-      dob: this.props.user.dob,
+      dob: this.props.user.dob.split('T')[0],
       gender: this.props.user.gender,
       private: this.props.user.private
     };
@@ -77,7 +77,7 @@ class ProfileEditor extends Component {
           type="email" /><br/>
         <label>Birthday: </label><br/>
         <input 
-          value={this.state.dob.split('T')[0]}
+          value={this.state.dob}
           onChange={event => this.onInputChange(event)}
           name="dob"
           type="date" /><br/>
@@ -89,7 +89,7 @@ class ProfileEditor extends Component {
           type="text" /><br/>
         <label>Private: </label><br/>
         <input 
-          onClick={event => this.onInputChange(event)}
+          onChange={event => this.onInputChange(event)}
           checked={this.state.private? "checked" : ""}
           name="private"
           type="checkbox" /><br/>
