@@ -82,12 +82,23 @@ class UI extends Component {
       }
     }
 
-    checkPrev() {
-      if(this.state.currFeedSceneIndex === 0){
+    checkPrev(view) {
+      if(view === 'userPosts'){
+        if(this.state.currUserPostsSceneIndex === 0){
+          return 'false';
+        }else {
+          return 'true';
+        }
+      }
+
+
+      if(view === 'feed' && this.state.currFeedSceneIndex === 0){
         return 'false';
       }else {
         return 'true';
       }
+
+
     }
 
     render() {
@@ -95,11 +106,17 @@ class UI extends Component {
       return (
         <Entity shift-click-ui {...this.props}>
           <Entity layout="type: line; margin: 1.5" position="-2.25 -2 -1">
-            <Text className="ui-element" text="<" visible={this.checkPrev()}
+            <Text className="ui-element" text="<" visible={this.checkPrev(this.state.currView)}
               onClick={()=>{
+                if(this.state.currView === 'feed') {
+                  this.props.setScene(this.props.feed.followingPosts[this.state.currFeedSceneIndex - 1].content);
+                  this.setState({ currFeedSceneIndex: this.state.currFeedSceneIndex - 1 })
+                }else{
+                  this.props.setScene(this.props.viewedUserPosts.userPosts[this.state.currUserPostsSceneIndex - 1].content);
+                  this.setState({ currUserPostsSceneIndex: this.state.currUserPostsSceneIndex - 1 });
+                }
 
-              this.props.setScene(this.props.feed.followingPosts[this.state.currFeedSceneIndex - 1].content);
-              this.setState({ currFeedSceneIndex: this.state.currFeedSceneIndex - 1 })
+
            }}/>
             <Entity className="ui-element" onClick={()=>{
               this.props.toggleFeed()
