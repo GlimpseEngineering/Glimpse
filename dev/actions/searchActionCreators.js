@@ -3,6 +3,7 @@ import axios from 'axios';
 export const CLEAR_SEARCH = 'CLEAR_SEARCH';
 export const SEARCH_USERS = 'SEARCH_USERS';
 export const FOLLOW_FOUND_USER = 'FOLLOW_FOUND_USER';
+export const UNFOLLOW_FOUND_USER = 'UNFOLLOW_FOUND_USER'
 
 export function searchUser(searchterm, UserId) {
   const request = axios.get(`api/search/users/${UserId}/${searchterm}`);
@@ -36,6 +37,8 @@ export function followFoundUser(userId, followId, privacySetting) {
       })
       .then((userRequest) => {
         followData.user = userRequest.data;
+        console.log('dispatching FOLLOW_FOUND_USER')
+        console.log('payload:',followData)
         if (privacySetting) {
           dispatch({ type: FOLLOW_FOUND_USER, payload: followData });
         } 
@@ -46,8 +49,32 @@ export function followFoundUser(userId, followId, privacySetting) {
       .then((acceptedUserRequest) => {
         if (acceptedUserRequest) {
           followData.followedByUser = acceptedUserRequest.data;
+          console.log('dispatching FOLLOW_FOUND_USER')
+          console.log('payload:',followData)
           dispatch({ type: FOLLOW_FOUND_USER, payload: followData });
         }
+      })
+      .catch((error) => {
+        throw error;
+      });
+  };
+};
+
+export function unfollowFoundUser(userId, followId) {
+  // userId requests a follow of followId
+  let followData = {};
+
+  return (dispatch) => {
+    axios.delete(`api/users/${userId}/follows/${followId}`)
+      .then((followRequest) => {
+        followData.followedByUser = followRequest.data[0];
+        return axios.get(`api/users/${followId}`)
+      })
+      .then((userRequest) => {
+        followData.user = userRequest.data;
+        console.log('dispatching UNFOLLOW_FOUND_USER')
+        console.log('payload:',followData)
+        dispatch({ type: UNFOLLOW_FOUND_USER, payload: followData });
       })
       .catch((error) => {
         throw error;

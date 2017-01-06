@@ -18,8 +18,6 @@ class User_Feeds extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('FEEED MEEE PROPZ:',this.props)
-
     if(nextProps.cacheFollowers.cached && !nextProps.cacheFollowers.pending){
       this.setState({ cacheFollowers: nextProps.cacheFollowers.cachedUsers })
       console.log(this.state);

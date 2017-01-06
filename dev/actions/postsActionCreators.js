@@ -12,6 +12,8 @@ import { SET_SCENE, ENTER_VR } from './vrModeActionCreators';
 
 export const CREATE_POST = 'CREATE_POST';
 export const STAGE_ENTITY = 'STAGE_ENTITY';
+export const DELETE_ENTITY = 'DELETE_ENTITY';
+export const EDIT_ENTITY = 'EDIT_ENTITY';
 
 //USER ACTIONS ===========================>
 export function getPostsByUser(userId) {
@@ -81,5 +83,17 @@ export function stageEntity(entity) {
   console.log('here is the entity in the action creator', entity);
   return (dispatch) => {
     dispatch({type: STAGE_ENTITY, payload: entity});
+  };
+};
+
+export function deleteEntity(entityId) {
+  return (dispatch) => {
+    dispatch({type: DELETE_ENTITY, payload: entityId});
+  };
+};
+
+export function editEntity(editedEntity) {
+  return (dispatch) => {
+    dispatch({type: EDIT_ENTITY, payload: editedEntity})
   };
 };

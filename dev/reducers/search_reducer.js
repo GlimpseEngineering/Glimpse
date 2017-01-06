@@ -1,4 +1,4 @@
-import { CLEAR_SEARCH, SEARCH_USERS, FOLLOW_FOUND_USER } from '../actions/searchActionCreators';
+import { CLEAR_SEARCH, SEARCH_USERS, FOLLOW_FOUND_USER, UNFOLLOW_FOUND_USER } from '../actions/searchActionCreators';
 
 const INITIAL_STATE = { 
   foundUsers: { 
@@ -27,6 +27,20 @@ export default function(state = INITIAL_STATE, action) {
       } 
     })
   case FOLLOW_FOUND_USER:
+    return Object.assign({}, state, {
+      foundUsers: {
+        users: {
+          count: state.foundUsers.users.count,
+          rows: Object.assign({}, state.foundUsers.users.rows, {
+            [action.payload.user.id]: action.payload.user
+          })
+        },
+        followedByUser: Object.assign({}, state.foundUsers.followedByUser, {
+          [action.payload.followedByUser.FollowId]: action.payload.followedByUser
+        })
+      }
+    });
+  case UNFOLLOW_FOUND_USER:
     return Object.assign({}, state, {
       foundUsers: {
         users: {
