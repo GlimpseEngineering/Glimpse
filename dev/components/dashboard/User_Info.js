@@ -84,7 +84,7 @@ class User_Info extends Component {
         </button> : 
         <button className='editButton'
                 onClick={()=>{
-                  
+                  nextProps.unfollow(this.props.activeUser.id, this.props.viewedProfile.id)
                 }}>unfollow</button>
     } else {
       console.log('no activeUser in nextprops')

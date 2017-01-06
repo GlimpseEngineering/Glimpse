@@ -37,6 +37,8 @@ export function followFoundUser(userId, followId, privacySetting) {
       })
       .then((userRequest) => {
         followData.user = userRequest.data;
+        console.log('dispatching FOLLOW_FOUND_USER')
+        console.log('payload:',followData)
         if (privacySetting) {
           dispatch({ type: FOLLOW_FOUND_USER, payload: followData });
         } 
@@ -47,6 +49,8 @@ export function followFoundUser(userId, followId, privacySetting) {
       .then((acceptedUserRequest) => {
         if (acceptedUserRequest) {
           followData.followedByUser = acceptedUserRequest.data;
+          console.log('dispatching FOLLOW_FOUND_USER')
+          console.log('payload:',followData)
           dispatch({ type: FOLLOW_FOUND_USER, payload: followData });
         }
       })
@@ -68,6 +72,8 @@ export function unfollowFoundUser(userId, followId) {
       })
       .then((userRequest) => {
         followData.user = userRequest.data;
+        console.log('dispatching UNFOLLOW_FOUND_USER')
+        console.log('payload:',followData)
         dispatch({ type: UNFOLLOW_FOUND_USER, payload: followData });
       })
       .catch((error) => {
