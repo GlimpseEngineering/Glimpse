@@ -6,6 +6,10 @@ class EntityGenerator extends Component {
   constructor(props) {
     super(props) 
       this.state = {
+        /**
+         * ideally would be nice for state to be set to whatever was submitted on load
+         * this way the person can decide what to keep and what to change
+         */
         enableEdit: false,
         id: '',
         primitive: '',
@@ -26,10 +30,26 @@ class EntityGenerator extends Component {
     this.state.enableEdit === true ? this.setState({enableEdit: false}) : this.setState({enableEdit: true});
   }
 
-  editEntity() {
-    let copiedEntity = Object.assign({}, this.props.stagedEntity, {
-      children: 'yas'
-    });
+  editEntity(event) {
+    event.preventDefault();
+    const position = function(x, y, z) {
+      return x.toString() + ' ' + y.toString() + ' ' + z.toString();
+    };
+    let copiedEntity;
+    /**
+     * want to edit the entity, but before i edit the entity i need a function 
+     * this function would take the values in the form and save them to state somehow 
+     * wait...form values are saved in state as they're updated 
+     */
+    if (this.props.stagedEntity.primitive === 'Text') {
+      copiedEntity = Object.assign({}, this.props.stagedEntity, {
+        components: {
+          color: this.state.color,
+          text: this.state.text,
+          position: position(this.state.x, this.state.y, this.state.z)
+        }
+      });
+    }
     console.log('original entity', this.props.stagedEntity);
     console.log('copied entity', copiedEntity);
     this.props.editEntity(copiedEntity);
@@ -69,7 +89,8 @@ class EntityGenerator extends Component {
 
         <form
             id="text"
-            className={this.props.stagedEntity.primitive === "Text" && this.state.enableEdit === true ? "" : "hide-post-details"} >
+            className={this.props.stagedEntity.primitive === "Text" && this.state.enableEdit === true ? "" : "hide-post-details"}
+            onSubmit={this.editEntity.bind(this)} >
             <div>
               <label>Text Content</label>
               <input
