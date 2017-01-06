@@ -54,8 +54,8 @@ export function updateUser(userId, profile){
     .then(response => {
       console.log('the response for updating user is:', response.data);
       let user = response.data || {}
-
       dispatch({type: 'SET_USER_PROFILE', payload: user});
+      dispatch({type: 'LOGIN_SUCCESS', profile: user})
     })
     .catch(err => {
       console.log('err in updateUser is:', err);
