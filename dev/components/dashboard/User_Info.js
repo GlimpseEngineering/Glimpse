@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { followFoundUser } from '../../actions/searchActionCreators';
+import { followFoundUser, unfollowFoundUser } from '../../actions/searchActionCreators';
 import { getFollowersForUser } from '../../actions/followsActionCreators';
 import Modal from 'react-modal';
 import ProfileEditor from '../ProfileEditor';
@@ -16,12 +16,12 @@ import DummyLogin from '../DummyLogin'
 
 const customStyles = {
   content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
+    top         : '50%',
+    left        : '50%',
+    right       : 'auto',
+    bottom      : 'auto',
+    marginRight : '-50%',
+    transform   : 'translate(-50%, -50%)'
   }
 };
 
@@ -51,7 +51,10 @@ class User_Info extends Component {
                   this.props.requestFollow(this.props.activeUser.id, this.props.viewedProfile.id)
                 }}>Follow
         </button> : 
-        <button className='editButton'>Unfollow</button>
+        <button className='editButton'
+                onClick={()=>{
+                    this.props.unfollow(this.props.activeUser.id, this.props.viewedProfile.id)
+                }}>unfollow</button>
     } else {
       console.log('no activeUser in this.props')
       this.backgroundColor = 'white';
@@ -79,7 +82,10 @@ class User_Info extends Component {
                   nextProps.requestFollow(nextProps.activeUser.id, nextProps.viewedProfile.id)
                 }}>Follow
         </button> : 
-        <button className='editButton'>Unfollow</button>
+        <button className='editButton'
+                onClick={()=>{
+                  nextProps.unfollow(this.props.activeUser.id, this.props.viewedProfile.id)
+                }}>unfollow</button>
     } else {
       console.log('no activeUser in nextprops')
       this.backgroundColor = 'white';
@@ -96,6 +102,11 @@ class User_Info extends Component {
     console.log(this.props)
     this.props.requestFollow(this.props.activeUser.id, id)
     // send a followRequest from activeUser to viewedProfile
+  }
+  unfollow(id) {
+    console.log('unfollow:',id)
+    console.log(this.props)
+    this.props.unfollow(this.props.activeUser.id, id)
   }
 
   editProfile(id) {
@@ -130,6 +141,7 @@ class User_Info extends Component {
             {this.editButton}
             <Modal
                 isOpen={this.state.modalIsOpen}
+                closeModal={this.closeModal.bind(this)}
                 onAfterOpen={this.afterOpenModal}
                 onRequestClose={this.closeModal}
                 style={customStyles}
@@ -180,6 +192,7 @@ function mapStateToProps(state){
 
 let info = connect(mapStateToProps, {
   requestFollow: followFoundUser,
+  unfollow: unfollowFoundUser,
   getFollowersForUser: getFollowersForUser,
 })(User_Info);
 

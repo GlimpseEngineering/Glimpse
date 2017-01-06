@@ -117,6 +117,10 @@ module.exports = {
       throw err;
     });
   },
+  deletePost: (req, res, next) => {
+    // find and delete (50 is a good id to start with)
+    res.json('deleting post');
+  },
   respondToPost: (req, res, next) => {
     models.User_Emoji_Post.create({
       UserId: req.body.userId,
