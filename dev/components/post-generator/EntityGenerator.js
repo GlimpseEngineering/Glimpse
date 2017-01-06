@@ -40,6 +40,13 @@ class EntityGenerator extends Component {
       return x.toString() + ' ' + y.toString() + ' ' + z.toString();
     };
     let copiedEntity;
+    if (this.props.stagedEntity.primitive === 'PhotoSphere') {
+      copiedEntity = Object.assign({}, this.props.stagedEntity, {
+        components: {
+          src: this.state.src,
+        }
+      });
+    }
     if (this.props.stagedEntity.primitive === 'Text') {
       copiedEntity = Object.assign({}, this.props.stagedEntity, {
         components: {
@@ -96,6 +103,22 @@ class EntityGenerator extends Component {
         {this.props.stagedEntity.primitive}: some kind of content {this.props.stagedEntity.children}
         <button onClick={this.openEditMenu.bind(this)}>{this.state.enableEdit === true ? 'Hide' : 'Edit'}</button>
         <button onClick={this.deleteEntity.bind(this)}>Delete</button>
+
+        <form
+            id="photosphere"
+            className={this.props.stagedEntity.primitive === "PhotoSphere" && this.state.enableEdit === true ? "" : "hide-post-details"}
+            onSubmit={this.editEntity.bind(this)} >
+            <div>
+              <label>Image URL</label>
+              <input
+                type="text"
+                name="src"
+                value={this.state.src}
+                onChange={event => this.onInputChange(event)} />
+            </div>
+
+            <button type="submit">Edit this scene!</button>
+          </form>
 
         <form
             id="text"
