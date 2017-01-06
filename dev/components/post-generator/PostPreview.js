@@ -38,20 +38,22 @@ export default class World extends Component {
 
   render() {
     return (
-      <Scene>
-      
-        <Camera>
-          <a-cursor
-            animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150">
-          </a-cursor>
-        </Camera>
+      <div className={"col-8"}>
+        <Scene>
 
-        {JSON.parse(this.props.currentScene)
-          .map((entity, i) => {
-            return this.createJSX(entity, i)
-        })}
+          <Camera>
+            <a-cursor
+              animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150">
+            </a-cursor>
+          </Camera>
 
-      </Scene>
+          {JSON.parse(this.props.currentScene)
+            .map((entity, i) => {
+              return this.createJSX(entity, i)
+          })}
+
+        </Scene>
+      </div>
     );
   }
 };

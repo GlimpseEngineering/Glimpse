@@ -144,165 +144,167 @@ class PostGenerator extends Component {
     console.log('here is the staged entity that we submitted', this.props.newPost.stagedEntity);
     return (
       <div>
-      {this.state.selectedPrimitive}
-        <h3>Create A New Scene</h3>
+        <div className={"col-4"}>
+          {this.state.selectedPrimitive}
+          <h3>Create A New Scene</h3>
 
-        <select
-          value={this.state.selectedPrimitive}
-          onChange={event => this.onPrimitiveChange(event)} >
-          <option name="PhotoSphere" value="PhotoSphere">PhotoSphere</option>
-          <option name="Text" value="Text">Text</option>
-          <option name="Box" value="Box">Box</option>
-        </select>
+          <select
+            value={this.state.selectedPrimitive}
+            onChange={event => this.onPrimitiveChange(event)} >
+            <option name="PhotoSphere" value="PhotoSphere">PhotoSphere</option>
+            <option name="Text" value="Text">Text</option>
+            <option name="Box" value="Box">Box</option>
+          </select>
 
-        <form
-          id="photosphere"
-          className={this.state.selectedPrimitive === "PhotoSphere" ? "" : "hide-post-details"}
-          onSubmit={this.submitScene.bind(this)} >
-          <div>
-            <label>Image URL</label>
-            <input
-              type="text"
-              name="url"
-              value={this.state.src}
-              onChange={event => this.onInputChange(event)} />
-          </div>
+          <form
+            id="photosphere"
+            className={this.state.selectedPrimitive === "PhotoSphere" ? "" : "hide-post-details"}
+            onSubmit={this.submitScene.bind(this)} >
+            <div>
+              <label>Image URL</label>
+              <input
+                type="text"
+                name="url"
+                value={this.state.src}
+                onChange={event => this.onInputChange(event)} />
+            </div>
 
-          <button type="submit">Add this scene!</button>
-        </form>
+            <button type="submit">Add this scene!</button>
+          </form>
 
-        <form
-          id="text"
-          className={this.state.selectedPrimitive === "Text" ? "" : "hide-post-details"}
-          onSubmit={this.submitScene.bind(this)} >
-          <div>
-            <label>Text Content</label>
-            <input
-              type="text"
-              name="text"
-              value={this.state.text}
-              onChange={event => this.onInputChange(event)} />
-          </div>
+          <form
+            id="text"
+            className={this.state.selectedPrimitive === "Text" ? "" : "hide-post-details"}
+            onSubmit={this.submitScene.bind(this)} >
+            <div>
+              <label>Text Content</label>
+              <input
+                type="text"
+                name="text"
+                value={this.state.text}
+                onChange={event => this.onInputChange(event)} />
+            </div>
 
-          <div>
-            <label>Text Color</label>
-            <input
-              type="text"
-              name="color"
-              value={this.state.color}
-              onChange={event => this.onInputChange(event)} />
-          </div>
+            <div>
+              <label>Text Color</label>
+              <input
+                type="text"
+                name="color"
+                value={this.state.color}
+                onChange={event => this.onInputChange(event)} />
+            </div>
 
-          <div>
-            <label>Text X-Axis</label>
-            <input
-              type="number"
-              name="x"
-              value={this.state.x}
-              onChange={event => this.onInputChange(event)} />
-          </div>
+            <div>
+              <label>Text X-Axis</label>
+              <input
+                type="number"
+                name="x"
+                value={this.state.x}
+                onChange={event => this.onInputChange(event)} />
+            </div>
 
-          <div>
-            <label>Text Y-Axis</label>
-            <input
-              type="number"
-              name="y"
-              value={this.state.y}
-              onChange={event => this.onInputChange(event)} />
-          </div>
+            <div>
+              <label>Text Y-Axis</label>
+              <input
+                type="number"
+                name="y"
+                value={this.state.y}
+                onChange={event => this.onInputChange(event)} />
+            </div>
 
-          <div>
-            <label>Text Z-Axis</label>
-            <input
-              type="number"
-              name="z"
-              value={this.state.z}
-              onChange={event => this.onInputChange(event)} />
-          </div>
+            <div>
+              <label>Text Z-Axis</label>
+              <input
+                type="number"
+                name="z"
+                value={this.state.z}
+                onChange={event => this.onInputChange(event)} />
+            </div>
 
-          <button type="submit">Add this scene!</button>
-        </form>
+            <button type="submit">Add this scene!</button>
+          </form>
 
-        <form
-          id="box"
-          className={this.state.selectedPrimitive === "Box" ? "" : "hide-post-details"}
-          onSubmit={this.submitScene.bind(this)} >
-          <div>
-            <label>Box Width</label>
-            <input
-              type="number"
-              name="width"
-              value={this.state.width}
-              onChange={event => this.onInputChange(event)} />
-          </div>
+          <form
+            id="box"
+            className={this.state.selectedPrimitive === "Box" ? "" : "hide-post-details"}
+            onSubmit={this.submitScene.bind(this)} >
+            <div>
+              <label>Box Width</label>
+              <input
+                type="number"
+                name="width"
+                value={this.state.width}
+                onChange={event => this.onInputChange(event)} />
+            </div>
 
-          <div>
-            <label>Box Height</label>
-            <input
-              type="number"
-              name="height"
-              value={this.state.height}
-              onChange={event => this.onInputChange(event)} />
-          </div>
+            <div>
+              <label>Box Height</label>
+              <input
+                type="number"
+                name="height"
+                value={this.state.height}
+                onChange={event => this.onInputChange(event)} />
+            </div>
 
-          <div>
-            <label>Box depth</label>
-            <input
-              type="number"
-              name="depth"
-              value={this.state.depth}
-              onChange={event => this.onInputChange(event)} />
-          </div>
+            <div>
+              <label>Box depth</label>
+              <input
+                type="number"
+                name="depth"
+                value={this.state.depth}
+                onChange={event => this.onInputChange(event)} />
+            </div>
 
-          <div>
-            <label>Box color</label>
-            <input
-              type="text"
-              name="color"
-              value={this.state.color}
-              onChange={event => this.onInputChange(event)} />
-          </div>
+            <div>
+              <label>Box color</label>
+              <input
+                type="text"
+                name="color"
+                value={this.state.color}
+                onChange={event => this.onInputChange(event)} />
+            </div>
 
-          <button type="submit">Add this scene!</button>
-        </form>
+            <button type="submit">Add this scene!</button>
+          </form>
 
-        <ul>
-          {stagedEntities}
-        </ul>
+          <ul>
+            {stagedEntities}
+          </ul>
 
-        <form
-          id="post"
-          onSubmit={this.submitPost.bind(this)}
-          className={this.state.sceneComplete ? "" : "hide-post-details"} >
-          <div>
-            <label>Description</label>
-            <textarea
-              name="description"
-              value={this.state.description}
-              onChange={event => this.onInputChange(event)} >
-            </textarea>
-          </div>
+          <form
+            id="post"
+            onSubmit={this.submitPost.bind(this)}
+            className={this.state.sceneComplete ? "" : "hide-post-details"} >
+            <div>
+              <label>Description</label>
+              <textarea
+                name="description"
+                value={this.state.description}
+                onChange={event => this.onInputChange(event)} >
+              </textarea>
+            </div>
 
-          <div>
-            <label>Make Private</label>
-            <input
-              type="radio"
-              name="private"
-              value={this.state.private}
-              onChange={event => this.onInputChange(event)} />
-          </div>
+            <div>
+              <label>Make Private</label>
+              <input
+                type="radio"
+                name="private"
+                value={this.state.private}
+                onChange={event => this.onInputChange(event)} />
+            </div>
 
-          <div>
-            <label>Tags</label>
-            <input
-              type="text"
-              name="tags"
-              value={this.state.tags}
-              onChange={event => this.onInputChange(event)} />
-          </div>
+            <div>
+              <label>Tags</label>
+              <input
+                type="text"
+                name="tags"
+                value={this.state.tags}
+                onChange={event => this.onInputChange(event)} />
+            </div>
 
-          <button type="submit">Submit</button>
-        </form>
+            <button type="submit">Submit</button>
+          </form>
+        </div>
 
         <PostPreview currentScene={JSON.stringify(this.entityCollection)} />
       </div>
