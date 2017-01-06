@@ -9,6 +9,23 @@ function photoSphereGenerator(id, src) {
   };
 };
 
+function textGenerator(id, text, color, x, y, z) {
+  function position(x, y, z) {
+    return x.toString() + ' ' + y.toString() + ' ' + z.toString();
+  };
+
+  return {
+    id: id,
+    primitive: 'Text',
+    components: {
+      text: text,
+      color: color,
+      position: position(x, y, z)
+    },
+    children: null
+  };
+};
+
 function boxGenerator(id, width, height, depth, color) {
   return {
     id: id,
@@ -25,5 +42,6 @@ function boxGenerator(id, width, height, depth, color) {
 
 export const templateIndex = {
   photoSphereGenerator: photoSphereGenerator,
+  textGenerator: textGenerator,
   boxGenerator: boxGenerator
 }
