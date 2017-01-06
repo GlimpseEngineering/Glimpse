@@ -4,8 +4,8 @@ import React from 'react';
 export default props => (
   <Entity geometry={{
             primitive: 'plane',
-            width: 1,
-            height: 1
+            width: .8,
+            height: .8
 
           }} {...props} />
 );

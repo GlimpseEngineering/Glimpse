@@ -22,7 +22,8 @@ class World extends Component {
   constructor(props) {
     super(props);
     this.state={
-      showFeed:'false'
+      showFeed:'false',
+      showUserPosts: 'false'
     }
   }
 
@@ -43,8 +44,13 @@ class World extends Component {
   }
 
   toggleFeed() {
-    if (this.state.showFeed==='false') this.setState({showFeed:'true'});
+    if (this.state.showFeed==='false') this.setState({showFeed:'true', showUserPosts: 'false'});
     else this.setState({showFeed:'false'});
+  }
+
+  toggleUserPosts() {
+    if (this.state.showUserPosts==='false') this.setState({showUserPosts:'true', showFeed: 'false'});
+    else this.setState({showUserPosts:'false'});
   }
 
 
@@ -61,8 +67,9 @@ class World extends Component {
 
 
         <UI className='ui' visible='false' zpos='-1' exit={this.props.exitVR}
-            feed={this.props.userFeed} showFeed={this.state.showFeed}
-            toggleFeed={this.toggleFeed.bind(this)}
+            feed={this.props.userFeed} viewedUserPosts={this.props.userPosts}
+            showFeed={this.state.showFeed} showUserPosts={this.state.showUserPosts}
+            toggleFeed={this.toggleFeed.bind(this)} toggleUserPosts={this.toggleUserPosts.bind(this)}
             setScene={this.props.setScene} currentScene={this.props.currentScene}/>
 
 
@@ -84,7 +91,8 @@ function mapStateToProps(state) {
     cache: state.cache,
     currentScene: state.vrMode.currentScene,
     userFeed: state.userFeed,
-    vrMode: state.vrMode
+    vrMode: state.vrMode,
+    userPosts: state.userPosts
   };
 }
 

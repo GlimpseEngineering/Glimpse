@@ -7,6 +7,9 @@ import 'aframe-ui-modal-component';
 import '../acomps/shift_click_ui'
 import 'aframe-layout-component';
 import 'aframe-bmfont-text-component';
+var moment = require('moment');
+
+
 
 
 class UI extends Component {
@@ -14,7 +17,9 @@ class UI extends Component {
     super(props)
     //console.log(props)
     this.state = {
-      currSceneIndex: ''
+      currFeedSceneIndex: '',
+      currUserPostsSceneIndex: '',
+      currView: ''
     }
     this.checkNext = this.checkNext.bind(this);
     this.checkPrev = this.checkPrev.bind(this);
@@ -23,70 +28,132 @@ class UI extends Component {
     componentDidMount(){
       var sceneIndex;
       var self = this;
+      this.props.viewedUserPosts.userPosts.forEach((post, index) => {
+        if(post.content === self.props.currentScene){
+          self.setState({ currUserPostsSceneIndex: index, currView: 'userPosts' });
+        }
+      })
+
       this.props.feed.followingPosts.forEach(function(post, index){
         if(self.props.currentScene === post.content){
-          sceneIndex = index;
+          self.setState({ currFeedSceneIndex: index, currView: 'feed' })
         }
       });
-      this.setState({ currSceneIndex: sceneIndex })
     }
 
-    checkNext() {
-      if(this.state.currSceneIndex === this.props.feed.followingPosts.length - 1){
+    updateUserPostsSceneIndex(index){
+      if(this.state.currView === 'feed'){
+        this.setState({ currUserPostsSceneIndex: index, currFeedSceneIndex: '', currView: 'userPosts' })
+      }else {
+          this.setState({ currUserPostsSceneIndex: index, currFeedSceneIndex: '' })
+      }
+    }
+
+    updateFeedSceneIndex(index){
+      if(this.state.currView === "userPosts"){
+        this.setState({ currFeedSceneIndex: index, currUserPostsSceneIndex: '', currView: 'feed' });
+      }else{
+        this.setState({ currFeedSceneIndex: index, currUserPostsSceneIndex: '' });
+      }
+    }
+
+    checkNext(view) {
+
+      if(view){
+        if(view === 'feed'){
+          console.log('your current view is: ' + view);
+          if(this.state.currFeedSceneIndex === this.props.feed.followingPosts.length - 1){
+            return 'false';
+          }else {
+            return 'true';
+          }
+        }else {
+          if(this.state.currUserPostsSceneIndex === this.props.viewedUserPosts.userPosts.length - 1){
+            return 'false';
+          }else {
+            return 'true';
+          }
+        }
+      }
+      if(this.state.currFeedSceneIndex === this.props.feed.followingPosts.length - 1){
         return 'false';
       }else {
         return 'true';
       }
     }
 
-    checkPrev() {
-      if(this.state.currSceneIndex === 0){
+    checkPrev(view) {
+      if(view === 'userPosts'){
+        if(this.state.currUserPostsSceneIndex === 0){
+          return 'false';
+        }else {
+          return 'true';
+        }
+      }
+
+
+      if(view === 'feed' && this.state.currFeedSceneIndex === 0){
         return 'false';
       }else {
         return 'true';
       }
+
+
     }
 
     render() {
-      var mat;
+      // console.log('is user posts?', this.isUserPosts())
       return (
         <Entity shift-click-ui {...this.props}>
           <Entity layout="type: line; margin: 1.5" position="-2.25 -2 -1">
-            <Text className="ui-element" text="<" visible={this.checkPrev()}
+            <Text className="ui-element" text="<" visible={this.checkPrev(this.state.currView)}
               onClick={()=>{
+                if(this.state.currView === 'feed') {
+                  this.props.setScene(this.props.feed.followingPosts[this.state.currFeedSceneIndex - 1].content);
+                  this.setState({ currFeedSceneIndex: this.state.currFeedSceneIndex - 1 })
+                }else{
+                  this.props.setScene(this.props.viewedUserPosts.userPosts[this.state.currUserPostsSceneIndex - 1].content);
+                  this.setState({ currUserPostsSceneIndex: this.state.currUserPostsSceneIndex - 1 });
+                }
 
-              this.props.setScene(this.props.feed.followingPosts[this.state.currSceneIndex - 1].content);
-              this.setState({ currSceneIndex: this.state.currSceneIndex - 1 })
+
            }}/>
-            <Entity className="ui-element" >
+            <Entity className="ui-element" onClick={()=>{
+              this.props.toggleFeed()
+            }}>
 
               <Box color="white" height="0.08" width="0.5" depth="0.08"
-                   position="0 0 0" onClick={()=>{
-                     this.props.toggleFeed()
-                   }}/>
+                   position="0 0 0" />
               <Box color="white" height="0.08" width="0.5" depth="0.08"
-                   position="0 .2 0" onClick={()=>{
-                     this.props.toggleFeed()
-                   }}/>
+                   position="0 .2 0" />
               <Box color="white" height="0.08" width="0.5" depth="0.08"
-                   position="0 .4 0" onClick={()=>{
-                     this.props.toggleFeed()
-                   }}/>
+                   position="0 .4 0" />
+              {/* <Entity draw="background: #D7E8FF" textwrap="textAlign: center; x: 128; y: 128; text: Hello world!" position="1.17 0 .07" /> */}
               <Entity className="vr-feed" visible={this.props.showFeed}
-                      layout="line" rotation="0 0 90" margin="0.1">
-                {this.props.feed.followingPosts.map(post=>{
+                      layout="line" rotation="0 0 90" margin="0.1" position="1.5 1 0">
+
+                {this.props.feed.followingPosts.map((post, index)=>{
+                  var time = moment(post.createdAt).fromNow();
+                  var text = post.description.length;
+                  // var lineBreak = function(text){
+                  //   console.log('this description is this long : ' + text)
+                  // }
+                  // lineBreak(text)
                   return(
 
-                    <Box color="white" height="0.85" width="2.7"
+                    <Box color="white" height="0.85" width="4"
                          depth="0.08" rotation="0 0 -90" key={post.id}
                          onClick={()=>{
+                           this.updateFeedSceneIndex(index);
                            this.props.toggleFeed();
                            this.props.setScene(post.content);
-                           console.log('inside of boxs')
                         }}>
 
-                        <Entity bmfont-text={{text: `${post.description}; width: 500`}} position="-.5 -.02 .1" />
-                        <Plane position="-1 0 .4" material={{src: `url(https://calderonsteven.github.io/panorama-vr/images/moonfase.jpg)`, side: "double"}} />
+                        <Entity bmfont-text={{text: `${post.description}; width: 400; align: left; `}} position="-1 0 .07" />
+
+                        <Entity bmfont-text={{text: `${time}; width: 175; align: left`}} position="1.17 0 .07" />
+
+                        <Plane position="-1.55 0 .07" material={{src: `url(https://calderonsteven.github.io/panorama-vr/images/moonfase.jpg)`, side: "double"}} />
                     </Box>
                   )
                 })}
@@ -94,19 +161,62 @@ class UI extends Component {
             </Entity>
             <Text className="ui-element" text="X" onClick={this.props.exit} />
 
-            <Text className="ui-element" text=">" visible={this.checkNext()}
+            <Entity className="ui-element" onClick={()=>{
+              this.props.toggleUserPosts();
+
+            }} >
+
+              <Text text="U" />
+              <Entity className="vr-feed" visible={this.props.showUserPosts}
+                      layout="line" rotation="0 0 90" margin="0.1" position="-1.5 1 0">
+                      {this.props.viewedUserPosts.userPosts.map((post, index)=>{
+                        var time = moment(post.createdAt).fromNow();
+                        // var text = post.description.length;
+                        // var lineBreak = function(text){
+                        //   console.log('this description is this long : ' + text)
+                        // }
+                        // lineBreak(text)
+                        return(
+
+                        <Box color="white" height="0.85" width="4"
+                            depth="0.08" rotation="0 0 -90" key={post.id}
+                            onClick={()=>{
+                              this.updateUserPostsSceneIndex(index);
+                              this.props.toggleUserPosts();
+                              this.props.setScene(post.content);
+                          }}>
+
+                          <Entity bmfont-text={{text: `${post.description}; width: 400; align: left; `}} position="-1 0 .07" />
+
+                          <Entity bmfont-text={{text: `${time}; width: 175; align: left`}} position="1.17 0 .07" />
+
+                          <Plane position="-1.55 0 .07" material={{src: `url(https://calderonsteven.github.io/panorama-vr/images/moonfase.jpg)`, side: "double"}} />
+                        </Box>
+                        )
+                      })}
+              </Entity>
+            </Entity>
+
+
+
+            <Text className="ui-element" text=">"
+              visible={
+
+                  this.checkNext(this.state.currView)
+
+
+              }
               onClick={()=>{
-              // if(this.state.currSceneIndex === this.props.feed.followingPosts.length - 2){
-              //   console.log('end of the line baby');
-              //   this.setState({ showNext: 'false' })
-              // }
-              // if(this.state.currSceneIndex !== this.props.feed.followingPosts.length - 2){
-              //   this.setState({ showNext: 'true' })
-              // }
-              this.props.setScene(this.props.feed.followingPosts[this.state.currSceneIndex + 1].content);
-              this.setState({ currSceneIndex: this.state.currSceneIndex + 1 })
-           }}
-         />
+                if(this.state.currView === 'feed') {
+                  this.props.setScene(this.props.feed.followingPosts[this.state.currFeedSceneIndex + 1].content);
+                  this.setState({ currFeedSceneIndex: this.state.currFeedSceneIndex + 1 });
+                }else{
+                  this.props.setScene(this.props.viewedUserPosts.userPosts[this.state.currUserPostsSceneIndex + 1].content);
+                  this.setState({ currUserPostsSceneIndex: this.state.currUserPostsSceneIndex + 1 });
+                }
+
+              }}
+            />
           </Entity>
         </Entity>
       );
