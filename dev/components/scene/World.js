@@ -77,14 +77,11 @@ class World extends Component {
           </a-cursor>
         </Camera>
 
-
         <UI className='ui' visible='false' zpos='-1' exit={this.props.exitVR} user={this.props.viewedProfile}
             feed={this.props.userFeed} viewedUserPosts={this.props.userPosts}
             showFeed={this.state.showFeed} showUserPosts={this.state.showUserPosts}
             toggleFeed={this.toggleFeed.bind(this)} toggleUserPosts={this.toggleUserPosts.bind(this)}
             setScene={this.props.setScene} currentScene={this.props.currentScene}/>
-
-
         {JSON.parse(this.props.currentScene)
           .map((entity, i) => {
             return this.createJSX(entity, i)
