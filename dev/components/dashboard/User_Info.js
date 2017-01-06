@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { followFoundUser } from '../../actions/searchActionCreators';
 import { getFollowersForUser } from '../../actions/followsActionCreators';
+import Modal from 'react-modal';
+import ProfileEditor from '../ProfileEditor';
 import DummyLogin from '../DummyLogin'
 
 /**
@@ -12,17 +14,36 @@ import DummyLogin from '../DummyLogin'
  * access the search term saved on the store and populate tabs with data
  */
 
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)'
+  }
+};
+
 class User_Info extends Component {
   constructor(props){
     super(props);
+    this.state = {
+      modalIsOpen: false
+    };
+
+    this.openModal = this.openModal.bind(this);
+    this.afterOpenModal = this.afterOpenModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+
     if(this.props.activeUser){
       console.log(this.props.activeUser.id)
       this.myProfile = this.props.viewedProfile.id===this.props.activeUser.id;
       
       this.backgroundColor = this.myProfile ? 'lightBlue' : 'white';
       this.editButton = this.myProfile ? 
-        <button onClick={()=>{this.editProfile(this.props.activeUser.id)}}
-                className='editButton'>Edit Profile
+        <button onClick={this.openModal}
+                  className='editButton'>Edit Profile
         </button> : 
         !this.props.followers.map(p=>p.UserId).includes(this.props.activeUser.id) ?
         <button className='editButton'
@@ -49,9 +70,9 @@ class User_Info extends Component {
       
       this.backgroundColor = this.myProfile ? 'lightBlue' : 'white';
       this.editButton = this.myProfile ? 
-        <button onClick={()=>{this.editProfile(nextProps.activeUser.id)}}
+        <button onClick={this.openModal}
                 className='editButton'>Edit Profile
-        </button> : 
+        </button> :
         !nextProps.followers.map(p=>p.UserId).includes(nextProps.activeUser.id) ?
         <button className='editButton'
                 onClick={()=>{
@@ -81,6 +102,20 @@ class User_Info extends Component {
     console.log('edit profile',id)
   }
 
+  openModal() {
+    console.log('openModal')
+    this.setState({modalIsOpen: true});
+  }
+
+  afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    // this.refs.subtitle.style.color = '#f00';
+  }
+
+  closeModal() {
+    this.setState({modalIsOpen: false});
+  }
+
   render() {
     console.log('Here are our user props', this.props.viewedProfile);
     return (
@@ -93,6 +128,15 @@ class User_Info extends Component {
           <div className="picContainer">
             <img src={this.props.viewedProfile.profPic} className="profPic" />
             {this.editButton}
+            <Modal
+                isOpen={this.state.modalIsOpen}
+                onAfterOpen={this.afterOpenModal}
+                onRequestClose={this.closeModal}
+                style={customStyles}
+                contentLabel="Example Modal"
+            >
+              <ProfileEditor user={this.props.activeUser}/>
+            </Modal>
           </div>
           <div className="profileInfo">
             <div className="username">

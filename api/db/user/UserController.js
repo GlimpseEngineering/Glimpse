@@ -15,7 +15,7 @@ module.exports = {
   },
 
   updateUser: (req, res, next) => {
-    let tags = JSON.parse(req.body.tags);
+    let tags = req.body.tags ? JSON.parse(req.body.tags) : [];
     models.User.findOne({
       where: { id: req.params.userId }
     })

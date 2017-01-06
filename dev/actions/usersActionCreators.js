@@ -35,12 +35,6 @@ export function getOneUser(userId){
       console.log('the response for getting one user is:', response.data);
       let user = response.data || {}
       browserHistory.push(`/#/profile/${response.data.id}`);
-      // getAllPosts();
-      // getAllUsers();
-      // getPostsByUser(userId);
-      // getFollowersForUser(userId);
-      // getFollowedByUser(userId);
-      // getFollowedPosts(userId);
       dispatch({type: 'SET_USER_PROFILE', payload: user});
     })
     .catch(err => {
@@ -50,6 +44,23 @@ export function getOneUser(userId){
 }
 
 
-export function updateUser(){}
+export function updateUser(userId, profile){
+  return function(dispatch) {
+    axios({
+      method: 'PUT',
+      url: `/api/users/${userId}`,
+      data: profile
+    })
+    .then(response => {
+      console.log('the response for updating user is:', response.data);
+      let user = response.data || {}
+
+      dispatch({type: 'SET_USER_PROFILE', payload: user});
+    })
+    .catch(err => {
+      console.log('err in updateUser is:', err);
+    });
+  }
+}
 
 export function getUsersWithTag(){}
