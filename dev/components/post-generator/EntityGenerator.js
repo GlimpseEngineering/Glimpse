@@ -22,6 +22,10 @@ class EntityGenerator extends Component {
     console.log('next props', nextProps);
   }
 
+  openEditMenu() {
+    this.state.enableEdit === true ? this.setState({enableEdit: false}) : this.setState({enableEdit: true});
+  }
+
   editEntity() {
     let copiedEntity = Object.assign({}, this.props.stagedEntity, {
       children: 'yas'
@@ -60,12 +64,12 @@ class EntityGenerator extends Component {
       <div>
         {this.props.stagedEntity.id}
         {this.props.stagedEntity.primitive}: some kind of content {this.props.stagedEntity.children}
-        <button onClick={this.editEntity.bind(this)}>Edit</button>
+        <button onClick={this.openEditMenu.bind(this)}>{this.state.enableEdit === true ? 'Hide' : 'Edit'}</button>
         <button onClick={this.deleteEntity.bind(this)}>Delete</button>
 
         <form
             id="text"
-            className={this.props.stagedEntity.primitive === "Text" ? "" : "hide-post-details"} >
+            className={this.props.stagedEntity.primitive === "Text" && this.state.enableEdit === true ? "" : "hide-post-details"} >
             <div>
               <label>Text Content</label>
               <input
