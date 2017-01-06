@@ -144,7 +144,7 @@ class PostGenerator extends Component {
     console.log('here is the staged entity that we submitted', this.props.newPost.stagedEntity);
     return (
       <div>
-        <div className={"col-4"}>
+        <div className="col-4">
           {this.state.selectedPrimitive}
           <h3>Create A New Scene</h3>
 

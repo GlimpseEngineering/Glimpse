@@ -38,7 +38,7 @@ export default class World extends Component {
 
   render() {
     return (
-      <div className={"col-8"}>
+      <div className="col-8">
         <Scene>
 
           <Camera>
