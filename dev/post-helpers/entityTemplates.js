@@ -26,7 +26,11 @@ function textGenerator(id, text, color, x, y, z) {
   };
 };
 
-function boxGenerator(id, width, height, depth, color) {
+function boxGenerator(id, width, height, depth, color, src, x, y, z) {
+  function position(x, y, z) {
+    return x.toString() + ' ' + y.toString() + ' ' + z.toString();
+  };
+  
   return {
     id: id,
     primitive: 'Box',
@@ -34,7 +38,9 @@ function boxGenerator(id, width, height, depth, color) {
       width: width,
       height: height,
       depth: depth,
-      color: color
+      color: color,
+      src: src,
+      position: position(x, y, z)
     },
     children: null
   };

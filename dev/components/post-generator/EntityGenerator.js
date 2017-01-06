@@ -5,7 +5,8 @@ import { editEntity, deleteEntity } from '../../actions/postsActionCreators';
 class EntityGenerator extends Component {
   constructor(props) {
     super(props)
-      if (this.props.stagedEntity.primitive === 'Text') {
+      let primitive = this.props.stagedEntity.primitive;
+      if (primitive === 'Text' || primitive === 'Box') {
         this.position = this.props.stagedEntity.components.position.split(' ');
       }
 
@@ -21,7 +22,11 @@ class EntityGenerator extends Component {
         color: this.props.stagedEntity.components.color,
         x: this.position ? this.position[0] : '',
         y: this.position ? this.position[1] : '',
-        z: this.position ? this.position[2] : ''
+        z: this.position ? this.position[2] : '',
+        width: this.props.stagedEntity.components.width,
+        height: this.props.stagedEntity.components.height,
+        depth: this.props.stagedEntity.components.depth,
+        src: this.props.stagedEntity.components.src
       }
   }
 
@@ -44,6 +49,18 @@ class EntityGenerator extends Component {
         }
       });
     }
+    if (this.props.stagedEntity.primitive === 'Box') {
+      copiedEntity = Object.assign({}, this.props.stagedEntity, {
+        components: {
+          color: this.state.color,
+          src: this.state.src,
+          position: position(this.state.x, this.state.y, this.state.z),
+          width: this.state.width,
+          height: this.state.height,
+          depth: this.state.depth, 
+        }
+      });
+    }
     console.log('original entity', this.props.stagedEntity);
     console.log('copied entity', copiedEntity);
     this.props.editEntity(copiedEntity);
@@ -60,7 +77,7 @@ class EntityGenerator extends Component {
     name === 'description' && this.setState({description: value});
     name === 'private' && this.setState({private: value});
     name === 'tags' && this.setState({tags: value});
-    name === 'url' && this.setState({src: value});
+    name === 'src' && this.setState({src: value});
     name === 'width' && this.setState({width: value});
     name === 'height' && this.setState({height: value});
     name === 'depth' && this.setState({depth: value});
@@ -72,11 +89,6 @@ class EntityGenerator extends Component {
   }
 
   render() {
-    console.log('here is an array of our positions', this.position);
-    console.log('here is state x', this.state.x);
-    console.log('here is state y', this.state.y);
-    console.log('here is state z', this.state.z);
-    console.log('this is the props of the entity', this.props);
     console.log('passing delete scene to child', this.props.deleteScene);
     return (
       <div>
@@ -133,6 +145,85 @@ class EntityGenerator extends Component {
                 value={this.state.z}
                 onChange={event => this.onInputChange(event)} />
             </div>
+            <button type="submit">Edit this scene!</button>
+          </form>
+
+          <form
+            id="box"
+            className={this.props.stagedEntity.primitive === "Box" && this.state.enableEdit === true ? "" : "hide-post-details"}
+            onSubmit={this.editEntity.bind(this)} >
+             <div>
+              <label>Image URL</label>
+              <input
+                type="text"
+                name="src"
+                value={this.state.src}
+                onChange={event => this.onInputChange(event)} />
+            </div>
+
+            <div>
+              <label>Box Width</label>
+              <input
+                type="number"
+                name="width"
+                value={this.state.width}
+                onChange={event => this.onInputChange(event)} />
+            </div>
+
+            <div>
+              <label>Box Height</label>
+              <input
+                type="number"
+                name="height"
+                value={this.state.height}
+                onChange={event => this.onInputChange(event)} />
+            </div>
+
+            <div>
+              <label>Box Depth</label>
+              <input
+                type="number"
+                name="depth"
+                value={this.state.depth}
+                onChange={event => this.onInputChange(event)} />
+            </div>
+
+            <div>
+              <label>Box Color</label>
+              <input
+                type="text"
+                name="color"
+                value={this.state.color}
+                onChange={event => this.onInputChange(event)} />
+            </div>
+
+            <div>
+              <label>Box X-Axis</label>
+              <input
+                type="number"
+                name="x"
+                value={this.state.x}
+                onChange={event => this.onInputChange(event)} />
+            </div>
+
+            <div>
+              <label>Box Y-Axis</label>
+              <input
+                type="number"
+                name="y"
+                value={this.state.y}
+                onChange={event => this.onInputChange(event)} />
+            </div>
+
+            <div>
+              <label>Box Z-Axis</label>
+              <input
+                type="number"
+                name="z"
+                value={this.state.z}
+                onChange={event => this.onInputChange(event)} />
+            </div>
+
             <button type="submit">Edit this scene!</button>
           </form>
       </div> 

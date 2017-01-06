@@ -49,11 +49,13 @@ class PostGenerator extends Component {
 
   submitPost(event) {
     /**
+     * note: as of yet, no need to remove the keys from the entities, seems to render just fine with them
+     * 
      * be sure to JSON.stringify the entityCollection before submitting
-     * also iterate through the object and pass the data to entityCollection w/o id
-     * i.e. when saving to db save w/o id? 
+     * setState({content: this.entityCollection})
      * 
      * also be sure to dispatch an action at some point that clears the created post from the reducer state
+     * also clear the collection of entities from this.entityCollection 
      */
     event.preventDefault();
     this.props.createPost(this.state);
@@ -87,7 +89,7 @@ class PostGenerator extends Component {
       entity = templateIndex.textGenerator(this.state.id, this.state.text, this.state.color, this.state.x, this.state.y, this.state.z);
     }
     if (this.state.selectedPrimitive === 'Box')  {
-      entity = templateIndex.boxGenerator(this.state.id, this.state.width, this.state.height,this.state.depth, this.state.color);
+      entity = templateIndex.boxGenerator(this.state.id, this.state.width, this.state.height,this.state.depth, this.state.color, this.state.src, this.state.x, this.state.y, this.state.z);
     }
     console.log('here is the submission of the entity', entity);
     this.props.stageEntity(entity);
@@ -112,7 +114,7 @@ class PostGenerator extends Component {
     name === 'description' && this.setState({description: value});
     name === 'private' && this.setState({private: value});
     name === 'tags' && this.setState({tags: value});
-    name === 'url' && this.setState({src: value});
+    name === 'src' && this.setState({src: value});
     name === 'width' && this.setState({width: value});
     name === 'height' && this.setState({height: value});
     name === 'depth' && this.setState({depth: value});
@@ -141,7 +143,7 @@ class PostGenerator extends Component {
       );
     });
 
-    console.log('here is the staged entity that we submitted', this.props.newPost.stagedEntity);
+    console.log('here is the staged entity that we submitted', this.props.newPost);
     return (
       <div>
         <div className="col-4">
@@ -164,7 +166,7 @@ class PostGenerator extends Component {
               <label>Image URL</label>
               <input
                 type="text"
-                name="url"
+                name="src"
                 value={this.state.src}
                 onChange={event => this.onInputChange(event)} />
             </div>
@@ -228,6 +230,15 @@ class PostGenerator extends Component {
             id="box"
             className={this.state.selectedPrimitive === "Box" ? "" : "hide-post-details"}
             onSubmit={this.submitScene.bind(this)} >
+             <div>
+              <label>Image URL</label>
+              <input
+                type="text"
+                name="src"
+                value={this.state.src}
+                onChange={event => this.onInputChange(event)} />
+            </div>
+
             <div>
               <label>Box Width</label>
               <input
@@ -247,7 +258,7 @@ class PostGenerator extends Component {
             </div>
 
             <div>
-              <label>Box depth</label>
+              <label>Box Depth</label>
               <input
                 type="number"
                 name="depth"
@@ -256,11 +267,38 @@ class PostGenerator extends Component {
             </div>
 
             <div>
-              <label>Box color</label>
+              <label>Box Color</label>
               <input
                 type="text"
                 name="color"
                 value={this.state.color}
+                onChange={event => this.onInputChange(event)} />
+            </div>
+
+            <div>
+              <label>Box X-Axis</label>
+              <input
+                type="number"
+                name="x"
+                value={this.state.x}
+                onChange={event => this.onInputChange(event)} />
+            </div>
+
+            <div>
+              <label>Box Y-Axis</label>
+              <input
+                type="number"
+                name="y"
+                value={this.state.y}
+                onChange={event => this.onInputChange(event)} />
+            </div>
+
+            <div>
+              <label>Box Z-Axis</label>
+              <input
+                type="number"
+                name="z"
+                value={this.state.z}
                 onChange={event => this.onInputChange(event)} />
             </div>
 
