@@ -4,7 +4,11 @@ import { editEntity, deleteEntity } from '../../actions/postsActionCreators';
 
 class EntityGenerator extends Component {
   constructor(props) {
-    super(props) 
+    super(props)
+      if (this.props.stagedEntity.primitive === 'Text') {
+        this.position = this.props.stagedEntity.components.position.split(' ');
+      }
+
       this.state = {
         /**
          * ideally would be nice for state to be set to whatever was submitted on load
@@ -13,17 +17,12 @@ class EntityGenerator extends Component {
         enableEdit: false,
         id: '',
         primitive: '',
-        text: '',
-        color: '',
-        x: '',
-        y: '',
-        z: ''
+        text: this.props.stagedEntity.components.text,
+        color: this.props.stagedEntity.components.color,
+        x: this.position ? this.position[0] : '',
+        y: this.position ? this.position[1] : '',
+        z: this.position ? this.position[2] : ''
       }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log('current props', this.props);
-    console.log('next props', nextProps);
   }
 
   openEditMenu() {
@@ -32,15 +31,10 @@ class EntityGenerator extends Component {
 
   editEntity(event) {
     event.preventDefault();
-    const position = function(x, y, z) {
+    const position = (x, y, z) => {
       return x.toString() + ' ' + y.toString() + ' ' + z.toString();
     };
     let copiedEntity;
-    /**
-     * want to edit the entity, but before i edit the entity i need a function 
-     * this function would take the values in the form and save them to state somehow 
-     * wait...form values are saved in state as they're updated 
-     */
     if (this.props.stagedEntity.primitive === 'Text') {
       copiedEntity = Object.assign({}, this.props.stagedEntity, {
         components: {
@@ -78,6 +72,10 @@ class EntityGenerator extends Component {
   }
 
   render() {
+    console.log('here is an array of our positions', this.position);
+    console.log('here is state x', this.state.x);
+    console.log('here is state y', this.state.y);
+    console.log('here is state z', this.state.z);
     console.log('this is the props of the entity', this.props);
     console.log('passing delete scene to child', this.props.deleteScene);
     return (
@@ -135,7 +133,7 @@ class EntityGenerator extends Component {
                 value={this.state.z}
                 onChange={event => this.onInputChange(event)} />
             </div>
-            <button type="submit">Add this scene!</button>
+            <button type="submit">Edit this scene!</button>
           </form>
       </div> 
     );
