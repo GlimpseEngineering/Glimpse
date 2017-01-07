@@ -10,8 +10,6 @@ import 'aframe-bmfont-text-component';
 var moment = require('moment');
 
 
-
-
 class UI extends Component {
   constructor(props) {
     super(props)
@@ -19,12 +17,16 @@ class UI extends Component {
     this.state = {
       currFeedSceneIndex: '',
       currUserPostsSceneIndex: '',
-      currView: ''
+      currView: '',
+      userPostsPosition: -2
     }
     this.checkNext = this.checkNext.bind(this);
     this.checkPrev = this.checkPrev.bind(this);
     this.isFeedCurrent = this.isFeedCurrent.bind(this);
     this.isUserPostsCurrent = this.isUserPostsCurrent.bind(this);
+    this.lineBreak = this.lineBreak.bind(this);
+    this.isFeedCurrWidth = this.isFeedCurrWidth.bind(this);
+    this.isPostsCurrWidth = this.isPostsCurrWidth.bind(this);
     }
 
     componentDidMount(){
@@ -117,17 +119,86 @@ class UI extends Component {
       }
     }
 
-    positionCurrFeed(index){
+    isFeedCurrWidth(index){
       if(index === this.state.currFeedSceneIndex){
-        return
+        return 4.2;
+      }else{
+        return 4;
       }
+    }
+    isPostsCurrWidth(index){
+      if(index === this.state.currUserPostsSceneIndex){
+        return 4.2;
+      }else{
+        return 4;
+      }
+    }
+
+    lineBreak(text){
+        text = text.split(' ');
+        var lineOne = '';
+        var lineTwo = '';
+        var lineThree = '';
+
+        var count = 0;
+        var result;
+        var curr;
+        for(var i = 0; i < text.length; i++){
+
+          if(lineOne.length <= 21 && ((lineOne.length + text[i].length + 1) <= 21) && count <= 21 && (curr === undefined || curr === 'line1')){
+            if(curr === undefined) {
+              curr = 'line1';
+              lineOne += (text[i] + ' ');
+              count += (text[i].length + 1);
+            }else if(curr === 'line1'){
+              lineOne += (text[i] + ' ');
+              count += (text[i].length + 1);
+            }
+          }else if(lineTwo.length <= 21 && ((lineTwo.length + text[i].length + 1) <= 21) && count < (count + 21) && (curr === 'line1' || curr === 'line2')) {
+            if(curr === 'line1'){
+              curr = 'line2';
+              lineTwo += (text[i] + ' ');
+              count += (text[i].length + 1);
+            }else if(curr === 'line2') {
+              lineTwo += (text[i] + ' ');
+              count += (text[i].length + 1);
+            }
+          }else if(lineThree.length <= 18 && ((lineThree.length + text[i].length + 1) <= 18) && count <= (count + 17) && (curr === 'line2' || curr === 'line3')){
+            if(curr === 'line2'){
+              curr = 'line3'
+              lineThree += (text[i] + ' ');
+              count += (text[i].length + 1);
+            }else if(curr === 'line3'){
+              lineThree += (text[i] + ' ');
+              count += (text[i].length + 1);
+            }
+          }else {
+            if(curr === 'line3'){
+              curr = 'done';
+              var removeEnd = lineThree.slice(0, lineThree.length - 1);
+              lineThree = removeEnd;
+              var removeEndAgain = lineThree.slice(lineThree.length - 1);
+              if(removeEndAgain === '.' || removeEndAgain === ','){
+                lineThree = lineThree.slice(0, lineThree.length - 1);
+                lineThree += "...";
+              }else{
+                lineThree += "...";
+              }
+            }
+          }
+        }
+        var arrayOfLines = [lineOne, lineTwo, lineThree];
+
+        result = [lineOne + '\n' + lineTwo + '\n' + lineThree, arrayOfLines];
+
+        return result;
     }
 
     render() {
       // console.log('is user posts?', this.isUserPosts())
       return (
         <Entity shift-click-ui {...this.props}>
-          <Entity layout="type: line; margin: 1.5" position="-2.25 -2 -1">
+          <Entity layout="type: line; margin: 1.3" position="-2.8 -2 0">
             <Text className="ui-element" text="<" visible={this.checkPrev(this.state.currView)}
               onClick={()=>{
                 if(this.state.currView === 'feed') {
@@ -152,19 +223,32 @@ class UI extends Component {
                    position="0 .4 0" />
               {/* <Entity draw="background: #D7E8FF" textwrap="textAlign: center; x: 128; y: 128; text: Hello world!" position="1.17 0 .07" /> */}
               <Entity className="vr-feed" visible={this.props.showFeed}
-                      layout="line" rotation="0 0 90" margin="0.1" position="1.5 1 0">
+                      layout="line" rotation="0 0 90" margin="0.1" position={`1.35 ${ -(this.state.currFeedSceneIndex) + 1 } -1`}>
 
                 {this.props.feed.followingPosts.map((post, index)=>{
                   var time = moment(post.createdAt).fromNow();
-                  var text = post.description.length;
-                  // var lineBreak = function(text){
-                  //   console.log('this description is this long : ' + text)
-                  // }
-                  // lineBreak(text)
+                  // var text = post.description.length;
+                  var text = post.description;
+                  var description = this.lineBreak(text);
+                  function textPosition(array){
+
+                    var result;
+                    if(array[2].length !== 0){
+                      result = "-1 -0.2 .07"
+
+                    }else if(array[2].length === 0 && array[1].length !== 0){
+                      result = "-1 0 .07";
+
+                    }else{
+                      result = "-1 0.2 .07";
+                    }
+                    return result;
+                  }
+                  var position = textPosition(description[1])
                   return(
 
-                    <Box  height="0.85" width="4"
-                         depth="0.08" rotation="0 0 -90" key={post.id}
+                    <Box  height="0.85" width={this.isFeedCurrWidth(index)}
+                         depth="0.05" rotation="0 0 -90" key={post.id}
                          material={`opacity: .4; color:${this.isFeedCurrent(index)}`}
                         //  color={this.isFeedCurrent(index)}
                          onClick={()=>{
@@ -173,7 +257,7 @@ class UI extends Component {
                            this.props.setScene(post.content);
                         }}>
 
-                        <Entity bmfont-text={{text: `${post.description}; width: 400; align: left; `}} position="-1 0 .07" />
+                        <Entity bmfont-text={{text: `${description[0]}; width: 400; align: left; `}} position={position} />
 
                         <Entity bmfont-text={{text: `${time}; width: 175; align: left`}} position="1.17 0 .07" />
 
@@ -192,110 +276,49 @@ class UI extends Component {
 
               <Text text="U" />
               <Entity className="vr-feed" visible={this.props.showUserPosts}
-                      layout="line" rotation="0 0 90" margin="0.1" position="-1.5 1 0">
+                      layout="line" rotation="0 0 90" margin="0.1" position={`-1.25 ${ -(this.state.currUserPostsSceneIndex) + 1 } -1`}>
                       {this.props.viewedUserPosts.userPosts.map((post, index)=>{
                         var time = moment(post.createdAt).fromNow();
 
                         //text display algorithm=========>>>>>>>
                         var text = post.description;
-                        var arrayOfLines;
-                        var lineBreak = function(text){
-                          text = text.split(' ');
-                          var lineOne = '';
-                          var lineTwo = '';
-                          var lineThree = '';
-
-                          var count = 0;
-                          var result;
-                          var curr;
-                          for(var i = 0; i < text.length; i++){
-
-                            if(lineOne.length <= 22 && ((lineOne.length + text[i].length + 1) <= 22) && count <= 22 && (curr === undefined || curr === 'line1')){
-                              if(curr === undefined) {
-                                curr = 'line1';
-                                lineOne += (text[i] + ' ');
-                                count += (text[i].length + 1);
-                              }else if(curr === 'line1'){
-                                lineOne += (text[i] + ' ');
-                                count += (text[i].length + 1);
-                              }
-                            }else if(lineTwo.length <= 22 && ((lineTwo.length + text[i].length + 1) <= 22) && count < (count + 22) && (curr === 'line1' || curr === 'line2')) {
-                              if(curr === 'line1'){
-                                curr = 'line2';
-                                lineTwo += (text[i] + ' ');
-                                count += (text[i].length + 1);
-                              }else if(curr === 'line2') {
-                                lineTwo += (text[i] + ' ');
-                                count += (text[i].length + 1);
-                              }
-                            }else if(lineThree.length <= 22 && ((lineThree.length + text[i].length + 1) <= 22) && count <= (count + 17) && (curr === 'line2' || curr === 'line3')){
-                              if(curr === 'line2'){
-                                curr = 'line3'
-                                lineThree += (text[i] + ' ');
-                                count += (text[i].length + 1);
-                              }else if(curr === 'line3'){
-                                lineThree += (text[i] + ' ');
-                                count += (text[i].length + 1);
-                              }
-                            }else {
-                              if(curr === 'line3'){
-                                curr = 'done';
-                                var removeEnd = lineThree.slice(0, lineThree.length - 1);
-                                lineThree = removeEnd;
-                                var removeEndAgain = lineThree.slice(lineThree.length - 1);
-                                if(removeEndAgain === '.' || removeEndAgain === ','){
-                                  lineThree = lineThree.slice(0, lineThree.length - 1);
-                                  lineThree += "...";
-                                }else{
-                                  lineThree += "...";
-                                }
-                              }
-                            }
-                          }
-
-
-                          arrayOfLines = [lineOne, lineTwo, lineThree];
-
-                          result = lineOne + '\n' + lineTwo + '\n' + lineThree;
-
-                          return result;
-                        }
-                        var description = lineBreak(text);
-                        //lineBreak(text)
+                        var description = this.lineBreak(text);
                         function textPosition(array){
-                          // console.log(array);
+
                           var result;
                           if(array[2].length !== 0){
                             result = "-1 -0.2 .07"
-                            console.log(array)
+
                           }else if(array[2].length === 0 && array[1].length !== 0){
                             result = "-1 0 .07";
-                            console.log(array)
+
                           }else{
                             result = "-1 0.2 .07";
                           }
                           return result;
                         }
-                        var position = textPosition(arrayOfLines)
+                        var position = textPosition(description[1])
                         //=========>>>>>>>
                         return(
 
-                        <Box height="0.85" width="4"
-                            depth="0.08" rotation="0 0 -90" key={post.id}
-                            material={`opacity: .4; color:${this.isUserPostsCurrent(index)}`}
-                            // color={this.isUserPostsCurrent(index)}
-                            onClick={()=>{
-                              this.updateUserPostsSceneIndex(index);
-                              this.props.toggleUserPosts();
-                              this.props.setScene(post.content);
-                          }}>
+                          <Box height="0.85" width={this.isPostsCurrWidth(index)}
+                              depth="0.05" rotation="0 0 -90" key={post.id}
+                              material={`opacity: .4; color:${this.isUserPostsCurrent(index)}`}
+                              // color={this.isUserPostsCurrent(index)}
+                              onClick={()=>{
+                                this.updateUserPostsSceneIndex(index);
+                                this.props.toggleUserPosts();
+                                this.props.setScene(post.content);
+                            }}>
 
-                          <Entity bmfont-text={{text: `${description}; width: 470; align: left; `}} position={position} />
+                            <Entity bmfont-text={{text: `${description[0]}; width: 470; align: left; `}} position={position} />
 
-                          <Entity bmfont-text={{text: `${time}; width: 175; align: left`}} position="1.17 0 .07" />
+                            <Entity bmfont-text={{text: `${time}; width: 175; align: left`}} position="1.17 0 .07" />
 
-                          <Plane position="-1.55 0 .07" material={{src: `url(https://calderonsteven.github.io/panorama-vr/images/moonfase.jpg)`, side: "double"}} />
-                        </Box>
+                            <Plane position="-1.55 0 .07" material={{src: `url(https://calderonsteven.github.io/panorama-vr/images/moonfase.jpg)`, side: "double"}} />
+                          </Box>
+
+
                         )
                       })}
               </Entity>
