@@ -67,11 +67,13 @@ class EntityGenerator extends Component {
       copiedEntity = Object.assign({}, this.props.stagedEntity, {
         components: {
           color: this.state.color,
-          src: this.state.src,
           position: position(this.state.x, this.state.y, this.state.z),
           width: this.state.width,
           height: this.state.height,
           depth: this.state.depth, 
+          material: {
+            src: this.state.src
+          }
         }
       });
     }
@@ -109,7 +111,6 @@ class EntityGenerator extends Component {
       <div>
         {this.props.stagedEntity.id}
         {this.props.stagedEntity.primitive}: some kind of content {this.props.stagedEntity.children}
-        <button value="copy" onClick={this.editOrCopyEntity.bind(this)}>Copy</button>
         <button onClick={this.openEditMenu.bind(this)}>{this.state.enableEdit === true ? 'Hide' : 'Edit'}</button>
         <button onClick={this.deleteEntity.bind(this)}>Delete</button>
 

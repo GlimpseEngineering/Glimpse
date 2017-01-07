@@ -39,8 +39,10 @@ function boxGenerator(id, width, height, depth, color, src, x, y, z) {
       height: height,
       depth: depth,
       color: color,
-      src: src,
-      position: position(x, y, z)
+      position: position(x, y, z),
+      material: {
+        src: src
+      }
     },
     children: null
   };
