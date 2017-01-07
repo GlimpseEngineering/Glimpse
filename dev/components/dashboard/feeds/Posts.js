@@ -69,46 +69,6 @@ class Posts extends Component {
     }
   }
 
-    this.openDeleteModal = this.openDeleteModal.bind(this);
-    this.closeDeleteModal = this.closeDeleteModal.bind(this);
-
-    if(this.props.activeUser){
-      this.myProfile = this.props.viewedProfile.id===this.props.activeUser.id;
-      console.log('MY PROFILE?????', this.myProfile)
-      
-      this.editButton = this.myProfile ? 
-        <div>
-          <button className='editButton'
-            onClick={()=>{setTimeout(this.openDeleteModal, 0)}}>Delete
-          </button>
-          <button className='editButton'
-            onClick={()=>{setTimeout(this.openEditModal, 0)}}>Edit
-          </button>
-        </div> : null
-  } else {
-      this.editButton = null;
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if(nextProps.activeUser){
-      this.myProfile = nextProps.viewedProfile.id===nextProps.activeUser.id;
-      console.log('MY PROFILE?????', this.myProfile)
-      
-      this.editButton = this.myProfile ? 
-        <div>
-          <button className='editButton'
-             onClick={()=>{setTimeout(this.openDeleteModal, 0)}}>Delete
-          </button>
-          <button className='editButton'
-            onClick={()=>{setTimeout(this.openEditModal, 0)}}>Edit
-          </button>
-        </div> : null
-  } else {
-      this.editButton = null;
-    }
-  }
-
   openEditModal() {
     this.setState({editModalIsOpen: true});
   }
@@ -181,7 +141,6 @@ class Posts extends Component {
               console.log('delete',this.state.selectedPost);
               this.props.deletePost(this.state.selectedPost.id);
               this.closeDeleteModal.bind(this);
-
             }}>
               Delete
             </button>
