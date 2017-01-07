@@ -37,6 +37,7 @@ class ProfileEditor extends Component {
       gender: this.state.gender,
       private: this.state.private
     })
+    this.props.closeModal();
   }
 
   onInputChange(event) {

@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { getOneUser, getAllUsers } from '../../actions/usersActionCreators';
 import { getPostsByUser, getAllPosts } from '../../actions/postsActionCreators';
@@ -19,7 +20,8 @@ class Profile extends Component {
     } else if (this.props.activeUser) {
       this.getFeedData(this.props.activeUser.id);
     } else {
-      this.getFeedData(1)
+      browserHistory.push(`/#/splash`)
+      window.location.reload();
     }
     
   }
