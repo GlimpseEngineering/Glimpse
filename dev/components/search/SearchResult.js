@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { followFoundUser, unfollowFoundUser } from '../../actions/searchActionCreators';
+import { getFollowedByUser } from '../../actions/followsActionCreators';
 import { Link } from 'react-router';
 
 class SearchResult extends Component {
@@ -20,14 +21,12 @@ class SearchResult extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    let followRequest = this.props.foundUsers.followedByUser[this.props.searchResult.id];
     let updatedRequest = nextProps.foundUsers.followedByUser[nextProps.searchResult.id];
     updatedRequest && updatedRequest.status === 'pending' && this.setState({button: 'pending'});
     updatedRequest && updatedRequest.status === 'accepted' && this.setState({button: 'unfollow'});
     updatedRequest && updatedRequest.status === 'unfollowed' && this.setState({button: 'follow'});
-    if (this.props.searchResult.id === 2 || this.props.searchResult.id === 6) {
-      console.log('props before unfollowing user', this.props.foundUsers);
-      console.log('props after unfollowing user', nextProps.foundUsers);
-    }
+    followRequest && updatedRequest && updatedRequest.status !== followRequest.status && this.props.getFollowedByUser(this.props.auth.activeUser.id);
   }
 
   onClick(event) {
@@ -56,5 +55,5 @@ function mapStateToProps(state){
   };
 };
 
-const searchResult = connect(mapStateToProps, { followFoundUser, unfollowFoundUser })(SearchResult);
+const searchResult = connect(mapStateToProps, { getFollowedByUser, followFoundUser, unfollowFoundUser })(SearchResult);
 export default searchResult;
