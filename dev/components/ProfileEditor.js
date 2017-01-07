@@ -107,10 +107,7 @@ class ProfileEditor extends Component {
 
 
 function mapStateToProps(state) {
-  return {
-    auth: state.auth,
-    newPost: state.newPost
-  };
+  return {};
 };
 
 export default connect(mapStateToProps, {

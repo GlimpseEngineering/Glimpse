@@ -118,8 +118,29 @@ module.exports = {
     });
   },
   deletePost: (req, res, next) => {
-    // find and delete (50 is a good id to start with)
-    res.json('deleting post');
+    models.Post.findOne({
+      where: { id: req.params.postId}
+    })
+    .then(post => {
+      console.log(`deleting post ${post.id} from db`)
+      return post.destroy()
+    })
+    .then((response) => {
+      console.log(`fetching remaining posts for user ${response.UserId}`)
+      return models.Post.findAll({
+        where: { userId: response.UserId }
+      })
+    })
+    .then(posts => {
+      console.log(`sending remaining posts for user`)
+      console.log(posts)
+      if (!Array.isArray(posts)) posts = [posts];
+      res.json(posts);
+    })
+    .catch(err => {
+      res.json(err);
+      throw err;
+    });
   },
   respondToPost: (req, res, next) => {
     models.User_Emoji_Post.create({
