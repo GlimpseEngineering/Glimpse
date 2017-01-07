@@ -133,10 +133,13 @@ class Posts extends Component {
             contentLabel="Example Modal"
         >
           <div>
-            <h3>Delete this post?</h3><br/>
+            <h3>Delete this post?</h3>
+            <p>{this.state.selectedPost && this.state.selectedPost.description}</p>
+            <br/>
             <button onClick={()=>{
               console.log('delete',this.state.selectedPost);
-              this.props.deletePost(this.state.selectedPost.id)
+              this.props.deletePost(this.state.selectedPost.id);
+              this.closeDeleteModal.bind(this);
             }}>
               Delete
             </button>

@@ -55,9 +55,7 @@ class User_Info extends Component {
 
   componentWillReceiveProps(nextProps) {
     console.log("USER_INFO PROPS:",this.props)
-    console.log('user_info nextprops:',nextProps)    
-    console.log(nextProps.followers)    
-    console.log(nextProps.followers.map(p=>p.UserId))
+    console.log('user_info nextprops:',nextProps)
     if(nextProps.activeUser){
       console.log(nextProps.activeUser.id)
       this.myProfile = nextProps.viewedProfile.id===nextProps.activeUser.id;
@@ -139,7 +137,8 @@ class User_Info extends Component {
                 style={customStyles}
                 contentLabel="Example Modal"
             >
-              <ProfileEditor user={this.props.activeUser}/>
+              <ProfileEditor user={this.props.activeUser}
+                closeModal={this.closeModal.bind(this)}/>
             </Modal>
           </div>
           <div className="profileInfo">
