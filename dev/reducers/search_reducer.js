@@ -50,7 +50,9 @@ export default function(state = INITIAL_STATE, action) {
           })
         },
         followedByUser: Object.assign({}, state.foundUsers.followedByUser, {
-          [action.payload.followedByUser.FollowId]: action.payload.followedByUser
+          [action.payload.followedByUser.FollowId]: Object.assign({}, action.payload.followedByUser, {
+            status: 'unfollowed'
+          })
         })
       }
     });
