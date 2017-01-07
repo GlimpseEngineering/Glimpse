@@ -23,6 +23,8 @@ class UI extends Component {
     }
     this.checkNext = this.checkNext.bind(this);
     this.checkPrev = this.checkPrev.bind(this);
+    this.isFeedCurrent = this.isFeedCurrent.bind(this);
+    this.isUserPostsCurrent = this.isUserPostsCurrent.bind(this);
     }
 
     componentDidMount(){
@@ -97,8 +99,28 @@ class UI extends Component {
       }else {
         return 'true';
       }
+    }
 
+    isFeedCurrent(index){
+      if(index === this.state.currFeedSceneIndex){
+        return '#6C6C6C';
+      }else{
+        return 'white';
+      }
+    }
 
+    isUserPostsCurrent(index){
+      if(index === this.state.currUserPostsSceneIndex){
+        return '#6C6C6C';
+      }else{
+        return 'white';
+      }
+    }
+
+    positionCurrFeed(index){
+      if(index === this.state.currFeedSceneIndex){
+        return
+      }
     }
 
     render() {
@@ -141,8 +163,10 @@ class UI extends Component {
                   // lineBreak(text)
                   return(
 
-                    <Box color="white" height="0.85" width="4"
+                    <Box  height="0.85" width="4"
                          depth="0.08" rotation="0 0 -90" key={post.id}
+                         material={`opacity: .4; color:${this.isFeedCurrent(index)}`}
+                        //  color={this.isFeedCurrent(index)}
                          onClick={()=>{
                            this.updateFeedSceneIndex(index);
                            this.props.toggleFeed();
@@ -171,22 +195,102 @@ class UI extends Component {
                       layout="line" rotation="0 0 90" margin="0.1" position="-1.5 1 0">
                       {this.props.viewedUserPosts.userPosts.map((post, index)=>{
                         var time = moment(post.createdAt).fromNow();
-                        // var text = post.description.length;
-                        // var lineBreak = function(text){
-                        //   console.log('this description is this long : ' + text)
-                        // }
-                        // lineBreak(text)
+
+                        //text display algorithm=========>>>>>>>
+                        var text = post.description;
+                        var arrayOfLines;
+                        var lineBreak = function(text){
+                          text = text.split(' ');
+                          var lineOne = '';
+                          var lineTwo = '';
+                          var lineThree = '';
+
+                          var count = 0;
+                          var result;
+                          var curr;
+                          for(var i = 0; i < text.length; i++){
+
+                            if(lineOne.length <= 22 && ((lineOne.length + text[i].length + 1) <= 22) && count <= 22 && (curr === undefined || curr === 'line1')){
+                              if(curr === undefined) {
+                                curr = 'line1';
+                                lineOne += (text[i] + ' ');
+                                count += (text[i].length + 1);
+                              }else if(curr === 'line1'){
+                                lineOne += (text[i] + ' ');
+                                count += (text[i].length + 1);
+                              }
+                            }else if(lineTwo.length <= 22 && ((lineTwo.length + text[i].length + 1) <= 22) && count < (count + 22) && (curr === 'line1' || curr === 'line2')) {
+                              if(curr === 'line1'){
+                                curr = 'line2';
+                                lineTwo += (text[i] + ' ');
+                                count += (text[i].length + 1);
+                              }else if(curr === 'line2') {
+                                lineTwo += (text[i] + ' ');
+                                count += (text[i].length + 1);
+                              }
+                            }else if(lineThree.length <= 22 && ((lineThree.length + text[i].length + 1) <= 22) && count <= (count + 17) && (curr === 'line2' || curr === 'line3')){
+                              if(curr === 'line2'){
+                                curr = 'line3'
+                                lineThree += (text[i] + ' ');
+                                count += (text[i].length + 1);
+                              }else if(curr === 'line3'){
+                                lineThree += (text[i] + ' ');
+                                count += (text[i].length + 1);
+                              }
+                            }else {
+                              if(curr === 'line3'){
+                                curr = 'done';
+                                var removeEnd = lineThree.slice(0, lineThree.length - 1);
+                                lineThree = removeEnd;
+                                var removeEndAgain = lineThree.slice(lineThree.length - 1);
+                                if(removeEndAgain === '.' || removeEndAgain === ','){
+                                  lineThree = lineThree.slice(0, lineThree.length - 1);
+                                  lineThree += "...";
+                                }else{
+                                  lineThree += "...";
+                                }
+                              }
+                            }
+                          }
+
+
+                          arrayOfLines = [lineOne, lineTwo, lineThree];
+
+                          result = lineOne + '\n' + lineTwo + '\n' + lineThree;
+
+                          return result;
+                        }
+                        var description = lineBreak(text);
+                        //lineBreak(text)
+                        function textPosition(array){
+                          // console.log(array);
+                          var result;
+                          if(array[2].length !== 0){
+                            result = "-1 -0.2 .07"
+                            console.log(array)
+                          }else if(array[2].length === 0 && array[1].length !== 0){
+                            result = "-1 0 .07";
+                            console.log(array)
+                          }else{
+                            result = "-1 0.2 .07";
+                          }
+                          return result;
+                        }
+                        var position = textPosition(arrayOfLines)
+                        //=========>>>>>>>
                         return(
 
-                        <Box color="white" height="0.85" width="4"
+                        <Box height="0.85" width="4"
                             depth="0.08" rotation="0 0 -90" key={post.id}
+                            material={`opacity: .4; color:${this.isUserPostsCurrent(index)}`}
+                            // color={this.isUserPostsCurrent(index)}
                             onClick={()=>{
                               this.updateUserPostsSceneIndex(index);
                               this.props.toggleUserPosts();
                               this.props.setScene(post.content);
                           }}>
 
-                          <Entity bmfont-text={{text: `${post.description}; width: 400; align: left; `}} position="-1 0 .07" />
+                          <Entity bmfont-text={{text: `${description}; width: 470; align: left; `}} position={position} />
 
                           <Entity bmfont-text={{text: `${time}; width: 175; align: left`}} position="1.17 0 .07" />
 
