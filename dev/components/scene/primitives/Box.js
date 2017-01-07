@@ -8,6 +8,6 @@ export default props => (
             height: props.height,
             depth: props.depth
           }}
-          material={{color: props.color, src: props.src}}
+          material={{color: props.color}}
           {...props} />
 );

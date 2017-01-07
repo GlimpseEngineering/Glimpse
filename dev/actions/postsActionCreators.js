@@ -69,6 +69,23 @@ export function getOnePost(postId) {
   }
 }
 
+export function deletePost(postId) {
+  console.log('hitting deletePost action creator:', postId)
+  return function(dispatch) {
+    axios({
+      method: 'DELETE',
+      url: `/api/posts/${postId}`
+    })
+    .then(response => {
+      console.log('the response for deleteing the post is:', response.data);
+      response.data.sort(function(a,b){
+        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      });
+      dispatch({type: 'USER_POSTS', payload: response.data});
+    })
+  }
+}
+
 export function createPost(formValues) {
   const request = axios.post('/api/posts', formValues)
 
