@@ -21,6 +21,7 @@ class Profile extends Component {
     } else {
       this.getFeedData(1)
     }
+    
   }
 
   componentWillReceiveProps(nextProps) {

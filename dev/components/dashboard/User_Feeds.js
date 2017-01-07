@@ -36,6 +36,7 @@ class User_Feeds extends Component {
       <div className="col-8 container">
         <div className="tab-wrap">
           <Tabs
+            className="tab-panel"
             onSelect={this.handleSelect}
             selectedIndex={this.state.tab}
           >
@@ -45,22 +46,21 @@ class User_Feeds extends Component {
               <Tab className="tab">Following</Tab>
               <Tab className="tab">Followers</Tab>
             </TabList>
-
-            <TabPanel>
-              <News_Feed userFeed={this.props.userFeed}/>
-            </TabPanel>
-            <TabPanel>
-              <Posts
-                userPosts={this.props.userPosts}
-                user={this.props.viewedProfile}
-              />
-            </TabPanel>
-            <TabPanel>
-              <Following follows={this.props.follows}/>
-            </TabPanel>
-            <TabPanel>
-              <Followers followers={this.props.followers}/>
-            </TabPanel>
+              <TabPanel className='tab-view'>
+                <News_Feed userFeed={this.props.userFeed}/>
+              </TabPanel>
+              <TabPanel className='tab-view'>
+                <Posts
+                  userPosts={this.props.userPosts}
+                  user={this.props.viewedProfile}
+                />
+              </TabPanel>
+              <TabPanel className='tab-view'>
+                <Following follows={this.props.follows}/>
+              </TabPanel>
+              <TabPanel className='tab-view'>
+                <Followers followers={this.props.followers}/>
+              </TabPanel>
           </Tabs>
         </div>
 
