@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { followFoundUser } from '../../actions/searchActionCreators';
+import { Link } from 'react-router';
 
 class SearchResult extends Component {
   constructor(props) {
@@ -32,7 +33,9 @@ class SearchResult extends Component {
   render() {
     return (
       <div>
-        {this.props.searchResult.username}
+        <Link to={"profile/" + this.props.searchResult.id}>
+          {this.props.searchResult.username}
+        </Link>
         <button value={this.props.searchResult.id} onClick={this.onClick.bind(this)}>{this.state.button}</button>
       </div>
     );
