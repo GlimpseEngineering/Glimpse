@@ -6,14 +6,6 @@ import Modal from 'react-modal';
 import ProfileEditor from '../ProfileEditor';
 import DummyLogin from '../DummyLogin'
 
-/**
- * for now
- * in user_info, have a form input that i can use to submit a search term
- * save this search term to the store?
- * reroute to the search page via this.props.history.push('/search')
- * access the search term saved on the store and populate tabs with data
- */
-
 const customStyles = {
   content : {
     top         : '50%',
@@ -37,7 +29,6 @@ class User_Info extends Component {
     this.closeModal = this.closeModal.bind(this);
 
     if(this.props.activeUser){
-      console.log(this.props.activeUser.id)
       this.myProfile = this.props.viewedProfile.id===this.props.activeUser.id;
       
       this.backgroundColor = this.myProfile ? 'lightBlue' : 'white';
@@ -64,9 +55,7 @@ class User_Info extends Component {
 
   componentWillReceiveProps(nextProps) {
     console.log("USER_INFO PROPS:",this.props)
-    console.log('user_info nextprops:',nextProps)    
-    console.log(nextProps.followers)    
-    console.log(nextProps.followers.map(p=>p.UserId))
+    console.log('user_info nextprops:',nextProps)
     if(nextProps.activeUser){
       console.log(nextProps.activeUser.id)
       this.myProfile = nextProps.viewedProfile.id===nextProps.activeUser.id;
@@ -133,7 +122,8 @@ class User_Info extends Component {
       <div className="col-4 userContainer" 
            style={{
              backgroundColor:this.backgroundColor,
-             height: '100%'
+             height: '85vh',
+             overflow: 'scroll'
            }}>
         <div className="profile">
           <div className="picContainer">
@@ -147,7 +137,8 @@ class User_Info extends Component {
                 style={customStyles}
                 contentLabel="Example Modal"
             >
-              <ProfileEditor user={this.props.activeUser}/>
+              <ProfileEditor user={this.props.activeUser}
+                closeModal={this.closeModal.bind(this)}/>
             </Modal>
           </div>
           <div className="profileInfo">

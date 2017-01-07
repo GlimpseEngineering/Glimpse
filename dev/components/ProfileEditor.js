@@ -37,6 +37,7 @@ class ProfileEditor extends Component {
       gender: this.state.gender,
       private: this.state.private
     })
+    this.props.closeModal();
   }
 
   onInputChange(event) {
@@ -107,10 +108,7 @@ class ProfileEditor extends Component {
 
 
 function mapStateToProps(state) {
-  return {
-    auth: state.auth,
-    newPost: state.newPost
-  };
+  return {};
 };
 
 export default connect(mapStateToProps, {

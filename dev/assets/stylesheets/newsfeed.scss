@@ -91,3 +91,13 @@ li {
 .componentInfo {
   padding: 10px;
 }
+
+.tab-panel {
+  height: 85vh;
+  overflow: hidden;
+}
+
+.tab-view {
+  overflow: scroll;
+  height: 100%;
+}
