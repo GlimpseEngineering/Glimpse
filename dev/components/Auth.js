@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 import { login, logout } from '../actions/authActionCreators';
 import { getOneUser  } from '../actions/usersActionCreators';
 import User_Info from './dashboard/User_Info';
@@ -61,6 +62,7 @@ class Auth extends Component {
             <button className="btn btn-primary"
                     onClick={()=>{
                       this.props.getOneUser(this.props.auth.activeUser.id)
+                      browserHistory.push(`/#/profile/${this.props.auth.activeUser.id}`)
                     }}>Home
             </button>
             {/* <button className="btn-primary">Post</button> */}

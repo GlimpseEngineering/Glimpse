@@ -133,6 +133,7 @@ class Posts extends Component {
             contentLabel="Example Modal"
         >
           <div>
+
             <h3>Delete this post?</h3>
             <p>{this.state.selectedPost && this.state.selectedPost.description}</p>
             <br/>

@@ -19,9 +19,7 @@ class Splash extends Component {
         window.location.reload();   
       }
     }
-    if (nextProps.params !== 'splash') {
-      browserHistory.push(`/#/splash`)
-    }
+    window.location.reload();
   }
 
   render(){
@@ -61,7 +59,8 @@ class Splash extends Component {
 
 function mapStateToProps(state) {
   return{
-    activeUser: state.auth.activeUser
+    activeUser: state.auth.activeUser,
+    viewedProfile: state.user.viewedProfile
   }
 }
 
