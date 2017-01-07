@@ -28,7 +28,6 @@ class Posts extends Component {
 
     this.openEditModal = this.openEditModal.bind(this);
     this.closeEditModal = this.closeEditModal.bind(this);
-<<<<<<< HEAD
 
     this.openDeleteModal = this.openDeleteModal.bind(this);
     this.closeDeleteModal = this.closeDeleteModal.bind(this);
@@ -70,8 +69,6 @@ class Posts extends Component {
     }
   }
 
-=======
-
     this.openDeleteModal = this.openDeleteModal.bind(this);
     this.closeDeleteModal = this.closeDeleteModal.bind(this);
 
@@ -112,7 +109,6 @@ class Posts extends Component {
     }
   }
 
->>>>>>> [prog] can now delete posts
   openEditModal() {
     this.setState({editModalIsOpen: true});
   }

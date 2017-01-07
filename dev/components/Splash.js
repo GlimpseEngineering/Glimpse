@@ -19,13 +19,8 @@ class Splash extends Component {
         window.location.reload();   
       }
     }
-<<<<<<< HEAD
     window.location.reload();
-=======
-    if (nextProps.params !== 'splash') {
-      browserHistory.push(`/#/splash`)
-    }
->>>>>>> [prog] skeleton and routing for splash screen
+
   }
 
   render(){
@@ -65,12 +60,8 @@ class Splash extends Component {
 
 function mapStateToProps(state) {
   return{
-<<<<<<< HEAD
     activeUser: state.auth.activeUser,
     viewedProfile: state.user.viewedProfile
-=======
-    activeUser: state.auth.activeUser
->>>>>>> [prog] skeleton and routing for splash screen
   }
 }
 
