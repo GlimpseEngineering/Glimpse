@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import request from 'superagent';
 import Dropzone from 'react-dropzone';
 
-const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/glimpse/upload'
+const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/glimpse/image/upload'
 const PROFPIC_PRESET = 'profile picture'
 const PHOTOSPHERE_PRESET = 'photosphere'
 const FLAT_PHOTO_PRESET = 'flat photo'
 const VIDEOSPHERE_PRESET = 'videosphere'
 const FLAT_VIDEO_PRESET = 'flat video'
+const SCENE_PREVIEW = 'scene preview'
 
 const dropZoneStyles = {
         width: 160,
@@ -18,12 +19,16 @@ const dropZoneStyles = {
         borderRadius: 5
       }
 
+const thumbnailStyles = {
+        width: 200,
+        height: 100
+      }
+
 export default class Upload extends Component{
   constructor(props) {
     super(props);
 
     this.state = {
-      showUploadField: false,
       uploadedFileUrl: ''
     };
   }
@@ -73,7 +78,8 @@ export default class Upload extends Component{
             <p>Drop an image or click to select a file to upload.</p>
           </Dropzone>
           {this.state.uploadedFileUrl === '' ? null :
-          <img src={this.state.uploadedFileUrl} />}
+          <img src={this.state.uploadedFileUrl} 
+               style={thumbnailStyles}/>}
         </span>
 
       </div>

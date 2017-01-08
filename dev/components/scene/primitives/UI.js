@@ -3,8 +3,7 @@ import {Entity} from 'aframe-react';
 import Plane from './Plane';
 import Text from './Text';
 import Box from './Box';
-import 'aframe-ui-modal-component';
-import '../acomps/shift_click_ui'
+import '../acomps/shift_click_ui';
 import 'aframe-layout-component';
 import 'aframe-bmfont-text-component';
 var moment = require('moment');
