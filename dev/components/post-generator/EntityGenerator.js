@@ -57,8 +57,8 @@ class EntityGenerator extends Component {
     if (this.props.stagedEntity.primitive === 'Text') {
       copiedEntity = Object.assign({}, this.props.stagedEntity, {
         components: {
-          color: this.state.color,
           text: this.state.text,
+          color: this.state.color,
           position: position(this.state.x, this.state.y, this.state.z)
         }
       });

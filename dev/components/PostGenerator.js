@@ -90,7 +90,7 @@ class PostGenerator extends Component {
       entity = templateIndex.textGenerator(this.state.id, this.state.text, this.state.color, this.state.x, this.state.y, this.state.z);
     }
     if (this.state.selectedPrimitive === 'Box')  {
-      entity = templateIndex.boxGenerator(this.state.id, this.state.width, this.state.height,this.state.depth, this.state.color, this.state.src, this.state.x, this.state.y, this.state.z);
+      entity = templateIndex.boxGenerator(this.state.id, this.state.width, this.state.height, this.state.depth, this.state.color, this.state.src, this.state.x, this.state.y, this.state.z);
     }
     console.log('here is the submission of the entity', entity);
     this.props.stageEntity(entity);
