@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Upload from './Upload';
 import { createPost, stageEntity } from '../actions/postsActionCreators';
 import PostPreview from './post-generator/PostPreview';
 import EntityGenerator from './post-generator/EntityGenerator';
@@ -134,6 +135,17 @@ class PostGenerator extends Component {
     value === 'Box' && this.setState({selectedPrimitive: value});
   }
 
+  setSrc(url) {
+    console.log('setting src to:', url);
+    this.setState({src: url});
+  }
+
+  // <input
+  //               type="url"
+  //               name="src"
+  //               value={this.state.src}
+  //               onChange={event => this.onInputChange(event)} />
+
   render() {
     // console.log('after inserting edited entity', this.entityCollection);
     let stagedEntities = this.entityCollection.map((entity) => {
@@ -186,11 +198,8 @@ class PostGenerator extends Component {
             onSubmit={this.submitScene.bind(this)} >
             <div>
               <label>Image URL</label>
-              <input
-                type="text"
-                name="src"
-                value={this.state.src}
-                onChange={event => this.onInputChange(event)} />
+              <Upload preset="photosphere"
+                      setImage={url=>this.setSrc(url)}/>
             </div>
 
             <button type="submit">Add this scene!</button>
