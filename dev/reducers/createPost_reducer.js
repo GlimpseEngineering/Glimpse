@@ -12,7 +12,11 @@ export default function(state = INITIAL_STATE, action) {
   switch (action.type) {
   case CREATE_POST:
     return Object.assign({}, state, {
-      createdPost: action.payload
+      createdPost: action.payload,
+      stagedEntity: null,
+      entityToDeleteId: null,
+      entityToEditId: null,
+      editedEntity: null
     })
   case STAGE_ENTITY:
     return Object.assign({}, state, {
