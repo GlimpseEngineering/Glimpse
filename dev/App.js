@@ -23,6 +23,8 @@ class App extends Component {
     let displayMode = this.props.vrMode.active? <World /> : this.props.children;
     return (
       <div >
+        <button onClick={this.props.enterVR}>enter vr</button>
+        <button onClick={this.props.exitVR}>exit vr</button>      
         {displayMode}
       </div>
     );
