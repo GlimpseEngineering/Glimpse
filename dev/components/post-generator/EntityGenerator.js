@@ -20,13 +20,13 @@ class EntityGenerator extends Component {
         primitive: '',
         text: this.props.stagedEntity.components.text,
         color: this.props.stagedEntity.components.color,
+        src: this.props.stagedEntity.components.src,
         x: this.position ? this.position[0] : '',
         y: this.position ? this.position[1] : '',
         z: this.position ? this.position[2] : '',
         width: this.props.stagedEntity.components.width,
         height: this.props.stagedEntity.components.height,
         depth: this.props.stagedEntity.components.depth,
-        src: this.props.stagedEntity.components.src
       }
   }
 
@@ -66,13 +66,13 @@ class EntityGenerator extends Component {
     if (this.props.stagedEntity.primitive === 'Box') {
       copiedEntity = Object.assign({}, this.props.stagedEntity, {
         components: {
-          color: this.state.color,
-          position: position(this.state.x, this.state.y, this.state.z),
           width: this.state.width,
           height: this.state.height,
           depth: this.state.depth, 
+          position: position(this.state.x, this.state.y, this.state.z),
           material: {
-            src: this.state.src
+            src: this.state.src,
+            color: this.state.color
           }
         }
       });
