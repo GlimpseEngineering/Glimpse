@@ -7,9 +7,7 @@ import { GET_ONE_POST } from '../actions/postsActionCreators'
 const initialState = {
   active: false,
   currentScene: '[{"primitive":"PhotoSphere","components":{'+
-                '"src":"url(https://rawgit.com/aframevr/assets/'+
-                'gh-pages/360-image-gallery-boilerplate/img/'+
-                'sechelt.jpg)"},"children":null},{"primitive":'+
+                '"src":"url(https://s3-us-west-1.amazonaws.com/glimpse.profpics/IMG_6467.JPG)"},"children":null},{"primitive":'+
                 '"Text","components":{"text":"YOOOOO","color":'+
                 '"#DADADA","position":"-1.75 1 -3"},"children":'+
                 '[{"primitive":"Text","components":{"text":"sup",'+
