@@ -78,8 +78,13 @@ export default class Upload extends Component{
             <p>Drop an image or click to select a file to upload.</p>
           </Dropzone>
           {this.state.uploadedFileUrl === '' ? null :
+<<<<<<< HEAD
           <img src={this.state.uploadedFileUrl} 
                style={thumbnailStyles}/>}
+=======
+          <img src={this.state.uploadedFileUrl}
+               style={thumbnailStyles} />}
+>>>>>>> feat/preview
         </span>
 
       </div>

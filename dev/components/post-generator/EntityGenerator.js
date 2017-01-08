@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { editEntity, deleteEntity } from '../../actions/postsActionCreators';
+import { stageEntity, editEntity, deleteEntity } from '../../actions/postsActionCreators';
 
 class EntityGenerator extends Component {
   constructor(props) {
@@ -20,13 +20,13 @@ class EntityGenerator extends Component {
         primitive: '',
         text: this.props.stagedEntity.components.text,
         color: this.props.stagedEntity.components.color,
+        src: this.props.stagedEntity.components.src,
         x: this.position ? this.position[0] : '',
         y: this.position ? this.position[1] : '',
         z: this.position ? this.position[2] : '',
         width: this.props.stagedEntity.components.width,
         height: this.props.stagedEntity.components.height,
         depth: this.props.stagedEntity.components.depth,
-        src: this.props.stagedEntity.components.src
       }
   }
 
@@ -34,17 +34,31 @@ class EntityGenerator extends Component {
     this.state.enableEdit === true ? this.setState({enableEdit: false}) : this.setState({enableEdit: true});
   }
 
-  editEntity(event) {
+  editOrCopyEntity(event) {
+    /**
+     * can comebine edit and copy entities here?
+     * import stageEntity
+     */
     event.preventDefault();
+    console.log('this is what a click event looks like', event);
+    console.log('accessing the value of a click event', event.target.value);
+    console.log('accessing the name of a click event', event.target.name);
     const position = (x, y, z) => {
       return x.toString() + ' ' + y.toString() + ' ' + z.toString();
     };
     let copiedEntity;
+    if (this.props.stagedEntity.primitive === 'PhotoSphere') {
+      copiedEntity = Object.assign({}, this.props.stagedEntity, {
+        components: {
+          src: this.state.src,
+        }
+      });
+    }
     if (this.props.stagedEntity.primitive === 'Text') {
       copiedEntity = Object.assign({}, this.props.stagedEntity, {
         components: {
-          color: this.state.color,
           text: this.state.text,
+          color: this.state.color,
           position: position(this.state.x, this.state.y, this.state.z)
         }
       });
@@ -52,18 +66,21 @@ class EntityGenerator extends Component {
     if (this.props.stagedEntity.primitive === 'Box') {
       copiedEntity = Object.assign({}, this.props.stagedEntity, {
         components: {
-          color: this.state.color,
-          src: this.state.src,
-          position: position(this.state.x, this.state.y, this.state.z),
           width: this.state.width,
           height: this.state.height,
           depth: this.state.depth, 
+          position: position(this.state.x, this.state.y, this.state.z),
+          material: {
+            src: this.state.src,
+            color: this.state.color
+          }
         }
       });
     }
     console.log('original entity', this.props.stagedEntity);
     console.log('copied entity', copiedEntity);
-    this.props.editEntity(copiedEntity);
+    event.target.value === 'copy' && this.props.stageEntity(copiedEntity);
+    event.target.value !== 'copy' && this.props.editEntity(copiedEntity);
   }
 
   deleteEntity() {
@@ -98,9 +115,25 @@ class EntityGenerator extends Component {
         <button onClick={this.deleteEntity.bind(this)}>Delete</button>
 
         <form
+            id="photosphere"
+            className={this.props.stagedEntity.primitive === "PhotoSphere" && this.state.enableEdit === true ? "" : "hide-post-details"}
+            onSubmit={this.editOrCopyEntity.bind(this)} >
+            <div>
+              <label>Image URL</label>
+              <input
+                type="text"
+                name="src"
+                value={this.state.src}
+                onChange={event => this.onInputChange(event)} />
+            </div>
+
+            <button type="submit">Edit this scene!</button>
+          </form>
+
+        <form
             id="text"
             className={this.props.stagedEntity.primitive === "Text" && this.state.enableEdit === true ? "" : "hide-post-details"}
-            onSubmit={this.editEntity.bind(this)} >
+            onSubmit={this.editOrCopyEntity.bind(this)} >
             <div>
               <label>Text Content</label>
               <input
@@ -151,7 +184,7 @@ class EntityGenerator extends Component {
           <form
             id="box"
             className={this.props.stagedEntity.primitive === "Box" && this.state.enableEdit === true ? "" : "hide-post-details"}
-            onSubmit={this.editEntity.bind(this)} >
+            onSubmit={this.editOrCopyEntity.bind(this)} >
              <div>
               <label>Image URL</label>
               <input
@@ -231,5 +264,5 @@ class EntityGenerator extends Component {
   }
 };
 
-const entityGenerator = connect(null, { editEntity, deleteEntity })(EntityGenerator);
+const entityGenerator = connect(null, { stageEntity, editEntity, deleteEntity })(EntityGenerator);
 export default entityGenerator;

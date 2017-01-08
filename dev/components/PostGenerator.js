@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Upload from './Upload';
 import { createPost, stageEntity } from '../actions/postsActionCreators';
 import PostPreview from './post-generator/PostPreview';
 import EntityGenerator from './post-generator/EntityGenerator';
@@ -42,7 +43,7 @@ class PostGenerator extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    nextProps.newPost.stagedEntity && !nextProps.newPost.entityToDeleteId && !nextProps.newPost.entityToEditId && this.entityCollection.push(nextProps.newPost.stagedEntity);
+    nextProps.newPost.stagedEntity && !nextProps.newPost.entityToDeleteId && !nextProps.newPost.entityToEditId && this.entityCollection.push(nextProps.newPost.stagedEntity) && this.setState({content: JSON.stringify(this.entityCollection)});
     nextProps.newPost.entityToDeleteId && this.editOrDeleteEntity(nextProps.newPost.entityToDeleteId);
     nextProps.newPost.entityToEditId && this.editOrDeleteEntity(nextProps.newPost.editedEntity);
   }
@@ -59,6 +60,7 @@ class PostGenerator extends Component {
      */
     event.preventDefault();
     this.props.createPost(this.state);
+    this.entityCollection = [];
     this.setState({
       content: [],
       description: '',
@@ -89,7 +91,7 @@ class PostGenerator extends Component {
       entity = templateIndex.textGenerator(this.state.id, this.state.text, this.state.color, this.state.x, this.state.y, this.state.z);
     }
     if (this.state.selectedPrimitive === 'Box')  {
-      entity = templateIndex.boxGenerator(this.state.id, this.state.width, this.state.height,this.state.depth, this.state.color, this.state.src, this.state.x, this.state.y, this.state.z);
+      entity = templateIndex.boxGenerator(this.state.id, this.state.width, this.state.height, this.state.depth, this.state.color, this.state.src, this.state.x, this.state.y, this.state.z);
     }
     console.log('here is the submission of the entity', entity);
     this.props.stageEntity(entity);
@@ -133,8 +135,19 @@ class PostGenerator extends Component {
     value === 'Box' && this.setState({selectedPrimitive: value});
   }
 
+  setSrc(url) {
+    console.log('setting src to:', url);
+    this.setState({src: url});
+  }
+
+  // <input
+  //               type="url"
+  //               name="src"
+  //               value={this.state.src}
+  //               onChange={event => this.onInputChange(event)} />
+
   render() {
-    console.log('after inserting edited entity', this.entityCollection);
+    // console.log('after inserting edited entity', this.entityCollection);
     let stagedEntities = this.entityCollection.map((entity) => {
       return (
         <EntityGenerator
@@ -143,12 +156,33 @@ class PostGenerator extends Component {
       );
     });
 
-    console.log('here is the staged entity that we submitted', this.props.newPost);
+    // console.log('here is the staged entity that we submitted', this.props.newPost);
     return (
       <div>
         <div className="col-4">
           {this.state.selectedPrimitive}
           <h3>Create A New Scene</h3>
+
+          <form
+            id="post" >
+            <div>
+              <label>Description</label>
+              <textarea
+                name="description"
+                value={this.state.description}
+                onChange={event => this.onInputChange(event)} >
+              </textarea>
+            </div>
+
+            <div>
+              <label>Tags</label>
+              <input
+                type="text"
+                name="tags"
+                value={this.state.tags}
+                onChange={event => this.onInputChange(event)} />
+            </div>
+          </form>
 
           <select
             value={this.state.selectedPrimitive}
@@ -164,11 +198,8 @@ class PostGenerator extends Component {
             onSubmit={this.submitScene.bind(this)} >
             <div>
               <label>Image URL</label>
-              <input
-                type="text"
-                name="src"
-                value={this.state.src}
-                onChange={event => this.onInputChange(event)} />
+              <Upload preset="photosphere"
+                      setImage={url=>this.setSrc(url)}/>
             </div>
 
             <button type="submit">Add this scene!</button>
@@ -305,43 +336,11 @@ class PostGenerator extends Component {
             <button type="submit">Add this scene!</button>
           </form>
 
+          <button onClick={this.submitPost.bind(this)}>Submit Post</button>
+
           <ul>
             {stagedEntities}
           </ul>
-
-          <form
-            id="post"
-            onSubmit={this.submitPost.bind(this)}
-            className={this.state.sceneComplete ? "" : "hide-post-details"} >
-            <div>
-              <label>Description</label>
-              <textarea
-                name="description"
-                value={this.state.description}
-                onChange={event => this.onInputChange(event)} >
-              </textarea>
-            </div>
-
-            <div>
-              <label>Make Private</label>
-              <input
-                type="radio"
-                name="private"
-                value={this.state.private}
-                onChange={event => this.onInputChange(event)} />
-            </div>
-
-            <div>
-              <label>Tags</label>
-              <input
-                type="text"
-                name="tags"
-                value={this.state.tags}
-                onChange={event => this.onInputChange(event)} />
-            </div>
-
-            <button type="submit">Submit</button>
-          </form>
         </div>
 
         <PostPreview currentScene={JSON.stringify(this.entityCollection)} />

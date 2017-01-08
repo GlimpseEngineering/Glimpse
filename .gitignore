@@ -4,4 +4,3 @@ npm-debug.log
 .DS_Store
 build/bundle.js
 dump.rdb
-.vscode/

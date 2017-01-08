@@ -24,7 +24,6 @@
 .userContainer {
   align-items: center;
   padding: 2% 4% 2% 4%;
-  max-width: 350px;
 }
 
 .profileInfo {
@@ -43,7 +42,8 @@
 }
 
 .editButton {
-  margin: auto;
+  float: right;
+  padding-right: 4px;
   background-color:#fff;
   -moz-border-radius:6px;
   -webkit-border-radius:6px;

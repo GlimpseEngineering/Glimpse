@@ -88,9 +88,11 @@ export function deletePost(postId) {
 
 export function createPost(formValues) {
   const request = axios.post('/api/posts', formValues)
+  console.log('calling create post with these form values', formValues);
 
   return (dispatch) => {
     request.then((data) => {
+      console.log('data returned from creating post', data);
       dispatch({type: CREATE_POST, payload: data})
     });
   };
