@@ -96,8 +96,7 @@ li {
 
 .userContainer {
   align-items: center;
-  padding: 2% 4% 2% 4%;
-  max-width: 350px; }
+  padding: 2% 4% 2% 4%; }
 
 .profileInfo {
   border-top: solid #e1e8ed 1px;
@@ -111,7 +110,8 @@ li {
   border-top: solid #e1e8ed 1px; }
 
 .editButton {
-  margin: auto;
+  float: right;
+  padding-right: 4px;
   background-color: #fff;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
@@ -136,6 +136,9 @@ li {
   top: 1px; }
 
 .hide-post-details {
+  display: none; }
+
+.vr-component {
   display: none; }
 
 h1, h2 {
