@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Upload from './Upload';
 import { updateUser } from '../actions/usersActionCreators';
 
 class ProfileEditor extends Component {
@@ -55,6 +56,11 @@ class ProfileEditor extends Component {
     }, 0);
   }
 
+  setProfPic(url) {
+    console.log('setting profpic to:',url)
+    this.setState({profPic: url})
+  }
+
   render() {
     return (
       <form id="editProfile" onSubmit={this.submitChange.bind(this)}>
@@ -69,7 +75,9 @@ class ProfileEditor extends Component {
           value={this.state.profPic}
           onChange={event => this.onInputChange(event)}
           name="profPic"
-          type="url" /><br/>
+          type="url" />
+        <Upload preset="profile picture"
+                setImage={url=>this.setProfPic(url)}/>
         <label>Email: </label><br/>
         <input 
           value={this.state.email}
