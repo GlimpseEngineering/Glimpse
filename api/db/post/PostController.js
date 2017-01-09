@@ -54,6 +54,7 @@ module.exports = {
     models.Post.create({
       content: req.body.content,
       description: req.body.description,
+      previewUrl: req.body.previewUrl,
       format: req.body.format,
       private: req.body.private,
       UserId: req.body.userId

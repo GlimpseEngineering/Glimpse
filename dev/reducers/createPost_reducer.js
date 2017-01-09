@@ -1,11 +1,12 @@
-import { CREATE_POST, STAGE_ENTITY, DELETE_ENTITY, EDIT_ENTITY } from '../actions/postsActionCreators';
+import { CREATE_POST, PREVIEW_CREATED, STAGE_ENTITY, DELETE_ENTITY, EDIT_ENTITY } from '../actions/postsActionCreators';
 
 const INITIAL_STATE = { 
   createdPost: null,
   stagedEntity: null,
   entityToDeleteId: null,
   entityToEditId: null,
-  editedEntity: null 
+  editedEntity: null,
+  previewUrl: null 
 };
 
 export default function(state = INITIAL_STATE, action) {
@@ -17,6 +18,10 @@ export default function(state = INITIAL_STATE, action) {
       entityToDeleteId: null,
       entityToEditId: null,
       editedEntity: null
+    })
+  case PREVIEW_CREATED:
+    return Object.assign({}, state, {
+      previewUrl: action.payload
     })
   case STAGE_ENTITY:
     return Object.assign({}, state, {

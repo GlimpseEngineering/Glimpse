@@ -1,7 +1,10 @@
 import 'aframe';
 import request from 'superagent';
+import store from '../../../store/store.js';
+
 const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/glimpse/image/upload'
 const SCENE_PREVIEW = 'scene preview'
+const PREVIEW_CREATED = 'PREVIEW_CREATED'
 
 var VERTEX_SHADER = [
   'attribute vec3 position;',
@@ -37,7 +40,7 @@ var FRAGMENT_SHADER = [
 AFRAME.registerComponent('createPreview', {
   schema: {
     width: {default: 4096},
-    height: {default: 2048}
+    height: {default: 2048},
   },
 
   init: function () {
@@ -46,6 +49,7 @@ AFRAME.registerComponent('createPreview', {
     console.log('================================')
     var el = this.el;
     var self = this;
+    self.previewUrl = '';
     if (el.renderer) {
       setup();
     } else {
@@ -70,7 +74,7 @@ AFRAME.registerComponent('createPreview', {
       self.canvas = document.createElement('canvas');
       self.ctx = self.canvas.getContext('2d');
       if (el.camera) { el.camera.add(self.quad); }
-      self.onKeyDown = self.onKeyDown.bind(self);
+      // self.onKeyDown = self.onKeyDown.bind(self);
       self.onCameraActive = self.onCameraActive.bind(self);
       el.addEventListener('camera-set-active', self.onCameraActive);
     }
@@ -111,17 +115,6 @@ AFRAME.registerComponent('createPreview', {
     var cameraParent = this.quad.parent;
     if (cameraParent) { cameraParent.remove(this.quad); }
     evt.detail.cameraEl.getObject3D('camera').add(this.quad);
-  },
-
-  /**
-   * <ctrl> + <alt> + s = regular screenshot
-   * <ctrl> + <alt> + <shift> + s = equirectangular screenshot
-   */
-  onKeyDown: function (evt) {
-    var shortcutPressed = evt.keyCode === 83 && evt.ctrlKey && evt.altKey;
-    if (!this.data || !shortcutPressed) { return; }
-    var projection = evt.shiftKey ? 'equirectangular' : 'perspective';
-    this.capture(projection);
   },
 
   /**
@@ -207,6 +200,7 @@ AFRAME.registerComponent('createPreview', {
   },
 
   uploadCapture: function () {
+    let el = this.el;
     this.canvas.toBlob(function (blob) {
       let upload = request.post(CLOUDINARY_UPLOAD_URL)
                           .field('upload_preset', SCENE_PREVIEW)
@@ -217,24 +211,15 @@ AFRAME.registerComponent('createPreview', {
           console.error(err);
         }
 
-        if (response.body.secure_url !== '') {
-          console.log(response.body.secure_url)
-
+        if (!response.body.secure_url) {
+          self.previewUrl="http://res.cloudinary.com/glimpse/image/upload/v1483926952/photospheres/ujfxcnbimyhyqtajvxxt.jpg"
+        } else {
+          self.previewUrl = response.body.secure_url
         }
+        store.dispatch({type: PREVIEW_CREATED, payload: self.previewUrl})
+      
       });     
 
-      // var url = URL.createObjectURL(blob);
-      // var fileName = 'screenshot-' + document.title + '-' + Date.now() + '.png';
-      // var aEl = document.createElement('a');
-      // aEl.href = url;
-      // aEl.setAttribute('download', fileName);
-      // aEl.innerHTML = 'downloading...';
-      // aEl.style.display = 'none';
-      // document.body.appendChild(aEl);
-      // setTimeout(function () {
-      //   aEl.click();
-      //   document.body.removeChild(aEl);
-      // }, 1);
     }, 'image/png');
   }
 });

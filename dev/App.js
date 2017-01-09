@@ -10,6 +10,7 @@ class App extends Component {
   constructor(props) {
     super(props),
     this.state = {};
+
   }
 
   render() {
@@ -26,8 +27,9 @@ class App extends Component {
         <button onClick={this.props.enterVR}>enter vr</button>
         <button onClick={this.props.exitVR}>exit vr</button>
         <button onClick={()=>{
-          let scene = document.querySelector('#scene')
-          let screenShot = document.querySelector('#scene').components.createPreview;
+          let scene = document.querySelector('#scene') ||
+                      document.querySelector('#preview');
+          let screenShot = scene.components.createPreview;
           console.log(scene.components.screenshot);
           console.log(screenShot);
           scene.components.createPreview.init();

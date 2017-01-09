@@ -8,9 +8,14 @@ http://redux.js.org/docs/basics/Actions.html
 // import { push } from 'react-router-redux';
 // import { browserHistory } from 'react-router';
 import axios from 'axios';
+import superagent from 'superagent';
 import { SET_SCENE, ENTER_VR } from './vrModeActionCreators';
 
+const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/glimpse/image/upload'
+const SCENE_PREVIEW = 'scene preview'
+
 export const CREATE_POST = 'CREATE_POST';
+export const PREVIEW_CREATED = 'PREVIEW_CREATED';
 export const STAGE_ENTITY = 'STAGE_ENTITY';
 export const DELETE_ENTITY = 'DELETE_ENTITY';
 export const EDIT_ENTITY = 'EDIT_ENTITY';
@@ -97,6 +102,26 @@ export function createPost(formValues) {
     });
   };
 };
+
+export function uploadPreview(blob) {
+  superagent
+    .post(CLOUDINARY_UPLOAD_URL)
+    .field('upload_preset', SCENE_PREVIEW)
+    .field('file', blob)
+    .end((err, response) => {
+    if (err) {
+      console.error(err);
+    }
+
+    if (response.body.secure_url !== '') {
+      console.log(response.body.secure_url)
+      dispatch({
+        type: PREVIEW_CREATED, 
+        payload: response.body.secure_url
+      })
+    }
+  });     
+}
 
 export function stageEntity(entity) {
   console.log('here is the entity in the action creator', entity);

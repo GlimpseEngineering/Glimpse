@@ -14,6 +14,7 @@ class PostGenerator extends Component {
       userId: this.props.auth.activeUser.id,
       content: [],
       description: '',
+      previewUrl:'',
       private: 0,
       tags: '',
       sceneComplete: false,
@@ -31,7 +32,7 @@ class PostGenerator extends Component {
     };
 
     this.entityCollection = [];
-
+    
     this.editOrDeleteEntity = (target) => {
       let targetIndex
       this.entityCollection.forEach((entity, index) => {
@@ -43,7 +44,18 @@ class PostGenerator extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    nextProps.newPost.stagedEntity && !nextProps.newPost.entityToDeleteId && !nextProps.newPost.entityToEditId && this.entityCollection.push(nextProps.newPost.stagedEntity) && this.setState({content: JSON.stringify(this.entityCollection)});
+    nextProps.newPost.stagedEntity && 
+      !nextProps.newPost.entityToDeleteId && 
+      !nextProps.newPost.entityToEditId && 
+      nextProps.newPost.stagedEntity !== this.props.newPost.stagedEntity &&
+      this.entityCollection.push(nextProps.newPost.stagedEntity) && 
+      this.setState({content: JSON.stringify(this.entityCollection)});
+    console.log('preview url:',nextProps.newPost.previewUrl)
+    if (nextProps.newPost.previewUrl && nextProps.newPost.previewUrl !== this.props.newPost.previewUrl) {
+      this.setState({previewUrl:nextProps.newPost.previewUrl} , ()=>{
+        this.finalizePost();
+      });
+    }
     nextProps.newPost.entityToDeleteId && this.editOrDeleteEntity(nextProps.newPost.entityToDeleteId);
     nextProps.newPost.entityToEditId && this.editOrDeleteEntity(nextProps.newPost.editedEntity);
   }
@@ -59,11 +71,28 @@ class PostGenerator extends Component {
      * also clear the collection of entities from this.entityCollection 
      */
     event.preventDefault();
+          // let scene = document.querySelector('#scene')
+          // let screenShot = document.querySelector('#scene').components.createPreview;
+          // console.log(scene.components.screenshot);
+          // console.log(screenShot);
+          // scene.components.createPreview.init();
+          // scene.components.createPreview.capture('perspective')
+          
+
+    this.screenshot = document.querySelector('#preview').components.createPreview;
+    this.screenshot.init();
+    this.screenshot.capture('perspective');
+    
+  }
+
+  finalizePost(url){
+    console.log('sending post to db:', this.state)
     this.props.createPost(this.state);
     this.entityCollection = [];
     this.setState({
       content: [],
       description: '',
+      previewUrl: '',
       private: 0,
       tags: '',
       sceneComplete: false,
@@ -79,6 +108,7 @@ class PostGenerator extends Component {
       y: '',
       z: ''
     });
+    console.log('cleared state:',this.state)
   }
 
   submitScene(event) {
