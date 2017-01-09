@@ -1,3 +1,5 @@
+import { EDIT_POST } from '../actions/postsActionCreators';
+
 const initialState = { userPosts: []};
 export default function(state = initialState, action) {
   switch(action.type){

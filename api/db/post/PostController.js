@@ -83,11 +83,17 @@ module.exports = {
     });
   },
   updatePost: (req, res, next) => {
-    let tags = JSON.parse(req.body.tags);
+    console.log('here is the request userid', req.body.userId);
+    let tags;
+    if (req.body.tags) {
+      tags = JSON.parse(req.body.tags);
+    }
     models.Post.findOne({
       where: { id: req.params.postId}
     })
     .then(post => {
+      console.log('here is the request userid', req.body.userId);
+      console.log('here is the request content', req.body.content);
       if (!post) res.json('post not found');
       else {
         post.content = req.body.content,
@@ -100,18 +106,20 @@ module.exports = {
     })
     .then(post => {
       postInstance = post;
-      tags.forEach((tag) => {
-        models.Tag.findOrCreate({
-          where: { name: tag },
-          defaults: { name: tag }
-        })
-        .then(result => postInstance.addTag(result[0]))
-        .catch(err => {
-          res.json(err);
-          throw err;
+      if (tags) {
+        tags.forEach((tag) => {
+          models.Tag.findOrCreate({
+            where: { name: tag },
+            defaults: { name: tag }
+          })
+          .then(result => postInstance.addTag(result[0]))
+          .catch(err => {
+            res.json(err);
+            throw err;
+          });
         });
-      });
-      res.json(postInstance);
+      }
+    res.json(postInstance);
     })
     .catch(err => {
       res.json(err);

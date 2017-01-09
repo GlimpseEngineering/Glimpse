@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Upload from './Upload';
-import { createPost, stageEntity } from '../actions/postsActionCreators';
+import { createPost, editPost, stageEntity } from '../actions/postsActionCreators';
 import PostPreview from './post-generator/PostPreview';
 import EntityGenerator from './post-generator/EntityGenerator';
 import { templateIndex } from '../post-helpers/entityTemplates';
@@ -12,6 +12,7 @@ class PostGenerator extends Component {
 
     this.state = {
       userId: this.props.auth.activeUser.id,
+      editMode: false,
       content: [],
       description: '',
       previewUrl:'',
@@ -42,10 +43,19 @@ class PostGenerator extends Component {
       if (typeof target === 'number') this.entityCollection.splice(targetIndex, 1);
     } 
   }
-
-  /**
-   * maybe in component did mount see if user is trying to load and edit a post
-   */
+  
+  componentDidMount() {
+    console.log('here is the index to edit', this.props.indexToEdit);
+    if (this.props.postToEdit) {
+      this.entityCollection = JSON.parse(this.props.postToEdit.content);
+      this.setState({
+        id: this.entityCollection.length + 1,
+        editMode: true,
+        description: this.props.postToEdit.description,
+        content: this.props.postToEdit.content
+      });
+    }
+  }
 
   componentWillReceiveProps(nextProps) {
     nextProps.newPost.stagedEntity && 
@@ -66,11 +76,7 @@ class PostGenerator extends Component {
 
   submitPost(event) {
     /**
-     * note: as of yet, no need to remove the keys from the entities, seems to render just fine with them
-     * 
-     * be sure to JSON.stringify the entityCollection before submitting
-     * setState({content: this.entityCollection})
-     * 
+     * see if the below is still accurate:
      * also be sure to dispatch an action at some point that clears the created post from the reducer state
      * also clear the collection of entities from this.entityCollection 
      */
@@ -91,7 +97,12 @@ class PostGenerator extends Component {
 
   finalizePost(url){
     console.log('sending post to db:', this.state)
-    this.props.createPost(this.state);
+    if (this.props.postToEdit) {
+      this.setState({editMode: false});
+      this.props.editPost(this.state, this.props.postToEdit.id, this.props.indexToEdit);
+    } else {
+      this.props.createPost(this.state);
+    }
     this.entityCollection = [];
     this.setState({
       content: [],
@@ -181,6 +192,8 @@ class PostGenerator extends Component {
   //               onChange={event => this.onInputChange(event)} />
 
   render() {
+    console.log('this is the active userId', this.state.userId);
+    console.log('state of edit mode', this.state.editMode);
     // console.log('after inserting edited entity', this.entityCollection);
     let stagedEntities = this.entityCollection.map((entity) => {
       return (
@@ -390,4 +403,4 @@ function mapStateToProps(state) {
   };
 };
 
-export default connect(mapStateToProps, { createPost, stageEntity })(PostGenerator);
+export default connect(mapStateToProps, { createPost, editPost, stageEntity })(PostGenerator);
