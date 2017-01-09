@@ -6,8 +6,8 @@ export default props => {
 
 
   return <Entity
-    animation__rot={{property: 'rotation', dur: 5000, loop: true, to: '360 360 360'}}
-    animation__sca={{property: 'scale', dir: 'alternate', dur: 100, loop: true}}
+    animation__rot={{property: 'rotation', dur: 10000, loop: true, to: '0 360 0'}}
+    //animation__sca={{property: 'scale', dir: 'alternate', dur: 100, loop: true}}
     geometry={{
               primitive: 'sphere',
               radius: .3

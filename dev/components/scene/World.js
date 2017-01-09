@@ -60,7 +60,7 @@ class World extends Component {
     console.log('curScene:',JSON.parse(this.props.currentScene))
 
     return (
-      
+
       <Scene id='scene' createPreview>
         <Camera id='camera' >
           <a-cursor
@@ -69,7 +69,7 @@ class World extends Component {
         </Camera>
 
 
-        <UI className='ui' visible='false' zpos='-1' exit={this.props.exitVR}
+        <UI className='ui' visible='false' zpos='-1' exit={this.props.exitVR} user={this.props.viewedProfile}
             feed={this.props.userFeed} viewedUserPosts={this.props.userPosts}
             showFeed={this.state.showFeed} showUserPosts={this.state.showUserPosts}
             toggleFeed={this.toggleFeed.bind(this)} toggleUserPosts={this.toggleUserPosts.bind(this)}

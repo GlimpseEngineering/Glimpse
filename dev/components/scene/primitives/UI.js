@@ -39,6 +39,7 @@ class UI extends Component {
     this.userPostsPosition = this.userPostsPosition.bind(this);
     this.boxHeight = this.boxHeight.bind(this);
     this.boxPosition = this.boxPosition.bind(this);
+    this.headerToRender = this.headerToRender.bind(this);
     }
 
     componentDidMount(){
@@ -430,26 +431,94 @@ class UI extends Component {
 
     boxHeight(){
       var display = this.mainCompDisplay();
+      var UPLength = this.props.viewedUserPosts.userPosts.length;
+      var feedLength = this.props.feed.followingPosts.length;
+      var result = '7.2';
       if(display){
-        console.log('hey hey hey hey')
-        return '1.6'
+        if(this.props.showUserPosts === 'true'){
+          if(UPLength === 1){
+            result = '1.6';
+          }else if(UPLength === 2){
+            result = '3';
+          }else if(UPLength === 3){
+            result = '4.4';
+          }else if(UPLength === 4){
+            result = '5.8';
+          }
+        }else {
+          if(feedLength === 1){
+            result = '1.6';
+          }else if(feedLength === 2){
+            result = '3';
+          }else if(feedLength === 3){
+            result = '4.4';
+          }else if(feedLength === 4){
+            result = '5.8';
+          }
+        }
       }
-      //return '1.6'
+      return result;
     }
 
     boxPosition(){
+      var display = this.mainCompDisplay();
+      var UPLength = this.props.viewedUserPosts.userPosts.length;
+      var feedLength = this.props.feed.followingPosts.length;
+      var result = '1.4';
+      if(display){
+        if(this.props.showUserPosts === 'true'){
+          if(UPLength === 1){
+            result = '-1.4';
+          }else if(UPLength === 2){
+            result = '-.7';
+          }else if(UPLength === 3){
+            result = '0';
+          }else if(UPLength === 4){
+            result = '.7';
+          }
+        }else {
+          if(feedLength === 1){
+            result = '-1.4';
+          }else if(feedLength === 2){
+            result = '-.7';
+          }else if(feedLength === 3){
+            result = '0';
+          }else if(feedLength === 4){
+            result = '.7';
+          }
+        }
+      }
+      return result;
+    }
 
+    headerToRender() {
+      var display = this.mainCompDisplay();
+      var result;
+      if(display){
+        if(this.props.showFeed === 'true'){
+          result = this.props.user.username + "'s Feed";
+        }else if(this.props.showUserPosts === 'true'){
+          result = this.props.user.username + "'s Posts"
+        }
+      }
+      return result;
     }
 
     render() {
       // console.log('is user posts?', this.isUserPosts())
       return (
         <Entity shift-click-ui {...this.props}>
-          <Box  height="6" width={this.boxHeight()} position='-.2 -1.4 -3'
+          <Box
+            height=".5" width="3.77" position="-.125 3.4 -1" depth=".01"
+            material={`opacity: .2; color: white`}
+          >
+            <Entity bmfont-text={{text: `${this.headerToRender()}; width: 700; align: center;`}} scale="1.4 1.4 1.4" position="-2.6 -.18 .07"/>
+          </Box>
+          <Box  height="6" width={this.boxHeight()} position={`-.2 ${ this.boxPosition() } -4`}
                depth="0.01" rotation="0 0 -90" visible={this.mainCompDisplay()}
                material={`opacity: .2; color: white`}
              />
-          <Entity layout="type: line; margin: 1.3" position="-2.8 -2 0">
+          <Entity layout="type: line; margin: 1.3" position="-2.8 -2 -1">
 
             <Text className="ui-element" text="<" visible={this.checkPrev(this.state.currView)}
               onClick={()=>{
