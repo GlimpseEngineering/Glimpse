@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-// import request from 'superagent';
-// import Dropzone from 'react-dropzone';
+import request from 'superagent';
+import Dropzone from 'react-dropzone';
 
 const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/glimpse/image/upload'
 const PROFPIC_PRESET = 'profile picture'
