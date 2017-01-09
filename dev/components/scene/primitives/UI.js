@@ -413,11 +413,22 @@ class UI extends Component {
                     return result;
                   }
                   var position = textPosition(description[1])
+
+                  var feedBelow = this.displayFeedBelow(index);
+                  var feedAbove = this.displayFeedAbove(index);
+                  var displayMode = function(i){
+
+                    if(feedBelow && feedAbove){
+                      return 'true';
+                    }else{
+                      return 'false';
+                    }
+                  }
                   return(
 
                     <Box  height="0.85" width={this.isFeedCurrWidth(index)}
                          depth="0.05" rotation="0 0 -90" key={post.id}
-
+                         visible={displayMode(index)}
                          material={`opacity: .25; color:${this.isFeedCurrent(index)}`}
 
                          onClick={()=>{

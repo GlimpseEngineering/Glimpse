@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-// import request from 'superagent';
-// import Dropzone from 'react-dropzone';
+import request from 'superagent';
+import Dropzone from 'react-dropzone';
 
 const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/glimpse/image/upload'
 const PROFPIC_PRESET = 'profile picture'
@@ -78,13 +78,9 @@ export default class Upload extends Component{
             <p>Drop an image or click to select a file to upload.</p>
           </Dropzone>
           {this.state.uploadedFileUrl === '' ? null :
-<<<<<<< HEAD
-          <img src={this.state.uploadedFileUrl} 
-               style={thumbnailStyles}/>}
-=======
           <img src={this.state.uploadedFileUrl}
-               style={thumbnailStyles} />}
->>>>>>> feat/preview
+               style={thumbnailStyles}/>}
+
         </span>
 
       </div>
