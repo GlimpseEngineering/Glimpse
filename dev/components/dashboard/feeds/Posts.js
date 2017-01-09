@@ -147,10 +147,10 @@ class Posts extends Component {
             style={postStyles}
             contentLabel="Example Modal"
         >
-          <div>sup tho</div>
           <PostGenerator
             postToEdit={this.state.selectedPost}
-            indexToEdit={this.state.indexToEdit} />
+            indexToEdit={this.state.indexToEdit}
+            closeEditModal={this.closeEditModal.bind(this)} />
         </Modal>
         <Modal
             isOpen={this.state.deleteModalIsOpen}

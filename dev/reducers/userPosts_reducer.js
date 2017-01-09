@@ -14,6 +14,13 @@ export default function(state = initialState, action) {
      * find the index and update the information in state
      * send back copied state with the new information
      */
+    case EDIT_POST:
+      let copiedState = state.userPosts.slice();
+      copiedState[action.payload.indexToEdit] =  action.payload.data;
+      console.log('copied state', copiedState);
+      return Object.assign({}, state, {
+        userPosts: copiedState
+      });
     default:
       return state;
   }

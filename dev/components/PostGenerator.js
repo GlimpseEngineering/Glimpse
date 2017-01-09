@@ -81,6 +81,7 @@ class PostGenerator extends Component {
      * also clear the collection of entities from this.entityCollection 
      */
     event.preventDefault();
+<<<<<<< HEAD
           // let scene = document.querySelector('#scene')
           // let screenShot = document.querySelector('#scene').components.createPreview;
           // console.log(scene.components.screenshot);
@@ -98,8 +99,12 @@ class PostGenerator extends Component {
   finalizePost(url){
     console.log('sending post to db:', this.state)
     if (this.props.postToEdit) {
+=======
+    if (this.state.editMode) {
+>>>>>>> [feat] able to edit posts in post feed
       this.setState({editMode: false});
       this.props.editPost(this.state, this.props.postToEdit.id, this.props.indexToEdit);
+      this.props.closeEditModal();
     } else {
       this.props.createPost(this.state);
     }
