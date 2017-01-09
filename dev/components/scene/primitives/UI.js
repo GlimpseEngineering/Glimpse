@@ -28,6 +28,7 @@ class UI extends Component {
     this.isUserPostsCurrent = this.isUserPostsCurrent.bind(this);
     this.lineBreak = this.lineBreak.bind(this);
     this.isFeedCurrWidth = this.isFeedCurrWidth.bind(this);
+    this.isPostsCurrWidth = this.isPostsCurrWidth.bind(this);
     this.displayFeedBelow = this.displayFeedBelow.bind(this);
     this.displayFeedAbove = this.displayFeedAbove.bind(this);
     this.displayPostsBelow = this.displayPostsBelow.bind(this);
@@ -352,6 +353,7 @@ class UI extends Component {
       return result;
     }
 
+
     mainCompDisplay() {
       if(this.props.showFeed === 'true' || this.props.showUserPosts === 'true'){
         console.log('showfeed')
@@ -399,6 +401,7 @@ class UI extends Component {
       }
       return result;
     }
+
 
 
     render() {
@@ -462,11 +465,23 @@ class UI extends Component {
                     return result;
                   }
                   var position = textPosition(description[1])
+
+                  var feedBelow = this.displayFeedBelow(index);
+                  var feedAbove = this.displayFeedAbove(index);
+                  var displayMode = function(i){
+
+                    if(feedBelow && feedAbove){
+                      return 'true';
+                    }else{
+                      return 'false';
+                    }
+                  }
                   return(
 
                     <Box  height="0.85" width={this.isFeedCurrWidth(index)}
                          depth="0.05" rotation="0 0 -90" key={post.id}
 
+                         visible={displayMode(index)}
                          material={`opacity: .25; color:${this.isFeedCurrent(index)}`}
 
 
