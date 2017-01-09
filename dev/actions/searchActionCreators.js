@@ -26,17 +26,8 @@ export function clearSearch() {
 };
 
 export function followFoundUser(userId, followId, privacySetting, fromInfoPage) {
-  // userId requests a follow of followId
   let followData = {};
   followData.fromInfoPage = fromInfoPage;
-  console.log('GGGGG follow data', followData);
-  /**
-   * maybe put the logic i had earlier in the comopnentwillreceiveprops call
-   * have a flag and depending on where the follow/unfollow request is, change flag
-   * if coming from search bar should be false so can render
-   * else be true so can not render
-   * or vice versa 
-   */
 
   return (dispatch) => {
     console.log('in dispatch')
@@ -70,7 +61,6 @@ export function followFoundUser(userId, followId, privacySetting, fromInfoPage) 
 };
 
 export function unfollowFoundUser(userId, followId, fromInfoPage) {
-  // userId requests a follow of followId
   let followData = {};
   followData.fromInfoPage = fromInfoPage;
 
