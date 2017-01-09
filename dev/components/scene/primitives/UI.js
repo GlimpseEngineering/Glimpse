@@ -303,6 +303,55 @@ class UI extends Component {
       )
     }
 
+
+    mainCompDisplay() {
+      if(this.props.showFeed === 'true' || this.props.showUserPosts === 'true'){
+        console.log('showfeed')
+        return 'true';
+      }else {
+        return 'false';
+      }
+
+    }
+
+    feedPosition(){
+      var feedLength = this.props.feed.followingPosts.length;
+      var result = -(this.state.currFeedSceneIndex) + 3;
+      if(this.state.currFeedSceneIndex < 2){
+        if(this.state.currFeedSceneIndex === 0){
+          result = -(this.state.currFeedSceneIndex) + 1;
+        }else if(this.state.currFeedSceneIndex === 1){
+          result = -(this.state.currFeedSceneIndex) + 2;
+        }
+      }else if(this.state.currFeedSceneIndex > feedLength - 3){
+        if(this.state.currFeedSceneIndex === feedLength - 1){
+          result = -(this.state.currFeedSceneIndex) + 5;
+        }else if(this.state.currFeedSceneIndex === feedLength - 2){
+          result = -(this.state.currFeedSceneIndex) + 4;
+        }
+      }
+      return result;
+    }
+
+    userPostsPosition(){
+      var UPLength = this.props.viewedUserPosts.userPosts.length;
+      var result = -(this.state.currUserPostsSceneIndex) + 3;
+      if(this.state.currUserPostsSceneIndex < 2){
+        if(this.state.currUserPostsSceneIndex === 0){
+          result = -(this.state.currUserPostsSceneIndex) + 1;
+        }else if(this.state.currUserPostsSceneIndex === 1){
+          result = -(this.state.currUserPostsSceneIndex) + 2;
+        }
+      }else if(this.state.currUserPostsSceneIndex > UPLength - 3){
+        if(this.state.currUserPostsSceneIndex === UPLength - 1){
+          result = -(this.state.currUserPostsSceneIndex) + 5;
+        }else if(this.state.currUserPostsSceneIndex === UPLength - 2){
+          result = -(this.state.currUserPostsSceneIndex) + 4;
+        }
+      }
+      return result;
+    }
+
     mainCompDisplay() {
       if(this.props.showFeed === 'true' || this.props.showUserPosts === 'true'){
         console.log('showfeed')
@@ -490,7 +539,6 @@ class UI extends Component {
                             <Entity bmfont-text={{text: `${description[0]}; width: 470; align: left; `}} position={position} />
 
                             <Entity bmfont-text={{text: `${time}; width: 175; align: left`}} position="1.17 0 .07" />
-
 
 
                             {JSON.parse(post.content)
