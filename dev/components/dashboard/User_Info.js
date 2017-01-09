@@ -73,13 +73,13 @@ class User_Info extends Component {
         <button className='editButton'
                 onClick={()=>{
                   console.log('pre-request nextprop followers:',nextProps.followers)
-                  nextProps.requestFollow(nextProps.activeUser.id, nextProps.viewedProfile.id)
+                  nextProps.requestFollow(nextProps.activeUser.id, nextProps.viewedProfile.id, null, true)
                 }}>Follow
         </button> : 
         <button className='editButton'
                 onClick={()=>{
                   console.log('pre-request nextprop followers:',nextProps.followers)
-                  nextProps.unfollow(this.props.activeUser.id, nextProps.viewedProfile.id)
+                  nextProps.unfollow(this.props.activeUser.id, nextProps.viewedProfile.id, true)
                 }}>unfollow</button>
     } else {
       console.log('no activeUser in nextprops')
