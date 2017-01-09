@@ -3,7 +3,10 @@ import {Entity} from 'aframe-react';
 import Plane from './Plane';
 import Text from './Text';
 import Box from './Box';
-import '../acomps/shift_click_ui';
+import Sphere from './SpherePreview';
+import Svg from './svg';
+import 'aframe-ui-modal-component';
+import '../acomps/shift_click_ui'
 import 'aframe-layout-component';
 import 'aframe-bmfont-text-component';
 var moment = require('moment');
@@ -25,7 +28,14 @@ class UI extends Component {
     this.isUserPostsCurrent = this.isUserPostsCurrent.bind(this);
     this.lineBreak = this.lineBreak.bind(this);
     this.isFeedCurrWidth = this.isFeedCurrWidth.bind(this);
-    this.isPostsCurrWidth = this.isPostsCurrWidth.bind(this);
+    this.displayFeedBelow = this.displayFeedBelow.bind(this);
+    this.displayFeedAbove = this.displayFeedAbove.bind(this);
+    this.displayPostsBelow = this.displayPostsBelow.bind(this);
+    this.displayPostsAbove = this.displayPostsAbove.bind(this);
+    this.createJSX = this.createJSX.bind(this);
+    this.mainCompDisplay = this.mainCompDisplay.bind(this);
+    this.feedPosition = this.feedPosition.bind(this);
+    this.userPostsPosition = this.userPostsPosition.bind(this);
     }
 
     componentDidMount(){
@@ -125,6 +135,7 @@ class UI extends Component {
         return 4;
       }
     }
+
     isPostsCurrWidth(index){
       if(index === this.state.currUserPostsSceneIndex){
         return 4.2;
@@ -193,11 +204,169 @@ class UI extends Component {
         return result;
     }
 
+
+    displayFeedBelow(index){
+      var result = false;
+      var feedLength = this.props.feed.followingPosts.length;
+      if(this.state.currFeedSceneIndex >= (feedLength - 2)){
+        console.log('in this bitch')
+        if(index > this.state.currFeedSceneIndex - 4 && this.state.currFeedSceneIndex === (feedLength - 2)){
+          console.log('in dis bitch')
+          result = true;
+        }
+        if(index > this.state.currFeedSceneIndex - 5 && this.state.currFeedSceneIndex === (feedLength - 1)){
+          console.log('in dis bitch')
+          result = true;
+        }
+      }else{
+        if(index < this.state.currFeedSceneIndex - 2){
+          result = false;
+        }else {
+          result = true;
+        }
+      }
+
+      // if(index < this.state.currUserPostsSceneIndex){
+      //   return false;
+      // }else {
+      //   return true;
+      // }
+
+      return result;
+    }
+
+    displayFeedAbove(index){
+      var result = false;
+      if(this.state.currFeedSceneIndex < 2){
+        if(index < this.state.currFeedSceneIndex + 4 && this.state.currFeedSceneIndex === 1){
+          result = true;
+        }
+        if(index < this.state.currFeedSceneIndex + 5 && this.state.currFeedSceneIndex === 0){
+          result = true;
+        }
+      }else{
+        if(index < this.state.currFeedSceneIndex + 3){
+          result = true;
+        }
+      }
+      return result;
+    }
+
+    displayPostsBelow(index){
+      // var result = false;
+      // var feedLength = this.props.feed.followingPosts.length;
+      // if(this.state.currFeedSceneIndex >= (feedLength - 2)){
+      //
+      //   if(index > this.state.currFeedSceneIndex - 3 && this.state.currFeedSceneIndex === (feedLength - 2)){
+      //     console.log('in dis bitch')
+      //     result = true;
+      //   }
+      //   if(index > this.state.currFeedSceneIndex - 4 && this.state.currFeedSceneIndex === (feedLength - 1)){
+      //     console.log('in dis bitch')
+      //     result = true;
+      //   }
+      // }else{
+      //   if(index < this.state.currFeedSceneIndex){
+      //     result = false;
+      //   }else {
+      //     result = true;
+      //   }
+      // }
+      //
+      // // if(index < this.state.currUserPostsSceneIndex){
+      // //   return false;
+      // // }else {
+      // //   return true;
+      // // }
+      //
+      // return result;
+    }
+
+    displayPostsAbove(index){
+      if(index < this.state.currUserPostsSceneIndex + 5){
+        return true;
+      }else {
+        return false;
+      }
+    }
+
+    createJSX(entity, i) {
+      let Tag =
+        entity.primitive === 'PhotoSphere' ? Sphere :
+        Entity;
+      const comps = entity.components;
+      const children = entity.children || [];
+      return (
+        <Tag key={i} {...comps}>
+          { children.map((child, i) => this.createJSX(child, i)) }
+        </Tag>
+      )
+    }
+
+    mainCompDisplay() {
+      if(this.props.showFeed === 'true' || this.props.showUserPosts === 'true'){
+        console.log('showfeed')
+        return 'true';
+      }else {
+        return 'false';
+      }
+
+    }
+
+    feedPosition(){
+      var feedLength = this.props.feed.followingPosts.length;
+      var result = -(this.state.currFeedSceneIndex) + 3;
+      if(this.state.currFeedSceneIndex < 2){
+        if(this.state.currFeedSceneIndex === 0){
+          result = -(this.state.currFeedSceneIndex) + 1;
+        }else if(this.state.currFeedSceneIndex === 1){
+          result = -(this.state.currFeedSceneIndex) + 2;
+        }
+      }else if(this.state.currFeedSceneIndex > feedLength - 3){
+        if(this.state.currFeedSceneIndex === feedLength - 1){
+          result = -(this.state.currFeedSceneIndex) + 5;
+        }else if(this.state.currFeedSceneIndex === feedLength - 2){
+          result = -(this.state.currFeedSceneIndex) + 4;
+        }
+      }
+      return result;
+    }
+
+    userPostsPosition(){
+      var UPLength = this.props.viewedUserPosts.userPosts.length;
+      var result = -(this.state.currUserPostsSceneIndex) + 3;
+      if(this.state.currUserPostsSceneIndex < 2){
+        if(this.state.currUserPostsSceneIndex === 0){
+          result = -(this.state.currUserPostsSceneIndex) + 1;
+        }else if(this.state.currUserPostsSceneIndex === 1){
+          result = -(this.state.currUserPostsSceneIndex) + 2;
+        }
+      }else if(this.state.currUserPostsSceneIndex > UPLength - 3){
+        if(this.state.currUserPostsSceneIndex === UPLength - 1){
+          result = -(this.state.currUserPostsSceneIndex) + 5;
+        }else if(this.state.currUserPostsSceneIndex === UPLength - 2){
+          result = -(this.state.currUserPostsSceneIndex) + 4;
+        }
+      }
+      return result;
+    }
+
+
     render() {
       // console.log('is user posts?', this.isUserPosts())
       return (
         <Entity shift-click-ui {...this.props}>
+          <Box  height="6" width='7.2' position='-.2 1.4 -3'
+               depth="0.01" rotation="0 0 -90" visible={this.mainCompDisplay()}
+               material={`opacity: .2; color: white`}
+             />
           <Entity layout="type: line; margin: 1.3" position="-2.8 -2 0">
+            {/* <Entity
+              // geometry="primitive: plane"
+              material={{src: 'Svg'}}
+            /> */}
+
+
             <Text className="ui-element" text="<" visible={this.checkPrev(this.state.currView)}
               onClick={()=>{
                 if(this.state.currView === 'feed') {
@@ -222,7 +391,7 @@ class UI extends Component {
                    position="0 .4 0" />
               {/* <Entity draw="background: #D7E8FF" textwrap="textAlign: center; x: 128; y: 128; text: Hello world!" position="1.17 0 .07" /> */}
               <Entity className="vr-feed" visible={this.props.showFeed}
-                      layout="line" rotation="0 0 90" margin="0.1" position={`1.35 ${ -(this.state.currFeedSceneIndex) + 1 } -1`}>
+                      layout="line" rotation="0 0 90" margin="0.1" position={`1.35 ${ this.feedPosition() } -1`}>
 
                 {this.props.feed.followingPosts.map((post, index)=>{
                   var time = moment(post.createdAt).fromNow();
@@ -248,8 +417,10 @@ class UI extends Component {
 
                     <Box  height="0.85" width={this.isFeedCurrWidth(index)}
                          depth="0.05" rotation="0 0 -90" key={post.id}
-                         material={`opacity: .4; color:${this.isFeedCurrent(index)}`}
-                        //  color={this.isFeedCurrent(index)}
+
+                         material={`opacity: .25; color:${this.isFeedCurrent(index)}`}
+
+
                          onClick={()=>{
                            this.updateFeedSceneIndex(index);
                            this.props.toggleFeed();
@@ -260,7 +431,11 @@ class UI extends Component {
 
                         <Entity bmfont-text={{text: `${time}; width: 175; align: left`}} position="1.17 0 .07" />
 
-                        <Plane position="-1.55 0 .07" material={{src: `url(https://calderonsteven.github.io/panorama-vr/images/moonfase.jpg)`, side: "double"}} />
+                        {JSON.parse(post.content)
+                          .map((entity, i) => {
+                            return this.createJSX(entity, i)
+                        })}
+                        {/* <Plane position="-1.55 0 .07" material={{src: `url(https://calderonsteven.github.io/panorama-vr/images/moonfase.jpg)`, side: "double"}} /> */}
                     </Box>
                   )
                 })}
@@ -275,10 +450,12 @@ class UI extends Component {
 
               <Text text="U" />
               <Entity className="vr-feed" visible={this.props.showUserPosts}
-                      layout="line" rotation="0 0 90" margin="0.1" position={`-1.25 ${ -(this.state.currUserPostsSceneIndex) + 1 } -1`}>
+                      layout="line" rotation="0 0 90" margin="0.1" position={`-1.25 ${ this.userPostsPosition() } -1`}>
                       {this.props.viewedUserPosts.userPosts.map((post, index)=>{
                         var time = moment(post.createdAt).fromNow();
-
+                        // console.log('curScene:', this.createJSX(JSON.parse(post.content)));
+                        // console.log('curScene:',JSON.parse(post.content))
+                        //var content = this.createJSX(JSON.parse(post.content));
                         //text display algorithm=========>>>>>>>
                         var text = post.description;
                         var description = this.lineBreak(text);
@@ -302,7 +479,7 @@ class UI extends Component {
 
                           <Box height="0.85" width={this.isPostsCurrWidth(index)}
                               depth="0.05" rotation="0 0 -90" key={post.id}
-                              material={`opacity: .4; color:${this.isUserPostsCurrent(index)}`}
+                              material={`opacity: .25; color:${this.isUserPostsCurrent(index)}`}
                               // color={this.isUserPostsCurrent(index)}
                               onClick={()=>{
                                 this.updateUserPostsSceneIndex(index);
@@ -314,7 +491,17 @@ class UI extends Component {
 
                             <Entity bmfont-text={{text: `${time}; width: 175; align: left`}} position="1.17 0 .07" />
 
-                            <Plane position="-1.55 0 .07" material={{src: `url(https://calderonsteven.github.io/panorama-vr/images/moonfase.jpg)`, side: "double"}} />
+
+
+                            {JSON.parse(post.content)
+                              .map((entity, i) => {
+                                return this.createJSX(entity, i)
+                            })}
+                            {/* <Sphere geometry={{
+                                      primitive: 'sphere',
+                                      radius: .3
+                                    }} position="-1.55 0 .07" material={{ src: `url(https://calderonsteven.github.io/panorama-vr/images/moonfase.jpg)`, side: "double"}} /> */}
+
                           </Box>
 
 
