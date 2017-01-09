@@ -6,7 +6,8 @@ const INITIAL_STATE = {
       count: 0, 
       rows: {}
     }, 
-    followedByUser: {} 
+    followedByUser: {},
+    unfollowedByUser: {} 
   } 
 };
 
@@ -50,7 +51,7 @@ export default function(state = INITIAL_STATE, action) {
           })
         },
         followedByUser: Object.assign({}, state.foundUsers.followedByUser, {
-          [action.payload.followedByUser.FollowId]: Object.assign({}, action.payload.followedByUser, {
+          [action.payload.unFollowedByUser.FollowId]: Object.assign({}, action.payload.unFollowedByUser, {
             status: 'unfollowed'
           })
         })

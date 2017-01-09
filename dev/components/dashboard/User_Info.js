@@ -36,15 +36,18 @@ class User_Info extends Component {
         <button onClick={this.openModal}
                   className='editButton'>Edit Profile
         </button> : 
-        !this.props.followers.map(p=>p.UserId).includes(this.props.activeUser.id) ?
+        !this.props.followers.filter(p=>p.status='accepted')
+          .map(p=>p.UserId).includes(this.props.activeUser.id) ?
         <button className='editButton'
                 onClick={()=>{
+                  console.log('pre-request prop followers:',this.props.followers)
                   this.props.requestFollow(this.props.activeUser.id, this.props.viewedProfile.id)
                 }}>Follow
         </button> : 
         <button className='editButton'
                 onClick={()=>{
-                    this.props.unfollow(this.props.activeUser.id, this.props.viewedProfile.id)
+                  console.log('pre-request prop followers:',this.props.followers)
+                  this.props.unfollow(this.props.activeUser.id, this.props.viewedProfile.id)
                 }}>unfollow</button>
     } else {
       console.log('no activeUser in this.props')
@@ -65,22 +68,30 @@ class User_Info extends Component {
         <button onClick={this.openModal}
                 className='editButton'>Edit Profile
         </button> :
-        !nextProps.followers.map(p=>p.UserId).includes(nextProps.activeUser.id) ?
+        !nextProps.followers.filter(p=>p.status='accepted')
+          .map(p=>p.UserId).includes(nextProps.activeUser.id) ?
         <button className='editButton'
                 onClick={()=>{
+                  console.log('pre-request nextprop followers:',nextProps.followers)
                   nextProps.requestFollow(nextProps.activeUser.id, nextProps.viewedProfile.id)
                 }}>Follow
         </button> : 
         <button className='editButton'
                 onClick={()=>{
-                  nextProps.unfollow(this.props.activeUser.id, this.props.viewedProfile.id)
+                  console.log('pre-request nextprop followers:',nextProps.followers)
+                  nextProps.unfollow(this.props.activeUser.id, nextProps.viewedProfile.id)
                 }}>unfollow</button>
     } else {
       console.log('no activeUser in nextprops')
       this.backgroundColor = 'white';
       this.editButton = null;
     }
-    if (Object.keys(nextProps.foundUsers.followedByUser).length !== Object.keys(this.props.foundUsers.followedByUser).length) {
+    if (Object.values(nextProps.foundUsers.followedByUser)
+              .filter(v=>v.status !=='unfollowed')
+              .length !== Object
+              .values(this.props.foundUsers.followedByUser)
+              .filter(v=>v.status !=='unfollowed')
+              .length) {
       console.log('howdy')
       this.props.getFollowersForUser(nextProps.viewedProfile.id)
     }
