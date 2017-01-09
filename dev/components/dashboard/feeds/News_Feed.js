@@ -11,10 +11,10 @@ class News_Feed extends Component {
   }
 
   render() {
-    return (
+    return this.props.userFeed.loading ? <h3>loading...</h3> : (
       <div className="feed_content">
        <ul>
-         {this.props.userFeed.map( post =>
+         {this.props.userFeed.followingPosts.map( post =>
            <li
              onClick={(e) => {
                this.handleSelect(e);
@@ -43,6 +43,7 @@ class News_Feed extends Component {
 function mapStateToProps(state) {
   // returns input state as props in output
   return {
+    userFeed: state.userFeed
   };
 }
 

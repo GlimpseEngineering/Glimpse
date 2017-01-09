@@ -20,7 +20,7 @@ class User_Feeds extends Component {
   componentWillReceiveProps(nextProps) {
     if(nextProps.cacheFollowers.cached && !nextProps.cacheFollowers.pending){
       this.setState({ cacheFollowers: nextProps.cacheFollowers.cachedUsers })
-      console.log(this.state);
+      console.log('state in user feed::',this.state);
     }
   }
 
@@ -47,19 +47,19 @@ class User_Feeds extends Component {
               <Tab className="tab">Followers</Tab>
             </TabList>
               <TabPanel className='tab-view'>
-                <News_Feed userFeed={this.props.userFeed}/>
+                <News_Feed />
               </TabPanel>
               <TabPanel className='tab-view'>
                 <Posts
-                  userPosts={this.props.userPosts}
+                  
                   user={this.props.viewedProfile}
                 />
               </TabPanel>
               <TabPanel className='tab-view'>
-                <Following follows={this.props.follows}/>
+                <Following />
               </TabPanel>
               <TabPanel className='tab-view'>
-                <Followers followers={this.props.followers}/>
+                <Followers />
               </TabPanel>
           </Tabs>
         </div>

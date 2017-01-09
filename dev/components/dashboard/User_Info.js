@@ -57,10 +57,9 @@ class User_Info extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("USER_INFO PROPS:",this.props)
-    console.log('user_info nextprops:',nextProps)
+    // console.log("USER_INFO PROPS:",this.props)
+    // console.log('user_info nextprops:',nextProps)
     if(nextProps.activeUser){
-      console.log(nextProps.activeUser.id)
       this.myProfile = nextProps.viewedProfile.id===nextProps.activeUser.id;
       
       this.backgroundColor = this.myProfile ? 'lightBlue' : 'white';
@@ -92,7 +91,6 @@ class User_Info extends Component {
               .values(this.props.foundUsers.followedByUser)
               .filter(v=>v.status !=='unfollowed')
               .length) {
-      console.log('howdy')
       this.props.getFollowersForUser(nextProps.viewedProfile.id)
     }
   } 
@@ -116,7 +114,6 @@ class User_Info extends Component {
   }
 
   render() {
-    console.log('Here are our user props', this.props.viewedProfile);
     return (
       <div className="col-4 userContainer" 
            style={{

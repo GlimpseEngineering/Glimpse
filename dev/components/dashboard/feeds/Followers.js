@@ -9,10 +9,10 @@ class Followers extends Component {
 
   render() {
 
-    return (
+    return this.props.followers.loading ? <h3>loading...</h3> : (
       <div className="feed_content">
         <ul>
-          {this.props.followers.map( user =>
+          {this.props.followers.userFollowers.map( user =>
             <li className='list-item'
                 key={user.UserId}
                 value={user.UserId}
@@ -38,7 +38,9 @@ class Followers extends Component {
 
 function mapStateToProps(state) {
   // returns input state as props in output
-  return {};
+  return {
+    followers: state.followers
+  };
 }
 
 function mapDispatchToProps(dispatch) {

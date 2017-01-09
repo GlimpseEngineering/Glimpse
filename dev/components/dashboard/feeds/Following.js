@@ -9,11 +9,11 @@ class Following extends Component {
 
 
   render() {
-    console.log(this.props.follows);
-    return (
+    console.log('follows feed:',this.props.follows);
+    return this.props.follows.loading ? <h3>loading...</h3> : (
       <div className="feed_content">
         <ul>
-          {this.props.follows.map( user =>
+          {this.props.follows.userFollows.map( user =>
             <li className='list-item'
                 key={user.FollowId}
                 value={user.FollowId}
@@ -41,7 +41,9 @@ class Following extends Component {
 
 function mapStateToProps(state) {
   // returns input state as props in output
-  return {};
+  return {
+    follows: state.follows
+  };
 }
 
 function mapDispatchToProps(dispatch) {

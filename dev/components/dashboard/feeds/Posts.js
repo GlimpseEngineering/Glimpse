@@ -110,10 +110,10 @@ class Posts extends Component {
      * use the index in the reducer to update state information
      * i.e. do some splices, copy and then change the copy to the desired information 
      */
-    return (
+    return this.props.userPosts.loading ? <h3>loading...</h3> : (
       <div className="feed_content">
         <ul>
-          {this.props.userPosts.map( (post, i) =>
+          {this.props.userPosts.userPosts.map( (post, i) =>
            <li onClick={(e) => {
              this.setState({
               selectedPost: post,
@@ -187,6 +187,7 @@ function mapStateToProps(state) {
     activeUser: state.auth.activeUser,
     viewedProfile: state.user.viewedProfile,
     followers: state.followers.userFollowers,
+    userPosts: state.userPosts,
     foundUsers: state.search.foundUsers
   };
 }
