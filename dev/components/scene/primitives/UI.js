@@ -3,24 +3,21 @@ import {Entity} from 'aframe-react';
 import Plane from './Plane';
 import Text from './Text';
 import Box from './Box';
-import 'aframe-ui-modal-component';
-import '../acomps/shift_click_ui'
+import '../acomps/shift_click_ui';
 import 'aframe-layout-component';
 import 'aframe-bmfont-text-component';
 var moment = require('moment');
-// import AFRAME from 'aframe';
 
 
 class UI extends Component {
   constructor(props) {
     super(props)
-
+    //console.log(props)
     this.state = {
       currFeedSceneIndex: '',
       currUserPostsSceneIndex: '',
       currView: '',
-      feedBelowHidden: '',
-      hover: ''
+      userPostsPosition: -2
     }
     this.checkNext = this.checkNext.bind(this);
     this.checkPrev = this.checkPrev.bind(this);
@@ -29,10 +26,6 @@ class UI extends Component {
     this.lineBreak = this.lineBreak.bind(this);
     this.isFeedCurrWidth = this.isFeedCurrWidth.bind(this);
     this.isPostsCurrWidth = this.isPostsCurrWidth.bind(this);
-    this.displayFeedBelow = this.displayFeedBelow.bind(this);
-    this.displayFeedAbove = this.displayFeedAbove.bind(this);
-    this.displayPostsBelow = this.displayPostsBelow.bind(this);
-    this.displayPostsAbove = this.displayPostsAbove.bind(this);
     }
 
     componentDidMount(){
@@ -55,7 +48,7 @@ class UI extends Component {
       if(this.state.currView === 'feed'){
         this.setState({ currUserPostsSceneIndex: index, currFeedSceneIndex: '', currView: 'userPosts' })
       }else {
-        this.setState({ currUserPostsSceneIndex: index, currFeedSceneIndex: '' })
+          this.setState({ currUserPostsSceneIndex: index, currFeedSceneIndex: '' })
       }
     }
 
@@ -68,6 +61,7 @@ class UI extends Component {
     }
 
     checkNext(view) {
+
       if(view){
         if(view === 'feed'){
           console.log('your current view is: ' + view);
@@ -199,48 +193,8 @@ class UI extends Component {
         return result;
     }
 
-    displayFeedBelow(index){
-      if(index < this.state.currFeedSceneIndex){
-        return false;
-      }else {
-        return true;
-      }
-    }
-
-    displayFeedAbove(index){
-      if(index < this.state.currFeedSceneIndex + 5){
-        return true;
-      }else {
-        return false;
-      }
-    }
-
-    displayPostsBelow(index){
-      if(index < this.state.currUserPostsSceneIndex){
-        return false;
-      }else {
-        return true;
-      }
-    }
-
-    displayPostsAbove(index){
-      if(index < this.state.currUserPostsSceneIndex + 5){
-        return true;
-      }else {
-        return false;
-      }
-    }
-
-    // animate(){
-    //   if(this.state.hover){
-    //     return {property: 'scale', dir: 'alternate', dur: 100, loop: true, to: '2 2 2'};
-    //   }
-    // }
-
     render() {
       // console.log('is user posts?', this.isUserPosts())
-
-
       return (
         <Entity shift-click-ui {...this.props}>
           <Entity layout="type: line; margin: 1.3" position="-2.8 -2 0">
@@ -271,7 +225,6 @@ class UI extends Component {
                       layout="line" rotation="0 0 90" margin="0.1" position={`1.35 ${ -(this.state.currFeedSceneIndex) + 1 } -1`}>
 
                 {this.props.feed.followingPosts.map((post, index)=>{
-
                   var time = moment(post.createdAt).fromNow();
                   // var text = post.description.length;
                   var text = post.description;
@@ -290,28 +243,13 @@ class UI extends Component {
                     }
                     return result;
                   }
-                  var position = textPosition(description[1]);
-                  var feedBelow = this.displayFeedBelow(index);
-                  var feedAbove = this.displayFeedAbove(index);
-                  var displayMode = function(i){
-
-                    if(feedBelow && feedAbove){
-                      return 'true';
-                    }else{
-                      return 'false';
-                    }
-                  }
-
-
-
-
+                  var position = textPosition(description[1])
                   return(
 
-                    <Box  height="0.85" width={this.isFeedCurrWidth(index)} visible={displayMode(index)}
+                    <Box  height="0.85" width={this.isFeedCurrWidth(index)}
                          depth="0.05" rotation="0 0 -90" key={post.id}
-
                          material={`opacity: .4; color:${this.isFeedCurrent(index)}`}
-
+                        //  color={this.isFeedCurrent(index)}
                          onClick={()=>{
                            this.updateFeedSceneIndex(index);
                            this.props.toggleFeed();
@@ -325,9 +263,7 @@ class UI extends Component {
                         <Plane position="-1.55 0 .07" material={{src: `url(https://calderonsteven.github.io/panorama-vr/images/moonfase.jpg)`, side: "double"}} />
                     </Box>
                   )
-                })
-
-              }
+                })}
               </Entity>
             </Entity>
             <Text className="ui-element" text="X" onClick={this.props.exit} />
@@ -347,11 +283,14 @@ class UI extends Component {
                         var text = post.description;
                         var description = this.lineBreak(text);
                         function textPosition(array){
+
                           var result;
                           if(array[2].length !== 0){
                             result = "-1 -0.2 .07"
+
                           }else if(array[2].length === 0 && array[1].length !== 0){
                             result = "-1 0 .07";
+
                           }else{
                             result = "-1 0.2 .07";
                           }
@@ -359,19 +298,9 @@ class UI extends Component {
                         }
                         var position = textPosition(description[1])
                         //=========>>>>>>>
-                        var postsBelow = this.displayPostsBelow(index);
-                        var postsAbove = this.displayPostsAbove(index);
-                        var displayMode = function(i){
-
-                          if(postsBelow && postsAbove){
-                            return 'true';
-                          }else{
-                            return 'false';
-                          }
-                        }
                         return(
 
-                          <Box height="0.85" width={this.isPostsCurrWidth(index)} visible={displayMode(index)}
+                          <Box height="0.85" width={this.isPostsCurrWidth(index)}
                               depth="0.05" rotation="0 0 -90" key={post.id}
                               material={`opacity: .4; color:${this.isUserPostsCurrent(index)}`}
                               // color={this.isUserPostsCurrent(index)}
@@ -385,7 +314,7 @@ class UI extends Component {
 
                             <Entity bmfont-text={{text: `${time}; width: 175; align: left`}} position="1.17 0 .07" />
 
-                            <Plane position="-1.55 0 .07" material={{ src: `url(https://calderonsteven.github.io/panorama-vr/images/moonfase.jpg)`, side: "double"}} />
+                            <Plane position="-1.55 0 .07" material={{src: `url(https://calderonsteven.github.io/panorama-vr/images/moonfase.jpg)`, side: "double"}} />
                           </Box>
 
 
@@ -397,14 +326,12 @@ class UI extends Component {
 
 
             <Text className="ui-element" text=">"
-              // animation__scale={this.animate()}
               visible={
+
                   this.checkNext(this.state.currView)
+
+
               }
-              events={{mouseenter: () => {
-                console.log('ohh shit hovered!')
-                this.setState({ hover: true });
-              }}}
               onClick={()=>{
                 if(this.state.currView === 'feed') {
                   this.props.setScene(this.props.feed.followingPosts[this.state.currFeedSceneIndex + 1].content);
@@ -416,24 +343,6 @@ class UI extends Component {
 
               }}
             />
-            {/* <Entity className="ui-element" material=" src: url(http://img.freepik.com/free-icon/right-arrow-circular-button_318-69332.jpg?size=338c&ext=jpg)"
-              visible={
-
-                  this.checkNext(this.state.currView)
-
-
-              }
-              onClick={()=>{
-                if(this.state.currView === 'feed') {
-                  this.props.setScene(this.props.feed.followingPosts[this.state.currFeedSceneIndex + 1].content);
-                  this.setState({ currFeedSceneIndex: this.state.currFeedSceneIndex + 1 });
-                }else{
-                  this.props.setScene(this.props.viewedUserPosts.userPosts[this.state.currUserPostsSceneIndex + 1].content);
-                  this.setState({ currUserPostsSceneIndex: this.state.currUserPostsSceneIndex + 1 });
-                }
-
-              }}
-            /> */}
           </Entity>
         </Entity>
       );

@@ -8,6 +8,7 @@ const PHOTOSPHERE_PRESET = 'photosphere'
 const FLAT_PHOTO_PRESET = 'flat photo'
 const VIDEOSPHERE_PRESET = 'videosphere'
 const FLAT_VIDEO_PRESET = 'flat video'
+const SCENE_PREVIEW = 'scene preview'
 
 const dropZoneStyles = {
         width: 160,
@@ -28,7 +29,6 @@ export default class Upload extends Component{
     super(props);
 
     this.state = {
-      showUploadField: false,
       uploadedFileUrl: ''
     };
   }
@@ -78,8 +78,13 @@ export default class Upload extends Component{
             <p>Drop an image or click to select a file to upload.</p>
           </Dropzone>
           {this.state.uploadedFileUrl === '' ? null :
+<<<<<<< HEAD
+          <img src={this.state.uploadedFileUrl} 
+               style={thumbnailStyles}/>}
+=======
           <img src={this.state.uploadedFileUrl}
                style={thumbnailStyles} />}
+>>>>>>> feat/preview
         </span>
 
       </div>

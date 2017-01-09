@@ -24,7 +24,15 @@ class App extends Component {
     return (
       <div >
         <button onClick={this.props.enterVR}>enter vr</button>
-        <button onClick={this.props.exitVR}>exit vr</button>      
+        <button onClick={this.props.exitVR}>exit vr</button>
+        <button onClick={()=>{
+          let scene = document.querySelector('#scene')
+          let screenShot = document.querySelector('#scene').components.createPreview;
+          console.log(scene.components.screenshot);
+          console.log(screenShot);
+          scene.components.createPreview.init();
+          scene.components.createPreview.capture('perspective')
+        }}>screenshot</button>      
         {displayMode}
       </div>
     );

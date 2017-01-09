@@ -5,6 +5,8 @@ import 'babel-polyfill';
 import 'aframe-keyboard-controls';
 import 'aframe-mouse-cursor-component';
 
+import './acomps/create_preview';
+
 import {Entity, Scene} from 'aframe-react';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -58,8 +60,9 @@ class World extends Component {
     console.log('curScene:',JSON.parse(this.props.currentScene))
 
     return (
-      <Scene >
-        <Camera >
+      
+      <Scene id='scene' createPreview>
+        <Camera id='camera' >
           <a-cursor
             animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150">
           </a-cursor>
