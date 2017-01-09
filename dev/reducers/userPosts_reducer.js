@@ -8,6 +8,12 @@ export default function(state = initialState, action) {
       return Object.assign({},state,{
           userPosts: action.payload
         });
+    /**
+     * here need to get the index to edit off the payload
+     * make a copy of state
+     * find the index and update the information in state
+     * send back copied state with the new information
+     */
     default:
       return state;
   }
