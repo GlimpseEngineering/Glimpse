@@ -16,8 +16,10 @@ class Profile extends Component {
     super(props);
     if(this.props.viewedProfile.id) {
       this.getFeedData(this.props.viewedProfile.id);
+    } else if (this.props.params.id){
+      this.props.getUserProfile(this.props.params.id);
     } else if (this.props.activeUser) {
-      this.getFeedData(this.props.activeUser.id);
+      this.getUserProfile(this.props.activeUser.id);
     } else {
       browserHistory.push(`/#/splash`)
       window.location.reload();
@@ -35,7 +37,7 @@ class Profile extends Component {
       this.getFeedData(nextProps.viewedProfile.id)
     }
     if(nextProps.params.id !== this.props.params.id) {
-      this.getFeedData(nextProps.params.id)
+      this.props.getUserProfile(nextProps.params.id)
     }
     if(nextProps.requireDataFetch) {
       this.getFeedData(this.props.viewedProfile.id)
@@ -44,7 +46,7 @@ class Profile extends Component {
 
     getFeedData(id){
       console.log('getting feed data for user',id)
-      this.props.getUserProfile(id)
+      // this.props.getUserProfile(id)
       this.props.getUserListings();
       this.props.getUserFollowers(id);
       this.props.getUserFollows(id);
