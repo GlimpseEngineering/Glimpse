@@ -7,6 +7,9 @@ module.exports = (sequelize, DataTypes) => {
       description: {
         type: DataTypes.TEXT
       },
+      previewUrl: {
+        type: DataTypes.TEXT
+      },
       format: {
         type: DataTypes.STRING
       },

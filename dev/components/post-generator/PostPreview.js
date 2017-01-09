@@ -4,9 +4,12 @@ import 'aframe-text-component';
 import 'babel-polyfill';
 import 'aframe-keyboard-controls';
 import 'aframe-mouse-cursor-component';
+import '../scene/acomps/create_preview';
 
 import {Entity, Scene} from 'aframe-react';
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 import Camera from '../scene/primitives/Camera';
 import PhotoSphere from '../scene/primitives/PhotoSphere';
@@ -15,9 +18,11 @@ import UI from '../scene/primitives/UI';
 import Plane from '../scene/primitives/Plane';
 import Box from '../scene/primitives/Box';
 
-export default class World extends Component {
+class Preview extends Component {
   constructor(props) {
     super(props);
+
+  
   }
 
   createJSX(entity, i) {
@@ -37,9 +42,10 @@ export default class World extends Component {
   }
 
   render() {
+    
     return (
       <div className="col-8">
-        <Scene>
+        <Scene id='preview' createPreview>
 
           <Camera>
             <a-cursor
@@ -57,3 +63,9 @@ export default class World extends Component {
     );
   }
 };
+
+function mapStateToProps(state) {
+  return {}
+}
+
+export default connect(mapStateToProps, {})(Preview)
