@@ -75,24 +75,16 @@ class PostGenerator extends Component {
   }
 
   submitPost(event) {
-    /**
-     * see if the below is still accurate:
-     * also be sure to dispatch an action at some point that clears the created post from the reducer state
-     * also clear the collection of entities from this.entityCollection 
-     */
     event.preventDefault();
-          // let scene = document.querySelector('#scene')
-          // let screenShot = document.querySelector('#scene').components.createPreview;
-          // console.log(scene.components.screenshot);
-          // console.log(screenShot);
-          // scene.components.createPreview.init();
-          // scene.components.createPreview.capture('perspective')
-          
-
+    // let scene = document.querySelector('#scene')
+    // let screenShot = document.querySelector('#scene').components.createPreview;
+    // console.log(scene.components.screenshot);
+    // console.log(screenShot);
+    // scene.components.createPreview.init();
+    // scene.components.createPreview.capture('perspective')
     this.screenshot = document.querySelector('#preview').components.createPreview;
     this.screenshot.init();
     this.screenshot.capture('perspective');
-    
   }
 
   finalizePost(url){
@@ -193,9 +185,6 @@ class PostGenerator extends Component {
   //               onChange={event => this.onInputChange(event)} />
 
   render() {
-    console.log('this is the active userId', this.state.userId);
-    console.log('state of edit mode', this.state.editMode);
-    // console.log('after inserting edited entity', this.entityCollection);
     let stagedEntities = this.entityCollection.map((entity) => {
       return (
         <EntityGenerator
@@ -204,7 +193,6 @@ class PostGenerator extends Component {
       );
     });
 
-    // console.log('here is the staged entity that we submitted', this.props.newPost);
     return (
       <div>
         <div className="col-4">

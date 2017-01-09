@@ -15,11 +15,8 @@ const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/glimpse/image/upl
 const SCENE_PREVIEW = 'scene preview'
 
 export const CREATE_POST = 'CREATE_POST';
-<<<<<<< HEAD
 export const PREVIEW_CREATED = 'PREVIEW_CREATED';
-=======
 export const EDIT_POST = 'EDIT_POST';
->>>>>>> [prog] saving edits to the db
 export const STAGE_ENTITY = 'STAGE_ENTITY';
 export const DELETE_ENTITY = 'DELETE_ENTITY';
 export const EDIT_ENTITY = 'EDIT_ENTITY';
@@ -131,6 +128,7 @@ export function editPost(formValues, postId, indexToEdit) {
   let editedData = {};
   const request = axios.put(`api/posts/${postId}`, formValues);
 
+
   return (dispatch) => {
     request.then((data) => {
       editedData.indexToEdit = indexToEdit;
@@ -139,6 +137,7 @@ export function editPost(formValues, postId, indexToEdit) {
       dispatch({type: EDIT_POST, payload: editedData});
     });
   };
+};
 
 export function stageEntity(entity) {
   console.log('here is the entity in the action creator', entity);
