@@ -14,9 +14,8 @@ class Profile extends Component {
 
   constructor(props){
     super(props);
-    console.log('PROFILE PROPZ:',this.props)
-    if(this.props.params.id) {
-      this.getFeedData(this.props.params.id);
+    if(this.props.viewedProfile.id) {
+      this.getFeedData(this.props.viewedProfile.id);
     } else if (this.props.activeUser) {
       this.getFeedData(this.props.activeUser.id);
     } else {
@@ -27,6 +26,10 @@ class Profile extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log('-----------')
+    console.log('profile old props:',this.props)
+    console.log('profile new props:',nextProps)
+    console.log('-----------')
     nextProps.cache.cached && nextProps.cache.pending && this.props.getCachedUsers();
     if(nextProps.viewedProfile.id !== this.props.viewedProfile.id) {
       this.getFeedData(nextProps.viewedProfile.id)
@@ -40,6 +43,7 @@ class Profile extends Component {
   }
 
     getFeedData(id){
+      console.log('getting feed data for user',id)
       this.props.getUserProfile(id)
       this.props.getUserListings();
       this.props.getUserFollowers(id);
