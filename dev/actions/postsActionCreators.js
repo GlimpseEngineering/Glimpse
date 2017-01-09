@@ -16,6 +16,7 @@ const SCENE_PREVIEW = 'scene preview'
 
 export const CREATE_POST = 'CREATE_POST';
 export const PREVIEW_CREATED = 'PREVIEW_CREATED';
+export const EDIT_POST = 'EDIT_POST';
 export const STAGE_ENTITY = 'STAGE_ENTITY';
 export const DELETE_ENTITY = 'DELETE_ENTITY';
 export const EDIT_ENTITY = 'EDIT_ENTITY';
@@ -93,11 +94,11 @@ export function deletePost(postId) {
 
 export function createPost(formValues) {
   const request = axios.post('/api/posts', formValues)
-  console.log('calling create post with these form values', formValues);
+  // console.log('calling create post with these form values', formValues);
 
   return (dispatch) => {
     request.then((data) => {
-      console.log('data returned from creating post', data);
+      // console.log('data returned from creating post', data);
       dispatch({type: CREATE_POST, payload: data})
     });
   };
@@ -122,6 +123,21 @@ export function uploadPreview(blob) {
     }
   });     
 }
+
+export function editPost(formValues, postId, indexToEdit) {
+  let editedData = {};
+  const request = axios.put(`api/posts/${postId}`, formValues);
+
+
+  return (dispatch) => {
+    request.then((data) => {
+      editedData.indexToEdit = indexToEdit;
+      editedData.data = data.data;
+      console.log('here is the edited data', editedData);
+      dispatch({type: EDIT_POST, payload: editedData});
+    });
+  };
+};
 
 export function stageEntity(entity) {
   console.log('here is the entity in the action creator', entity);

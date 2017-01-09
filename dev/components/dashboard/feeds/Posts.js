@@ -4,8 +4,20 @@ import { connect } from 'react-redux';
 import { getOnePost, deletePost } from '../../../actions/postsActionCreators';
 import Modal from 'react-modal';
 import Moment from 'react-moment';
+import PostGenerator from '../../PostGenerator';
 
 const customStyles = {
+  content : {
+    top         : '50%',
+    left        : '50%',
+    right       : 'auto',
+    bottom      : 'auto',
+    marginRight : '-50%',
+    transform   : 'translate(-50%, -50%)'
+  }
+};
+
+const postStyles = {
   content : {
     top         : '50%',
     left        : '50%',
@@ -23,7 +35,8 @@ class Posts extends Component {
     this.state = {
       editModalIsOpen: false,
       deleteModalIsOpen: false,
-      selectedPost: null
+      selectedPost: null,
+      indexToEdit: null,
     };
 
     this.openEditModal = this.openEditModal.bind(this);
@@ -31,6 +44,10 @@ class Posts extends Component {
 
     this.openDeleteModal = this.openDeleteModal.bind(this);
     this.closeDeleteModal = this.closeDeleteModal.bind(this);
+
+    this.initiateEdit = () => {
+
+    }
 
     if(this.props.activeUser){
       this.myProfile = this.props.viewedProfile.id===this.props.activeUser.id;
@@ -88,13 +105,19 @@ class Posts extends Component {
   }
 
   render() {
-
+    /**
+     * consider changing key to the index
+     * use the index in the reducer to update state information
+     * i.e. do some splices, copy and then change the copy to the desired information 
+     */
     return (
       <div className="feed_content">
         <ul>
-          {this.props.userPosts.map( post =>
+          {this.props.userPosts.map( (post, i) =>
            <li onClick={(e) => {
-             this.setState({selectedPost:post})
+             this.setState({
+              selectedPost: post,
+              indexToEdit: i})
              if (e.target.className !=='editButton') {
                this.props.getOnePost(post.id)
            }}}
@@ -121,10 +144,13 @@ class Posts extends Component {
             isOpen={this.state.editModalIsOpen}
             closeEditModal={this.closeEditModal.bind(this)}
             onRequestClose={this.closeEditModal}
-            style={customStyles}
+            style={postStyles}
             contentLabel="Example Modal"
         >
-          <div>sup tho</div>
+          <PostGenerator
+            postToEdit={this.state.selectedPost}
+            indexToEdit={this.state.indexToEdit}
+            closeEditModal={this.closeEditModal.bind(this)} />
         </Modal>
         <Modal
             isOpen={this.state.deleteModalIsOpen}
