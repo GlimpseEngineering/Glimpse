@@ -9,26 +9,30 @@ class SearchResults extends Component {
   }
 
   render() {
-    let props = this.props;
-    let userProfiles = [];
-    
-    for (let user in props.foundUsers.users.rows) {
-      userProfiles.push(props.foundUsers.users.rows[user]);
-    };
+    if (!this.props.foundUsers.fromInfoPage) {
+      let props = this.props;
+      let userProfiles = [];
+      
+      for (let user in props.foundUsers.users.rows) {
+        userProfiles.push(props.foundUsers.users.rows[user]);
+      };
 
-    let searchResults = userProfiles.map((searchResult) => {
+      let searchResults = userProfiles.map((searchResult) => {
+        return (
+          <SearchResult
+            key={searchResult.id} 
+            searchResult={searchResult} />
+        );
+      });
+
       return (
-        <SearchResult
-          key={searchResult.id} 
-          searchResult={searchResult} />
+        <ul>
+          {searchResults}
+        </ul>
       );
-    });
-
-    return (
-      <ul>
-        {searchResults}
-      </ul>
-    );
+    } else {
+      return null;
+    }
   }
 };
 

@@ -7,7 +7,8 @@ const INITIAL_STATE = {
       rows: {}
     }, 
     followedByUser: {},
-    unfollowedByUser: {} 
+    unfollowedByUser: {},
+    fromInfoPage: false 
   } 
 };
 
@@ -15,7 +16,8 @@ export default function(state = INITIAL_STATE, action) {
   switch (action.type) {
   case SEARCH_USERS:
     return Object.assign({}, state, {
-      foundUsers: action.payload
+      foundUsers: action.payload,
+      fromInfoPage: false
     })
   case CLEAR_SEARCH:
     return Object.assign({}, state, {
@@ -38,7 +40,8 @@ export default function(state = INITIAL_STATE, action) {
         },
         followedByUser: Object.assign({}, state.foundUsers.followedByUser, {
           [action.payload.followedByUser.FollowId]: action.payload.followedByUser
-        })
+        }),
+        fromInfoPage: action.payload.fromInfoPage
       }
     });
   case UNFOLLOW_FOUND_USER:
@@ -54,7 +57,8 @@ export default function(state = INITIAL_STATE, action) {
           [action.payload.unFollowedByUser.FollowId]: Object.assign({}, action.payload.unFollowedByUser, {
             status: 'unfollowed'
           })
-        })
+        }),
+        fromInfoPage: action.payload.fromInfoPage
       }
     });
   default:

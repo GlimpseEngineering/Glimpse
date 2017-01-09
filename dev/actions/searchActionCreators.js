@@ -25,9 +25,9 @@ export function clearSearch() {
   };
 };
 
-export function followFoundUser(userId, followId, privacySetting) {
-  // userId requests a follow of followId
+export function followFoundUser(userId, followId, privacySetting, fromInfoPage) {
   let followData = {};
+  followData.fromInfoPage = fromInfoPage;
 
   return (dispatch) => {
     console.log('in dispatch')
@@ -60,9 +60,9 @@ export function followFoundUser(userId, followId, privacySetting) {
   };
 };
 
-export function unfollowFoundUser(userId, followId) {
-  // userId requests a follow of followId
+export function unfollowFoundUser(userId, followId, fromInfoPage) {
   let followData = {};
+  followData.fromInfoPage = fromInfoPage;
 
   return (dispatch) => {
     axios.delete(`api/users/${userId}/follows/${followId}`)
