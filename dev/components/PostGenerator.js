@@ -43,6 +43,10 @@ class PostGenerator extends Component {
     } 
   }
 
+  /**
+   * maybe in component did mount see if user is trying to load and edit a post
+   */
+
   componentWillReceiveProps(nextProps) {
     nextProps.newPost.stagedEntity && 
       !nextProps.newPost.entityToDeleteId && 
