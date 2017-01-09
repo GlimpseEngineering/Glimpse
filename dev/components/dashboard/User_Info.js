@@ -97,18 +97,6 @@ class User_Info extends Component {
     }
   } 
 
-  requestFollow(id) {
-    console.log('add friend',id)
-    console.log(this.props)
-    this.props.requestFollow(this.props.activeUser.id, id)
-    // send a followRequest from activeUser to viewedProfile
-  }
-  unfollow(id) {
-    console.log('unfollow:',id)
-    console.log(this.props)
-    this.props.unfollow(this.props.activeUser.id, id)
-  }
-
   editProfile(id) {
     console.log('edit profile',id)
   }

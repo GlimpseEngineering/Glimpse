@@ -167,7 +167,7 @@ class Posts extends Component {
             <button onClick={()=>{
               console.log('delete',this.state.selectedPost);
               this.props.deletePost(this.state.selectedPost.id);
-              this.closeDeleteModal.bind(this);
+              this.closeDeleteModal();
             }}>
               Delete
             </button>

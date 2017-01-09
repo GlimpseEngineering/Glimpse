@@ -6,6 +6,8 @@ import { updateUser } from '../actions/usersActionCreators';
 class ProfileEditor extends Component {
   constructor(props) {
     super(props)
+    let dob = this.props.user.dob ? this.props.user.dob.split('T')[0] : "1900-01-01";
+    let gender = this.props.user.gender ? this.props.user.gender : "";
 
     this.state = {
       id: this.props.user.id,
@@ -14,8 +16,8 @@ class ProfileEditor extends Component {
       authId: this.props.user.authId,
       bio: this.props.user.bio,
       email: this.props.user.email,
-      dob: this.props.user.dob.split('T')[0],
-      gender: this.props.user.gender,
+      dob: dob,
+      gender: gender,
       private: this.props.user.private
     };
 
