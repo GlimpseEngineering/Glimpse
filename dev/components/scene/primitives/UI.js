@@ -500,7 +500,15 @@ class UI extends Component {
           result = this.props.user.username + "'s Feed";
         }else if(this.props.showUserPosts === 'true'){
           result = this.props.user.username + "'s Posts"
+        }else if(this.state.currView === 'feed' && this.props.showFeed === 'false' && this.props.showUserPosts === 'false'){
+          result = `In ${this.props.user.username}'s Feed`;
+        }else if(this.state.currView === 'userPosts' && this.props.showFeed === 'false' && this.props.showUserPosts === 'false'){
+          result = `In ${this.props.user.username}'s Posts`;
         }
+        // if(this.state.currView === 'feed'){
+        //   result = `Currently in ${this.props.user.username}'s feed`
+        // }
+
       }
       return result;
     }
@@ -553,9 +561,9 @@ class UI extends Component {
             height=".5" width="3.77" position={`-.125 ${this.headPosition()} -1`} depth=".01"
             material={`opacity: .2; color: white`}
           >
-            <Entity bmfont-text={{text: `${this.headerToRender()}; width: 700; align: center;`}} scale="1.4 1.4 1.4" position="-2.6 -.14 .07"/>
+            <Entity bmfont-text={{text: `${this.headerToRender()}; width: 700; align: center;`}} scale="1.4 1.4 1.4" position="-2.5 -.13 .07"/>
           </Box>
-          <Box  height="6" width={this.boxHeight()} position={`-.2 ${ this.boxPosition() } -4`}
+          <Box height="6" width={this.boxHeight()} position={`-.2 ${ this.boxPosition() } -4`}
                depth="0.01" rotation="0 0 -90" visible={this.mainCompDisplay()}
                material={`opacity: .2; color: white`}
              />
