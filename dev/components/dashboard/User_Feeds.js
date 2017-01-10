@@ -69,7 +69,7 @@ class User_Feeds extends Component {
   }
 }
 
-function mapStateToProps({ auth, user, users, followers, follows, userPosts, allPosts, userFeed}){
+function mapStateToProps({ auth, user, users, followers, follows, userPosts, allPosts, userFeed, newPost}){
   return {
     activeUser: auth.activeUser,
     viewedProfile: user.viewedProfile,
@@ -79,6 +79,7 @@ function mapStateToProps({ auth, user, users, followers, follows, userPosts, all
     userPosts: userPosts.userPosts,
     allPosts: allPosts.allPosts,
     userFeed: userFeed.followingPosts,
+    newPost: newPost.createdPost
   };
 }
 
