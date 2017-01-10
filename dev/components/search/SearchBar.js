@@ -21,17 +21,10 @@ class SearchBar extends Component {
     }
   }
 
-  onSubmit(event) {
-    event.preventDefault();
-    let searchterm = this.state.searchterm;
-    this.props.searchUser(searchterm, this.props.auth.activeUser.id);
-    this.setState({searchterm: ''});
-  }
-
   render() {
     return (
       <div className="searchBar">
-        <form onSubmit={this.onSubmit.bind(this)}>
+        <form>
           <input
             className="searchBarInput"
             type="text"
