@@ -22,7 +22,7 @@ class Preview extends Component {
   constructor(props) {
     super(props);
 
-  
+    // scene.components && scene.components.embedPreview.init();
   }
 
   createJSX(entity, i) {
@@ -45,7 +45,7 @@ class Preview extends Component {
     
     return (
       <div className="col-8">
-        <Scene id='preview' createPreview>
+        <a-scene id='preview' createPreview embedded style={{height:'500px',width:'500px'}}>
 
           <Camera>
             <a-cursor
@@ -58,7 +58,7 @@ class Preview extends Component {
               return this.createJSX(entity, i)
           })}
 
-        </Scene>
+        </a-scene>
       </div>
     );
   }
