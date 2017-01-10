@@ -365,7 +365,11 @@ class PostGenerator extends Component {
                 onChange={event => this.onInputChange(event)} />
             </div>
 
-            <button type="submit">Add this scene!</button>
+            <button 
+              type="submit"
+              className={this.props.newPost.loading === true ? "hide-post-details" : ''} >
+              Add this scene!
+            </button>
           </form>
 
           <button 

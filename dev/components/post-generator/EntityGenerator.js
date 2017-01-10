@@ -20,7 +20,7 @@ class EntityGenerator extends Component {
         id: '',
         primitive: '',
         text: this.props.stagedEntity.components.text,
-        color: this.props.stagedEntity.components.color,
+        color: this.props.stagedEntity.components.material.color,
         src: this.props.stagedEntity.components.src,
         x: this.position ? this.position[0] : '',
         y: this.position ? this.position[1] : '',
