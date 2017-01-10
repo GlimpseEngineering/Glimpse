@@ -3,7 +3,10 @@ function photoSphereGenerator(id, src) {
     id: id,
     primitive: 'PhotoSphere',
     components: {
-      src: src
+      src: src,
+      material: {
+        color: ''
+      }
     },
     children: null
   };
@@ -19,8 +22,10 @@ function textGenerator(id, text, color, x, y, z) {
     primitive: 'Text',
     components: {
       text: text,
-      color: color,
-      position: position(x, y, z)
+      position: position(x, y, z),
+      material: {
+        color: color
+      }
     },
     children: null
   };

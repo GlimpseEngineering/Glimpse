@@ -12,16 +12,12 @@ class EntityGenerator extends Component {
       }
 
       this.state = {
-        /**
-         * ideally would be nice for state to be set to whatever was submitted on load
-         * this way the person can decide what to keep and what to change
-         */
         enableEdit: false,
         id: '',
         primitive: '',
         text: this.props.stagedEntity.components.text,
-        color: this.props.stagedEntity.components.color,
-        src: this.props.stagedEntity.components.src,
+        color: this.props.stagedEntity.components.material.color,
+        src: this.props.stagedEntity.components.src ? this.props.stagedEntity.components.src : this.props.stagedEntity.components.material.src,
         x: this.position ? this.position[0] : '',
         y: this.position ? this.position[1] : '',
         z: this.position ? this.position[2] : '',
@@ -36,14 +32,7 @@ class EntityGenerator extends Component {
   }
 
   editOrCopyEntity(event) {
-    /**
-     * can comebine edit and copy entities here?
-     * import stageEntity
-     */
     event.preventDefault();
-    console.log('this is what a click event looks like', event);
-    console.log('accessing the value of a click event', event.target.value);
-    console.log('accessing the name of a click event', event.target.name);
     const position = (x, y, z) => {
       return x.toString() + ' ' + y.toString() + ' ' + z.toString();
     };
@@ -78,8 +67,6 @@ class EntityGenerator extends Component {
         }
       });
     }
-    console.log('original entity', this.props.stagedEntity);
-    console.log('copied entity', copiedEntity);
     event.target.value === 'copy' && this.props.stageEntity(copiedEntity);
     event.target.value !== 'copy' && this.props.editEntity(copiedEntity);
   }
@@ -112,6 +99,7 @@ class EntityGenerator extends Component {
   }
 
   render() {
+    console.log('this is the src', this.state.src);
     console.log('passing delete scene to child', this.props.deleteScene);
     return (
       <div>
@@ -129,7 +117,11 @@ class EntityGenerator extends Component {
               <Upload preset="photosphere"
                       setImage={url=>this.setSrc(url)}/>
             </div>
-            <button type="submit">Edit this scene!</button>
+            <button 
+              type="submit"
+              className={this.props.newPost.loading === true ? "hide-post-details" : ''} >
+              Edit this scene!
+            </button>
           </form>
 
         <form
@@ -256,12 +248,23 @@ class EntityGenerator extends Component {
                 onChange={event => this.onInputChange(event)} />
             </div>
 
-            <button type="submit">Edit this scene!</button>
+            <button 
+              type="submit"
+              className={this.props.newPost.loading === true ? "hide-post-details" : ''} >
+              Edit this scene!
+            </button>
           </form>
       </div> 
     );
   }
 };
 
-const entityGenerator = connect(null, { stageEntity, editEntity, deleteEntity })(EntityGenerator);
+function mapStateToProps(state) {
+  return {
+    newPost: state.newPost
+  };
+};
+
+
+const entityGenerator = connect(mapStateToProps, { stageEntity, editEntity, deleteEntity })(EntityGenerator);
 export default entityGenerator;
