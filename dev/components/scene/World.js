@@ -1,4 +1,5 @@
 import 'aframe';
+import 'aframe-outline'
 import 'aframe-animation-component';
 import 'aframe-text-component';
 import 'babel-polyfill';
@@ -61,7 +62,7 @@ class World extends Component {
 
     return (
 
-      <Scene id='scene' createPreview>
+      <Scene id='scene' createPreview outline>
         <Camera id='camera' >
           <a-cursor
             animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150">

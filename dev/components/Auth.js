@@ -72,6 +72,7 @@ class Auth extends Component {
                 isOpen={this.state.modalIsOpen}
                 onAfterOpen={this.afterOpenModal}
                 closeModal={this.closeModal}
+                onRequestClose={this.closeModal}
                 style={customStyles}
                 contentLabel="Example Modal"
               >
