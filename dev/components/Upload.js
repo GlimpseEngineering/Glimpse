@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { startLoadUrl, endLoadUrl } from '../actions/postsActionCreators';
 import request from 'superagent';
 import Dropzone from 'react-dropzone';
 
@@ -24,7 +26,7 @@ const thumbnailStyles = {
         height: 100
       }
 
-export default class Upload extends Component{
+class Upload extends Component{
   constructor(props) {
     super(props);
 
@@ -42,6 +44,10 @@ export default class Upload extends Component{
   }
 
   handleImageUpload(file) {
+    /**
+     * dispatch loading true here
+     */
+    this.props.startLoadUrl();
     let upload = request.post(CLOUDINARY_UPLOAD_URL)
                         .field('upload_preset', this.props.preset)
                         .field('file', file);
@@ -61,6 +67,7 @@ export default class Upload extends Component{
           this.state.uploadedFileUrl ||
           'http://res.cloudinary.com/glimpse/image/upload/v1483833949/profile%20pictures/uljzqgntgtshodfow0k9.jpg'
         )
+        this.props.endLoadUrl();
       }
     });
   }
@@ -87,3 +94,5 @@ export default class Upload extends Component{
     )
   }
 }
+
+export default connect(null, { startLoadUrl, endLoadUrl })(Upload);

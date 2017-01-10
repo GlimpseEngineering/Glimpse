@@ -86,7 +86,7 @@ module.exports = {
     console.log('here is the request userid', req.body.userId);
     let tags;
     if (req.body.tags) {
-      tags = JSON.parse(req.body.tags);
+      let tags = req.body.tags.split(',');
     }
     models.Post.findOne({
       where: { id: req.params.postId}
