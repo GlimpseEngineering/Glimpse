@@ -24,6 +24,7 @@ export const EDIT_ENTITY = 'EDIT_ENTITY';
 //USER ACTIONS ===========================>
 export function getPostsByUser(userId) {
   return function(dispatch) {
+    dispatch({type:'LOADING_POSTS_BY_USER'})
     axios({
       method: 'GET',
       url: `/api/users/${userId}/posts`

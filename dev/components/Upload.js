@@ -52,7 +52,7 @@ export default class Upload extends Component{
       }
 
       if (response.body.secure_url !== '') {
-        console.log(response.body.secure_url)
+        console.log('uploaded to:',response.body.secure_url)
         this.setState({
           uploadedFileUrl: response.body.secure_url
         });

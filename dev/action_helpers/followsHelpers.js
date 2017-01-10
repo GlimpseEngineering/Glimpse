@@ -41,6 +41,7 @@ export function getFollows(userId) {
             url: `/api/users/${userId}/follows`
           })
         .then((resp) => {
+            console.log(`helper getFollows userid ${userId} results:`,resp )
             return _getFollowsUserInfo(resp)
         })
         .catch((err)=>{
@@ -63,6 +64,7 @@ function _getFollowsUserInfo(resultArr) {
       resultArr.data.forEach((user, index) => {
         user.userInfo = userData[index].data;
       })
+      console.log("_getFollowsUserInfo results:",resultArr)
       return resultArr;
     })
 }
@@ -104,6 +106,7 @@ function _getFollowsPosts(resultArr) {
       feedPosts.sort(function(a,b){
         return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
       });
+      console.log('_getFollowsPosts results:',feedPosts)
       return feedPosts;
     })
 

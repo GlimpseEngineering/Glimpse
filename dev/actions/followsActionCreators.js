@@ -13,6 +13,7 @@ import { getFollowers, getFollows, getFeedPosts } from '../action_helpers/follow
 //USER ACTIONS ===========================>
 export function getFollowersForUser(userId) {
   return function(dispatch) {
+  dispatch({type:'LOADING_FOLLOWERS'})
   getFollowers(userId)
     .then(response => {
       console.log('the response for getting user followers is:', response.data);
@@ -26,6 +27,7 @@ export function getFollowersForUser(userId) {
 
 export function getFollowedByUser(userId) {
   return function(dispatch) {
+    dispatch({type:'LOADING_USER_FOLLOWS'})
     getFollows(userId)
     .then(response => {
       console.log('the response for getting follows: ', response.data);
@@ -39,6 +41,7 @@ export function getFollowedByUser(userId) {
 
 export function getFollowedPosts(userId) {
   return function (dispatch) {
+    dispatch({type:'LOADING_USER_FEED'})
     getFeedPosts(userId)
     .then(response => {
       dispatch({type: 'USER_FEED', payload: response});
