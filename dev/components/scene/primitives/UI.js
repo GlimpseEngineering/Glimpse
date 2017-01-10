@@ -40,6 +40,7 @@ class UI extends Component {
     this.boxHeight = this.boxHeight.bind(this);
     this.boxPosition = this.boxPosition.bind(this);
     this.headerToRender = this.headerToRender.bind(this);
+    this.headPosition = this.headPosition.bind(this);
     }
 
     componentDidMount(){
@@ -504,15 +505,55 @@ class UI extends Component {
       return result;
     }
 
+    headPosition(){
+      var result = -1.12;
+      var UPLength = this.props.viewedUserPosts.userPosts.length;
+      var feedLength = this.props.feed.followingPosts.length;
+      if(this.props.showFeed === 'true'){
+        if(feedLength === 1){
+          result = -.1;
+        }
+        if(feedLength === 2){
+          result = .77;
+        }
+        if(feedLength === 3){
+          result = 1.65;
+        }
+        if(feedLength === 4){
+          result = 2.53;
+        }
+        if(feedLength >= 5){
+          result = 3.4;
+        }
+      }else if(this.props.showUserPosts === 'true'){
+        if(UPLength === 1){
+          result = -.1;
+        }
+        if(UPLength === 2){
+          result = .77;
+        }
+        if(UPLength === 3){
+          result = 1.65;
+        }
+        if(UPLength === 4){
+          result = 2.53;
+        }
+        if(UPLength >= 5){
+          result = 3.4;
+        }
+      }
+      return result;
+    }
+
     render() {
       // console.log('is user posts?', this.isUserPosts())
       return (
         <Entity shift-click-ui {...this.props}>
           <Box
-            height=".5" width="3.77" position="-.125 3.4 -1" depth=".01"
+            height=".5" width="3.77" position={`-.125 ${this.headPosition()} -1`} depth=".01"
             material={`opacity: .2; color: white`}
           >
-            <Entity bmfont-text={{text: `${this.headerToRender()}; width: 700; align: center;`}} scale="1.4 1.4 1.4" position="-2.6 -.18 .07"/>
+            <Entity bmfont-text={{text: `${this.headerToRender()}; width: 700; align: center;`}} scale="1.4 1.4 1.4" position="-2.6 -.14 .07"/>
           </Box>
           <Box  height="6" width={this.boxHeight()} position={`-.2 ${ this.boxPosition() } -4`}
                depth="0.01" rotation="0 0 -90" visible={this.mainCompDisplay()}
