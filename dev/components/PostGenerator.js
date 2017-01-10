@@ -299,11 +299,8 @@ class PostGenerator extends Component {
             onSubmit={this.submitScene.bind(this)} >
              <div>
               <label>Image URL</label>
-              <input
-                type="text"
-                name="src"
-                value={this.state.src}
-                onChange={event => this.onInputChange(event)} />
+              <Upload preset="photosphere"
+                      setImage={url=>this.setSrc(url)}/>
             </div>
 
             <div>
@@ -372,7 +369,11 @@ class PostGenerator extends Component {
             <button type="submit">Add this scene!</button>
           </form>
 
-          <button onClick={this.submitPost.bind(this)}>Submit Post</button>
+          <button 
+            onClick={this.submitPost.bind(this)}
+            className={this.entityCollection.length === 0 ? 'hide-post-details' : ''} >
+            Submit Post
+          </button>
 
           <ul>
             {stagedEntities}

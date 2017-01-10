@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Upload from '../Upload';
 import { stageEntity, editEntity, deleteEntity } from '../../actions/postsActionCreators';
 
 class EntityGenerator extends Component {
@@ -105,6 +106,11 @@ class EntityGenerator extends Component {
     name === 'z' && this.setState({z: value});
   }
 
+  setSrc(url) {
+    console.log('setting src to:', url);
+    this.setState({src: url});
+  }
+
   render() {
     console.log('passing delete scene to child', this.props.deleteScene);
     return (
@@ -120,13 +126,9 @@ class EntityGenerator extends Component {
             onSubmit={this.editOrCopyEntity.bind(this)} >
             <div>
               <label>Image URL</label>
-              <input
-                type="text"
-                name="src"
-                value={this.state.src}
-                onChange={event => this.onInputChange(event)} />
+              <Upload preset="photosphere"
+                      setImage={url=>this.setSrc(url)}/>
             </div>
-
             <button type="submit">Edit this scene!</button>
           </form>
 
@@ -185,13 +187,10 @@ class EntityGenerator extends Component {
             id="box"
             className={this.props.stagedEntity.primitive === "Box" && this.state.enableEdit === true ? "" : "hide-post-details"}
             onSubmit={this.editOrCopyEntity.bind(this)} >
-             <div>
+            <div>
               <label>Image URL</label>
-              <input
-                type="text"
-                name="src"
-                value={this.state.src}
-                onChange={event => this.onInputChange(event)} />
+              <Upload preset="photosphere"
+                      setImage={url=>this.setSrc(url)}/>
             </div>
 
             <div>
