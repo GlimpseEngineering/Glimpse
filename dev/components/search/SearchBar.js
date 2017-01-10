@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { searchUser } from '../../actions/searchActionCreators';
+import { searchUser, clearSearch } from '../../actions/searchActionCreators';
 import SearchResults from './SearchResults';
 
 class SearchBar extends Component {
@@ -14,22 +14,17 @@ class SearchBar extends Component {
 
   onInputChange(event) {
     event.preventDefault();
-    let name = event.target.name;
-    let value = event.target.value;
-    name === 'searchterm' && this.setState({searchterm: value});
-  }
-
-  onSubmit(event) {
-    event.preventDefault();
-    let searchterm = this.state.searchterm;
-    this.props.searchUser(searchterm, this.props.auth.activeUser.id);
-    this.setState({searchterm: ''});
+    this.setState({searchterm: event.target.value});
+    this.props.searchUser(event.target.value, this.props.auth.activeUser.id);
+    if (event.target.value === '') {
+      this.props.clearSearch();
+    }
   }
 
   render() {
     return (
       <div className="searchBar">
-        <form onSubmit={this.onSubmit.bind(this)}>
+        <form>
           <input
             className="searchBarInput"
             type="text"
@@ -52,5 +47,5 @@ function mapStateToProps(state){
   };
 }
 
-const search = connect(mapStateToProps, { searchUser })(SearchBar);
+const search = connect(mapStateToProps, { searchUser, clearSearch })(SearchBar);
 export default search;
