@@ -67,13 +67,8 @@ li {
 .componentInfo {
   padding: 10px; }
 
-.tab-panel {
-  height: 85vh;
-  overflow: hidden; }
-
-.tab-view {
-  overflow: scroll;
-  height: 100%; }
+.time {
+  align-content: right; }
 
 .profPic {
   width: 100%;
@@ -136,9 +131,6 @@ li {
   top: 1px; }
 
 .hide-post-details {
-  display: none; }
-
-.vr-component {
   display: none; }
 
 h1, h2 {
