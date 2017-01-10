@@ -71,11 +71,11 @@ class Auth extends Component {
               <Modal
                 isOpen={this.state.modalIsOpen}
                 onAfterOpen={this.afterOpenModal}
-                onRequestClose={this.closeModal}
+                closeModal={this.closeModal}
                 style={customStyles}
                 contentLabel="Example Modal"
               >
-                <PostGenerator />
+                <PostGenerator closeModal={this.closeModal}/>
                 {/* <h2 ref="subtitle">Hello</h2>
                 <button onClick={this.closeModal}>close</button>
                 <div>I am a modal</div>

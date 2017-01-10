@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Upload from './Upload';
-import { createPost, editPost, stageEntity } from '../actions/postsActionCreators';
+import { createPost, 
+         editPost, 
+         stageEntity,  
+         getPostsByUser 
+       } from '../actions/postsActionCreators';
+import { getFollowedPosts } from '../actions/followsActionCreators';
 import PostPreview from './post-generator/PostPreview';
 import EntityGenerator from './post-generator/EntityGenerator';
 import { templateIndex } from '../post-helpers/entityTemplates';
@@ -11,7 +16,7 @@ class PostGenerator extends Component {
     super(props)
 
     this.state = {
-      userId: this.props.auth.activeUser.id,
+      userId: this.props.activeUser.id,
       editMode: false,
       content: [],
       description: '',
@@ -95,6 +100,7 @@ class PostGenerator extends Component {
       this.props.closeEditModal();
     } else {
       this.props.createPost(this.state);
+      this.props.closeModal();
     }
     this.entityCollection = [];
     this.setState({
@@ -391,9 +397,16 @@ class PostGenerator extends Component {
 
 function mapStateToProps(state) {
   return {
-    auth: state.auth,
+    activeUser: state.auth.activeUser,
+    viewedProfile:state.viewedProfile,
     newPost: state.newPost
   };
 };
 
-export default connect(mapStateToProps, { createPost, editPost, stageEntity })(PostGenerator);
+export default connect(mapStateToProps, { 
+  createPost, 
+  editPost, 
+  stageEntity,
+  getPostsByUser,
+  getFollowedPosts
+ })(PostGenerator);

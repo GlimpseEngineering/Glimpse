@@ -41,6 +41,11 @@ class Profile extends Component {
       console.log('new params, getting profile for user',nextProps.params.id)
       this.props.getUserProfile(nextProps.params.id)
     }
+    if (nextProps.newPost.createdPost !== this.props.newPost.createdPost) {
+      nextProps.viewedProfile.id === nextProps.activeUser.id ?
+        this.props.getPostsByUser(nextProps.activeUser.id) :
+        this.props.getFollowedPosts(nextProps.viewedProfile.id)
+    }
     console.log('-----------')
   }
 
@@ -80,7 +85,8 @@ function mapStateToProps(state){
   return {
     activeUser: state.auth.activeUser,
     viewedProfile: state.user.viewedProfile,
-    cache: state.cache
+    cache: state.cache,
+    newPost: state.newPost
   };
 }
 
@@ -92,6 +98,6 @@ var dashboard = connect(mapStateToProps, {
   getPostsByUser: getPostsByUser,
   getAllPosts: getAllPosts,
   getFollowedPosts: getFollowedPosts,
-  getCachedUsers: getCachedUsers
+  getCachedUsers: getCachedUsers,
 })(Profile);
 export default dashboard;
