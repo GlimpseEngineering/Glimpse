@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { searchUser } from '../../actions/searchActionCreators';
+import { searchUser, clearSearch } from '../../actions/searchActionCreators';
 import SearchResults from './SearchResults';
 
 class SearchBar extends Component {
@@ -14,9 +14,11 @@ class SearchBar extends Component {
 
   onInputChange(event) {
     event.preventDefault();
-    let name = event.target.name;
-    let value = event.target.value;
-    name === 'searchterm' && this.setState({searchterm: value});
+    this.setState({searchterm: event.target.value});
+    this.props.searchUser(event.target.value, this.props.auth.activeUser.id);
+    if (event.target.value === '') {
+      this.props.clearSearch();
+    }
   }
 
   onSubmit(event) {
@@ -52,5 +54,5 @@ function mapStateToProps(state){
   };
 }
 
-const search = connect(mapStateToProps, { searchUser })(SearchBar);
+const search = connect(mapStateToProps, { searchUser, clearSearch })(SearchBar);
 export default search;
