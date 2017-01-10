@@ -23,14 +23,20 @@ class News_Feed extends Component {
              key={post.id}
              className='list-item'
              value={post.id}>
-             <div className="col-2">
-               <img className="userPic" src={post.userInfo.profPic} />
-             </div>
-             <div className='col-8 componentInfo'>
-               <p>{post.description}</p>
-             </div>
-             <div className="col-2">
-               <Moment fromNow style={{ fontSize: '.9em' }}>{post.createdAt}</Moment>
+             <div>
+              <div className="col-2">
+                <img className="userPic" src={post.userInfo.profPic} />
+              </div>
+              <div className='col-8 componentInfo'>
+                <p>{post.description}<br/>
+                <img className='previewImg' 
+                      src={post.previewUrl}
+                      width='160'  height='90' 
+                /></p>
+              </div>
+              <div className="col-2">
+                <Moment fromNow style={{ fontSize: '.9em' }}>{post.createdAt}</Moment>
+              </div>
              </div>
            </li>
          )}

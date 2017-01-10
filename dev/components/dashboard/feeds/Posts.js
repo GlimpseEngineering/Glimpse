@@ -123,13 +123,16 @@ class Posts extends Component {
            }}}
              key={post.id}
              className='list-item'
-             value={post.id}
-             >
+             value={post.id}>
             <div className="col-2" >
               <img className="userPic" src={this.props.user.profPic} />
             </div>
             <div className='col-8 componentInfo'>
-              <p>{post.description}</p>
+              <p>{post.description}<br/>
+              <img className='previewImg' 
+                  src={post.previewUrl}
+                  width='160'  height='90' 
+              /></p>
             </div>
             <div className="col-2">
               <Moment fromNow style={{ fontSize: '.9em' }} >
