@@ -103,8 +103,7 @@ class EntityGenerator extends Component {
     console.log('passing delete scene to child', this.props.deleteScene);
     return (
       <div>
-        {this.props.stagedEntity.id}
-        {this.props.stagedEntity.primitive}: some kind of content {this.props.stagedEntity.children}
+        Content Type: {this.props.stagedEntity.primitive}
         <button onClick={this.openEditMenu.bind(this)}>{this.state.enableEdit === true ? 'Hide' : 'Edit'}</button>
         <button onClick={this.deleteEntity.bind(this)}>Delete</button>
 

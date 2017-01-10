@@ -197,7 +197,7 @@ class PostGenerator extends Component {
 
     return (
       <div>
-        <div className="col-4">
+        <div className="col-4 userContainer">
           {this.state.selectedPrimitive}
           <h3>Create A New Scene</h3>
 
