@@ -37,6 +37,10 @@ class UI extends Component {
     this.mainCompDisplay = this.mainCompDisplay.bind(this);
     this.feedPosition = this.feedPosition.bind(this);
     this.userPostsPosition = this.userPostsPosition.bind(this);
+    this.boxHeight = this.boxHeight.bind(this);
+    this.boxPosition = this.boxPosition.bind(this);
+    this.headerToRender = this.headerToRender.bind(this);
+    this.headPosition = this.headPosition.bind(this);
     }
 
     componentDidMount(){
@@ -209,14 +213,18 @@ class UI extends Component {
     displayFeedBelow(index){
       var result = false;
       var feedLength = this.props.feed.followingPosts.length;
+
+      if(this.state.currFeedSceneIndex === ""){
+        if(index < 5){
+          result = true;
+        }
+      }
+
       if(this.state.currFeedSceneIndex >= (feedLength - 2)){
-        console.log('in this bitch')
         if(index > this.state.currFeedSceneIndex - 4 && this.state.currFeedSceneIndex === (feedLength - 2)){
-          console.log('in dis bitch')
           result = true;
         }
         if(index > this.state.currFeedSceneIndex - 5 && this.state.currFeedSceneIndex === (feedLength - 1)){
-          console.log('in dis bitch')
           result = true;
         }
       }else{
@@ -226,18 +234,18 @@ class UI extends Component {
           result = true;
         }
       }
-
-      // if(index < this.state.currUserPostsSceneIndex){
-      //   return false;
-      // }else {
-      //   return true;
-      // }
-
       return result;
     }
 
     displayFeedAbove(index){
       var result = false;
+
+      if(this.state.currFeedSceneIndex === ""){
+        if(index < 5){
+          result = true;
+        }
+      }
+
       if(this.state.currFeedSceneIndex < 2){
         if(index < this.state.currFeedSceneIndex + 4 && this.state.currFeedSceneIndex === 1){
           result = true;
@@ -254,41 +262,52 @@ class UI extends Component {
     }
 
     displayPostsBelow(index){
-      // var result = false;
-      // var feedLength = this.props.feed.followingPosts.length;
-      // if(this.state.currFeedSceneIndex >= (feedLength - 2)){
-      //
-      //   if(index > this.state.currFeedSceneIndex - 3 && this.state.currFeedSceneIndex === (feedLength - 2)){
-      //     console.log('in dis bitch')
-      //     result = true;
-      //   }
-      //   if(index > this.state.currFeedSceneIndex - 4 && this.state.currFeedSceneIndex === (feedLength - 1)){
-      //     console.log('in dis bitch')
-      //     result = true;
-      //   }
-      // }else{
-      //   if(index < this.state.currFeedSceneIndex){
-      //     result = false;
-      //   }else {
-      //     result = true;
-      //   }
-      // }
-      //
-      // // if(index < this.state.currUserPostsSceneIndex){
-      // //   return false;
-      // // }else {
-      // //   return true;
-      // // }
-      //
-      // return result;
+      var result = false;
+      var feedLength = this.props.viewedUserPosts.userPosts.length;
+
+      if(this.state.currUserPostsSceneIndex === ""){
+        if(index < 5){
+          result = true;
+        }
+      }
+      if(this.state.currUserPostsSceneIndex >= (feedLength - 2)){
+        if(index > this.state.currUserPostsSceneIndex - 4 && this.state.currUserPostsSceneIndex === (feedLength - 2)){
+          result = true;
+        }
+        if(index > this.state.currUserPostsSceneIndex - 5 && this.state.currUserPostsSceneIndex === (feedLength - 1)){
+          result = true;
+        }
+      }else{
+        if(index < this.state.currUserPostsSceneIndex - 2){
+          result = false;
+        }else {
+          result = true;
+        }
+      }
+      return result;
     }
 
     displayPostsAbove(index){
-      if(index < this.state.currUserPostsSceneIndex + 5){
-        return true;
-      }else {
-        return false;
+      var result = false;
+
+      if(this.state.currUserPostsSceneIndex === ""){
+        if(index < 5){
+          result = true;
+        }
       }
+      if(this.state.currUserPostsSceneIndex < 2){
+        if(index < this.state.currUserPostsSceneIndex + 4 && this.state.currUserPostsSceneIndex === 1){
+          result = true;
+        }
+        if(index < this.state.currUserPostsSceneIndex + 5 && this.state.currUserPostsSceneIndex === 0){
+          result = true;
+        }
+      }else{
+        if(index < this.state.currUserPostsSceneIndex + 3){
+          result = true;
+        }
+      }
+      return result;
     }
 
     createJSX(entity, i) {
@@ -367,6 +386,7 @@ class UI extends Component {
     feedPosition(){
       var feedLength = this.props.feed.followingPosts.length;
       var result = -(this.state.currFeedSceneIndex) + 3;
+
       if(this.state.currFeedSceneIndex < 2){
         if(this.state.currFeedSceneIndex === 0){
           result = -(this.state.currFeedSceneIndex) + 1;
@@ -380,12 +400,16 @@ class UI extends Component {
           result = -(this.state.currFeedSceneIndex) + 4;
         }
       }
+      if(this.state.currFeedSceneIndex == "" || feedLength < 5){
+        result = 1;
+      }
       return result;
     }
 
     userPostsPosition(){
       var UPLength = this.props.viewedUserPosts.userPosts.length;
       var result = -(this.state.currUserPostsSceneIndex) + 3;
+
       if(this.state.currUserPostsSceneIndex < 2){
         if(this.state.currUserPostsSceneIndex === 0){
           result = -(this.state.currUserPostsSceneIndex) + 1;
@@ -399,25 +423,151 @@ class UI extends Component {
           result = -(this.state.currUserPostsSceneIndex) + 4;
         }
       }
+      if(this.state.currUserPostsSceneIndex == "" || UPLength < 5){
+
+        result = 1;
+      }
       return result;
     }
 
+    boxHeight(){
+      var display = this.mainCompDisplay();
+      var UPLength = this.props.viewedUserPosts.userPosts.length;
+      var feedLength = this.props.feed.followingPosts.length;
+      var result = '7.2';
+      if(display){
+        if(this.props.showUserPosts === 'true'){
+          if(UPLength === 1){
+            result = '1.6';
+          }else if(UPLength === 2){
+            result = '3';
+          }else if(UPLength === 3){
+            result = '4.4';
+          }else if(UPLength === 4){
+            result = '5.8';
+          }
+        }else {
+          if(feedLength === 1){
+            result = '1.6';
+          }else if(feedLength === 2){
+            result = '3';
+          }else if(feedLength === 3){
+            result = '4.4';
+          }else if(feedLength === 4){
+            result = '5.8';
+          }
+        }
+      }
+      return result;
+    }
 
+    boxPosition(){
+      var display = this.mainCompDisplay();
+      var UPLength = this.props.viewedUserPosts.userPosts.length;
+      var feedLength = this.props.feed.followingPosts.length;
+      var result = '1.4';
+      if(display){
+        if(this.props.showUserPosts === 'true'){
+          if(UPLength === 1){
+            result = '-1.4';
+          }else if(UPLength === 2){
+            result = '-.7';
+          }else if(UPLength === 3){
+            result = '0';
+          }else if(UPLength === 4){
+            result = '.7';
+          }
+        }else {
+          if(feedLength === 1){
+            result = '-1.4';
+          }else if(feedLength === 2){
+            result = '-.7';
+          }else if(feedLength === 3){
+            result = '0';
+          }else if(feedLength === 4){
+            result = '.7';
+          }
+        }
+      }
+      return result;
+    }
+
+    headerToRender() {
+      var display = this.mainCompDisplay();
+      var result;
+      if(display){
+        if(this.props.showFeed === 'true'){
+          result = this.props.user.username + "'s Feed";
+        }else if(this.props.showUserPosts === 'true'){
+          result = this.props.user.username + "'s Posts"
+        }else if(this.state.currView === 'feed' && this.props.showFeed === 'false' && this.props.showUserPosts === 'false'){
+          result = `In ${this.props.user.username}'s Feed`;
+        }else if(this.state.currView === 'userPosts' && this.props.showFeed === 'false' && this.props.showUserPosts === 'false'){
+          result = `In ${this.props.user.username}'s Posts`;
+        }
+        // if(this.state.currView === 'feed'){
+        //   result = `Currently in ${this.props.user.username}'s feed`
+        // }
+
+      }
+      return result;
+    }
+
+    headPosition(){
+      var result = -1.12;
+      var UPLength = this.props.viewedUserPosts.userPosts.length;
+      var feedLength = this.props.feed.followingPosts.length;
+      if(this.props.showFeed === 'true'){
+        if(feedLength === 1){
+          result = -.1;
+        }
+        if(feedLength === 2){
+          result = .77;
+        }
+        if(feedLength === 3){
+          result = 1.65;
+        }
+        if(feedLength === 4){
+          result = 2.53;
+        }
+        if(feedLength >= 5){
+          result = 3.4;
+        }
+      }else if(this.props.showUserPosts === 'true'){
+        if(UPLength === 1){
+          result = -.1;
+        }
+        if(UPLength === 2){
+          result = .77;
+        }
+        if(UPLength === 3){
+          result = 1.65;
+        }
+        if(UPLength === 4){
+          result = 2.53;
+        }
+        if(UPLength >= 5){
+          result = 3.4;
+        }
+      }
+      return result;
+    }
 
     render() {
       // console.log('is user posts?', this.isUserPosts())
       return (
         <Entity shift-click-ui {...this.props}>
-          <Box  height="6" width='7.2' position='-.2 1.4 -3'
+          <Box
+            height=".5" width="3.77" position={`-.125 ${this.headPosition()} -1`} depth=".01"
+            material={`opacity: .2; color: white`}
+          >
+            <Entity bmfont-text={{text: `${this.headerToRender()}; width: 700; align: center;`}} scale="1.4 1.4 1.4" position="-2.5 -.13 .07"/>
+          </Box>
+          <Box height="6" width={this.boxHeight()} position={`-.2 ${ this.boxPosition() } -4`}
                depth="0.01" rotation="0 0 -90" visible={this.mainCompDisplay()}
                material={`opacity: .2; color: white`}
              />
-          <Entity layout="type: line; margin: 1.3" position="-2.8 -2 0">
-            {/* <Entity
-              // geometry="primitive: plane"
-              material={{src: 'Svg'}}
-            /> */}
-
+          <Entity layout="type: line; margin: 1.3" position="-2.8 -2 -1">
 
             <Text className="ui-element" text="<" visible={this.checkPrev(this.state.currView)}
               onClick={()=>{
@@ -464,7 +614,8 @@ class UI extends Component {
                     }
                     return result;
                   }
-                  var position = textPosition(description[1])
+                  var position = textPosition(description[1]);
+                  //========>
 
                   var feedBelow = this.displayFeedBelow(index);
                   var feedAbove = this.displayFeedAbove(index);
@@ -475,6 +626,8 @@ class UI extends Component {
                     }else{
                       return 'false';
                     }
+
+
                   }
                   return(
 
@@ -539,9 +692,19 @@ class UI extends Component {
                         }
                         var position = textPosition(description[1])
                         //=========>>>>>>>
+                        var postsBelow = this.displayPostsBelow(index);
+                        var postsAbove = this.displayPostsAbove(index);
+                        var displayMode = function(i){
+
+                          if(postsBelow && postsAbove){
+                            return 'true';
+                          }else{
+                            return 'false';
+                          }
+                        }
                         return(
 
-                          <Box height="0.85" width={this.isPostsCurrWidth(index)}
+                          <Box height="0.85" width={this.isPostsCurrWidth(index)} visible={displayMode(index)}
                               depth="0.05" rotation="0 0 -90" key={post.id}
                               material={`opacity: .25; color:${this.isUserPostsCurrent(index)}`}
                               // color={this.isUserPostsCurrent(index)}
