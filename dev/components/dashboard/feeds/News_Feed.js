@@ -1,3 +1,4 @@
+import 'aframe';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -28,11 +29,12 @@ class News_Feed extends Component {
                 <img className="userPic" src={post.userInfo.profPic} />
               </div>
               <div className='col-8 componentInfo'>
-                <p>{post.description}<br/>
                 <img className='previewImg' 
                       src={post.previewUrl}
-                      width='160'  height='90' 
-                /></p>
+                      width='300'  height='150' 
+                />
+                <br/>
+                {post.description}
               </div>
               <div className="col-2">
                 <Moment fromNow style={{ fontSize: '.9em' }}>{post.createdAt}</Moment>

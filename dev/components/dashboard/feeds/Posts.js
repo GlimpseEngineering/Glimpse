@@ -127,13 +127,14 @@ class Posts extends Component {
             <div className="col-2" >
               <img className="userPic" src={this.props.user.profPic} />
             </div>
-            <div className='col-8 componentInfo'>
-              <p>{post.description}<br/>
-              <img className='previewImg' 
-                  src={post.previewUrl}
-                  width='160'  height='90' 
-              /></p>
-            </div>
+              <div className='col-8 componentInfo'>
+                <img className='previewImg' 
+                      src={post.previewUrl}
+                      width='300'  height='150' 
+                />
+                <br/>
+                {post.description}
+              </div>
             <div className="col-2">
               <Moment fromNow style={{ fontSize: '.9em' }} >
                 {post.createdAt}
