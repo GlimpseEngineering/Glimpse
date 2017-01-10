@@ -177,14 +177,10 @@ class PostGenerator extends Component {
     console.log('setting src to:', url);
     this.setState({src: url});
   }
-
-  // <input
-  //               type="url"
-  //               name="src"
-  //               value={this.state.src}
-  //               onChange={event => this.onInputChange(event)} />
-
+  
   render() {
+    console.log('triggering loading state newPost', this.props.newPost);
+    console.log('triggering loading state', this.props.newPost.loading);
     let stagedEntities = this.entityCollection.map((entity) => {
       return (
         <EntityGenerator
@@ -237,8 +233,11 @@ class PostGenerator extends Component {
               <Upload preset="photosphere"
                       setImage={url=>this.setSrc(url)}/>
             </div>
-
-            <button type="submit">Add this scene!</button>
+            <button 
+              type="submit"
+              className={this.props.newPost.loading === true ? "hide-post-details" : ''} >
+              Add this scene!
+            </button>
           </form>
 
           <form
