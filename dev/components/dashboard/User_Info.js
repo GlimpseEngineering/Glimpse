@@ -85,14 +85,24 @@ class User_Info extends Component {
       this.backgroundColor = 'white';
       this.editButton = null;
     }
-    if (Object.values(nextProps.foundUsers.followedByUser)
-              .filter(v=>v.status !=='unfollowed')
-              .length !== Object
-              .values(this.props.foundUsers.followedByUser)
-              .filter(v=>v.status !=='unfollowed')
-              .length) {
-      this.props.getFollowersForUser(nextProps.viewedProfile.id)
-    }
+    console.log('*|*|*|*|*|*|*|*|*')
+    console.log('user_info old props:',this.props)
+    console.log('user_info new props:',nextProps)
+    console.log('*-*-*-*-*-*-*-*-*')
+
+    let oldFollowedBy = Object.values(this.props.foundUsers.followedByUser)
+    let newFollowedBy = Object.values(nextProps.foundUsers.followedByUser)
+    console.log('oldFollowedBy:',JSON.stringify(oldFollowedBy))
+    console.log('newFollowedBy:',JSON.stringify(newFollowedBy))
+    
+    // check to see if the followedBy prop has changed in number or value
+    !newFollowedBy.every((follow,i)=>
+      oldFollowedBy[i] && follow.status === oldFollowedBy[i].status
+    ) && this.props.getFollowersForUser(nextProps.viewedProfile.id);
+    
+    // console.log(Object.values(this.props.foundUsers.followedByUser))
+    // console.log(Object.values(nextProps.foundUsers.followedByUser))
+    
   } 
 
   editProfile(id) {

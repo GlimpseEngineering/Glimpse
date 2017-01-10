@@ -38,7 +38,7 @@ class Profile extends Component {
       this.getFeedData(nextProps.viewedProfile.id)
     }
     if(nextProps.params.id !== this.props.params.id) {
-      console.lg('new params, getting profile for user',nextProps.params.id)
+      console.log('new params, getting profile for user',nextProps.params.id)
       this.props.getUserProfile(nextProps.params.id)
     }
     console.log('-----------')
