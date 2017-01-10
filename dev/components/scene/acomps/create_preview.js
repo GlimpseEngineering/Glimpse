@@ -149,7 +149,7 @@ AFRAME.registerComponent('createPreview', {
       // render scene with cube camera
       cubeCamera.updateCubeMap(el.renderer, el.object3D);
       this.quad.material.uniforms.map.value = cubeCamera.renderTarget.texture;
-      size = {width: this.data.width, height: this.data.height};
+      size = {width: 300, height: 150};
       // use quad to project image taken by the cube camera
       this.quad.visible = true;
     }

@@ -30,7 +30,6 @@ export function followFoundUser(userId, followId, privacySetting, fromInfoPage) 
   followData.fromInfoPage = fromInfoPage;
 
   return (dispatch) => {
-    console.log('in dispatch')
     axios.post(`api/users/${userId}/follows/${followId}`)
       .then((followRequest) => {
         followData.followedByUser = followRequest.data[0];
@@ -38,8 +37,7 @@ export function followFoundUser(userId, followId, privacySetting, fromInfoPage) 
       })
       .then((userRequest) => {
         followData.user = userRequest.data;
-        console.log('dispatching FOLLOW_FOUND_USER')
-        console.log('payload:',followData)
+        console.log('dispatching FOLLOW_FOUND_USER. Payload:',followData)
         if (privacySetting) {
           dispatch({ type: FOLLOW_FOUND_USER, payload: followData });
         } else {
@@ -49,8 +47,7 @@ export function followFoundUser(userId, followId, privacySetting, fromInfoPage) 
       .then((acceptedUserRequest) => {
         if (acceptedUserRequest) {
           followData.followedByUser = acceptedUserRequest.data;
-          console.log('dispatching FOLLOW_FOUND_USER2')
-          console.log('payload:',followData)
+          console.log('dispatching FOLLOW_FOUND_USER3. Payload:',followData)
           dispatch({ type: FOLLOW_FOUND_USER, payload: followData });
         }
       })
