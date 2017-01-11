@@ -13,12 +13,13 @@ const FLAT_VIDEO_PRESET = 'flat video'
 const SCENE_PREVIEW = 'scene preview'
 
 const dropZoneStyles = {
-        width: 160,
+        width: 220,
         height: 100,
         borderWidth: 2,
         borderColor: '#666',
         borderStyle: 'dashed',
         borderRadius: 5
+
       }
 
 const thumbnailStyles = {

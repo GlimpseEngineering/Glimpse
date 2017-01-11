@@ -43,7 +43,9 @@
   color: black; }
 
 .feed_content {
-  width: 100%; }
+  width: 100%;
+  overflow: auto;
+  height: 100%; }
 
 .list-item {
   position: relative;
@@ -67,13 +69,12 @@ li {
 .componentInfo {
   padding: 10px; }
 
-.tab-panel {
-  height: 85vh;
-  overflow: hidden; }
-
 .tab-view {
-  overflow: scroll;
-  height: 100%; }
+  overflow: auto;
+  max-height: 100vh; }
+
+.time {
+  align-content: right; }
 
 .profPic {
   width: 100%;
@@ -82,10 +83,12 @@ li {
   padding: 0% 4% 5% 4%; }
 
 .picContainer {
+  width: 100%;
   text-align: center;
   align-items: center;
   justify-content: center;
-  padding-bottom: 5px; }
+  padding: 5px;
+  display: block; }
 
 .profile {
   color: black;
@@ -96,7 +99,10 @@ li {
 
 .userContainer {
   align-items: center;
-  padding: 2% 4% 2% 4%; }
+  padding: 2% 4% 0% 4%;
+  height: 100vh;
+  width: 100%;
+  display: table; }
 
 .profileInfo {
   border-top: solid #e1e8ed 1px;
@@ -109,21 +115,21 @@ li {
   padding-top: 10px;
   border-top: solid #e1e8ed 1px; }
 
+.profileButton {
+  text-align: center;
+  padding-bottom: 15px; }
+
 .editButton {
-  float: right;
-  padding-right: 4px;
   background-color: #fff;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   border-radius: 6px;
   border: 1px solid #dcdcdc;
-  display: inline-block;
   cursor: pointer;
   color: #666666;
   font-size: 14px;
-  padding: 2px 16px;
-  text-decoration: none;
-  margin-left: 2px; }
+  padding: 6px 16px;
+  text-decoration: none; }
 
 .editButton:hover {
   background-color: #b3b3b3;
@@ -138,8 +144,69 @@ li {
 .hide-post-details {
   display: none; }
 
-.vr-component {
-  display: none; }
+.postForm {
+  height: 100%;
+  width: 100%; }
+
+.postGeneratorTitle {
+  margin-bottom: 15px;
+  text-align: center; }
+
+.post_description {
+  top: 10px;
+  width: 100%;
+  height: 50px;
+  background-color: #fff;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  border: 1px solid #dcdcdc;
+  display: inline-block;
+  color: #666666;
+  font-size: 12px;
+  text-decoration: none; }
+
+.btn-select {
+  width: 100%;
+  background-color: #fff;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  border: 1px solid #dcdcdc;
+  display: inline-block;
+  cursor: pointer;
+  color: #666666;
+  font-size: 16px;
+  padding: 6px 24px;
+  text-decoration: none;
+  margin: 5px 0 5px 0; }
+
+.btn-select:hover {
+  background-color: #b3b3b3;
+  color: white;
+  transition: color 0.2s;
+  transition: background-color 0.2s; }
+
+.btn-select:active {
+  position: relative; }
+
+.dragAndDrop {
+  margin: 7px 0 7px 0;
+  align-content: center; }
+
+.text_content_full {
+  width: 100%;
+  background-color: #fff;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  border: 1px solid #dcdcdc;
+  display: inline-block;
+  color: #666666;
+  font-size: 12px;
+  padding: 6px 3px 6px 3px;
+  text-decoration: none;
+  margin: 7px 0 7px 0; }
 
 h1, h2 {
   font-family: "Open Sans", sans-serif;
@@ -185,22 +252,25 @@ p {
 
 ul {
   margin: 0;
-  margin-bottom: 0; }
-
-html, html a {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004); }
+  margin-bottom: 5px; }
 
 body {
   font-family: "Open Sans", sans-serif;
   margin: 0px; }
 
+html, body {
+  margin: 0;
+  height: 100%; }
+
 .top-hide {
   display: none; }
 
+.mainEverything {
+  height: 100%; }
+
 .container {
   padding: 10px;
+  height: 100vh;
   width: 100%; }
 
 .content_body {
@@ -268,6 +338,35 @@ body {
   border-radius: 6px;
   border: 1px solid #e1e8ed;
   padding: 9px 24px; }
+
+.searchResult {
+  left: -40px;
+  border: 1px solid #dcdcdc;
+  background-color: white;
+  position: relative;
+  z-index: 9;
+  width: 100%;
+  height: 100%; }
+
+.search_ul {
+  width: 100%;
+  display: block; }
+
+.searchInfo {
+  float: right;
+  padding: 5px 15px 5px 0px;
+  width: 55%; }
+
+.searchPic {
+  margin-left: 10px; }
+
+.searchFollowButton {
+  text-align: center;
+  padding: 1px 0 4px 0; }
+
+.searchNameLink {
+  text-align: center;
+  padding: 10px 0 7px 0; }
 
 .row:after {
   display: block;

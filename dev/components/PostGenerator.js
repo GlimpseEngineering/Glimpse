@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Upload from './Upload';
-import { createPost, 
-         editPost, 
-         stageEntity,  
-         getPostsByUser 
+import { createPost,
+         editPost,
+         stageEntity,
+         getPostsByUser
        } from '../actions/postsActionCreators';
 import { getFollowedPosts } from '../actions/followsActionCreators';
 import PostPreview from './post-generator/PostPreview';
@@ -38,7 +38,7 @@ class PostGenerator extends Component {
     };
 
     this.entityCollection = [];
-    
+
     this.editOrDeleteEntity = (target) => {
       let targetIndex
       this.entityCollection.forEach((entity, index) => {
@@ -46,9 +46,9 @@ class PostGenerator extends Component {
       });
       if (typeof target === 'object') this.entityCollection[targetIndex] = target;
       if (typeof target === 'number') this.entityCollection.splice(targetIndex, 1);
-    } 
+    }
   }
-  
+
   componentDidMount() {
     console.log('here is the index to edit', this.props.indexToEdit);
     if (this.props.postToEdit) {
@@ -63,11 +63,11 @@ class PostGenerator extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    nextProps.newPost.stagedEntity && 
-      !nextProps.newPost.entityToDeleteId && 
-      !nextProps.newPost.entityToEditId && 
+    nextProps.newPost.stagedEntity &&
+      !nextProps.newPost.entityToDeleteId &&
+      !nextProps.newPost.entityToEditId &&
       nextProps.newPost.stagedEntity !== this.props.newPost.stagedEntity &&
-      this.entityCollection.push(nextProps.newPost.stagedEntity) && 
+      this.entityCollection.push(nextProps.newPost.stagedEntity) &&
       this.setState({content: JSON.stringify(this.entityCollection)});
     console.log('preview url:',nextProps.newPost.previewUrl)
     if (nextProps.newPost.previewUrl && nextProps.newPost.previewUrl !== this.props.newPost.previewUrl) {
@@ -183,7 +183,7 @@ class PostGenerator extends Component {
     console.log('setting src to:', url);
     this.setState({src: url});
   }
-  
+
   render() {
     console.log('triggering loading state newPost', this.props.newPost);
     console.log('triggering loading state', this.props.newPost.loading);
@@ -197,32 +197,31 @@ class PostGenerator extends Component {
 
     return (
       <div>
-        <div className="col-4">
-          {this.state.selectedPrimitive}
-          <h3>Create A New Scene</h3>
 
-          <form
-            id="post" >
+        <div className="col-4 postForm">
+
+
+
+          <div className="postGeneratorTitle">
+
+            <h4>Create A New Scene</h4>
+
+          </div>
+
+
+          {/* <form id="post" >
             <div>
-              <label>Description</label>
-              <textarea
-                name="description"
-                value={this.state.description}
-                onChange={event => this.onInputChange(event)} >
-              </textarea>
+
+
             </div>
 
-            <div>
-              <label>Tags</label>
-              <input
-                type="text"
-                name="tags"
-                value={this.state.tags}
-                onChange={event => this.onInputChange(event)} />
-            </div>
-          </form>
+          </form> */}
 
-          <select
+          {/* <div>
+            <h5>{this.state.selectedPrimitive}</h5>
+          </div> */}
+
+          <select className="btn-select"
             value={this.state.selectedPrimitive}
             onChange={event => this.onPrimitiveChange(event)} >
             <option name="PhotoSphere" value="PhotoSphere">PhotoSphere</option>
@@ -234,15 +233,21 @@ class PostGenerator extends Component {
             id="photosphere"
             className={this.state.selectedPrimitive === "PhotoSphere" ? "" : "hide-post-details"}
             onSubmit={this.submitScene.bind(this)} >
-            <div>
-              <label>Image URL</label>
+            <textarea className="post_description"
+              name="description"
+              value={this.state.description}
+              placeholder="description"
+              onChange={event => this.onInputChange(event)} >
+            </textarea>
+            <div className="dragAndDrop">
+              {/* <label>Image URL</label> */}
               <Upload preset="photosphere"
                       setImage={url=>this.setSrc(url)}/>
             </div>
-            <button 
+            <button
               type="submit"
-              className={this.props.newPost.loading === true ? "hide-post-details" : ''} >
-              Add this scene!
+              className={this.props.newPost.loading === true ? "hide-post-details" : 'btn-select'} >
+              Add This Photo Sphere!
             </button>
           </form>
 
@@ -251,8 +256,9 @@ class PostGenerator extends Component {
             className={this.state.selectedPrimitive === "Text" ? "" : "hide-post-details"}
             onSubmit={this.submitScene.bind(this)} >
             <div>
-              <label>Text Content</label>
-              <input
+              {/* <label>Text Content</label> */}
+              <input className="text_content_full"
+                placeholder="Text Content"
                 type="text"
                 name="text"
                 value={this.state.text}
@@ -260,57 +266,60 @@ class PostGenerator extends Component {
             </div>
 
             <div>
-              <label>Text Color</label>
-              <input
+              {/* <label>Text Color</label> */}
+              <input className="text_content_full"
+                placeholder="Text Color"
                 type="text"
                 name="color"
                 value={this.state.color}
                 onChange={event => this.onInputChange(event)} />
             </div>
 
-            <div>
-              <label>Text X-Axis</label>
-              <input
+            <div >
+              {/* <label>Text X-Axis</label> */}
+              <input className="text_content_full"
+                placeholder="X-Axis"
                 type="number"
                 name="x"
                 value={this.state.x}
                 onChange={event => this.onInputChange(event)} />
             </div>
-
-            <div>
-              <label>Text Y-Axis</label>
-              <input
+              {/* <label>Text Y-Axis</label> */}
+            <div >
+              <input className="text_content_full"
+                placeholder="Y-Axis"
                 type="number"
                 name="y"
                 value={this.state.y}
                 onChange={event => this.onInputChange(event)} />
             </div>
-
-            <div>
-              <label>Text Z-Axis</label>
-              <input
+              {/* <label>Text Z-Axis</label> */}
+            <div >
+              <input className="text_content_full"
+                placeholder="Z-Axis"
                 type="number"
                 name="z"
                 value={this.state.z}
                 onChange={event => this.onInputChange(event)} />
             </div>
 
-            <button type="submit">Add this scene!</button>
+            <button type="submit" className="btn-select">Add This Text!</button>
           </form>
 
           <form
             id="box"
             className={this.state.selectedPrimitive === "Box" ? "" : "hide-post-details"}
             onSubmit={this.submitScene.bind(this)} >
-             <div>
-              <label>Image URL</label>
+             <div className="dragAndDrop">
+              {/* <label>Image URL</label> */}
               <Upload preset="photosphere"
                       setImage={url=>this.setSrc(url)}/>
             </div>
 
             <div>
-              <label>Box Width</label>
-              <input
+              {/* <label>Box Width</label> */}
+              <input className="text_content_full"
+                placeholder="Box Width"
                 type="number"
                 name="width"
                 value={this.state.width}
@@ -318,8 +327,9 @@ class PostGenerator extends Component {
             </div>
 
             <div>
-              <label>Box Height</label>
-              <input
+              {/* <label>Box Height</label> */}
+              <input className="text_content_full"
+                placeholder="Box Height"
                 type="number"
                 name="height"
                 value={this.state.height}
@@ -327,8 +337,9 @@ class PostGenerator extends Component {
             </div>
 
             <div>
-              <label>Box Depth</label>
-              <input
+              {/* <label>Box Depth</label> */}
+              <input className="text_content_full"
+                placeholder="Box Depth"
                 type="number"
                 name="depth"
                 value={this.state.depth}
@@ -336,8 +347,9 @@ class PostGenerator extends Component {
             </div>
 
             <div>
-              <label>Box Color</label>
-              <input
+              {/* <label>Box Color</label> */}
+              <input className="text_content_full"
+                placeholder="Box Color"
                 type="text"
                 name="color"
                 value={this.state.color}
@@ -345,8 +357,9 @@ class PostGenerator extends Component {
             </div>
 
             <div>
-              <label>Box X-Axis</label>
-              <input
+              {/* <label>Box X-Axis</label> */}
+              <input className="text_content_full"
+                placeholder="Box X-Axis"
                 type="number"
                 name="x"
                 value={this.state.x}
@@ -354,8 +367,9 @@ class PostGenerator extends Component {
             </div>
 
             <div>
-              <label>Box Y-Axis</label>
-              <input
+              {/* <label>Box Y-Axis</label> */}
+              <input className="text_content_full"
+                placeholder="Box Y-Axis"
                 type="number"
                 name="y"
                 value={this.state.y}
@@ -363,24 +377,25 @@ class PostGenerator extends Component {
             </div>
 
             <div>
-              <label>Box Z-Axis</label>
-              <input
+              {/* <label>Box Z-Axis</label> */}
+              <input className="text_content_full"
+                placeholder="Box Z-Axis"
                 type="number"
                 name="z"
                 value={this.state.z}
                 onChange={event => this.onInputChange(event)} />
             </div>
 
-            <button 
+            <button
               type="submit"
-              className={this.props.newPost.loading === true ? "hide-post-details" : ''} >
-              Add this scene!
+              className={this.props.newPost.loading === true ? "hide-post-details" : 'btn-select'} >
+              Add This Box!
             </button>
           </form>
 
-          <button 
+          <button
             onClick={this.submitPost.bind(this)}
-            className={this.entityCollection.length === 0 ? 'hide-post-details' : ''} >
+            className={this.entityCollection.length === 0 ? 'hide-post-details' : 'btn-select'} >
             Submit Post
           </button>
 
@@ -403,9 +418,9 @@ function mapStateToProps(state) {
   };
 };
 
-export default connect(mapStateToProps, { 
-  createPost, 
-  editPost, 
+export default connect(mapStateToProps, {
+  createPost,
+  editPost,
   stageEntity,
   getPostsByUser,
   getFollowedPosts

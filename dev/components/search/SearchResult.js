@@ -21,6 +21,7 @@ class SearchResult extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    this.props && this.props.getFollowedByUser(this.props.auth.activeUser.id);
     let followRequest = this.props.foundUsers.followedByUser[this.props.searchResult.id];
     let updatedRequest = nextProps.foundUsers.followedByUser[nextProps.searchResult.id];
     updatedRequest && updatedRequest.status === 'pending' && this.setState({button: 'pending'});
@@ -37,12 +38,24 @@ class SearchResult extends Component {
 
   render() {
     return (
-      <div>
-        <Link to={"profile/" + this.props.searchResult.id}>
-          <img className="userPic" src={this.props.searchResult.profPic} />
-          <p>{this.props.searchResult.username}</p>
+      <div className="searchResult">
+
+        <Link to={"profile/" + this.props.searchResult.id} >
+          <img className="userPic searchPic" src={this.props.searchResult.profPic} />
+
         </Link>
-        <button value={this.props.searchResult.id} onClick={this.onClick.bind(this)}>{this.state.button}</button>
+
+        <div className="searchInfo">
+          <div className="searchNameLink">
+            <Link>
+              <p>{this.props.searchResult.username}</p>
+            </Link>
+          </div>
+          <div className="searchFollowButton">
+            <button className="btn-primary" value={this.props.searchResult.id} onClick={this.onClick.bind(this)}>{this.state.button}</button>
+          </div>
+        </div>
+
       </div>
     );
   }

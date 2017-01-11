@@ -29,7 +29,7 @@ const postStyles = {
 };
 
 class Posts extends Component {
-  
+
   constructor(props) {
     super(props);
     this.state = {
@@ -52,8 +52,8 @@ class Posts extends Component {
     if(this.props.activeUser){
       this.myProfile = this.props.viewedProfile.id===this.props.activeUser.id;
       console.log('MY PROFILE?????', this.myProfile)
-      
-      this.editButton = this.myProfile ? 
+
+      this.editButton = this.myProfile ?
         <div>
           <button className='editButton'
             onClick={()=>{setTimeout(this.openDeleteModal, 0)}}>Delete
@@ -71,16 +71,21 @@ class Posts extends Component {
     if(nextProps.activeUser){
       this.myProfile = nextProps.viewedProfile.id===nextProps.activeUser.id;
       console.log('MY PROFILE?????', this.myProfile)
-      
-      this.editButton = this.myProfile ? 
+
+      this.editButton = this.myProfile ?
+      <div>
         <div>
           <button className='editButton'
              onClick={()=>{setTimeout(this.openDeleteModal, 0)}}>Delete
           </button>
+        </div>
+        <div>
           <button className='editButton'
             onClick={()=>{setTimeout(this.openEditModal, 0)}}>Edit
           </button>
-        </div> : null
+        </div>
+      </div>
+        : null
   } else {
       this.editButton = null;
     }
@@ -108,7 +113,7 @@ class Posts extends Component {
     /**
      * consider changing key to the index
      * use the index in the reducer to update state information
-     * i.e. do some splices, copy and then change the copy to the desired information 
+     * i.e. do some splices, copy and then change the copy to the desired information
      */
     return this.props.userPosts.loading ? <h3>loading...</h3> : (
       <div className="feed_content">
@@ -128,9 +133,9 @@ class Posts extends Component {
               <img className="userPic" src={this.props.user.profPic} />
             </div>
               <div className='col-8 componentInfo'>
-                <img className='previewImg' 
+                <img className='previewImg'
                       src={post.previewUrl}
-                      width='300'  height='150' 
+                      width='300'  height='150'
                 />
                 <br/>
                 {post.description}
@@ -198,7 +203,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   // pass the result of selectBook to all reducers
-  return bindActionCreators({ 
+  return bindActionCreators({
     getOnePost: getOnePost,
     deletePost: deletePost
   }, dispatch)

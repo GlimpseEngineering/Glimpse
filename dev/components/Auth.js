@@ -68,6 +68,7 @@ class Auth extends Component {
             {/* <button className="btn-primary">Post</button> */}
             {/* <div> */}
               <button onClick={this.openModal} className="btn-primary">Post</button>
+
               <Modal
                 isOpen={this.state.modalIsOpen}
                 onAfterOpen={this.afterOpenModal}

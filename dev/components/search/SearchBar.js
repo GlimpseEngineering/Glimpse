@@ -25,16 +25,18 @@ class SearchBar extends Component {
     return (
       <div className="searchBar">
         <form>
-          <input
-            className="searchBarInput"
-            type="text"
-            name="searchterm"
-            value={this.state.searchterm}
-            onChange={event => this.onInputChange(event)} />
+        <input
+          className="searchBarInput"
+          type="text"
+          name="searchterm"
+          value={this.state.searchterm}
+          onChange={event => this.onInputChange(event)} />
 
           <button type="submit" className="btn-primary" >Search</button>
+
         </form>
-        <SearchResults />
+        <SearchResults className="searchResult"/>
+
       </div>
     );
   }

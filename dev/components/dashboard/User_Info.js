@@ -27,7 +27,7 @@ class User_Info extends Component {
 
     this.props.getFollowersForUser(this.props.viewedProfile.id)
     // if(this.props.activeUser){
-    //   this.myProfile = this.props.viewedProfile.id===this.props.activeUser.id;      
+    //   this.myProfile = this.props.viewedProfile.id===this.props.activeUser.id;
     //   this.backgroundColor = this.myProfile ? 'lightBlue' : 'white';
 
     // } else {
@@ -52,18 +52,18 @@ class User_Info extends Component {
       this.activeUserFollowsProfile = nextProps.followers.filter(p=>p.status='accepted')
           .map(p=>p.UserId).includes(nextProps.activeUser.id)
 
-      this.buttonText = this.myProfile ? 
+      this.buttonText = this.myProfile ?
           'Edit Profile' : this.activeUserFollowsProfile ?
-            'Unfollow' : 'Follow' 
-      
-      this.handleClick = this.myProfile ? 
+            'Unfollow' : 'Follow'
+
+      this.handleClick = this.myProfile ?
         this.editProfClick.bind(this) :
         this.activeUserFollowsProfile ?
-          this.unFollowClick.bind(this) : 
+          this.unFollowClick.bind(this) :
           this.followClick.bind(this)
 
-      this.backgroundColor = this.myProfile ? 'lightBlue' : 'white';
-        
+      this.backgroundColor = this.myProfile ? 'lightBlue' : '#B5CBB7';
+
     } else {
       console.log('no activeUser in nextprops')
       this.backgroundColor = 'white';
@@ -90,21 +90,21 @@ class User_Info extends Component {
     }
     let oldFollowedBy = Object.values(this.props.foundUsers.followedByUser)
     let newFollowedBy = Object.values(nextProps.foundUsers.followedByUser)
-    
+
     // check to see if the followedBy prop has changed in number or value
     newFollowedBy && !newFollowedBy.every((follow,i)=>
       oldFollowedBy[i] && follow.status === oldFollowedBy[i].status
     ) && this.props.getFollowersForUser(nextProps.viewedProfile.id);
-    
+
     // console.log(Object.values(this.props.foundUsers.followedByUser))
     // console.log(Object.values(nextProps.foundUsers.followedByUser))
-    
-  } 
+
+  }
 
   editProfClick(){
     this.openModal()
   }
-      
+
   followClick(){
     console.log('pre-request nextprop followers:',this.props.followers)
     console.log(`setting button Text from ${this.state.buttonText} to Unfollow at followClick`)
@@ -114,7 +114,7 @@ class User_Info extends Component {
    unFollowClick(){
     console.log('pre-request nextprop followers:',this.props.followers)
     console.log(`setting button Text from ${this.state.buttonText} to Follow at unfollowClick`)
-    this.setState({buttonText:'Follow'})   
+    this.setState({buttonText:'Follow'})
     this.props.unfollow(this.props.activeUser.id, this.props.viewedProfile.id, true)
   }
 
@@ -134,15 +134,19 @@ class User_Info extends Component {
 
   render() {
     return (
-      <div className="col-4 userContainer" 
+      <div className="col-4 userContainer"
            style={{
              backgroundColor:this.state.backgroundColor,
-             height: '85vh',
-             overflow: 'scroll'
+            //  height: '85vh',
+            //  overflow: 'scroll'
            }}>
         <div className="profile">
           <div className="picContainer">
+
             <img src={this.props.viewedProfile.profPic} className="profPic" />
+
+          </div>
+          <div className="profileButton">
             {!this.props.activeUser ? null :
             <button className='editButton'onClick={this.state.handleClick}>
               {this.state.buttonText}
@@ -162,15 +166,12 @@ class User_Info extends Component {
           <div className="profileInfo">
             <div className="username">
               <h4>{this.props.viewedProfile.username}</h4>
-              <p style={{
-                   fontSize: '.7em',
-                   padding: '4px 0px 15px 0px' 
-                 }}>
+              <p >
                 {this.props.viewedProfile.email}
               </p>
             </div>
             <div className="bio">
-              <div style={{ paddingBottom: '10px' }}>
+              <div >
 
                 <label>Bio:</label>
               </div>

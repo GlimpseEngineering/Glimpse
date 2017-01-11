@@ -44,9 +44,11 @@ class Preview extends Component {
   render() {
     
     return (
-      <div className="col-8">
+      <div className="col-8 container">
         <a-scene id='preview' createPreview embedded style={{height:'500px',width:'500px'}}>
-
+          <a-assets id='assets'>
+            <img id="NO_ASSET" />
+          </a-assets>
           <Camera>
             <a-cursor
               animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150">

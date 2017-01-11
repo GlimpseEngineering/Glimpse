@@ -12,7 +12,7 @@ class SearchResults extends Component {
     if (!this.props.foundUsers.fromInfoPage) {
       let props = this.props;
       let userProfiles = [];
-      
+
       for (let user in props.foundUsers.users.rows) {
         userProfiles.push(props.foundUsers.users.rows[user]);
       };
@@ -20,13 +20,13 @@ class SearchResults extends Component {
       let searchResults = userProfiles.map((searchResult) => {
         return (
           <SearchResult
-            key={searchResult.id} 
+            key={searchResult.id}
             searchResult={searchResult} />
         );
       });
 
       return (
-        <ul>
+        <ul className="search_ul">
           {searchResults}
         </ul>
       );
