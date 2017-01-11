@@ -62,7 +62,11 @@ class World extends Component {
 
     return (
 
-      <Scene id='scene' createPreview outline>
+
+      <Scene id='scene' createPreview > 
+        <a-assets id='assets'>
+          <img id="NO_ASSET" />
+        </a-assets>
         <Camera id='camera' >
           <a-cursor
             animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150">
