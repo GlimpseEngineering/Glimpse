@@ -65,6 +65,10 @@ $secondary-color: #B364B4;
 
 .feed_content {
   width: 100%;
+  overflow: auto;
+  // max-height: 100vh;
+  // overflow: hidden;
+  height: 100%;
 }
 //-------->
 .list-item {
@@ -93,10 +97,10 @@ li {
   padding: 10px;
 }
 
-// .tab-view {
-//   overflow: scroll;;
-//   height: 100%;
-// }
+.tab-view {
+  overflow: auto;
+  max-height: 100vh;
+}
 
 .time {
   align-content: right;

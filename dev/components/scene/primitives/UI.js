@@ -380,7 +380,6 @@ class UI extends Component {
       }else {
         return 'false';
       }
-
     }
 
     feedPosition(){

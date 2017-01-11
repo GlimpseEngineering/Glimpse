@@ -24,6 +24,7 @@ class SearchBar extends Component {
   render() {
     return (
       <div className="searchBar">
+        <form>
         <input
           className="searchBarInput"
           type="text"
@@ -32,7 +33,10 @@ class SearchBar extends Component {
           onChange={event => this.onInputChange(event)} />
 
           <button type="submit" className="btn-primary" >Search</button>
-        <SearchResults />
+
+        </form>
+        <SearchResults className="searchResult"/>
+
       </div>
     );
   }
