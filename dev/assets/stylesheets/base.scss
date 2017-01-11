@@ -5,7 +5,6 @@
 @import './newsfeed';
 @import './userInfo';
 @import './createPost';
-@import './vrmode';
 // =======================
 // VARIABLES
 // =======================
@@ -95,7 +94,8 @@ p {
 
 ul {
   margin: 0;
-  margin-bottom: 0;
+  margin-bottom: 5px;
+
 }
 // =======================
 // MAIN
@@ -105,23 +105,40 @@ ul {
 // }
 
 html, html a {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+  // -webkit-font-smoothing: antialiased;
+  // -moz-osx-font-smoothing: grayscale;
+  // text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
 }
 
 body {
   font-family: $font-stack;
   margin: 0px;
+  // overflow-y: auto;
+  // position: fixed;
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+  // overflow: hidden;
 }
 //hide enterVR and exitVR buttons
 .top-hide {
   display: none;
 }
 
+.mainEverything {
+  // display: flex
+  // flex-flow: column;
+  height: 100%;
+}
+
 .container {
   padding: 10px;
+  height: 100vh;
   width: 100%;
+
+  // top: 50%;
 }
 
 .content_body {
@@ -197,12 +214,54 @@ body {
 
 }
 
+// .mainEverything {
+//   height: 100%;
+// }
+
 .searchBarInput {
   position: relative;
   top: -2px;
   border-radius: 6px;
   border: 1px solid #e1e8ed;
   padding:9px 24px;
+}
+
+.searchResult {
+  left: -40px;
+  border:1px solid #dcdcdc;
+  background-color: white;
+  position: relative;
+  z-index: 9;
+  width: 100%;
+  height: 100%;
+
+  // display: inline-flex;
+}
+.search_ul {
+  width: 100%;
+  display: block;
+
+}
+
+.searchInfo {
+  // align-items: left;
+  float: right;
+  padding: 5px 15px 5px 0px;
+  width: 55%;
+}
+
+.searchPic {
+  margin-left: 10px;
+}
+
+.searchFollowButton {
+  text-align: center;
+  padding: 1px 0 4px 0;
+}
+
+.searchNameLink {
+  text-align: center;
+  padding: 10px 0 7px 0;
 }
 
 //----- Extends
@@ -221,6 +280,8 @@ $grid-spacing:0%;
     & + & {
         margin-top:$grid-spacing;
     }
+
+
 }
 
 [class^="col-"] {

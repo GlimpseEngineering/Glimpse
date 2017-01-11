@@ -49,6 +49,7 @@ $secondary-color: #B364B4;
   list-style: none;
   padding: 6px 12px;
   cursor: pointer;
+
 }
 
 .react-tabs [role=tab][aria-selected=true] {
@@ -64,6 +65,10 @@ $secondary-color: #B364B4;
 
 .feed_content {
   width: 100%;
+  overflow: auto;
+  // max-height: 100vh;
+  // overflow: hidden;
+  height: 100%;
 }
 //-------->
 .list-item {
@@ -92,12 +97,11 @@ li {
   padding: 10px;
 }
 
-.tab-panel {
-  height: 85vh;
-  overflow: hidden;
+.tab-view {
+  overflow: auto;
+  max-height: 100vh;
 }
 
-.tab-view {
-  overflow: scroll;
-  height: 100%;
+.time {
+  align-content: right;
 }

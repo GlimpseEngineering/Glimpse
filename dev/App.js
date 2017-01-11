@@ -23,9 +23,9 @@ class App extends Component {
     console.log('state.vrMode:',this.props.vrMode)
     let displayMode = this.props.vrMode.active? <World /> : this.props.children;
     return (
-      <div >
-        <button onClick={this.props.enterVR}>enter vr</button>
-        <button onClick={this.props.exitVR}>exit vr</button>
+      <div className="mainEverything">
+        <button onClick={this.props.enterVR} className="top-hide">enter vr</button>
+        <button onClick={this.props.exitVR} className="top-hide">exit vr</button>
         <button onClick={()=>{
           let scene = document.querySelector('#scene') ||
                       document.querySelector('#preview');
@@ -34,7 +34,7 @@ class App extends Component {
           console.log(screenShot);
           scene.components.createPreview.init();
           scene.components.createPreview.capture('perspective')
-        }}>screenshot</button>      
+        }} className="top-hide">screenshot</button>
         {displayMode}
       </div>
     );

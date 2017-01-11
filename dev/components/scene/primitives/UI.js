@@ -41,6 +41,7 @@ class UI extends Component {
     this.boxPosition = this.boxPosition.bind(this);
     this.headerToRender = this.headerToRender.bind(this);
     this.headPosition = this.headPosition.bind(this);
+    this.adjustTime = this.adjustTime.bind(this);
     }
 
     componentDidMount(){
@@ -209,7 +210,6 @@ class UI extends Component {
         return result;
     }
 
-
     displayFeedBelow(index){
       var result = false;
       var feedLength = this.props.feed.followingPosts.length;
@@ -323,7 +323,6 @@ class UI extends Component {
       )
     }
 
-
     mainCompDisplay() {
       if(this.props.showFeed === 'true' || this.props.showUserPosts === 'true'){
         console.log('showfeed')
@@ -372,15 +371,15 @@ class UI extends Component {
       return result;
     }
 
-
     mainCompDisplay() {
-      if(this.props.showFeed === 'true' || this.props.showUserPosts === 'true'){
+      var feedLength = this.props.feed.followingPosts.length;
+      var UPLength = this.props.viewedUserPosts.userPosts.length;
+      if((this.props.showFeed === 'true' || this.props.showUserPosts === 'true')){
         console.log('showfeed')
         return 'true';
       }else {
         return 'false';
       }
-
     }
 
     feedPosition(){
@@ -553,6 +552,25 @@ class UI extends Component {
       return result;
     }
 
+    adjustTime(time){
+      var arrayTime = time.split(' ');
+      var result = [];
+      arrayTime.forEach(word => {
+        if(word === 'seconds'){
+          word = 'secs';
+        }
+        if(word === 'minutes'){
+          console.log('helllooooo')
+          word = 'mins';
+        }
+        if(word === 'minute'){
+          word = 'min';
+        }
+        result.push(word)
+      })
+      return result.join(' ');
+    }
+
     render() {
       // console.log('is user posts?', this.isUserPosts())
       return (
@@ -646,7 +664,7 @@ class UI extends Component {
 
                         <Entity bmfont-text={{text: `${description[0]}; width: 400; align: left; `}} position={position} />
 
-                        <Entity bmfont-text={{text: `${time}; width: 175; align: left`}} position="1.17 0 .07" />
+                        <Entity bmfont-text={{text: `${this.adjustTime(time)}; width: 175; align: left`}} position="1.17 0 .07" />
 
                         {JSON.parse(post.content)
                           .map((entity, i) => {
@@ -716,27 +734,20 @@ class UI extends Component {
 
                             <Entity bmfont-text={{text: `${description[0]}; width: 470; align: left; `}} position={position} />
 
-                            <Entity bmfont-text={{text: `${time}; width: 175; align: left`}} position="1.17 0 .07" />
+                            <Entity bmfont-text={{text: `${this.adjustTime(time)}; width: 175; align: left`}} position="1.17 0 .07" />
 
 
                             {JSON.parse(post.content)
                               .map((entity, i) => {
                                 return this.createJSX(entity, i)
                             })}
-                            {/* <Sphere geometry={{
-                                      primitive: 'sphere',
-                                      radius: .3
-                                    }} position="-1.55 0 .07" material={{ src: `url(https://calderonsteven.github.io/panorama-vr/images/moonfase.jpg)`, side: "double"}} /> */}
 
                           </Box>
-
 
                         )
                       })}
               </Entity>
             </Entity>
-
-
 
             <Text className="ui-element" text=">"
               visible={
@@ -762,41 +773,3 @@ class UI extends Component {
     }
 }
 export default UI;
-//
-// export default props => (
-//   <Entity shift-click-ui {...props}>
-//     <Entity layout="type: line; margin: 1.5" position="-2.25 -2 -1">
-//       <Text className="ui-element" text="<" />
-//       <Entity className="ui-element" >
-//
-//         <Box color="white" height="0.08" width="0.5" depth="0.08"
-//              position="0 0 0" onClick={()=>{
-//                props.toggleFeed()
-//              }}/>
-//         <Box color="white" height="0.08" width="0.5" depth="0.08"
-//              position="0 .2 0" onClick={()=>{
-//                props.toggleFeed()
-//              }}/>
-//         <Box color="white" height="0.08" width="0.5" depth="0.08"
-//              position="0 .4 0" onClick={()=>{
-//                props.toggleFeed()
-//              }}/>
-//         <Entity className="vr-feed" visible={props.showFeed}
-//                 layout="line" rotation="0 0 90" margin="0.1">
-//           {props.feed.followingPosts.map(post=>{
-//             return(
-//               <Box color="white" height="0.5" width="1.5"
-//                    depth="0.08" rotation="0 0 -90" key={post.id}
-//                    onClick={()=>{
-//                      props.toggleFeed();
-//                      props.setScene(post.content);
-//                   }}/>
-//             )
-//           })}
-//         </Entity>
-//       </Entity>
-//       <Text className="ui-element" text="X" onClick={props.exit} />
-//       <Text className="ui-element" text=">" />
-//     </Entity>
-//   </Entity>
-// );
