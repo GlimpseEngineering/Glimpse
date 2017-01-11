@@ -21,6 +21,7 @@ class SearchResult extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    this.props && this.props.getFollowedByUser(this.props.auth.activeUser.id);
     let followRequest = this.props.foundUsers.followedByUser[this.props.searchResult.id];
     let updatedRequest = nextProps.foundUsers.followedByUser[nextProps.searchResult.id];
     updatedRequest && updatedRequest.status === 'pending' && this.setState({button: 'pending'});
