@@ -4,7 +4,7 @@ import { startLoadUrl, endLoadUrl } from '../actions/postsActionCreators';
 import request from 'superagent';
 import Dropzone from 'react-dropzone';
 
-const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/glimpse/image/upload'
+const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/glimpse/video/upload'
 const PROFPIC_PRESET = 'profile picture'
 const PHOTOSPHERE_PRESET = 'photosphere'
 const FLAT_PHOTO_PRESET = 'flat photo'
@@ -35,12 +35,18 @@ class Upload extends Component{
     };
   }
 
-  onImageDrop(files) {
-    this.setState({
-      uploadedFile: files[0]
-    });
+  onImageDrop(files, rejected) {
+    if (rejected) {
+      console.log('rejected:', rejected)
+    }
+    console.log('files dropped:',files)
+    if (files[0]){
+      this.setState({
+        uploadedFile: files[0]
+      });
 
-    this.handleImageUpload(files[0]);
+      this.handleImageUpload(files[0]);
+    }
   }
 
   handleImageUpload(file) {
@@ -48,7 +54,15 @@ class Upload extends Component{
      * dispatch loading true here
      */
     this.props.startLoadUrl();
-    let upload = request.post(CLOUDINARY_UPLOAD_URL)
+    console.log(`sending ${file} to ${this.props.preset}`)
+    console.log(file.name)
+    let url = file.type.startsWith('image') ? 
+              'https://api.cloudinary.com/v1_1/glimpse/image/upload' :
+              file.type.startsWith('video') ?
+              'https://api.cloudinary.com/v1_1/glimpse/video/upload' :
+              `error when uploading ${file}: unknown filetype`
+    
+    let upload = request.post(url)
                         .field('upload_preset', this.props.preset)
                         .field('file', file);
 
@@ -80,7 +94,7 @@ class Upload extends Component{
           <Dropzone
             style={dropZoneStyles}
             multiple={false}
-            accept="image/*"
+            accept=".jpg,.png,.gif,.mpv,.mkv,.avi,.mp4,.mov"
             onDrop={this.onImageDrop.bind(this)}>
             <p>Drop an image or click to select a file to upload.</p>
           </Dropzone>
