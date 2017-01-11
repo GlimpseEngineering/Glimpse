@@ -1,8 +1,7 @@
+import React, { Component } from 'react';
 import {Entity} from 'aframe-react';
-import React from 'react';
 import 'aframe-gif-shader';
 import 'aframe-asset-on-demand-component';
-import React, { Component } from 'react';
 
 export default class PhotoShpere extends Component {
   constructor(props) {
