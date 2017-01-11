@@ -26,6 +26,7 @@ export function clearSearch() {
 };
 
 export function followFoundUser(userId, followId, privacySetting, fromInfoPage) {
+  console.log('CALLING FOLLOW FOUND USER');
   let followData = {};
   followData.fromInfoPage = fromInfoPage;
 

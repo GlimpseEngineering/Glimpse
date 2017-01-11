@@ -6,7 +6,14 @@ import { getOneUser  } from '../../../actions/usersActionCreators';
 
 class Following extends Component {
 
+  componentDidMount() {
+    console.log('$$$$$$$$$$$$', this.props.follows);
+  }
 
+  componentWillReceiveProps(nextProps) {
+    console.log('&&&&&&&&&&&', nextProps.search.followedByUser);
+    console.log('&&&&&&&&&&&', nextProps.follows);
+  }
 
   render() {
     console.log('follows feed:',this.props.follows);
@@ -42,7 +49,8 @@ class Following extends Component {
 function mapStateToProps(state) {
   // returns input state as props in output
   return {
-    follows: state.follows
+    follows: state.follows,
+    search: state.search.foundUsers
   };
 }
 

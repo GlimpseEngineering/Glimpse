@@ -26,6 +26,7 @@ export function getFollowersForUser(userId) {
 }
 
 export function getFollowedByUser(userId) {
+  console.log('CALLING GET FOLLOWED BY USER');
   return function(dispatch) {
     dispatch({type:'LOADING_USER_FOLLOWS'})
     getFollows(userId)
