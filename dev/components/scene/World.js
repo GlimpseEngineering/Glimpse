@@ -67,7 +67,7 @@ class World extends Component {
     return (
 
 
-      <a-scene id='scene' createPreview embedded style={{height:windowHeight,width:windowWidth}}> 
+      <a-scene id='scene' createPreview > 
         <a-assets id='assets'>
           <img id="NO_ASSET" src={LOADING_SPINNER} />
         </a-assets>
