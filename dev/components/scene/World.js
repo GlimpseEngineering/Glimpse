@@ -21,6 +21,8 @@ import UI from './primitives/UI';
 import Plane from './primitives/Plane';
 import Box from './primitives/Box';
 
+const LOADING_SPINNER = 'http://res.cloudinary.com/glimpse/image/upload/v1484179580/wavy_mv9ykh.gif'
+
 class World extends Component {
   constructor(props) {
     super(props);
@@ -59,13 +61,15 @@ class World extends Component {
 
   render() {
     console.log('curScene:',JSON.parse(this.props.currentScene))
+    let windowHeight=window.innerHeight+'px'
+    let windowWidth=window.innerWidth+'px'
 
     return (
 
 
-      <Scene id='scene' createPreview > 
+      <a-scene id='scene' createPreview embedded style={{height:windowHeight,width:windowWidth}}> 
         <a-assets id='assets'>
-          <img id="NO_ASSET" />
+          <img id="NO_ASSET" src={LOADING_SPINNER} />
         </a-assets>
         <Camera id='camera' >
           <a-cursor
@@ -86,7 +90,7 @@ class World extends Component {
             return this.createJSX(entity, i)
         })}
 
-      </Scene>
+      </a-scene>
     );
   }
 }

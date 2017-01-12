@@ -3,6 +3,7 @@ import {Entity} from 'aframe-react';
 import 'aframe-gif-shader';
 import 'aframe-asset-on-demand-component';
 
+
 export default class PhotoShpere extends Component {
   constructor(props) {
     super(props);
@@ -17,7 +18,7 @@ export default class PhotoShpere extends Component {
     // console.log('assets with new asset:',assets)
 
     this.state=({
-      format: '',
+      format: 'gif',
       shader: '',
       assetId: 'NO_ASSET'
     })
