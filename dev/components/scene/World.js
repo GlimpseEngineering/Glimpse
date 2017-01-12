@@ -61,11 +61,13 @@ class World extends Component {
 
   render() {
     console.log('curScene:',JSON.parse(this.props.currentScene))
+    let windowHeight=window.innerHeight+'px'
+    let windowWidth=window.innerWidth+'px'
 
     return (
 
 
-      <Scene id='scene' createPreview > 
+      <a-scene id='scene' createPreview embedded style={{height:windowHeight,width:windowWidth}}> 
         <a-assets id='assets'>
           <img id="NO_ASSET" src={LOADING_SPINNER} />
         </a-assets>
@@ -88,7 +90,7 @@ class World extends Component {
             return this.createJSX(entity, i)
         })}
 
-      </Scene>
+      </a-scene>
     );
   }
 }
