@@ -21,6 +21,8 @@ import UI from './primitives/UI';
 import Plane from './primitives/Plane';
 import Box from './primitives/Box';
 
+const LOADING_SPINNER = 'http://res.cloudinary.com/glimpse/image/upload/v1484179580/wavy_mv9ykh.gif'
+
 class World extends Component {
   constructor(props) {
     super(props);
@@ -65,7 +67,7 @@ class World extends Component {
 
       <Scene id='scene' createPreview > 
         <a-assets id='assets'>
-          <img id="NO_ASSET" />
+          <img id="NO_ASSET" src={LOADING_SPINNER} />
         </a-assets>
         <Camera id='camera' >
           <a-cursor
