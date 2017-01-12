@@ -73,13 +73,20 @@ li {
   padding: 10px; }
 
 .componentInfo {
-  padding: 10px; }
+  padding: 10px;
+  text-align: center; }
 
 .tab-view {
   height: 100%; }
 
 .time {
   align-content: right; }
+
+.edit {
+  margin: 5px; }
+
+.delete {
+  margin: 5px; }
 
 .profPic {
   width: 88%;
@@ -109,10 +116,6 @@ li {
   width: 100%;
   overflow-y: hidden;
   border-left: 10px solid #ddd; }
-
-@media screen and (min-width: 900px) {
-  .userContainer {
-    border-left: 8vw solid #ddd; } }
 
 .profileContainer {
   padding: 2% 4% 0% 4%;
@@ -162,7 +165,7 @@ li {
   position: relative;
   top: 1px; }
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 1075px) {
   .userContainer {
     border-left: 8vw solid #ddd; } }
 
@@ -237,6 +240,9 @@ li {
 .imagePreview {
   width: 100%;
   padding: 15px 15px 0px 15px; }
+
+.ReactModal__Content {
+  min-width: 750px; }
 
 #preview {
   margin-right: -90px; }
@@ -476,7 +482,7 @@ html, body {
 .col-12 {
   width: 100%; }
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 1075px) {
   .container {
     border-right: 8vw solid #ddd; }
   .navButtons {
