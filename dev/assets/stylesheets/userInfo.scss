@@ -1,8 +1,8 @@
 .profPic {
-  width:100%;
+  width:88%;
   max-width:210px;
   border-radius: 50%;
-  padding: 0% 4% 5% 4%;
+  padding: 5% 4% 5% 4%;
 
 }
 
@@ -24,11 +24,32 @@
 }
 
 .userContainer {
+  background-color: #ddd;
   align-items: center;
-  padding: 2% 4% 0% 4%;
-  height: 100vh;
+
+
+  border-right: 10px solid #ddd;
+
   width: 100%;
-  display: table;
+  overflow-y: hidden;
+  border-left: 10px solid #ddd;
+}
+
+@media screen and (min-width: 900px) {
+    .userContainer {
+        border-left: 8vw solid #ddd;
+    }
+    // .navButtons {
+    //   margin-right: 8.2vw;
+    //
+    // }
+}
+
+.profileContainer {
+  padding: 2% 4% 0% 4%;
+  height: 92.8vh;
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;
 }
 
 .profileInfo {
@@ -37,13 +58,21 @@
   padding-top: 10px;
 }
 
-.username, .bio {
-  padding: 0 11% 0 11%;
+.username p {
+  padding-bottom: 7%;
+  font-size: .7em;
 }
+
+.username {
+  padding: 0 11% 0 11%;
+//   width: 88%
+}
+
 
 .bio {
   padding-top: 10px;
   border-top: solid #e1e8ed 1px;
+  padding: 0 11% 0 11%;
 }
 
 .profileButton {
@@ -79,4 +108,10 @@
 .editButton:active {
 	position:relative;
 	top:1px;
+}
+
+@media screen and (min-width: 900px) {
+    .userContainer {
+        border-left: 8vw solid #ddd;
+    }
 }
