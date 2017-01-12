@@ -45,7 +45,7 @@ class Preview extends Component {
 
     return (
       <div className="bigPreview">
-        <a-scene id='preview' createPreview embedded style={{height:'300px',width:'500px'}}>
+        <a-scene id='preview' createPreview embedded style={{height:'300px',width:'442px'}}>
           <a-assets id='assets'>
             <img id="NO_ASSET" />
           </a-assets>

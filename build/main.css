@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700,400,italic);.navBar {
+  margin-bottom: 5px;
   color: black;
   box-sizing: border-box;
   display: inline-flex;
@@ -112,7 +113,7 @@ li {
 .userContainer {
   background-color: #ddd;
   align-items: center;
-  border-right: 10px solid #ddd;
+  margin-right: -20px;
   width: 100%;
   overflow-y: hidden;
   border-left: 10px solid #ddd; }
@@ -219,6 +220,30 @@ li {
 .btn-select:active {
   position: relative; }
 
+.btn-select-edit {
+  width: 100%;
+  background-color: #fff;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  border: 1px solid #dcdcdc;
+  display: inline-block;
+  cursor: pointer;
+  color: #666666;
+  font-size: 16px;
+  padding: 3px 6px;
+  text-decoration: none;
+  margin: 5px 3px 5px 3px; }
+
+.btn-select-edit:hover {
+  background-color: #b3b3b3;
+  color: white;
+  transition: color 0.2s;
+  transition: background-color 0.2s; }
+
+.btn-select-edit:active {
+  position: relative; }
+
 .dragAndDrop {
   margin: 7px 0 7px 0;
   align-content: center; }
@@ -237,15 +262,86 @@ li {
   text-decoration: none;
   margin: 7px 0 7px 0; }
 
+.text_content_third {
+  width: 87%;
+  background-color: #fff;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  border: 1px solid #dcdcdc;
+  display: inline-block;
+  color: #666666;
+  font-size: 12px;
+  padding: 6px 3px 6px 3px;
+  text-decoration: none;
+  margin: 3px 0 3px 0; }
+
+.text_content_fifth_post {
+  width: 92%;
+  background-color: #fff;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  border: 1px solid #dcdcdc;
+  color: #666666;
+  font-size: 12px;
+  padding: 6px 3px 6px 3px;
+  text-decoration: none;
+  margin: 3px 0 3px 0; }
+
+.input-fifths {
+  display: inline; }
+
+.input-thirds {
+  display: flex; }
+
 .imagePreview {
   width: 100%;
   padding: 15px 15px 0px 15px; }
 
 .ReactModal__Content {
-  min-width: 750px; }
+  min-width: 750px;
+  min-height: 500px;
+  max-width: 455px; }
 
 #preview {
   margin-right: -90px; }
+
+.list-item-generator {
+  position: relative;
+  display: flex;
+  padding: 7px 7px 7px 7px;
+  margin-bottom: -1px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  border-left: none;
+  margin-left: -40px;
+  margin-bottom: 0; }
+
+.editPostButtons {
+  display: flex;
+  float: right; }
+
+.postComponent {
+  width: 100%;
+  display: block; }
+
+.primitiveType {
+  float: left;
+  margin-top: 7px; }
+
+.editPopUp {
+  margin-top: 40px; }
+
+.postGeneratorFeed {
+  border: 1px solid #ddd;
+  overflow-y: scroll;
+  height: 20vh;
+  max-height: 30vh;
+  min-height: 30vh; }
+
+.submitButton {
+  bottom: 5px; }
 
 h1, h2 {
   font-family: "Open Sans", sans-serif;
@@ -337,7 +433,7 @@ html, body {
   cursor: pointer;
   color: #666666;
   font-size: 16px;
-  padding: 6px 24px;
+  padding: 4px 24px;
   text-decoration: none;
   margin-left: 2px; }
 
@@ -376,10 +472,10 @@ html, body {
 
 .searchBarInput {
   position: relative;
-  top: -2px;
+  top: -1px;
   border-radius: 6px;
   border: 1px solid #e1e8ed;
-  padding: 9px 24px; }
+  padding: 4px 27px; }
 
 .searchResult {
   left: -40px;
@@ -398,19 +494,13 @@ html, body {
 
 .searchInfo {
   float: right;
-  padding: 5px 15px 5px 0px;
   width: 55%; }
 
 .searchPic {
   margin-left: 10px; }
 
 .searchFollowButton {
-  text-align: center;
-  padding: 1px 0 4px 0; }
-
-.searchNameLink {
-  text-align: center;
-  padding: 10px 0 7px 0; }
+  margin-top: -10px; }
 
 .row:after {
   display: block;

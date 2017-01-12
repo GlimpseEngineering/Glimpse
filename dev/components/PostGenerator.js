@@ -192,16 +192,19 @@ class PostGenerator extends Component {
       //   console.log('nope')
       // }else{
         return (
-          <EntityGenerator
-            key={entity.id}
-            stagedEntity={entity} />
+          <div className="list-item-generator">
+            <EntityGenerator
+              key={entity.id}
+              stagedEntity={entity} />
+          </div>
+
         );
       // }
 
     });
 
     return (
-      <div>
+      <div className="postModal">
 
         <div className="col-4 postForm">
 
@@ -280,32 +283,35 @@ class PostGenerator extends Component {
                 onChange={event => this.onInputChange(event)} />
             </div>
 
-            <div >
-              {/* <label>Text X-Axis</label> */}
-              <input className="text_content_full"
-                placeholder="X-Axis"
-                type="number"
-                name="x"
-                value={this.state.x}
-                onChange={event => this.onInputChange(event)} />
-            </div>
-              {/* <label>Text Y-Axis</label> */}
-            <div >
-              <input className="text_content_full"
-                placeholder="Y-Axis"
-                type="number"
-                name="y"
-                value={this.state.y}
-                onChange={event => this.onInputChange(event)} />
-            </div>
-              {/* <label>Text Z-Axis</label> */}
-            <div >
-              <input className="text_content_full"
-                placeholder="Z-Axis"
-                type="number"
-                name="z"
-                value={this.state.z}
-                onChange={event => this.onInputChange(event)} />
+
+            <div className="input-thirds">
+              <div >
+                {/* <label>Text X-Axis</label> */}
+                <input className="text_content_third"
+                  placeholder="X-Axis"
+                  type="number"
+                  name="x"
+                  value={this.state.x}
+                  onChange={event => this.onInputChange(event)} />
+              </div>
+                {/* <label>Text Y-Axis</label> */}
+              <div >
+                <input className="text_content_third"
+                  placeholder="Y-Axis"
+                  type="number"
+                  name="y"
+                  value={this.state.y}
+                  onChange={event => this.onInputChange(event)} />
+              </div>
+                {/* <label>Text Z-Axis</label> */}
+              <div >
+                <input className="text_content_third"
+                  placeholder="Z-Axis"
+                  type="number"
+                  name="z"
+                  value={this.state.z}
+                  onChange={event => this.onInputChange(event)} />
+              </div>
             </div>
 
             <button type="submit" className="btn-select">Add This Text!</button>
@@ -321,35 +327,9 @@ class PostGenerator extends Component {
                       setImage={url=>this.setSrc(url)}/>
             </div>
 
-            <div>
-              {/* <label>Box Width</label> */}
-              <input className="text_content_full"
-                placeholder="Box Width"
-                type="number"
-                name="width"
-                value={this.state.width}
-                onChange={event => this.onInputChange(event)} />
-            </div>
 
-            <div>
-              {/* <label>Box Height</label> */}
-              <input className="text_content_full"
-                placeholder="Box Height"
-                type="number"
-                name="height"
-                value={this.state.height}
-                onChange={event => this.onInputChange(event)} />
-            </div>
 
-            <div>
-              {/* <label>Box Depth</label> */}
-              <input className="text_content_full"
-                placeholder="Box Depth"
-                type="number"
-                name="depth"
-                value={this.state.depth}
-                onChange={event => this.onInputChange(event)} />
-            </div>
+
 
             <div>
               {/* <label>Box Color</label> */}
@@ -361,35 +341,70 @@ class PostGenerator extends Component {
                 onChange={event => this.onInputChange(event)} />
             </div>
 
-            <div>
-              {/* <label>Box X-Axis</label> */}
-              <input className="text_content_full"
-                placeholder="Box X-Axis"
-                type="number"
-                name="x"
-                value={this.state.x}
-                onChange={event => this.onInputChange(event)} />
+            <div className="input-thirds">
+              <div>
+                {/* <label>Box Width</label> */}
+                <input className="text_content_third"
+                  placeholder="Width"
+                  type="number"
+                  name="width"
+                  value={this.state.width}
+                  onChange={event => this.onInputChange(event)} />
+              </div>
+
+              <div>
+                {/* <label>Box Height</label> */}
+                <input className="text_content_third"
+                  placeholder="Height"
+                  type="number"
+                  name="height"
+                  value={this.state.height}
+                  onChange={event => this.onInputChange(event)} />
+              </div>
+
+              <div>
+                {/* <label>Box Depth</label> */}
+                <input className="text_content_third"
+                  placeholder="Depth"
+                  type="number"
+                  name="depth"
+                  value={this.state.depth}
+                  onChange={event => this.onInputChange(event)} />
+              </div>
             </div>
 
-            <div>
-              {/* <label>Box Y-Axis</label> */}
-              <input className="text_content_full"
-                placeholder="Box Y-Axis"
-                type="number"
-                name="y"
-                value={this.state.y}
-                onChange={event => this.onInputChange(event)} />
+            <div className="input-thirds">
+              <div>
+                {/* <label>Box X-Axis</label> */}
+                <input className="text_content_third"
+                  placeholder="X-Axis"
+                  type="number"
+                  name="x"
+                  value={this.state.x}
+                  onChange={event => this.onInputChange(event)} />
+              </div>
+
+              <div>
+                {/* <label>Box Y-Axis</label> */}
+                <input className="text_content_third"
+                  placeholder="Y-Axis"
+                  type="number"
+                  name="y"
+                  value={this.state.y}
+                  onChange={event => this.onInputChange(event)} />
+              </div>
+
+              <div>
+                {/* <label>Box Z-Axis</label> */}
+                <input className="text_content_third"
+                  placeholder="Z-Axis"
+                  type="number"
+                  name="z"
+                  value={this.state.z}
+                  onChange={event => this.onInputChange(event)} />
+              </div>
             </div>
 
-            <div>
-              {/* <label>Box Z-Axis</label> */}
-              <input className="text_content_full"
-                placeholder="Box Z-Axis"
-                type="number"
-                name="z"
-                value={this.state.z}
-                onChange={event => this.onInputChange(event)} />
-            </div>
 
             <button
               type="submit"
@@ -400,15 +415,15 @@ class PostGenerator extends Component {
 
           <button
             onClick={this.submitPost.bind(this)}
-            className={this.entityCollection.length === 0 ? 'hide-post-details' : 'btn-select'} >
+            className={this.entityCollection.length === 0 ? 'hide-post-details' : 'btn-select submitButton'} >
             Submit Post
           </button>
 
 
         </div>
-        <div className="col-8">
+        <div className="col-8 postPreviewColumn">
           <PostPreview currentScene={JSON.stringify(this.entityCollection)} />
-          <div>
+          <div className="postGeneratorFeed">
             <ul>
               {stagedEntities}
             </ul>

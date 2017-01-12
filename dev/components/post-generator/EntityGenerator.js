@@ -102,157 +102,194 @@ class EntityGenerator extends Component {
     console.log('this is the src', this.state.src);
     console.log('passing delete scene to child', this.props.deleteScene);
     return (
-      <div>
-        {this.props.stagedEntity.primitive}
-        <button onClick={this.openEditMenu.bind(this)}>{this.state.enableEdit === true ? 'Hide' : 'Edit'}</button>
-        <button onClick={this.deleteEntity.bind(this)}>Delete</button>
+      <div className="postComponent">
+        <div >
+          <div className="primitiveType">
+            {this.props.stagedEntity.primitive}
+          </div>
+          <div className="editPostButtons">
 
-        <form
-            id="photosphere"
-            className={this.props.stagedEntity.primitive === "PhotoSphere" && this.state.enableEdit === true ? "" : "hide-post-details"}
-            onSubmit={this.editOrCopyEntity.bind(this)} >
-            <div>
-              <label>Image URL</label>
-              <Upload preset="photosphere"
-                      setImage={url=>this.setSrc(url)}/>
-            </div>
-            <button
-              type="submit"
-              className={this.props.newPost.loading === true ? "hide-post-details" : ''} >
-              Edit this scene!
-            </button>
-          </form>
+            <button className="btn-select-edit"
+              onClick={this.deleteEntity.bind(this)}>Delete</button>
+              <button className="btn-select-edit"
+                onClick={this.openEditMenu.bind(this)}>{this.state.enableEdit === true ? 'Hide' : 'Edit'}</button>
+          </div>
 
-        <form
-            id="text"
-            className={this.props.stagedEntity.primitive === "Text" && this.state.enableEdit === true ? "" : "hide-post-details"}
-            onSubmit={this.editOrCopyEntity.bind(this)} >
-            <div>
-              <label>Text Content</label>
-              <input
-                type="text"
-                name="text"
-                value={this.state.text}
-                onChange={event => this.onInputChange(event)} />
-            </div>
+        </div>
 
-            <div>
-              <label>Text Color</label>
-              <input
-                type="text"
-                name="color"
-                value={this.state.color}
-                onChange={event => this.onInputChange(event)} />
-            </div>
-
-            <div>
-              <label>Text X-Axis</label>
-              <input
-                type="number"
-                name="x"
-                value={this.state.x}
-                onChange={event => this.onInputChange(event)} />
-            </div>
-
-            <div>
-              <label>Text Y-Axis</label>
-              <input
-                type="number"
-                name="y"
-                value={this.state.y}
-                onChange={event => this.onInputChange(event)} />
-            </div>
-
-            <div>
-              <label>Text Z-Axis</label>
-              <input
-                type="number"
-                name="z"
-                value={this.state.z}
-                onChange={event => this.onInputChange(event)} />
-            </div>
-            <button type="submit">Edit this scene!</button>
-          </form>
+        <div className="editPopUp">
+          <form
+              id="photosphere"
+              className={this.props.stagedEntity.primitive === "PhotoSphere" && this.state.enableEdit === true ? "" : "hide-post-details"}
+              onSubmit={this.editOrCopyEntity.bind(this)} >
+              <div>
+                {/* <label>Image URL</label> */}
+                <Upload preset="photosphere"
+                        setImage={url=>this.setSrc(url)}/>
+              </div>
+              <button
+                type="submit"
+                className={this.props.newPost.loading === true ? "hide-post-details" : 'btn-select-edit'} >
+                Edit this scene!
+              </button>
+            </form>
 
           <form
-            id="box"
-            className={this.props.stagedEntity.primitive === "Box" && this.state.enableEdit === true ? "" : "hide-post-details"}
-            onSubmit={this.editOrCopyEntity.bind(this)} >
-            <div>
-              <label>Image URL</label>
-              <Upload preset="photosphere"
-                      setImage={url=>this.setSrc(url)}/>
-            </div>
+              id="text"
+              className={this.props.stagedEntity.primitive === "Text" && this.state.enableEdit === true ? "" : "hide-post-details"}
+              onSubmit={this.editOrCopyEntity.bind(this)} >
 
-            <div>
-              <label>Box Width</label>
-              <input
-                type="number"
-                name="width"
-                value={this.state.width}
-                onChange={event => this.onInputChange(event)} />
-            </div>
+              <div className="input-fifths">
+                <div className="col-6" >
+                  {/* <label>Text Content</label> */}
+                  <input className="text_content_fifth_post"
+                    placeholder="Text Content"
+                    type="text"
+                    name="text"
+                    value={this.state.text}
+                    onChange={event => this.onInputChange(event)} />
+                </div>
 
-            <div>
-              <label>Box Height</label>
-              <input
-                type="number"
-                name="height"
-                value={this.state.height}
-                onChange={event => this.onInputChange(event)} />
-            </div>
+                <div className="col-6" >
+                  {/* <label>Text Color</label> */}
+                  <input className="text_content_fifth_post"
+                    placeholder="Text Color"
+                    type="text"
+                    name="color"
+                    value={this.state.color}
+                    onChange={event => this.onInputChange(event)} />
+                </div>
 
-            <div>
-              <label>Box Depth</label>
-              <input
-                type="number"
-                name="depth"
-                value={this.state.depth}
-                onChange={event => this.onInputChange(event)} />
-            </div>
 
-            <div>
-              <label>Box Color</label>
-              <input
-                type="text"
-                name="color"
-                value={this.state.color}
-                onChange={event => this.onInputChange(event)} />
-            </div>
+              </div>
+              <div>
+                <div className="col-4">
+                  {/* <label>Text X-Axis</label> */}
+                  <input className="text_content_third"
+                    placeholder="X-Axis"
+                    type="number"
+                    name="x"
+                    value={this.state.x}
+                    onChange={event => this.onInputChange(event)} />
+                </div>
 
-            <div>
-              <label>Box X-Axis</label>
-              <input
-                type="number"
-                name="x"
-                value={this.state.x}
-                onChange={event => this.onInputChange(event)} />
-            </div>
+                <div className="col-4">
+                  {/* <label>Text </label> */}
+                  <input className="text_content_third"
+                    placeholder="Y-Axis"
+                    type="number"
+                    name="y"
+                    value={this.state.y}
+                    onChange={event => this.onInputChange(event)} />
+                </div>
 
-            <div>
-              <label>Box Y-Axis</label>
-              <input
-                type="number"
-                name="y"
-                value={this.state.y}
-                onChange={event => this.onInputChange(event)} />
-            </div>
+                <div className="col-4">
+                  {/* <label>Text Z-Axis</label> */}
+                  <input className="text_content_third"
+                    placeholder="Z-Axis"
+                    type="number"
+                    name="z"
+                    value={this.state.z}
+                    onChange={event => this.onInputChange(event)} />
+                </div>
+              </div>
+              <button type="submit" className="btn-select-edit">Edit this scene!</button>
 
-            <div>
-              <label>Box Z-Axis</label>
-              <input
-                type="number"
-                name="z"
-                value={this.state.z}
-                onChange={event => this.onInputChange(event)} />
-            </div>
+            </form>
 
-            <button
-              type="submit"
-              className={this.props.newPost.loading === true ? "hide-post-details" : ''} >
-              Edit this scene!
-            </button>
-          </form>
+            <form
+              id="box"
+              className={this.props.stagedEntity.primitive === "Box" && this.state.enableEdit === true ? "" : "hide-post-details"}
+              onSubmit={this.editOrCopyEntity.bind(this)} >
+              <div>
+                {/* <label>Image URL</label> */}
+                <Upload preset="photosphere"
+                        setImage={url=>this.setSrc(url)}/>
+              </div>
+
+              <div className="col-12">
+                {/* <label>Box Color</label> */}
+                <input className="text_content_full"
+                  placeholder="Box Color"
+                  type="text"
+                  name="color"
+                  value={this.state.color}
+                  onChange={event => this.onInputChange(event)} />
+              </div>
+              <div>
+                <div className="col-4">
+                  {/* <label>Box Width</label> */}
+                  <input className="text_content_third"
+                    placeholder="Width"
+                    type="number"
+                    name="width"
+                    value={this.state.width}
+                    onChange={event => this.onInputChange(event)} />
+                </div>
+
+                <div className="col-4">
+                  {/* <label>Box Height</label> */}
+                  <input className="text_content_third"
+                    placeholder="Height"
+                    type="number"
+                    name="height"
+                    value={this.state.height}
+                    onChange={event => this.onInputChange(event)} />
+                </div>
+
+                <div className="col-4">
+                  {/* <label>Box Depth</label> */}
+                  <input className="text_content_third"
+                    placeholder="Depth"
+                    type="number"
+                    name="depth"
+                    value={this.state.depth}
+                    onChange={event => this.onInputChange(event)} />
+                </div>
+              </div>
+
+              <div>
+                <div className="col-4">
+                  {/* <label>Box X-Axis</label> */}
+                  <input className="text_content_third"
+                    place="X-Axis"
+                    type="number"
+                    name="x"
+                    value={this.state.x}
+                    onChange={event => this.onInputChange(event)} />
+                </div>
+
+                <div className="col-4">
+                  {/* <label>Box Y-Axis</label> */}
+                  <input className="text_content_third"
+                    placeholder="Y-Axis"
+                    type="number"
+                    name="y"
+                    value={this.state.y}
+                    onChange={event => this.onInputChange(event)} />
+                </div>
+
+                <div className="col-4">
+                  {/* <label>Box Z-Axis</label> */}
+                  <input className="text_content_third"
+                    placeholder="Z-Axis"
+                    type="number"
+                    name="z"
+                    value={this.state.z}
+                    onChange={event => this.onInputChange(event)} />
+                </div>
+              </div>
+
+
+
+              <button
+                type="submit"
+                className={this.props.newPost.loading === true ? "hide-post-details" : 'btn-select-edit'} >
+                Edit this scene!
+              </button>
+            </form>
+        </div>
+
       </div>
     );
   }

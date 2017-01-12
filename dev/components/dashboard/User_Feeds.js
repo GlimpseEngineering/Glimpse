@@ -51,7 +51,7 @@ class User_Feeds extends Component {
               </TabPanel>
               <TabPanel className='tab-view'>
                 <Posts
-                  
+
                   user={this.props.viewedProfile}
                 />
               </TabPanel>
