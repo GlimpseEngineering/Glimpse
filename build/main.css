@@ -275,6 +275,22 @@ li {
   text-decoration: none;
   margin: 3px 0 3px 0; }
 
+.text_content_fifth_post {
+  width: 92%;
+  background-color: #fff;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  border: 1px solid #dcdcdc;
+  color: #666666;
+  font-size: 12px;
+  padding: 6px 3px 6px 3px;
+  text-decoration: none;
+  margin: 3px 0 3px 0; }
+
+.input-fifths {
+  display: inline; }
+
 .input-thirds {
   display: flex; }
 
@@ -284,7 +300,8 @@ li {
 
 .ReactModal__Content {
   min-width: 750px;
-  min-height: 450px; }
+  min-height: 450px;
+  max-width: 455px; }
 
 #preview {
   margin-right: -90px; }

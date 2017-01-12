@@ -144,6 +144,29 @@
   text-decoration:none;
   margin: 3px 0 3px 0;
 }
+.text_content_fifth_post {
+  width: 92%;
+  // border-radius: 8px;
+  background-color:#fff;
+  -moz-border-radius:6px;
+  -webkit-border-radius:6px;
+  border-radius:6px;
+  border:1px solid #dcdcdc;
+  // display:inline-flex;
+  // margin-right: 10px;
+  color:#666666;
+  font-size:12px;
+  padding:6px 3px 6px 3px;
+  text-decoration:none;
+  margin: 3px 0 3px 0;
+}
+// .numberEdit {
+//   width: 80%;
+// }
+
+.input-fifths {
+  display: inline;
+}
 
 .input-thirds {
   display: flex;
@@ -158,6 +181,7 @@
 .ReactModal__Content {
   min-width: 750px;
   min-height: 450px;
+  max-width: 455px;
 }
 
 #preview {
