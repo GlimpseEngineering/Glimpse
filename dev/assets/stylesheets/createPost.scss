@@ -5,16 +5,17 @@
 .postForm {
   height: 100%;
   width: 100%;
+  padding-right: 15px;
 }
 
 .postGeneratorTitle {
-  margin-bottom: 15px;
+  margin-bottom: 25px;
   text-align: center;
 }
 
 .post_description {
   top: 10px;
-  width: 100%;
+  width: 97.5%;
   height: 50px;
   background-color:#fff;
   -moz-border-radius:6px;
@@ -68,7 +69,7 @@
 }
 
 .text_content_full {
-  width: 100%;
+  width: 97%;
   // border-radius: 8px;
   background-color:#fff;
   -moz-border-radius:6px;
@@ -88,7 +89,15 @@
   // height: 50px;
 }
 
-// .text_content_third {
-//   // width: 100%;
-//   // display:inline-block;
+.imagePreview {
+  width: 100%;
+  padding: 15px 15px 0px 15px;
+}
+
+// .FileUpload {
+//   width: 100%;
 // }
+
+#preview {
+  margin-right: -90px;
+}

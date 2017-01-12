@@ -42,9 +42,9 @@ class Preview extends Component {
   }
 
   render() {
-    
+
     return (
-      <div className="col-8 container">
+      <div className="col-8 bigPreview">
         <a-scene id='preview' createPreview embedded style={{height:'500px',width:'500px'}}>
           <a-assets id='assets'>
             <img id="NO_ASSET" />

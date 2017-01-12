@@ -134,57 +134,60 @@ class User_Info extends Component {
 
   render() {
     return (
-      <div className="col-4 userContainer"
-           style={{
-             backgroundColor:this.state.backgroundColor,
-            //  height: '85vh',
-            //  overflow: 'scroll'
-           }}>
-        <div className="profile">
-          <div className="picContainer">
+      <div className="col-4 userContainer">
+        <div className="profileContainer"
+             style={{
+               backgroundColor:this.state.backgroundColor,
+              //  height: '85vh',
+              //  overflow: 'scroll'
+             }}>
+          <div className="profile">
+            <div className="picContainer">
 
-            <img src={this.props.viewedProfile.profPic} className="profPic" />
+              <img src={this.props.viewedProfile.profPic} className="profPic" />
 
-          </div>
-          <div className="profileButton">
-            {!this.props.activeUser ? null :
-            <button className='editButton'onClick={this.state.handleClick}>
-              {this.state.buttonText}
-            </button>}
-            <Modal
-                isOpen={this.state.modalIsOpen}
-                closeModal={this.closeModal.bind(this)}
-                onAfterOpen={this.afterOpenModal}
-                onRequestClose={this.closeModal}
-                style={customStyles}
-                contentLabel="Example Modal"
-            >
-              <ProfileEditor user={this.props.activeUser}
-                closeModal={this.closeModal.bind(this)}/>
-            </Modal>
-          </div>
-          <div className="profileInfo">
-            <div className="username">
-              <h4>{this.props.viewedProfile.username}</h4>
-              <p >
-                {this.props.viewedProfile.email}
-              </p>
             </div>
-            <div className="bio">
-              <div >
-
-                <label>Bio:</label>
+            <div className="profileButton">
+              {!this.props.activeUser ? null :
+              <button className='editButton'onClick={this.state.handleClick}>
+                {this.state.buttonText}
+              </button>}
+              <Modal
+                  isOpen={this.state.modalIsOpen}
+                  closeModal={this.closeModal.bind(this)}
+                  onAfterOpen={this.afterOpenModal}
+                  onRequestClose={this.closeModal}
+                  style={customStyles}
+                  contentLabel="Example Modal"
+              >
+                <ProfileEditor user={this.props.activeUser}
+                  closeModal={this.closeModal.bind(this)}/>
+              </Modal>
+            </div>
+            <div className="profileInfo">
+              <div className="username">
+                <h4>{this.props.viewedProfile.username}</h4>
+                <p >
+                  {this.props.viewedProfile.email}
+                </p>
               </div>
+              <div className="bio">
+                <div >
 
-              <p>{this.props.viewedProfile.bio}</p>
+                  <label>Bio:</label>
+                </div>
+
+                <p>{this.props.viewedProfile.bio}</p>
+              </div>
             </div>
-          </div>
-          <div><DummyLogin /></div>
+            <div><DummyLogin /></div>
 
+
+          </div>
 
         </div>
-
       </div>
+
     );
   }
 }

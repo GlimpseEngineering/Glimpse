@@ -22,11 +22,16 @@ $secondary-color: #B364B4;
   border-top-right-radius: 6px;
   border-top-left-radius: 6px;
   flex: 1;
-  margin-right: 4px;
+  // margin-right: 4px;
+  // border-right: 4px solid #ddd;
+  margin-top: -2px;
+  margin-left: -1px;
+  margin-bottom: -5px;
 }
 
 .tab:last-child {
   margin-right: 0;
+
 }
 
 .tab:hover {
@@ -35,40 +40,49 @@ $secondary-color: #B364B4;
 }
 
 .react-tabs [role=tablist] {
-    border-bottom: 1px solid #aaa;
-    margin: 0 0 10px;
+    // border-top: 10px solid #ddd;
+
+    // border-bottom: 1px solid #aaa;
+    // margin: 0 0 10px;
     padding: 0;
   }
 
 .react-tabs [role=tab] {
   display: inline-block;
-  border: 1px solid transparent;
+  // border: 1px solid transparent;
+  // border-right: 4px solid #ddd;
+  margin-right: 4px;
   border-bottom: none;
   bottom: -1px;
   position: relative;
   list-style: none;
   padding: 6px 12px;
   cursor: pointer;
-
 }
+
 
 .react-tabs [role=tab][aria-selected=true] {
     background: #fff;
     border-color: #aaa;
     color: black;
+    margin-right: 4px;
+    // border-right: 4px solid #ddd;
     // border-radius: 5px 5px 0 0;
     // -moz-border-radius: 5px 5px 0 0;
     // -webkit-border-radius: 5px 5px 0 0;
 }
+// .react-tabs:last-child {
+//   border-right: none;
+// }
 
 //--------------------------->
 
 .feed_content {
   width: 100%;
-  overflow: auto;
+  // overflow: auto;
   // max-height: 100vh;
   // overflow: hidden;
-  height: 100%;
+  // height: 92vh;
 }
 //-------->
 .list-item {
@@ -77,8 +91,17 @@ $secondary-color: #B364B4;
   padding: 7px;
   margin-bottom: -1px;
   background-color: #fff;
-  border: 1px solid #ddd;
+  border-bottom: 5px solid #ddd;
+  border-right: 4px solid #ddd;
+  border-top: 5px solid #ddd;
+  border-left: none;
   margin-left: -40px;
+  margin-bottom: 0;
+
+}
+
+.list-item:first-child {
+  border-top: none;
 }
 
 li {
@@ -98,8 +121,9 @@ li {
 }
 
 .tab-view {
-  overflow: auto;
-  max-height: 100vh;
+  height: 100%;
+  // overflow-y: scroll;
+  // max-height: 100vh;
 }
 
 .time {

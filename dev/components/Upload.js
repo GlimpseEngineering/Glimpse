@@ -13,7 +13,7 @@ const FLAT_VIDEO_PRESET = 'flat video'
 const SCENE_PREVIEW = 'scene preview'
 
 const dropZoneStyles = {
-        width: 220,
+        // width: 220,
         height: 100,
         borderWidth: 2,
         borderColor: '#666',
@@ -100,8 +100,11 @@ class Upload extends Component{
             <p>Drop an image or click to select a file to upload.</p>
           </Dropzone>
           {this.state.uploadedFileUrl === '' ? null :
-          <img src={this.state.uploadedFileUrl}
-               style={thumbnailStyles}/>}
+
+            <img src={this.state.uploadedFileUrl}
+                 style={thumbnailStyles} className="imagePreview" />}
+
+
 
         </span>
 
