@@ -140,7 +140,7 @@ class EntityGenerator extends Component {
               onSubmit={this.editOrCopyEntity.bind(this)} >
 
               <div className="input-fifths">
-                <div className="col-3" >
+                <div className="col-6" >
                   {/* <label>Text Content</label> */}
                   <input className="text_content_fifth_post"
                     placeholder="Text Content"
@@ -150,7 +150,7 @@ class EntityGenerator extends Component {
                     onChange={event => this.onInputChange(event)} />
                 </div>
 
-                <div className="col-3" >
+                <div className="col-6" >
                   {/* <label>Text Color</label> */}
                   <input className="text_content_fifth_post"
                     placeholder="Text Color"
@@ -159,9 +159,13 @@ class EntityGenerator extends Component {
                     value={this.state.color}
                     onChange={event => this.onInputChange(event)} />
                 </div>
-                <div className="col-2">
+
+
+              </div>
+              <div>
+                <div className="col-4">
                   {/* <label>Text X-Axis</label> */}
-                  <input className="text_content_fifth_post numberEdit"
+                  <input className="text_content_third"
                     placeholder="X-Axis"
                     type="number"
                     name="x"
@@ -169,9 +173,9 @@ class EntityGenerator extends Component {
                     onChange={event => this.onInputChange(event)} />
                 </div>
 
-                <div className="col-2">
+                <div className="col-4">
                   {/* <label>Text </label> */}
-                  <input className="text_content_fifth_post numberEdit"
+                  <input className="text_content_third"
                     placeholder="Y-Axis"
                     type="number"
                     name="y"
@@ -179,16 +183,15 @@ class EntityGenerator extends Component {
                     onChange={event => this.onInputChange(event)} />
                 </div>
 
-                <div className="col-2">
+                <div className="col-4">
                   {/* <label>Text Z-Axis</label> */}
-                  <input className="text_content_fifth_post numberEdit"
+                  <input className="text_content_third"
                     placeholder="Z-Axis"
                     type="number"
                     name="z"
                     value={this.state.z}
                     onChange={event => this.onInputChange(event)} />
                 </div>
-
               </div>
               <button type="submit" className="btn-select-edit">Edit this scene!</button>
 
@@ -204,75 +207,80 @@ class EntityGenerator extends Component {
                         setImage={url=>this.setSrc(url)}/>
               </div>
 
-              <div>
-                {/* <label>Box Width</label> */}
-                <input
-                  placeholder="Width"
-                  type="number"
-                  name="width"
-                  value={this.state.width}
-                  onChange={event => this.onInputChange(event)} />
-              </div>
-
-              <div>
-                {/* <label>Box Height</label> */}
-                <input
-                  placeholder="Height"
-                  type="number"
-                  name="height"
-                  value={this.state.height}
-                  onChange={event => this.onInputChange(event)} />
-              </div>
-
-              <div>
-                {/* <label>Box Depth</label> */}
-                <input
-                  placeholder="Depth"
-                  type="number"
-                  name="depth"
-                  value={this.state.depth}
-                  onChange={event => this.onInputChange(event)} />
-              </div>
-
-              <div>
+              <div className="col-12">
                 {/* <label>Box Color</label> */}
-                <input
+                <input className="text_content_full"
                   placeholder="Box Color"
                   type="text"
                   name="color"
                   value={this.state.color}
                   onChange={event => this.onInputChange(event)} />
               </div>
-
               <div>
-                {/* <label>Box X-Axis</label> */}
-                <input
-                  place="X-Axis"
-                  type="number"
-                  name="x"
-                  value={this.state.x}
-                  onChange={event => this.onInputChange(event)} />
+                <div className="col-4">
+                  {/* <label>Box Width</label> */}
+                  <input className="text_content_third"
+                    placeholder="Width"
+                    type="number"
+                    name="width"
+                    value={this.state.width}
+                    onChange={event => this.onInputChange(event)} />
+                </div>
+
+                <div className="col-4">
+                  {/* <label>Box Height</label> */}
+                  <input className="text_content_third"
+                    placeholder="Height"
+                    type="number"
+                    name="height"
+                    value={this.state.height}
+                    onChange={event => this.onInputChange(event)} />
+                </div>
+
+                <div className="col-4">
+                  {/* <label>Box Depth</label> */}
+                  <input className="text_content_third"
+                    placeholder="Depth"
+                    type="number"
+                    name="depth"
+                    value={this.state.depth}
+                    onChange={event => this.onInputChange(event)} />
+                </div>
               </div>
 
               <div>
-                {/* <label>Box Y-Axis</label> */}
-                <input
-                  placeholder="Y-Axis"
-                  type="number"
-                  name="y"
-                  value={this.state.y}
-                  onChange={event => this.onInputChange(event)} />
+                <div className="col-4">
+                  {/* <label>Box X-Axis</label> */}
+                  <input className="text_content_third"
+                    place="X-Axis"
+                    type="number"
+                    name="x"
+                    value={this.state.x}
+                    onChange={event => this.onInputChange(event)} />
+                </div>
+
+                <div className="col-4">
+                  {/* <label>Box Y-Axis</label> */}
+                  <input className="text_content_third"
+                    placeholder="Y-Axis"
+                    type="number"
+                    name="y"
+                    value={this.state.y}
+                    onChange={event => this.onInputChange(event)} />
+                </div>
+
+                <div className="col-4">
+                  {/* <label>Box Z-Axis</label> */}
+                  <input className="text_content_third"
+                    placeholder="Z-Axis"
+                    type="number"
+                    name="z"
+                    value={this.state.z}
+                    onChange={event => this.onInputChange(event)} />
+                </div>
               </div>
 
-              <div>
-                {/* <label>Box Z-Axis</label> */}
-                <input
-                  placeholder="Z-Axis"
-                  type="number"
-                  name="z"
-                  value={this.state.z}
-                  onChange={event => this.onInputChange(event)} />
-              </div>
+
 
               <button
                 type="submit"

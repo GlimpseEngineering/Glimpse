@@ -53,13 +53,13 @@ class Auth extends Component {
 
         { !this.props.auth.isAuthenticated ? (
           <div >
-            <button className="btn btn-primary" onClick={this.props.login}>Login</button>
+            <button className="btn-primary" onClick={this.props.login}>Login</button>
           </div>
         ) : (
           <div>
 
-            <button className="btn btn-primary" onClick={this.props.logout}>Logout</button>
-            <button className="btn btn-primary"
+            <button className="btn-primary" onClick={this.props.logout}>Logout</button>
+            <button className="btn-primary"
                     onClick={()=>{
                       this.props.getOneUser(this.props.auth.activeUser.id)
                       browserHistory.push(`/#/profile/${this.props.auth.activeUser.id}`)

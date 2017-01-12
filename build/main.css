@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700,400,italic);.navBar {
+  margin-bottom: 5px;
   color: black;
   box-sizing: border-box;
   display: inline-flex;
@@ -112,7 +113,7 @@ li {
 .userContainer {
   background-color: #ddd;
   align-items: center;
-  border-right: 10px solid #ddd;
+  margin-right: -20px;
   width: 100%;
   overflow-y: hidden;
   border-left: 10px solid #ddd; }
@@ -232,7 +233,7 @@ li {
   font-size: 16px;
   padding: 3px 6px;
   text-decoration: none;
-  margin: 5px 0 5px 0; }
+  margin: 5px 3px 5px 3px; }
 
 .btn-select-edit:hover {
   background-color: #b3b3b3;
@@ -300,7 +301,7 @@ li {
 
 .ReactModal__Content {
   min-width: 750px;
-  min-height: 450px;
+  min-height: 500px;
   max-width: 455px; }
 
 #preview {
@@ -331,6 +332,16 @@ li {
 
 .editPopUp {
   margin-top: 40px; }
+
+.postGeneratorFeed {
+  border: 1px solid #ddd;
+  overflow-y: scroll;
+  height: 20vh;
+  max-height: 30vh;
+  min-height: 30vh; }
+
+.submitButton {
+  bottom: 5px; }
 
 h1, h2 {
   font-family: "Open Sans", sans-serif;
@@ -422,7 +433,7 @@ html, body {
   cursor: pointer;
   color: #666666;
   font-size: 16px;
-  padding: 6px 24px;
+  padding: 4px 24px;
   text-decoration: none;
   margin-left: 2px; }
 
@@ -461,10 +472,10 @@ html, body {
 
 .searchBarInput {
   position: relative;
-  top: -2px;
+  top: -1px;
   border-radius: 6px;
   border: 1px solid #e1e8ed;
-  padding: 9px 24px; }
+  padding: 4px 27px; }
 
 .searchResult {
   left: -40px;
@@ -483,19 +494,13 @@ html, body {
 
 .searchInfo {
   float: right;
-  padding: 5px 15px 5px 0px;
   width: 55%; }
 
 .searchPic {
   margin-left: 10px; }
 
 .searchFollowButton {
-  text-align: center;
-  padding: 1px 0 4px 0; }
-
-.searchNameLink {
-  text-align: center;
-  padding: 10px 0 7px 0; }
+  margin-top: -10px; }
 
 .row:after {
   display: block;

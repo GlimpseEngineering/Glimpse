@@ -188,7 +188,7 @@ html, body {
   // font-family:Arial;
   font-size:16px;
   // font-weight:bold;
-  padding:6px 24px;
+  padding:4px 24px;
   text-decoration:none;
   margin-left:2px;
   // text-shadow:0px 1px 0px #ffffff;
@@ -219,7 +219,7 @@ html, body {
 
 .navButtons {
   margin-top: 10px;
-
+  
   position: absolute;
   right: 10px;
   top: 0;
@@ -245,10 +245,10 @@ html, body {
 
 .searchBarInput {
   position: relative;
-  top: -2px;
+  top: -1px;
   border-radius: 6px;
   border: 1px solid #e1e8ed;
-  padding:9px 24px;
+  padding:4px 27px;
 }
 
 .searchResult {
@@ -274,7 +274,7 @@ html, body {
 .searchInfo {
   // align-items: left;
   float: right;
-  padding: 5px 15px 5px 0px;
+  // padding: 5px 15px 5px 0px;
   width: 55%;
 }
 
@@ -283,13 +283,14 @@ html, body {
 }
 
 .searchFollowButton {
-  text-align: center;
-  padding: 1px 0 4px 0;
+  // text-align: center;
+  // padding: 1px 0 4px 0;
+  margin-top: -10px;
 }
 
 .searchNameLink {
-  text-align: center;
-  padding: 10px 0 7px 0;
+  // text-align: center;
+  // padding: 10px 0 7px 0;
 }
 
 //----- Extends
@@ -313,6 +314,7 @@ $grid-spacing:0%;
 }
 
 [class^="col-"] {
+
     float:left;
     margin-right:$grid-spacing;
     -webkit-box-sizing:border-box;
@@ -353,6 +355,7 @@ $grid-spacing:0%;
 .col-10  { width:(100% / 1.2) - ($grid-spacing * 2 / 12); }
 .col-11  { width:(100% / 1.090909090909091) - ($grid-spacing * 1 / 12); }
 .col-12  { width:100%; }
+
 
 
 @media screen and (min-width: 1075px) {

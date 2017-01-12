@@ -90,7 +90,7 @@
   // font-weight:bold;
   padding:3px 6px;
   text-decoration:none;
-  margin: 5px 0 5px 0;
+  margin: 5px 3px 5px 3px;
   // margin-left:2px;
   // text-shadow:0px 1px 0px #ffffff;
 }
@@ -180,8 +180,9 @@
 
 .ReactModal__Content {
   min-width: 750px;
-  min-height: 450px;
+  min-height: 500px;
   max-width: 455px;
+
 }
 
 #preview {
@@ -221,4 +222,19 @@
 
 .editPopUp {
   margin-top: 40px;
+}
+
+.postGeneratorFeed {
+  border: 1px solid #ddd;
+  overflow-y: scroll;
+  height: 20vh;
+  max-height: 30vh;
+  min-height: 30vh;
+}
+
+.submitButton {
+  // position: absolute;
+  // left:    5px;
+  bottom:   5px;
+  // width: 30vw;
 }

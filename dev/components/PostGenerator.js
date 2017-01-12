@@ -415,7 +415,7 @@ class PostGenerator extends Component {
 
           <button
             onClick={this.submitPost.bind(this)}
-            className={this.entityCollection.length === 0 ? 'hide-post-details' : 'btn-select'} >
+            className={this.entityCollection.length === 0 ? 'hide-post-details' : 'btn-select submitButton'} >
             Submit Post
           </button>
 
@@ -423,7 +423,7 @@ class PostGenerator extends Component {
         </div>
         <div className="col-8 postPreviewColumn">
           <PostPreview currentScene={JSON.stringify(this.entityCollection)} />
-          <div>
+          <div className="postGeneratorFeed">
             <ul>
               {stagedEntities}
             </ul>
