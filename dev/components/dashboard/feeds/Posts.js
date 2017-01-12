@@ -73,19 +73,14 @@ class Posts extends Component {
       console.log('MY PROFILE?????', this.myProfile)
 
       this.editButton = this.myProfile ?
-      <div>
-        <div>
-          <button className='editButton'
-             onClick={()=>{setTimeout(this.openDeleteModal, 0)}}>Delete
+        <div className="postButtons">
+          <button className='btn-primary delete'
+            onClick={()=>{setTimeout(this.openDeleteModal, 0)}}>Delete
           </button>
-        </div>
-        <div>
-          <button className='editButton'
+          <button className='btn-primary edit'
             onClick={()=>{setTimeout(this.openEditModal, 0)}}>Edit
           </button>
-        </div>
-      </div>
-        : null
+        </div> : null
   } else {
       this.editButton = null;
     }
@@ -120,12 +115,14 @@ class Posts extends Component {
         <ul>
           {this.props.userPosts.userPosts.map( (post, i) =>
            <li onClick={(e) => {
+             console.log('click event:',e.target.className)
              this.setState({
               selectedPost: post,
               indexToEdit: i})
-             if (e.target.className !=='editButton') {
+             if (e.target.className !=='btn-primary delete' &&
+                 e.target.className !=='btn-primary edit' ) {
                this.props.getOnePost(post.id)
-           }}}
+           }}} 
              key={post.id}
              className='list-item'
              value={post.id}>
@@ -214,6 +211,5 @@ function mapDispatchToProps(dispatch) {
     deletePost: deletePost
   }, dispatch)
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Posts);

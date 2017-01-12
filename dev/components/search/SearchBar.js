@@ -21,10 +21,15 @@ class SearchBar extends Component {
     }
   }
 
+  clearSearch(event) {
+    event.preventDefault();
+    this.setState({searchterm: ''});
+    this.props.clearSearch();
+  }
+
   render() {
     return (
       <div className="searchBar">
-        <form>
         <input
           className="searchBarInput"
           type="text"
@@ -32,11 +37,8 @@ class SearchBar extends Component {
           value={this.state.searchterm}
           onChange={event => this.onInputChange(event)} />
 
-          <button type="submit" className="btn-primary" >Search</button>
-
-        </form>
+          <button onClick={this.clearSearch.bind(this)} className="btn-primary">Clear Search</button>
         <SearchResults className="searchResult"/>
-
       </div>
     );
   }
