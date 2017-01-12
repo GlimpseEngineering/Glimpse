@@ -6,6 +6,17 @@
   height: 100%;
   width: 100%;
   padding-right: 15px;
+  // border: 1px solid #ddd;
+}
+
+.postModal {
+  // border: 1px solid #ddd;
+}
+
+.postPreviewColumn {
+  // border-right: 1px solid #ddd;
+  // border-bottom: 1px solid #ddd;
+
 }
 
 .postGeneratorTitle {
@@ -62,6 +73,40 @@
 	// top:10px;
 }
 
+
+
+.btn-select-edit {
+  width: 100%;
+  background-color:#fff;
+  -moz-border-radius:6px;
+  -webkit-border-radius:6px;
+  border-radius:6px;
+  border:1px solid #dcdcdc;
+  display:inline-block;
+  cursor:pointer;
+  color:#666666;
+  // font-family:Arial;
+  font-size:16px;
+  // font-weight:bold;
+  padding:3px 6px;
+  text-decoration:none;
+  margin: 5px 0 5px 0;
+  // margin-left:2px;
+  // text-shadow:0px 1px 0px #ffffff;
+}
+.btn-select-edit:hover {
+	background-color:#b3b3b3;
+  color: white;
+  transition: color 0.2s;
+  transition: background-color 0.2s;
+}
+.btn-select-edit:active {
+	position:relative;
+	// top:10px;
+}
+
+
+
 .dragAndDrop {
   // width: 90%;
   margin: 7px 0 7px 0;
@@ -78,15 +123,31 @@
   border:1px solid #dcdcdc;
   display:inline-block;
   color:#666666;
-  // font-family:Arial;
   font-size:12px;
-  // font-weight:bold;
   padding:6px 3px 6px 3px;
   text-decoration:none;
   margin: 7px 0 7px 0;
-  // margin: 5px 0 5px 0;
-  // padding: 10px 0 10px 0;
-  // height: 50px;
+}
+
+.text_content_third {
+  width: 87%;
+  // border-radius: 8px;
+  background-color:#fff;
+  -moz-border-radius:6px;
+  -webkit-border-radius:6px;
+  border-radius:6px;
+  border:1px solid #dcdcdc;
+  display:inline-block;
+  color:#666666;
+  font-size:12px;
+  padding:6px 3px 6px 3px;
+  text-decoration:none;
+  margin: 3px 0 3px 0;
+}
+
+.input-thirds {
+  display: flex;
+  // width: 90%;
 }
 
 .imagePreview {
@@ -96,8 +157,44 @@
 
 .ReactModal__Content {
   min-width: 750px;
+  min-height: 450px;
 }
 
 #preview {
   margin-right: -90px;
+}
+
+.list-item-generator {
+  position: relative;
+  display: flex;
+  padding: 7px 7px 7px 7px;
+  margin-bottom: -1px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  // border-right: 1px solid #ddd;
+  // border-left: 1px solid #ddd;
+  // border-top: 1px solid #ddd;
+  border-left: none;
+  margin-left: -40px;
+  margin-bottom: 0;
+  // width: 100%;
+}
+
+.editPostButtons {
+  display: flex;
+  float: right;
+  // margin-right: 30px;
+}
+.postComponent {
+  width: 100%;
+  display: block;
+}
+
+.primitiveType {
+  float: left;
+  margin-top: 7px;
+}
+
+.editPopUp {
+  margin-top: 40px;
 }
