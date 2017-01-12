@@ -29,12 +29,17 @@ class News_Feed extends Component {
                 <img className="userPic" src={post.userInfo.profPic} />
               </div>
               <div className='col-8 componentInfo'>
+                <div className="description">
+                  {post.description}
+                </div>
+                <br/>
                 <img className='previewImg'
                       src={post.previewUrl}
-                      width='300'  height='150'
+                      width='400'  height='200'
                 />
-                <br/>
-                {post.description}
+
+
+
               </div>
               <div className="col-2 time">
                 <Moment fromNow style={{ fontSize: '.9em' }}>{post.createdAt}</Moment>

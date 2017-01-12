@@ -58,7 +58,7 @@ class EntityGenerator extends Component {
         components: {
           width: this.state.width,
           height: this.state.height,
-          depth: this.state.depth, 
+          depth: this.state.depth,
           position: position(this.state.x, this.state.y, this.state.z),
           material: {
             src: this.state.src,
@@ -103,7 +103,7 @@ class EntityGenerator extends Component {
     console.log('passing delete scene to child', this.props.deleteScene);
     return (
       <div>
-        Content Type: {this.props.stagedEntity.primitive}
+        {this.props.stagedEntity.primitive}
         <button onClick={this.openEditMenu.bind(this)}>{this.state.enableEdit === true ? 'Hide' : 'Edit'}</button>
         <button onClick={this.deleteEntity.bind(this)}>Delete</button>
 
@@ -116,7 +116,7 @@ class EntityGenerator extends Component {
               <Upload preset="photosphere"
                       setImage={url=>this.setSrc(url)}/>
             </div>
-            <button 
+            <button
               type="submit"
               className={this.props.newPost.loading === true ? "hide-post-details" : ''} >
               Edit this scene!
@@ -247,13 +247,13 @@ class EntityGenerator extends Component {
                 onChange={event => this.onInputChange(event)} />
             </div>
 
-            <button 
+            <button
               type="submit"
               className={this.props.newPost.loading === true ? "hide-post-details" : ''} >
               Edit this scene!
             </button>
           </form>
-      </div> 
+      </div>
     );
   }
 };

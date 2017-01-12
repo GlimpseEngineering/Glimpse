@@ -54,11 +54,11 @@ class Posts extends Component {
       console.log('MY PROFILE?????', this.myProfile)
 
       this.editButton = this.myProfile ?
-        <div>
-          <button className='editButton'
+        <div className="postButtons">
+          <button className='btn-primary delete'
             onClick={()=>{setTimeout(this.openDeleteModal, 0)}}>Delete
           </button>
-          <button className='editButton'
+          <button className='btn-primary edit'
             onClick={()=>{setTimeout(this.openEditModal, 0)}}>Edit
           </button>
         </div> : null
@@ -132,14 +132,20 @@ class Posts extends Component {
             <div className="col-2" >
               <img className="userPic" src={this.props.user.profPic} />
             </div>
-              <div className='col-8 componentInfo'>
-                <img className='previewImg'
-                      src={post.previewUrl}
-                      width='300'  height='150'
-                />
-                <br/>
+            <div className='col-8 componentInfo'>
+              <div className="description">
                 {post.description}
               </div>
+
+              <br/>
+              <img className='previewImg'
+                  src={post.previewUrl}
+                  width='400'  height='200'
+              />
+
+
+
+            </div>
             <div className="col-2">
               <Moment fromNow style={{ fontSize: '.9em' }} >
                 {post.createdAt}

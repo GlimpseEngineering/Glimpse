@@ -188,11 +188,16 @@ class PostGenerator extends Component {
     console.log('triggering loading state newPost', this.props.newPost);
     console.log('triggering loading state', this.props.newPost.loading);
     let stagedEntities = this.entityCollection.map((entity) => {
-      return (
-        <EntityGenerator
-          key={entity.id}
-          stagedEntity={entity} />
-      );
+      // if(this.state.selectedPrimitive === 'PhotoSphere'){
+      //   console.log('nope')
+      // }else{
+        return (
+          <EntityGenerator
+            key={entity.id}
+            stagedEntity={entity} />
+        );
+      // }
+
     });
 
     return (
@@ -399,12 +404,18 @@ class PostGenerator extends Component {
             Submit Post
           </button>
 
-          <ul>
-            {stagedEntities}
-          </ul>
+
+        </div>
+        <div className="col-8">
+          <PostPreview currentScene={JSON.stringify(this.entityCollection)} />
+          <div>
+            <ul>
+              {stagedEntities}
+            </ul>
+          </div>
         </div>
 
-        <PostPreview currentScene={JSON.stringify(this.entityCollection)} />
+
       </div>
     );
   }

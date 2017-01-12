@@ -35,15 +35,7 @@
   border-left: 10px solid #ddd;
 }
 
-@media screen and (min-width: 900px) {
-    .userContainer {
-        border-left: 8vw solid #ddd;
-    }
-    // .navButtons {
-    //   margin-right: 8.2vw;
-    //
-    // }
-}
+
 
 .profileContainer {
   padding: 2% 4% 0% 4%;
@@ -110,7 +102,7 @@
 	top:1px;
 }
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 1075px) {
     .userContainer {
         border-left: 8vw solid #ddd;
     }
