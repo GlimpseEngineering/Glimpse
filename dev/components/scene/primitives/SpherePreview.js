@@ -15,7 +15,6 @@ export default props => {
     // material={{color: 'red', opacity: 0.6}}
     // material= {{src: "url(https://aframe.io/aframe/examples/boilerplate/panorama/puydesancy.jpg)"}}
 
-    {...extraProps}
   />
     // onClick={this.changeColor.bind(this)}>
     // <Entity
