@@ -22,12 +22,14 @@ class News_Feed extends Component {
              className='list-item'
              value={post.id}>
              {/* <div> */}
+
               <div className="col-2">
-                <img className="userPic" src={post.userInfo.profPic} 
+                <img className="userPic" src={post.userInfo.profPic}
                      onClick={(e) => {
                        console.log(post.userInfo)
                        this.props.getOneUser(post.userInfo.id)
                      }}/>
+
               </div>
               <div className='col-8 componentInfo'
                    onClick={(e) => {
@@ -67,7 +69,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   // pass the result of selectBook to all reducers
-  return bindActionCreators({ 
+  return bindActionCreators({
     getOnePost: getOnePost,
     getOneUser: getOneUser
   }, dispatch)

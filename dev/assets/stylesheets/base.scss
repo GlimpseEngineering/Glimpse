@@ -91,7 +91,7 @@ li {
 
 p {
   margin: 0;
-  font-size: .9em;
+  font-size: 1em;
 }
 
 ul {
@@ -228,9 +228,18 @@ html, body {
 }
 
 .glimpseLogo {
-  margin-top: 5px;
+  margin-top: 11px;
   margin-left: 10px;
   // color: white;
+}
+.glimpseLogo a {
+  background-image: url('http://www.icon100.com/up/3942/128/22-Sphere-grid.png');
+  width: 16px;
+    height: 16px;
+    overflow: hidden;
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .searchBar {
@@ -248,7 +257,6 @@ html, body {
 
 .searchBarInput {
   position: relative;
-  top: -1px;
   border-radius: 6px;
   border: 1px solid #e1e8ed;
   padding:4px 27px;
@@ -275,7 +283,7 @@ html, body {
 }
 
 .searchInfo {
-  // align-items: left;
+  padding-top: 5px;
   float: right;
   // padding: 5px 15px 5px 0px;
   width: 55%;
@@ -296,6 +304,11 @@ html, body {
 .searchNameLink {
   // text-align: center;
   // padding: 10px 0 7px 0;
+}
+
+.deleteButton {
+  text-align: center;
+  margin: 23%;
 }
 
 //----- Extends

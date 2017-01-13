@@ -172,19 +172,19 @@ class Posts extends Component {
             style={customStyles}
             contentLabel="Example Modal"
         >
-          <div >
+          <div className="deleteButton">
 
             <h3>Delete this post?</h3>
             <p>{this.state.selectedPost && this.state.selectedPost.description}</p>
             <br/>
-            <button onClick={()=>{
+            <button className="btn-prim" onClick={()=>{
               console.log('delete',this.state.selectedPost);
               this.props.deletePost(this.state.selectedPost.id);
               this.closeDeleteModal();
             }}>
               Delete
             </button>
-            <button onClick={this.closeDeleteModal.bind(this)}>
+            <button className="btn-prim" onClick={this.closeDeleteModal.bind(this)}>
               Cancel
             </button>
           </div>

@@ -68,6 +68,9 @@
 li {
   cursor: pointer; }
 
+.picture {
+  width: 100%; }
+
 .userPic {
   width: 100%;
   min-width: 90px;
@@ -97,7 +100,8 @@ li {
 
 .description {
   text-align: left;
-  width: 90%; }
+  width: 90%;
+  font-size: 14px; }
 
 .time {
   margin-top: 10px; }
@@ -159,7 +163,7 @@ li {
 
 .profileContainer {
   padding: 2% 4% 0% 4%;
-  height: 92.8vh;
+  height: 93vh;
   border-top-right-radius: 6px;
   border-top-left-radius: 6px; }
 
@@ -172,16 +176,16 @@ li {
   font-size: .7em; }
 
 .username {
-  padding: 0 11% 0 11%; }
+  padding: 7% 11% 0 11%; }
 
 .bio {
-  padding-top: 10px;
   border-top: solid #e1e8ed 1px;
-  padding: 8% 11% 0 11%; }
+  padding: 8% 11% 8% 11%;
+  border-bottom: solid #e1e8ed 1px; }
 
 .profileButton {
   text-align: center;
-  padding-bottom: 15px; }
+  padding-bottom: 9%; }
 
 .editButton {
   background-color: #fff;
@@ -458,7 +462,7 @@ li {
 
 p {
   margin: 0;
-  font-size: .9em; }
+  font-size: 1em; }
 
 ul {
   margin: 0;
@@ -537,8 +541,17 @@ html, body {
   top: 0; }
 
 .glimpseLogo {
-  margin-top: 5px;
+  margin-top: 11px;
   margin-left: 10px; }
+
+.glimpseLogo a {
+  background-image: url("http://www.icon100.com/up/3942/128/22-Sphere-grid.png");
+  width: 16px;
+  height: 16px;
+  overflow: hidden;
+  background-size: 16px 16px;
+  background-repeat: no-repeat;
+  background-position: center; }
 
 .searchBar {
   margin-top: 10px;
@@ -548,7 +561,6 @@ html, body {
 
 .searchBarInput {
   position: relative;
-  top: -1px;
   border-radius: 6px;
   border: 1px solid #e1e8ed;
   padding: 4px 27px; }
@@ -569,6 +581,7 @@ html, body {
   overflow-y: scroll; }
 
 .searchInfo {
+  padding-top: 5px;
   float: right;
   width: 55%; }
 
@@ -579,6 +592,10 @@ html, body {
 
 .searchFollowButton {
   margin-top: -10px; }
+
+.deleteButton {
+  text-align: center;
+  margin: 23%; }
 
 .row:after {
   display: block;
