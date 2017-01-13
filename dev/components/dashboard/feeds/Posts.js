@@ -144,7 +144,7 @@ class Posts extends Component {
 
 
             </div>
-            <div className="col-2">
+            <div className="col-2 time">
               <Moment fromNow style={{ fontSize: '.9em' }} >
                 {post.createdAt}
               </Moment>
