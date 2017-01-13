@@ -5,6 +5,7 @@ $secondary-color: #B364B4;
 
 //nav bar--------------------------->
 .navBar {
+  left: 1px;
   margin-bottom: 5px;
   color: black;
   box-sizing: border-box;
@@ -13,7 +14,7 @@ $secondary-color: #B364B4;
   position: relative;
   // justify-content: center;
   text-align: center;
-  width: 100%;
+  width: 99.8%;
 }
 
 .tab {
@@ -37,6 +38,7 @@ $secondary-color: #B364B4;
 
 .tab:hover {
   color: white;
+  background-color: #8c8c8c;
   transition: color 0.2s;
 }
 
@@ -59,6 +61,7 @@ $secondary-color: #B364B4;
   list-style: none;
   padding: 6px 12px;
   cursor: pointer;
+
 }
 
 
@@ -111,10 +114,14 @@ li {
 
 .userPic {
   width:100%;
-  min-width: 69px;
-  max-width: 70px;
+  min-width: 90px;
+  max-width: 170px;
   border-radius: 50%;
   padding: 10px;
+}
+
+.previewImg {
+  margin-top: -13px;
 }
 
 .componentInfo {
@@ -134,8 +141,42 @@ li {
 
 .edit {
   margin: 5px;
+  // background-color: #fff;
 }
 
 .delete {
   margin: 5px;
+}
+.description {
+  text-align: left;
+}
+
+.btn-prim-post {
+
+  background-color:#fff;
+  -moz-border-radius:6px;
+  -webkit-border-radius:6px;
+  border-radius:6px;
+  border:1px solid #dcdcdc;
+  display:inline-block;
+  cursor:pointer;
+  color:#666666;
+  // font-family:Arial;
+  font-size:16px;
+  // font-weight:bold;
+  padding:4px;
+  text-decoration:none;
+  margin-left:2px;
+  width: 100%;
+  // text-shadow:0px 1px 0px #ffffff;
+}
+.btn-prim-post:hover {
+	background-color:#b3b3b3;
+  color: white;
+  transition: color 0.2s;
+  transition: background-color 0.2s;
+}
+.btn-prim-post:active {
+	position:relative;
+	top:1px;
 }

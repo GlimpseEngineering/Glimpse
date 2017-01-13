@@ -66,51 +66,63 @@ class ProfileEditor extends Component {
   render() {
     return (
       <form id="editProfile" onSubmit={this.submitChange.bind(this)}>
-        <label>Username: </label><br/>
-        <input 
-          value={this.state.username}
-          onChange={event => this.onInputChange(event)}
-          name="username"
-          type="text" /><br/>
-        <label>Profile picture(url): </label><br/>
-        <input 
-          value={this.state.profPic}
-          onChange={event => this.onInputChange(event)}
-          name="profPic"
-          type="url" />
-        <Upload preset="profile picture"
-                setImage={url=>this.setProfPic(url)}/>
-        <label>Email: </label><br/>
-        <input 
-          value={this.state.email}
-          onChange={event => this.onInputChange(event)}
-          name="email"
-          type="email" /><br/>
-        <label>Birthday: </label><br/>
-        <input 
-          value={this.state.dob}
-          onChange={event => this.onInputChange(event)}
-          name="dob"
-          type="date" /><br/>
-        <label>Gender: </label><br/>
-        <input 
-          value={this.state.gender}
-          onChange={event => this.onInputChange(event)}
-          name="gender"
-          type="text" /><br/>
-        <label>Private: </label><br/>
-        <input 
-          onChange={event => this.onInputChange(event)}
-          checked={this.state.private? "checked" : ""}
-          name="private"
-          type="checkbox" /><br/>
-        <label>Bio: </label><br/>
-        <textarea rows="4" cols="40"
-          name="bio" form="editProfile"
-          onChange={event => this.onInputChange(event)}
-          value={this.state.bio}>
-        </textarea><br/>
-        <button type="submit">Save Changes</button>
+        <div className="col-6">
+          <label>Username: </label><br/>
+          <input className="text_content_edit_profile"
+            value={this.state.username}
+            onChange={event => this.onInputChange(event)}
+            name="username"
+            type="text" />
+            <br/>
+            <label>Email: </label><br/>
+            <input className="text_content_edit_profile"
+              value={this.state.email}
+              onChange={event => this.onInputChange(event)}
+              name="email"
+              type="email" /><br/>
+            <label>Birthday: </label><br/>
+            <input className="text_content_edit_profile"
+              value={this.state.dob}
+              onChange={event => this.onInputChange(event)}
+              name="dob"
+              type="date" /><br/>
+            <label>Gender: </label><br/>
+            <input className="text_content_edit_profile"
+              value={this.state.gender}
+              onChange={event => this.onInputChange(event)}
+              name="gender"
+              type="text" /><br/>
+            <label>Private: </label>
+            <input className="checkbox"
+              onChange={event => this.onInputChange(event)}
+              checked={this.state.private? "checked" : ""}
+              name="private"
+              type="checkbox" /><br/>
+            <label>Bio: </label><br/>
+            <textarea rows="4" cols="40"
+              name="bio" form="editProfile"
+              onChange={event => this.onInputChange(event)}
+              value={this.state.bio}>
+            </textarea><br/>
+        </div>
+        <div className="col-6">
+          <label>Profile picture(url): </label><br/>
+          <input className="text_content_edit_profile"
+            value={this.state.profPic}
+            onChange={event => this.onInputChange(event)}
+            name="profPic"
+            type="url" />
+          <Upload preset="profile picture"
+                  setImage={url=>this.setProfPic(url)}/>
+          <div className="saveButton">
+            <button type="submit" className="btn-prim">Save Changes</button>
+          </div>
+
+        </div>
+
+
+
+
       </form>
     );
   };

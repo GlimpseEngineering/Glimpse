@@ -61,7 +61,7 @@ class User_Info extends Component {
           this.unFollowClick.bind(this) :
           this.followClick.bind(this)
 
-      this.backgroundColor = this.myProfile ? 'lightBlue' : '#B5CBB7';
+      this.backgroundColor = this.myProfile ? '#8c8c8c' : '#b3b3b3';
 
     } else {
       console.log('no activeUser in nextprops')

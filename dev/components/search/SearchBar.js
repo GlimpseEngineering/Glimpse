@@ -37,7 +37,7 @@ class SearchBar extends Component {
           value={this.state.searchterm}
           onChange={event => this.onInputChange(event)} />
 
-          <button onClick={this.clearSearch.bind(this)} className="btn-primary">Clear Search</button>
+          <button onClick={this.clearSearch.bind(this)} className="btn-prim">Clear</button>
         <SearchResults className="searchResult"/>
       </div>
     );
