@@ -77,7 +77,9 @@ class User_Info extends Component {
     console.log('viewed profile followers:',nextProps.followers.filter(p=>p.status='accepted').map(p=>p.UserId))
     nextProps.activeUser && console.log('next active user:',nextProps.activeUser.id)
     console.log(`setting button Text from ${this.state.buttonText} to ${this.buttonText}`)
-    if(nextProps.followers.length !== this.props.followers.length || this.state.buttonText === 'loading'){
+    if(nextProps.followers.length !== this.props.followers.length || 
+       this.state.buttonText === 'loading' ||
+       nextProps.viewedProfile.id !==this.props.viewedProfile.id ){
       this.setState({
         buttonText: this.buttonText,
         handleClick: this.handleClick,
