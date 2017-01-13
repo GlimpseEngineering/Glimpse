@@ -4,7 +4,6 @@ import { followFoundUser, unfollowFoundUser } from '../../actions/searchActionCr
 import { getFollowersForUser } from '../../actions/followsActionCreators';
 import Modal from 'react-modal';
 import ProfileEditor from '../ProfileEditor';
-import DummyLogin from '../DummyLogin'
 
 const customStyles = {
   content : {
@@ -180,7 +179,6 @@ class User_Info extends Component {
                 <p>{this.props.viewedProfile.bio}</p>
               </div>
             </div>
-            <div><DummyLogin /></div>
 
 
           </div>

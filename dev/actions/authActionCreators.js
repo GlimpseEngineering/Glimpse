@@ -68,25 +68,6 @@ export function login() {
   }
 }
 
-export function loginAs(id) {
-  /**
-   * THIS IS FOR DEV PURPOSES ONLY!!!!!!
-   * DELETE ALL TRACES OF THIS FUNCTION
-   * BEFORE DEPLOYING!!!!!!!!!!!!!!!!!!
-   */
-  return dispatch => {
-    logout()
-    axios.post(`/api/login`, {
-      authId:`dummy|${id}`
-    })
-    .then(user => {
-      generateCache(user.data.id)(dispatch);
-      localStorage.setItem('profile', JSON.stringify(user.data));
-      return dispatch(loginSuccess(user.data));
-    })
-  }
-}
-
 export function logout() {
   return dispatch => {
     localStorage.removeItem('id_token');
