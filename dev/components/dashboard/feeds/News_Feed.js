@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getOnePost } from '../../../actions/postsActionCreators';
+import { getOneUser  } from '../../../actions/usersActionCreators';
 import Moment from 'react-moment';
 
 class News_Feed extends Component {
@@ -17,18 +18,22 @@ class News_Feed extends Component {
        <ul>
          {this.props.userFeed.followingPosts.map( post =>
            <li
-             onClick={(e) => {
-               this.handleSelect(e);
-               this.props.getOnePost(post.id)
-             }}
              key={post.id}
              className='list-item'
              value={post.id}>
              {/* <div> */}
               <div className="col-2">
-                <img className="userPic" src={post.userInfo.profPic} />
+                <img className="userPic" src={post.userInfo.profPic} 
+                     onClick={(e) => {
+                       console.log(post.userInfo)
+                       this.props.getOneUser(post.userInfo.id)
+                     }}/>
               </div>
-              <div className='col-8 componentInfo'>
+              <div className='col-8 componentInfo'
+                   onClick={(e) => {
+                     this.handleSelect(e);
+                     this.props.getOnePost(post.id)
+                   }}>
                 <div className="description">
                   {post.description}
                 </div>
@@ -62,7 +67,10 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   // pass the result of selectBook to all reducers
-  return bindActionCreators({ getOnePost: getOnePost }, dispatch)
+  return bindActionCreators({ 
+    getOnePost: getOnePost,
+    getOneUser: getOneUser
+  }, dispatch)
 }
 
 
