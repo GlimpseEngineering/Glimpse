@@ -39,7 +39,7 @@
 
 .profileContainer {
   padding: 2% 4% 0% 4%;
-  height: 92.8vh;
+  height: 93vh;
   border-top-right-radius: 6px;
   border-top-left-radius: 6px;
 }
@@ -56,20 +56,22 @@
 }
 
 .username {
-  padding: 0 11% 0 11%;
+  padding: 7% 11% 0 11%;
 //   width: 88%
 }
 
 
 .bio {
-  padding-top: 10px;
+
+
   border-top: solid #e1e8ed 1px;
-  padding: 8% 11% 0 11%;
+  padding: 8% 11% 8% 11%;
+  border-bottom: solid #e1e8ed 1px;
 }
 
 .profileButton {
   text-align: center;
-  padding-bottom: 15px;
+  padding-bottom: 9%;
 }
 
 .editButton {

@@ -24,7 +24,7 @@ class Profile extends Component {
       browserHistory.push(`/#/splash`)
       window.location.reload();
     }
-    
+
   }
 
   componentWillReceiveProps(nextProps) {
@@ -64,7 +64,15 @@ class Profile extends Component {
     return (
       <div key={this.props.cache.cached}>
         <nav className="mainNav">
-          <h3 className="glimpseLogo">Glimpse</h3>
+          <div className="glimpseLogo">
+            {/* <span className="glimpseLogo">
+
+            </span> */}
+            {/* <a href="https://github.com/GlimpseEngineering/Glimpse" /> */}
+            {/* <i class="material-icons"></i> */}
+            <h3 >Glimpse</h3>
+          </div>
+
           <div className="searchAndButtons">
             <SearchBar />
             <div className="navButtons">

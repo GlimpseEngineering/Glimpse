@@ -436,6 +436,9 @@ class UI extends Component {
       var result = '7.2';
       if(display){
         if(this.props.showUserPosts === 'true'){
+          if(UPLength === 0){
+            result = '.2';
+          }
           if(UPLength === 1){
             result = '1.6';
           }else if(UPLength === 2){
@@ -446,6 +449,9 @@ class UI extends Component {
             result = '5.8';
           }
         }else {
+          if(feedLength === 0){
+            result = '.2';
+          }
           if(feedLength === 1){
             result = '1.6';
           }else if(feedLength === 2){
