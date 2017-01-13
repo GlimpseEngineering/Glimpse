@@ -79,7 +79,8 @@ class User_Info extends Component {
     console.log(`setting button Text from ${this.state.buttonText} to ${this.buttonText}`)
     if(nextProps.followers.length !== this.props.followers.length || 
        this.state.buttonText === 'loading' ||
-       nextProps.viewedProfile.id !==this.props.viewedProfile.id ){
+       nextProps.viewedProfile.id !== this.props.viewedProfile.id ){
+         if (this.activeUserFollowsProfile) this.buttonText==='Unfollow'
       this.setState({
         buttonText: this.buttonText,
         handleClick: this.handleClick,
