@@ -3,7 +3,6 @@ import 'aframe-animation-component';
 import 'aframe-text-component';
 import 'babel-polyfill';
 import 'aframe-keyboard-controls';
-import 'aframe-mouse-cursor-component';
 import '../scene/acomps/create_preview';
 
 import {Entity, Scene} from 'aframe-react';

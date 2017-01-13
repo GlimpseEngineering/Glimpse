@@ -2,10 +2,7 @@ import 'aframe';
 import 'aframe-animation-component';
 import 'aframe-text-component';
 import 'babel-polyfill';
-import 'aframe-keyboard-controls';
-import 'aframe-mouse-cursor-component';
 import './acomps/create_preview';
-
 import {Entity, Scene} from 'aframe-react';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
