@@ -1,11 +1,9 @@
 import 'aframe';
-import 'aframe-outline'
 import 'aframe-animation-component';
 import 'aframe-text-component';
 import 'babel-polyfill';
 import 'aframe-keyboard-controls';
 import 'aframe-mouse-cursor-component';
-
 import './acomps/create_preview';
 
 import {Entity, Scene} from 'aframe-react';
@@ -21,7 +19,7 @@ import UI from './primitives/UI';
 import Plane from './primitives/Plane';
 import Box from './primitives/Box';
 
-const LOADING_SPINNER = 'http://res.cloudinary.com/glimpse/image/upload/v1484179580/wavy_mv9ykh.gif'
+const LOADING_SPINNER = 'http://res.cloudinary.com/glimpse/image/upload/v1484265501/loadingAnimation_o4kmqw.gif'
 
 class World extends Component {
   constructor(props) {
@@ -61,14 +59,12 @@ class World extends Component {
 
   render() {
     console.log('curScene:',JSON.parse(this.props.currentScene))
-    let windowHeight=window.innerHeight+'px'
-    let windowWidth=window.innerWidth+'px'
 
     return (
 
 
-      <a-scene id='scene' createPreview embedded style={{height:windowHeight,width:windowWidth}}> 
-        <a-assets id='assets'>
+      <a-scene id='scene' createPreview > 
+        <a-assets id='assets' timeout='500'>
           <img id="NO_ASSET" src={LOADING_SPINNER} />
         </a-assets>
         <Camera id='camera' >
@@ -77,14 +73,11 @@ class World extends Component {
           </a-cursor>
         </Camera>
 
-
         <UI className='ui' visible='false' zpos='-1' exit={this.props.exitVR} user={this.props.viewedProfile}
             feed={this.props.userFeed} viewedUserPosts={this.props.userPosts}
             showFeed={this.state.showFeed} showUserPosts={this.state.showUserPosts}
             toggleFeed={this.toggleFeed.bind(this)} toggleUserPosts={this.toggleUserPosts.bind(this)}
             setScene={this.props.setScene} currentScene={this.props.currentScene}/>
-
-
         {JSON.parse(this.props.currentScene)
           .map((entity, i) => {
             return this.createJSX(entity, i)

@@ -54,8 +54,11 @@ class Upload extends Component{
     /**
      * dispatch loading true here
      */
+    let preset = file.type.startsWith('image') ? this.props.preset :
+                 this.props.preset === PHOTOSPHERE_PRESET ? VIDEOSPHERE_PRESET : 
+                 FLAT_VIDEO_PRESET
     this.props.startLoadUrl();
-    console.log(`sending ${file} to ${this.props.preset}`)
+    console.log(`sending ${file} to ${preset}`)
     console.log(file.name)
     let url = file.type.startsWith('image') ? 
               'https://api.cloudinary.com/v1_1/glimpse/image/upload' :
@@ -64,7 +67,7 @@ class Upload extends Component{
               `error when uploading ${file}: unknown filetype`
     
     let upload = request.post(url)
-                        .field('upload_preset', this.props.preset)
+                        .field('upload_preset', preset)
                         .field('file', file);
 
     upload.end((err, response) => {
