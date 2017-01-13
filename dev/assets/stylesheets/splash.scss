@@ -1,28 +1,34 @@
+body {
+  background-image: url('https://image.freepik.com/free-photo/abstract-background-with-ink_1112-820.jpg');
+  background-size: cover; /* or contain depending on what you want */
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
 article  {
   // background: url(./icons/IMG_372404.jpg);
   // padding: 15%;
   text-align: center;
   margin-top: 6vh;
-
-}
-// .mainShit {
-//     border-left: 15vw solid #ddd;
-//     border-right: 15vw solid #ddd;
-// }
-
-.splashInfo {
-  text-align: center;
-  padding: 0 10% 0 10%;
-
 }
 
 .splashTitle {
   text-align: center;
   padding-bottom: 15px;
+  color: #660066;
 }
+
+.splashInfo {
+  text-align: center;
+  padding: 0 10% 0 10%;
+  color: #660066;
+}
+
 .splashFooter {
   text-align: center;
+  margin-top: 100px;
   padding-top: 15px;
+  color: #660066;
 }
 
 // .sides {

@@ -35,28 +35,20 @@ class Splash extends Component {
             </div>
           </div>
         </nav>
-        <div className="mainShit">
+        <div>
           <article className="splash">
             <div className="col-2 sides">
 
             </div>
             <div className="col-8">
+              <div className="splashTitle">
+                <h2>Glimpse</h2>
+              </div>
               {/* <h1 className="splashTitle">Glimpse Into Someone's World</h1> */}
               <div className="splashInfo">
                 <p><br/>
-                  click on a user in the followers or
-                  following tab to view that user's profile
+                  Click on a post -> Shift+Click in VR -> Explore!
                 </p>
-                <p><br/>
-                  click on a post in post in a user's
-                  newsfeed or postfeed to view in vr
-                </p>
-                <p><br/>
-                  Shift+Click in VR to bring up the navigation menu
-                </p>
-                <p><br/>
-                  Click on the icons to navigate!
-                </p><br/>
                 <div className="splashFooter">
                   <h3 >Brought to you by: </h3>
                   <br/>
