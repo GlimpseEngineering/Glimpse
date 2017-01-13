@@ -11,7 +11,11 @@ export default props => {
     geometry={{
               primitive: 'sphere',
               radius: .3
-            }} position="-1.55 0 .07" material={{shader: 'flat', src: props.src}}
+            }} position="-1.55 0 .07" material={
+              props.src.endsWith('webm') ?
+              {shader: 'flat', src: props.previewUrl} :
+              {shader: 'flat', src: props.src}
+            }
     // material={{color: 'red', opacity: 0.6}}
     // material= {{src: "url(https://aframe.io/aframe/examples/boilerplate/panorama/puydesancy.jpg)"}}
 
