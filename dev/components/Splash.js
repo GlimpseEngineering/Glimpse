@@ -16,7 +16,7 @@ class Splash extends Component {
     if (nextLogin) {
       if (!loggedIn || loggedIn.id !== nextLogin.id){
         browserHistory.push(`/#/profile/${nextLogin.id}`)
-        window.location.reload();   
+        window.location.reload();
       }
     }
     window.location.reload();
@@ -35,24 +35,48 @@ class Splash extends Component {
             </div>
           </div>
         </nav>
+        <div className="mainShit">
+          <article className="splash">
+            <div className="col-2 sides">
 
-        <h1>SPLASH PAGE, SON!</h1>
-        <p><br/>
-          click on a user in the followers or
-          following tab to view that user's profile
-        </p>
-        <p><br/>
-          click on a post in post in a user's 
-          newsfeed or postfeed to view in vr
-        </p>
-        <p><br/>
-          Shift+Click in VR to bring up the navigation menu
-        </p>
-        <p><br/>
-          Click on the icons to navigate!
-        </p><br/>
-        <h3>Brought to you by Glimpse Engineering</h3>
-        <p>Kevin Amirdjanian, Jimmy Gonzalez, Nathaniel T Hart</p>
+            </div>
+            <div className="col-8">
+              {/* <h1 className="splashTitle">Glimpse Into Someone's World</h1> */}
+              <div className="splashInfo">
+                <p><br/>
+                  click on a user in the followers or
+                  following tab to view that user's profile
+                </p>
+                <p><br/>
+                  click on a post in post in a user's
+                  newsfeed or postfeed to view in vr
+                </p>
+                <p><br/>
+                  Shift+Click in VR to bring up the navigation menu
+                </p>
+                <p><br/>
+                  Click on the icons to navigate!
+                </p><br/>
+                <div className="splashFooter">
+                  <h3 >Brought to you by: </h3>
+                  <br/>
+                  <h3>Glimpse Engineering</h3>
+                  <br/>
+                  <p>Kevin Amirdjanian, Jimmy Gonzalez, Nathaniel T Hart</p>
+                </div>
+
+              </div>
+            </div>
+
+            <div className="col-2 sides">
+
+            </div>
+
+          </article>
+        </div>
+
+
+
       </div>
     );
   }

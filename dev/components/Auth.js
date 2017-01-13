@@ -53,13 +53,13 @@ class Auth extends Component {
 
         { !this.props.auth.isAuthenticated ? (
           <div >
-            <button className="btn-primary" onClick={this.props.login}>Login</button>
+            <button className="btn-prim" onClick={this.props.login}>Login</button>
           </div>
         ) : (
           <div>
 
-            <button className="btn-primary" onClick={this.props.logout}>Logout</button>
-            <button className="btn-primary"
+            <button className="btn-prim" onClick={this.props.logout}>Logout</button>
+            <button className="btn-prim"
                     onClick={()=>{
                       this.props.getOneUser(this.props.auth.activeUser.id)
                       browserHistory.push(`/#/profile/${this.props.auth.activeUser.id}`)
@@ -67,7 +67,7 @@ class Auth extends Component {
             </button>
             {/* <button className="btn-primary">Post</button> */}
             {/* <div> */}
-              <button onClick={this.openModal} className="btn-primary">Post</button>
+              <button onClick={this.openModal} className="btn-prim">Post</button>
 
               <Modal
                 isOpen={this.state.modalIsOpen}

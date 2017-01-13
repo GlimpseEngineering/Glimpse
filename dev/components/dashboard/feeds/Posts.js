@@ -14,6 +14,7 @@ const customStyles = {
     bottom      : 'auto',
     marginRight : '-50%',
     transform   : 'translate(-50%, -50%)'
+
   }
 };
 
@@ -55,10 +56,10 @@ class Posts extends Component {
 
       this.editButton = this.myProfile ?
         <div className="postButtons">
-          <button className='btn-primary delete'
+          <button className='btn-prim-post delete'
             onClick={()=>{setTimeout(this.openDeleteModal, 0)}}>Delete
           </button>
-          <button className='btn-primary edit'
+          <button className='btn-prim-post edit'
             onClick={()=>{setTimeout(this.openEditModal, 0)}}>Edit
           </button>
         </div> : null
@@ -74,10 +75,10 @@ class Posts extends Component {
 
       this.editButton = this.myProfile ?
         <div className="postButtons">
-          <button className='btn-primary delete'
+          <button className='btn-prim-post delete'
             onClick={()=>{setTimeout(this.openDeleteModal, 0)}}>Delete
           </button>
-          <button className='btn-primary edit'
+          <button className='btn-prim-post edit'
             onClick={()=>{setTimeout(this.openEditModal, 0)}}>Edit
           </button>
         </div> : null
@@ -119,10 +120,10 @@ class Posts extends Component {
              this.setState({
               selectedPost: post,
               indexToEdit: i})
-             if (e.target.className !=='btn-primary delete' &&
-                 e.target.className !=='btn-primary edit' ) {
+             if (e.target.className !=='btn-prim-post delete' &&
+                 e.target.className !=='btn-prim-post edit' ) {
                this.props.getOnePost(post.id)
-           }}} 
+           }}}
              key={post.id}
              className='list-item'
              value={post.id}>
@@ -143,7 +144,7 @@ class Posts extends Component {
 
 
             </div>
-            <div className="col-2">
+            <div className="col-2 time">
               <Moment fromNow style={{ fontSize: '.9em' }} >
                 {post.createdAt}
               </Moment>
@@ -171,7 +172,7 @@ class Posts extends Component {
             style={customStyles}
             contentLabel="Example Modal"
         >
-          <div>
+          <div >
 
             <h3>Delete this post?</h3>
             <p>{this.state.selectedPost && this.state.selectedPost.description}</p>

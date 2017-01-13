@@ -255,7 +255,7 @@ class PostGenerator extends Component {
             <button
               type="submit"
               className={this.props.newPost.loading === true ? "hide-post-details" : 'btn-select'} >
-              Add This Photo Sphere!
+              Add Photo Sphere!
             </button>
           </form>
 
@@ -314,7 +314,7 @@ class PostGenerator extends Component {
               </div>
             </div>
 
-            <button type="submit" className="btn-select">Add This Text!</button>
+            <button type="submit" className="btn-select">Add Text!</button>
           </form>
 
           <form
@@ -409,7 +409,7 @@ class PostGenerator extends Component {
             <button
               type="submit"
               className={this.props.newPost.loading === true ? "hide-post-details" : 'btn-select'} >
-              Add This Box!
+              Add Box!
             </button>
           </form>
 

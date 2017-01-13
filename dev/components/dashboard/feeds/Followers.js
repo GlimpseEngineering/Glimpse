@@ -25,8 +25,11 @@ class Followers extends Component {
                 <img className="userPic" src={user.userInfo.profPic} />
               </div>
               <div className='componentInfo'>
-                <p>username: {user.userInfo.username}</p>
-                <p>Bio: {user.userInfo.bio}</p>
+                <div className='description'>
+                  <p>username: {user.userInfo.username}</p>
+                  <p>Bio: {user.userInfo.bio}</p>
+                </div>
+
               </div>
             </li>
           )}

@@ -52,7 +52,7 @@ class SearchResult extends Component {
             </Link>
           </div>
           <div className="searchFollowButton">
-            <button className="btn-primary" value={this.props.searchResult.id} onClick={this.onClick.bind(this)}>{this.state.button}</button>
+            <button className="btn-prim" value={this.props.searchResult.id} onClick={this.onClick.bind(this)}>{this.state.button}</button>
           </div>
         </div>
 
