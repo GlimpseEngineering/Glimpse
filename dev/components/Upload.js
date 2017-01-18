@@ -40,7 +40,6 @@ class Upload extends Component{
     if (rejected) {
       console.log('rejected:', rejected)
     }
-    console.log('files dropped:',files)
     if (files[0]){
       this.setState({
         uploadedFile: files[0]
@@ -58,8 +57,6 @@ class Upload extends Component{
                  this.props.preset === PHOTOSPHERE_PRESET ? VIDEOSPHERE_PRESET : 
                  FLAT_VIDEO_PRESET
     this.props.startLoadUrl();
-    console.log(`sending ${file} to ${preset}`)
-    console.log(file.name)
     let url = file.type.startsWith('image') ? 
               'https://api.cloudinary.com/v1_1/glimpse/image/upload' :
               file.type.startsWith('video') ?
@@ -76,7 +73,6 @@ class Upload extends Component{
       }
 
       if (response.body.secure_url !== '') {
-        console.log('uploaded to:',response.body.secure_url)
         this.setState({
           uploadedFileUrl: response.body.secure_url
         });

@@ -25,16 +25,6 @@ class User_Info extends Component {
     this.closeModal = this.closeModal.bind(this);
 
     this.props.getFollowersForUser(this.props.viewedProfile.id)
-    // if(this.props.activeUser){
-    //   this.myProfile = this.props.viewedProfile.id===this.props.activeUser.id;
-    //   this.backgroundColor = this.myProfile ? 'lightBlue' : 'white';
-
-    // } else {
-    //   console.log('no activeUser in this.props')
-    //   this.backgroundColor = 'white';
-    //   // this.editButton = null;
-    // }
-    console.log('setting state to defaults in constructor')
     this.state = {
       modalIsOpen: false,
       buttonText: 'loading',
@@ -44,8 +34,6 @@ class User_Info extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // console.log("USER_INFO PROPS:",this.props)
-    // console.log('user_info nextprops:',nextProps)
     if(nextProps.activeUser) {
       this.myProfile = nextProps.viewedProfile.id===nextProps.activeUser.id;
       this.activeUserFollowsProfile = nextProps.followers.filter(p=>p.status='accepted')
@@ -64,19 +52,10 @@ class User_Info extends Component {
       this.backgroundColor = this.myProfile ? '#a4c9db' : 'rgb(181, 203, 183)';
 
     } else {
-      console.log('no activeUser in nextprops')
       this.backgroundColor = 'white';
       this.buttonText = null;
       this.handleClick=null
-      // this.editButton = null;
     }
-    console.log('*|*|*|*|*|*|*|*|*')
-    console.log('USER_INFO will recieve props')
-    console.log('user_info old props:',this.props)
-    console.log('user_info new props:',nextProps)
-    console.log('viewed profile followers:',nextProps.followers.filter(p=>p.status='accepted').map(p=>p.UserId))
-    nextProps.activeUser && console.log('next active user:',nextProps.activeUser.id)
-    console.log(`setting button Text from ${this.state.buttonText} to ${this.buttonText}`)
     if(nextProps.followers.length !== this.props.followers.length || 
        this.state.buttonText === 'loading' ||
        nextProps.viewedProfile.id !== this.props.viewedProfile.id ||
@@ -86,21 +65,13 @@ class User_Info extends Component {
         handleClick: this.handleClick,
         backgroundColor: this.backgroundColor
       },()=>{
-        console.log('button text:',this.state.buttonText)
-        console.log('_________________')
       })
     }
     let oldFollowedBy = Object.values(this.props.foundUsers.followedByUser)
     let newFollowedBy = Object.values(nextProps.foundUsers.followedByUser)
-
-    // check to see if the followedBy prop has changed in number or value
     newFollowedBy && !newFollowedBy.every((follow,i)=>
       oldFollowedBy[i] && follow.status === oldFollowedBy[i].status
     ) && this.props.getFollowersForUser(nextProps.viewedProfile.id);
-
-    // console.log(Object.values(this.props.foundUsers.followedByUser))
-    // console.log(Object.values(nextProps.foundUsers.followedByUser))
-
   }
 
   editProfClick(){
@@ -108,26 +79,19 @@ class User_Info extends Component {
   }
 
   followClick(){
-    console.log('pre-request nextprop followers:',this.props.followers)
-    console.log(`setting button Text from ${this.state.buttonText} to Unfollow at followClick`)
     this.setState({buttonText:'Unfollow'})
     this.props.requestFollow(this.props.activeUser.id, this.props.viewedProfile.id, null, true)
   }
    unFollowClick(){
-    console.log('pre-request nextprop followers:',this.props.followers)
-    console.log(`setting button Text from ${this.state.buttonText} to Follow at unfollowClick`)
     this.setState({buttonText:'Follow'})
     this.props.unfollow(this.props.activeUser.id, this.props.viewedProfile.id, true)
   }
 
   openModal() {
-    console.log('openModal')
     this.setState({modalIsOpen: true});
   }
 
   afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    // this.refs.subtitle.style.color = '#f00';
   }
 
   closeModal() {

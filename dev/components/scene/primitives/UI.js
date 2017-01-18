@@ -15,7 +15,6 @@ var moment = require('moment');
 class UI extends Component {
   constructor(props) {
     super(props)
-    //console.log(props)
     this.state = {
       currFeedSceneIndex: '',
       currUserPostsSceneIndex: '',

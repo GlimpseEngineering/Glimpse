@@ -1,7 +1,6 @@
 import React from 'react';
 import { Router, Route, hashHistory, IndexRedirect } from 'react-router';
 import { getOneUser  } from './actions/usersActionCreators';
-//provider makes store available to all container(super) components in app without passing it explicitly
 import App from './App';
 import World from './components/scene/World';
 import Profile from './components/dashboard/Profile';
@@ -23,6 +22,5 @@ const routes = (
       <Route path="search" component={Search} /> 
       <Route path="*" component={Splash} />
     </Route>
-
 )
 export default routes;

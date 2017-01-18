@@ -94,13 +94,10 @@ class EntityGenerator extends Component {
   }
 
   setSrc(url) {
-    console.log('setting src to:', url);
     this.setState({src: url});
   }
 
   render() {
-    console.log('this is the src', this.state.src);
-    console.log('passing delete scene to child', this.props.deleteScene);
     return (
       <div className="postComponent">
         <div >

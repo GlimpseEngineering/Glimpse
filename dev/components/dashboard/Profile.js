@@ -28,17 +28,11 @@ class Profile extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('-----------')
-    console.log('profile component will recieve props')
-    console.log('old props:',this.props)
-    console.log('new props:',nextProps)
     nextProps.cache.cached && nextProps.cache.pending && this.props.getCachedUsers();
     if(nextProps.viewedProfile.id !== this.props.viewedProfile.id) {
-      console.log(`switched viewedProfile from ${this.props.viewedProfile.id} to ${nextProps.viewedProfile.id}`)
       this.getFeedData(nextProps.viewedProfile.id)
     }
     if(nextProps.params.id !== this.props.params.id) {
-      console.log('new params, getting profile for user',nextProps.params.id)
       this.props.getUserProfile(nextProps.params.id)
     }
     if (nextProps.newPost.createdPost !== this.props.newPost.createdPost) {
@@ -46,17 +40,12 @@ class Profile extends Component {
         this.props.getPostsByUser(nextProps.activeUser.id) :
         this.props.getFollowedPosts(nextProps.viewedProfile.id)
     }
-    console.log('-----------')
   }
 
     getFeedData(id){
-      console.log('getting feed data for user',id)
-
-      // this.props.getAllUsers();
       this.props.getFollowersForUser(id);
       this.props.getFollowedByUser(id);
       this.props.getFollowedPosts(id);
-      // this.props.getAllPosts();
       this.props.getPostsByUser(id);
     }
 

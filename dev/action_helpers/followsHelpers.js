@@ -2,7 +2,6 @@ import axios from 'axios';
 
 //GETFOLLOWERS then add userInfo ----------------------------->
 export function getFollowers(userId) {
-    console.log('in helper getFollowers userid: ',userId);
     return axios({
             method: 'GET',
             url: `/api/users/${userId}/followers`
@@ -11,7 +10,7 @@ export function getFollowers(userId) {
             return _getFollowersUserInfo(resp)
         })
         .catch((err)=>{
-            console.log(err)
+            console.error(err)
         })
 }
 
@@ -35,17 +34,15 @@ function _getFollowersUserInfo(resultArr) {
 }
 //GETFOLLOWS w/ userInfo ----------------------------->
 export function getFollows(userId) {
-  console.log('in helper getFollows userid: ',userId);
     return axios({
             method: 'GET',
             url: `/api/users/${userId}/follows`
           })
         .then((resp) => {
-            console.log(`helper getFollows userid ${userId} results:`,resp )
             return _getFollowsUserInfo(resp)
         })
         .catch((err)=>{
-            console.log(err )
+            console.error(err )
         })
 }
 
@@ -64,7 +61,6 @@ function _getFollowsUserInfo(resultArr) {
       resultArr.data.forEach((user, index) => {
         user.userInfo = userData[index].data;
       })
-      console.log("_getFollowsUserInfo results:",resultArr)
       return resultArr;
     })
 }
@@ -76,7 +72,7 @@ export function getFeedPosts(userId) {
 
         })
         .catch((err)=>{
-          console.log(err )
+          console.error(err )
         })
 }
 
@@ -106,7 +102,6 @@ function _getFollowsPosts(resultArr) {
       feedPosts.sort(function(a,b){
         return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
       });
-      console.log('_getFollowsPosts results:',feedPosts)
       return feedPosts;
     })
 

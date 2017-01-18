@@ -32,14 +32,13 @@ export function getPostsByUser(userId) {
       url: `/api/users/${userId}/posts`
     })
     .then(response => {
-      console.log('the response for getting user posts:', response.data);
       response.data.sort(function(a,b){
         return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
       });
       dispatch({type: 'USER_POSTS', payload: response.data});
     })
     .catch(err => {
-      console.log('err in getPostsByUser is:', err);
+      console.error('err in getPostsByUser is:', err);
     });
   }
 }
@@ -51,42 +50,37 @@ export function getAllPosts() {
       url: `/api/posts`
     })
     .then(response => {
-      //console.log('the response for getting all posts:', response.data);
       dispatch({type: 'ALL_POSTS', payload: response.data});
     })
     .catch(err => {
-      console.log('err in getAllPosts is:', err);
+      console.error('err in getAllPosts is:', err);
     });
   }
 }
 
 export function getOnePost(postId) {
-  console.log('hitting getOnePost action creator', postId)
   return function(dispatch) {
     axios({
       method: 'GET',
       url: `/api/posts/${postId}`
     })
     .then(response => {
-      console.log('the response for getting one post:', response.data);
       dispatch({type: SET_SCENE, payload: response.data.content});
       dispatch({type: ENTER_VR})
     })
     .catch(err => {
-      console.log('err in getOnePost is:', err);
+      console.error('err in getOnePost is:', err);
     });
   }
 }
 
 export function deletePost(postId) {
-  console.log('hitting deletePost action creator:', postId)
   return function(dispatch) {
     axios({
       method: 'DELETE',
       url: `/api/posts/${postId}`
     })
     .then(response => {
-      console.log('the response for deleteing the post is:', response.data);
       response.data.sort(function(a,b){
         return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
       });
@@ -97,11 +91,9 @@ export function deletePost(postId) {
 
 export function createPost(formValues) {
   const request = axios.post('/api/posts', formValues)
-  // console.log('calling create post with these form values', formValues);
 
   return (dispatch) => {
     request.then((data) => {
-      // console.log('data returned from creating post', data);
       dispatch({type: CREATE_POST, payload: data})
     });
   };
@@ -118,7 +110,6 @@ export function uploadPreview(blob) {
     }
 
     if (response.body.secure_url !== '') {
-      console.log(response.body.secure_url)
       dispatch({
         type: PREVIEW_CREATED, 
         payload: response.body.secure_url
@@ -136,14 +127,12 @@ export function editPost(formValues, postId, indexToEdit) {
     request.then((data) => {
       editedData.indexToEdit = indexToEdit;
       editedData.data = data.data;
-      console.log('here is the edited data', editedData);
       dispatch({type: EDIT_POST, payload: editedData});
     });
   };
 };
 
 export function stageEntity(entity) {
-  console.log('here is the entity in the action creator', entity);
   return (dispatch) => {
     dispatch({type: STAGE_ENTITY, payload: entity});
   };

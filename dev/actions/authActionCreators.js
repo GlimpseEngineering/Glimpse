@@ -40,12 +40,10 @@ export function login() {
       if(err) {
         return dispatch(lockError(err));
       }
-      console.log('auth0 profile:', profile)
       axios.post('/api/login', {
         authId: profile.user_id
       })
       .then(user => {
-        console.log('user sent back from db:', user)
         localStorage.setItem('id_token', token)
         if(user.data) {
           localStorage.setItem('profile', JSON.stringify(user.data))
@@ -94,12 +92,11 @@ export function createNewUser(username, profPic, authId, bio, email, dob, gender
         }
     })
     .then(response => {
-      console.log('the response for creating user is:', response);
       localStorage.setItem('profile', JSON.stringify(response.data))
       return dispatch({type: 'USER_CREATED', profile: response.data});
     })
     .catch(err => {
-      console.log('err in createNewUser is:', err);
+      console.error('err in createNewUser is:', err);
     });
   }
 }

@@ -8,15 +8,6 @@ const LOADING_SPINNER = 'url(http://res.cloudinary.com/glimpse/image/upload/v148
 export default class PhotoShpere extends Component {
   constructor(props) {
     super(props);
-    
-    // let assets = document.querySelector('#assets')
-    // console.log('assets at constructor',assets)
-    // let asset = document.createElement(this.format)
-    // asset.setAttribute('id',this.id)
-    // asset.setAttribute('src',this.src)
-    // console.log('new asset:',asset)    
-    // assets.appendChild(asset)
-    // console.log('assets with new asset:',assets)
 
     this.state=({
       format: 'img',
@@ -50,21 +41,16 @@ export default class PhotoShpere extends Component {
       this.shader=this.props.shader||'flat';
     }
     
-    console.log('this.src in photosphere:', this.src, typeof this.src)
     document.querySelector('#sphere').addEventListener('materialtextureloaded',()=>{
-      console.log("**assets loaded**")
       this.setState({loading:false})
     })
     let assetId = this.guid();
 
     let assets = document.querySelector('#assets')
-    console.log('assets at mount',assets)
     let asset = document.createElement(this.format)
     asset.setAttribute('id',assetId)
-    asset.setAttribute('src',this.src)
-    console.log('new asset:',asset)    
+    asset.setAttribute('src',this.src) 
     assets.appendChild(asset)
-    console.log('assets with new asset:',assets)
 
     this.setState({
       format: this.format,
@@ -80,8 +66,6 @@ export default class PhotoShpere extends Component {
       if (this.src.endsWith(')')) {
         this.src=this.src.slice(4,-1)
       }
-      console.log('this.props.src in photosphere:', this.props, typeof this.props.src)
-      console.log('nextProps.src in photosphere:', nextProps, typeof nextProps.src)
       if (this.src.endsWith('.gif')) {
         this.format='img';
         this.shader='gif';
@@ -104,17 +88,12 @@ export default class PhotoShpere extends Component {
 
       let assets = document.querySelector('a-assets')
 
-      console.log('assets at will receive props',assets)
-
       let oldAsset = document.querySelector(`#${this.state.assetId}`)
-      console.log('old asset to be removed:',oldAsset)
       oldAsset && document.querySelector('#assets').removeChild(oldAsset)
       let asset = document.createElement(this.format)
       asset.setAttribute('id',assetId)
       asset.setAttribute('src',this.src)
-      console.log('new asset:',asset)    
       assets.appendChild(asset)
-      console.log('assets with new asset:',assets.fileLoader.proto);
 
       this.setState({
         format: this.format,

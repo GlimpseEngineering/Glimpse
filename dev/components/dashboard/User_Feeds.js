@@ -20,13 +20,11 @@ class User_Feeds extends Component {
   componentWillReceiveProps(nextProps) {
     if(nextProps.cacheFollowers.cached && !nextProps.cacheFollowers.pending){
       this.setState({ cacheFollowers: nextProps.cacheFollowers.cachedUsers })
-      console.log('state in user feed::',this.state);
     }
   }
 
   handleSelect(index, last) {
     this.setState({ tab: index });
-    //console.log('Selected tab: ' + index + ', Last tab: ' + last);
   }
 
   render() {

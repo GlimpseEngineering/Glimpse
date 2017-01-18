@@ -28,7 +28,6 @@ class ProfileEditor extends Component {
 
   submitChange(event) {
     event.preventDefault();
-    console.log('submitting changed profile:',this.state)
     this.setState(this.state.private? {private:1}:{private:0})
     this.props.updateUser(this.state.id, {
       username: this.state.username,
@@ -59,7 +58,6 @@ class ProfileEditor extends Component {
   }
 
   setProfPic(url) {
-    console.log('setting profpic to:',url)
     this.setState({profPic: url})
   }
 

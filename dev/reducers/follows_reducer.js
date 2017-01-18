@@ -9,7 +9,6 @@ export default function(state = initialState, action) {
         loading: true
       });
     case 'USER_FOLLOWS':
-      // console.log('payload for get users listings is', action.payload);
       return Object.assign({},state,{
           userFollows: action.payload,
           loading: false

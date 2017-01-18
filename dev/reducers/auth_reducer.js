@@ -1,7 +1,5 @@
 import { combineReducers } from 'redux'
 import { LOGIN_SUCCESS, LOGIN_ERROR, LOGOUT_SUCCESS, USER_CREATED } from '../actions/authActionCreators.js';
-// import { LOGIN_ERROR } from '../actions/authActionCreators.js';
-// import { LOGOUT_SUCCESS } from '../actions/authActionCreators.js';
 const jwtDecode = require('jwt-decode');
 
 function checkTokenExpiry() {
@@ -31,7 +29,6 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case LOGIN_SUCCESS:
-      console.log('login success!')
       return Object.assign({}, state, {
         isAuthenticated: true,
         activeUser: action.profile,

@@ -50,7 +50,6 @@ class PostGenerator extends Component {
   }
 
   componentDidMount() {
-    console.log('here is the index to edit', this.props.indexToEdit);
     if (this.props.postToEdit) {
       this.entityCollection = JSON.parse(this.props.postToEdit.content);
       this.setState({
@@ -69,7 +68,6 @@ class PostGenerator extends Component {
       nextProps.newPost.stagedEntity !== this.props.newPost.stagedEntity &&
       this.entityCollection.push(nextProps.newPost.stagedEntity) &&
       this.setState({content: JSON.stringify(this.entityCollection)});
-    console.log('preview url:',nextProps.newPost.previewUrl)
     if (nextProps.newPost.previewUrl && nextProps.newPost.previewUrl !== this.props.newPost.previewUrl) {
       this.setState({previewUrl:nextProps.newPost.previewUrl} , ()=>{
         this.finalizePost();
@@ -81,19 +79,12 @@ class PostGenerator extends Component {
 
   submitPost(event) {
     event.preventDefault();
-    // let scene = document.querySelector('#scene')
-    // let screenShot = document.querySelector('#scene').components.createPreview;
-    // console.log(scene.components.screenshot);
-    // console.log(screenShot);
-    // scene.components.createPreview.init();
-    // scene.components.createPreview.capture('perspective')
     this.screenshot = document.querySelector('#preview').components.createPreview;
     this.screenshot.init();
     this.screenshot.capture('perspective');
   }
 
   finalizePost(url){
-    console.log('sending post to db:', this.state)
     if (this.state.editMode) {
       this.setState({editMode: false});
       this.props.editPost(this.state, this.props.postToEdit.id, this.props.indexToEdit);
@@ -122,7 +113,6 @@ class PostGenerator extends Component {
       y: '',
       z: ''
     });
-    console.log('cleared state:',this.state)
   }
 
   submitScene(event) {
@@ -137,7 +127,6 @@ class PostGenerator extends Component {
     if (this.state.selectedPrimitive === 'Box')  {
       entity = templateIndex.boxGenerator(this.state.id, this.state.width, this.state.height, this.state.depth, this.state.color, this.state.src, this.state.x, this.state.y, this.state.z);
     }
-    console.log('here is the submission of the entity', entity);
     this.props.stageEntity(entity);
     this.setState({
       id: this.state.id += 1,
@@ -180,17 +169,11 @@ class PostGenerator extends Component {
   }
 
   setSrc(url) {
-    console.log('setting src to:', url);
     this.setState({src: url});
   }
 
   render() {
-    console.log('triggering loading state newPost', this.props.newPost);
-    console.log('triggering loading state', this.props.newPost.loading);
     let stagedEntities = this.entityCollection.map((entity) => {
-      // if(this.state.selectedPrimitive === 'PhotoSphere'){
-      //   console.log('nope')
-      // }else{
         return (
           <div className="list-item-generator">
             <EntityGenerator
@@ -199,8 +182,6 @@ class PostGenerator extends Component {
           </div>
 
         );
-      // }
-
     });
 
     return (

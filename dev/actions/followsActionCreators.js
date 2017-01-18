@@ -16,26 +16,23 @@ export function getFollowersForUser(userId) {
   dispatch({type:'LOADING_FOLLOWERS'})
   getFollowers(userId)
     .then(response => {
-      console.log('the response for getting user followers is:', response.data);
       dispatch({type: 'USER_FOLLOWERS', payload: response.data});
     })
     .catch(err => {
-      console.log('err in getFollowersForUser is:', err);
+      console.error('err in getFollowersForUser is:', err);
     });
   }
 }
 
 export function getFollowedByUser(userId) {
-  console.log('CALLING GET FOLLOWED BY USER');
   return function(dispatch) {
     dispatch({type:'LOADING_USER_FOLLOWS'})
     getFollows(userId)
     .then(response => {
-      console.log('the response for getting follows: ', response.data);
       dispatch({type: 'USER_FOLLOWS', payload: response.data});
     })
     .catch(err => {
-      console.log('err in getFollowedByUser is:', err);
+      console.error('err in getFollowedByUser is:', err);
     });
   }
 }
@@ -48,7 +45,7 @@ export function getFollowedPosts(userId) {
       dispatch({type: 'USER_FEED', payload: response});
     })
     .catch(err => {
-      console.log('err in getFollowedPosts is:', err);
+      console.error('err in getFollowedPosts is:', err);
     });
   }
 }

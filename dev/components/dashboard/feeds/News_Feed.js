@@ -9,7 +9,6 @@ import Moment from 'react-moment';
 class News_Feed extends Component {
 
   handleSelect(event){
-    console.log('you clicked on post id:', event.target.value);
   }
 
   render() {
@@ -26,7 +25,6 @@ class News_Feed extends Component {
               <div className="col-2">
                 <img className="userPic" src={post.userInfo.profPic}
                      onClick={(e) => {
-                       console.log(post.userInfo)
                        this.props.getOneUser(post.userInfo.id)
                      }}/>
 
@@ -61,14 +59,12 @@ class News_Feed extends Component {
 }
 
 function mapStateToProps(state) {
-  // returns input state as props in output
   return {
     userFeed: state.userFeed
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  // pass the result of selectBook to all reducers
   return bindActionCreators({
     getOnePost: getOnePost,
     getOneUser: getOneUser

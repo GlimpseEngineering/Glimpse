@@ -52,8 +52,6 @@ class Posts extends Component {
 
     if(this.props.activeUser){
       this.myProfile = this.props.viewedProfile.id===this.props.activeUser.id;
-      console.log('MY PROFILE?????', this.myProfile)
-
       this.editButton = this.myProfile ?
         <div className="postButtons">
           <button className='btn-prim-post delete'
@@ -71,8 +69,6 @@ class Posts extends Component {
   componentWillReceiveProps(nextProps) {
     if(nextProps.activeUser){
       this.myProfile = nextProps.viewedProfile.id===nextProps.activeUser.id;
-      console.log('MY PROFILE?????', this.myProfile)
-
       this.editButton = this.myProfile ?
         <div className="postButtons">
           <button className='btn-prim-post delete'
@@ -97,7 +93,6 @@ class Posts extends Component {
   }
 
   openDeleteModal() {
-    console.log('this.state.selectedPost',this.state.selectedPost)
     this.setState({deleteModalIsOpen: true});
   }
 
@@ -116,7 +111,6 @@ class Posts extends Component {
         <ul>
           {this.props.userPosts.userPosts.map( (post, i) =>
            <li onClick={(e) => {
-             console.log('click event:',e.target.className)
              this.setState({
               selectedPost: post,
               indexToEdit: i})
@@ -178,7 +172,6 @@ class Posts extends Component {
             <p>{this.state.selectedPost && this.state.selectedPost.description}</p>
             <br/>
             <button className="btn-prim" onClick={()=>{
-              console.log('delete',this.state.selectedPost);
               this.props.deletePost(this.state.selectedPost.id);
               this.closeDeleteModal();
             }}>
@@ -195,7 +188,6 @@ class Posts extends Component {
 }
 
 function mapStateToProps(state) {
-  // returns input state as props in output
   return {
     activeUser: state.auth.activeUser,
     viewedProfile: state.user.viewedProfile,
@@ -206,7 +198,6 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  // pass the result of selectBook to all reducers
   return bindActionCreators({
     getOnePost: getOnePost,
     deletePost: deletePost

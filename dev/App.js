@@ -14,13 +14,6 @@ class App extends Component {
   }
 
   render() {
-    // let children = null;
-    // if (this.props.children) {
-    //   children = React.cloneElement(this.props.children, {
-    //     auth: this.props.route.auth //sends auth instance from route to children
-    //   })
-    // }
-    console.log('state.vrMode:',this.props.vrMode)
     let displayMode = this.props.vrMode.active? <World /> : this.props.children;
     return (
       <div className="mainEverything">
@@ -30,8 +23,6 @@ class App extends Component {
           let scene = document.querySelector('#scene') ||
                       document.querySelector('#preview');
           let screenShot = scene.components.createPreview;
-          console.log(scene.components.screenshot);
-          console.log(screenShot);
           scene.components.createPreview.init();
           scene.components.createPreview.capture('perspective')
         }} className="top-hide">screenshot</button>

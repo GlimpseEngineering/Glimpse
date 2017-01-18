@@ -17,7 +17,6 @@ class Followers extends Component {
                 key={user.UserId}
                 value={user.UserId}
                 onClick = {e => {
-                  console.log('you clicked on post id:', user.UserId)
                   this.props.getUserProfile(user.UserId)
                 }
             }>

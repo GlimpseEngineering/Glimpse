@@ -20,8 +20,6 @@ import Box from '../scene/primitives/Box';
 class Preview extends Component {
   constructor(props) {
     super(props);
-
-    // scene.components && scene.components.embedPreview.init();
   }
 
   createJSX(entity, i) {

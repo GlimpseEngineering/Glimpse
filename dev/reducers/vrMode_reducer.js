@@ -24,17 +24,14 @@ const initialState = {
 export default function(state = initialState, action) {
   switch(action.type){
     case ENTER_VR:
-      console.log('assigning state.vrMode.active to', true);
       return Object.assign({},state,{
           active: true
         });
     case EXIT_VR:
-      console.log('assigning state.vrMode.active to', false);
       return Object.assign({},state,{
           active: false
         });
     case SET_SCENE:
-      console.log('assigning state.vrMode.currentScene to \n'+action.payload)
       return Object.assign({},state,{
           currentScene: action.payload
         });

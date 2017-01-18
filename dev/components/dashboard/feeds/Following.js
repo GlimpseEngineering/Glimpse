@@ -7,16 +7,12 @@ import { getOneUser  } from '../../../actions/usersActionCreators';
 class Following extends Component {
 
   componentDidMount() {
-    console.log('$$$$$$$$$$$$', this.props.follows);
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('&&&&&&&&&&&', nextProps.search.followedByUser);
-    console.log('&&&&&&&&&&&', nextProps.follows);
   }
 
   render() {
-    console.log('follows feed:',this.props.follows);
     return this.props.follows.loading ? <h3>loading...</h3> : (
       <div className="feed_content">
         <ul>
@@ -25,7 +21,6 @@ class Following extends Component {
                 key={user.FollowId}
                 value={user.FollowId}
                 onClick = {e => {
-                  console.log('you clicked on post id:', user.FollowId)
                   this.props.getUserProfile(user.FollowId)
                 }
             }>

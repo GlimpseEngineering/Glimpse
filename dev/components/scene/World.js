@@ -55,8 +55,6 @@ class World extends Component {
 
 
   render() {
-    console.log('curScene:',JSON.parse(this.props.currentScene))
-
     return (
 
 

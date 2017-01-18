@@ -44,9 +44,6 @@ AFRAME.registerComponent('createPreview', {
   },
 
   init: function () {
-    console.log('================================')
-    console.log('init init init init init')
-    console.log('================================')
     var el = this.el;
     var self = this;
     self.previewUrl = '';
@@ -74,7 +71,6 @@ AFRAME.registerComponent('createPreview', {
       self.canvas = document.createElement('canvas');
       self.ctx = self.canvas.getContext('2d');
       if (el.camera) { el.camera.add(self.quad); }
-      // self.onKeyDown = self.onKeyDown.bind(self);
       self.onCameraActive = self.onCameraActive.bind(self);
       el.addEventListener('camera-set-active', self.onCameraActive);
     }
