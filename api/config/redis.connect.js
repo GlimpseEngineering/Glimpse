@@ -17,16 +17,6 @@ client.on('error', err => {
 
 client.on('connect', () => {
   console.log(`Redis server connection has been established to: ${host}:${port}`);
-  // require('../redis/redis.helpers.js').generateCache();
 });
 
 module.exports = client;
-
-/**
- * thoughts on redis datatypes
- * 
- * sorted set is better than a list for looking up something like a post or user
- * hashes are a good way to store users/posts
- * sets would be great for associating tags with posts/users b/c cant make duplicate keys and adding/removing time complexity is O(1)
- * lists would be great for getting all the latest posts by users (see episode 6 of redis series)
- */

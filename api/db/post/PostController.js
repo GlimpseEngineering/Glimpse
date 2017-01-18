@@ -49,7 +49,6 @@ module.exports = {
     });
   },
   createPost: (req, res, next) => {
-    console.log('Here is the createPost request body', req.body);
     let postInstance;
     models.Post.create({
       content: req.body.content,
@@ -83,7 +82,6 @@ module.exports = {
     });
   },
   updatePost: (req, res, next) => {
-    console.log('here is the request userid', req.body.userId);
     let tags;
     if (req.body.tags) {
       let tags = req.body.tags.split(',');
@@ -92,8 +90,6 @@ module.exports = {
       where: { id: req.params.postId}
     })
     .then(post => {
-      console.log('here is the request userid', req.body.userId);
-      console.log('here is the request content', req.body.content);
       if (!post) res.json('post not found');
       else {
         post.content = req.body.content,
@@ -131,18 +127,14 @@ module.exports = {
       where: { id: req.params.postId}
     })
     .then(post => {
-      console.log(`deleting post ${post.id} from db`)
       return post.destroy()
     })
     .then((response) => {
-      console.log(`fetching remaining posts for user ${response.UserId}`)
       return models.Post.findAll({
         where: { userId: response.UserId }
       })
     })
     .then(posts => {
-      console.log(`sending remaining posts for user`)
-      console.log(posts)
       if (!Array.isArray(posts)) posts = [posts];
       res.json(posts);
     })

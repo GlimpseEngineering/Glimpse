@@ -79,7 +79,6 @@ class UI extends Component {
 
       if(view){
         if(view === 'feed'){
-          console.log('your current view is: ' + view);
           if(this.state.currFeedSceneIndex === this.props.feed.followingPosts.length - 1){
             return 'false';
           }else {
@@ -324,7 +323,6 @@ class UI extends Component {
 
     mainCompDisplay() {
       if(this.props.showFeed === 'true' || this.props.showUserPosts === 'true'){
-        console.log('showfeed')
         return 'true';
       }else {
         return 'false';
@@ -374,7 +372,6 @@ class UI extends Component {
       var feedLength = this.props.feed.followingPosts.length;
       var UPLength = this.props.viewedUserPosts.userPosts.length;
       if((this.props.showFeed === 'true' || this.props.showUserPosts === 'true')){
-        console.log('showfeed')
         return 'true';
       }else {
         return 'false';
@@ -565,7 +562,6 @@ class UI extends Component {
           word = 'secs';
         }
         if(word === 'minutes'){
-          console.log('helllooooo')
           word = 'mins';
         }
         if(word === 'minute'){
@@ -577,7 +573,6 @@ class UI extends Component {
     }
 
     render() {
-      // console.log('is user posts?', this.isUserPosts())
       return (
         <Entity shift-click-ui {...this.props}>
           <Box
@@ -693,10 +688,6 @@ class UI extends Component {
                       layout="line" rotation="0 0 90" margin="0.1" position={`-1.25 ${ this.userPostsPosition() } -1`}>
                       {this.props.viewedUserPosts.userPosts.map((post, index)=>{
                         var time = moment(post.createdAt).fromNow();
-                        // console.log('curScene:', this.createJSX(JSON.parse(post.content)));
-                        // console.log('curScene:',JSON.parse(post.content))
-                        //var content = this.createJSX(JSON.parse(post.content));
-                        //text display algorithm=========>>>>>>>
                         var text = post.description;
                         var description = this.lineBreak(text);
                         function textPosition(array){
