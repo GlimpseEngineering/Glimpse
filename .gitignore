@@ -5,3 +5,4 @@ npm-debug.log
 build/bundle.js
 dump.rdb
 debug.log
+.vscode

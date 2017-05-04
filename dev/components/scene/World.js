@@ -1,6 +1,6 @@
 import 'aframe';
 import 'aframe-animation-component';
-import 'aframe-text-component';
+import 'aframe-text-geometry-component';
 import 'babel-polyfill';
 import './acomps/create_preview';
 import {Entity, Scene} from 'aframe-react';
