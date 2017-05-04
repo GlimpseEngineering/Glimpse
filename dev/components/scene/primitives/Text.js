@@ -1,6 +1,6 @@
 import {Entity} from 'aframe-react';
 import React from 'react';
-import 'aframe-text-component';
+import 'aframe-text-geometry-component';
 
 export default props => {
   const extraProps = AFRAME.utils.extend({}, props);
@@ -8,6 +8,6 @@ export default props => {
   delete extraProps.text;
 
   return <Entity
-    text={{text: props.text}} material={{color: props.color}}
+    text-geometry={{value: props.text}} material={{color: props.color}}
     {...extraProps}/>
 };
