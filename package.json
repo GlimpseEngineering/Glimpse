@@ -33,7 +33,7 @@
     "aframe-text-geometry-component": "^0.5.1",
     "aframe-textwrap-component": "^1.0.1",
     "aframe-ui-modal-component": "^1.0.0",
-    "auth0-lock": "^10.7.3",
+    "auth0-lock": "^11.26.3",
     "axios": "^0.15.3",
     "babel-core": "^6.21.0",
     "babel-loader": "^6.2.10",
